@@ -1,0 +1,1009 @@
+<html>
+    <head>
+    <link rel="stylesheet" href="journeystyle.css">
+    <script>
+        var elements = [];
+        var focusElement = -1;
+        var canvasInFocus = false;
+        
+
+        //Presentation variables
+        var iconFiles = [{name: "achievement", file: "Achievement_card.png"} , {name: "admin", file: "Admin_card.png"}, {name: "assessment", file: "Assessments_card.png"} , {name: "communication", file: "Communication_card.png"} , {name: "confidence", file: "ConfidenceBoost_card.png"} , {name: "duedates", file: "DueDates_card.png"} , {name: "helpneeded", file: "HelpNeeded_card.png"} , {name: "highpressure", file: "HighPressure_card.png"} , {name: "information", file: "Information_card.png"} , {name: "lostdirection", file: "LostDirection_card.png"} , {name: "lowenergy", file: "LowEnergy_card.png"} , {name: "lowscores", file: "LowScores_card.png"} , {name: "nosupport", file: "NoSupport_card.png"} , {name: "peersupport", file: "PeerSupport_card.png"} , {name: "problem", file: "Problem_card.png"} , {name: "register", file: "Register_card.png"} , {name: "studybreak", file: "StudyBreak_card.png"} , {name: "studyexperience", file: "StudyExperience_card.png"}, {name: "studygoal", file: "StudyGoal_card.png"} , {name: "studymilestone", file: "StudyMilestone_card.png"},{name: "studysuccess", file: "StudySuccess_card.png"} , {name: "studysupport", file: "StudySupport_card.png"},{name: "timelost", file: "TimeLost_card.png"}];
+        var emoticonFiles = [{name: "angry", file: "Angry_emoji.png"}, {name: "achieve", file: "Achieve_emoji.png"}, {name: "bored", file: "Bored_emoji.png"}, {name: "confused", file: "Confused_emoji.png"},{name: "excited", file: "Excited_emoji.png"}, {name: "happy", file: "Happy_emoji.png"}, {name: "nervous", file: "Nervous_emoji.png"}, {name: "sick", file: "Sick_emoji.png"}, {name: "angry", file: "Angry_emoji.png"}, {name: "achieve", file: "Achieve_emoji.png"}, {name: "unhappy", file: "Unhappy_emoji.png"}, {name: "upset", file: "Upset_emoji.png"},{name: "thinking", file: "Thinking_emoji.png"}];
+        var iconWidth = 110;
+        var iconHeight = 110;
+        var iconXV = 110;
+        var iconYV = 5;
+        var iconX = 10;
+        var iconY = 110;
+        var emoticonWidth = 72;
+        var emoticonHeight = 72;
+        var emoticonXV = 95;
+        var emoticonYV = 170;
+        var emoticonXVR = 35;
+        var emoticonYVR = 260;
+        var emoticonX = 110;
+        var emoticonY = 160;
+        var emoticontextX = 130;
+        var emoticontextY = 260;
+        var textXV = 110;
+        var textYV = 130;
+        var textXVR = 10;
+        var textYVR = 230;
+        var textX = 130;
+        var textY = 110;
+        var rectY = 100;
+        var rectXV = 100;
+        var postitX = 75;
+        var postitVY = 75;
+        var postitVRX = 100;
+        var postitTextX = 100;
+        var postitTextVX = 20;
+        var numElements = 29;
+        var vlElements = [0,9,10,19,20];
+        var vrElements = [4,5,14,15,24,25];
+
+
+        document.addEventListener('keydown', (event) => {
+        const keyName = event.key;
+        var shifted = false;
+        if(canvasInFocus){
+        if (keyName === 'Shift') {
+        shifted = true;
+        return;
+        }
+        //alert("key " + keyName);
+        switch(keyName){
+                case 'Tab':
+                    if(shifted){
+                        cyclePrevFocus();
+                    }
+                    else{
+                        cycleNextFocus();
+                    }
+                    break;
+                case 'ArrowUp':
+                    cyclePrevFocus();
+                    break;
+                case 'ArrowLeft':
+                    cyclePrevFocus();
+                    break;
+                case 'ArrowRight':
+                    cycleNextFocus();
+                    break;
+                case 'ArrowDown':
+                    cycleNextFocus();
+                    break;
+            }
+
+        }}, false);
+
+        function initialiseElements(){
+            for(i=0;i<numElements;i++){
+                var element = { eID: "place" + i , text: " ", emoticon: "none", icon: "none", postit: ""};
+                elements.push(element);
+            }
+            updateElements();
+        }
+
+        function demoFill(){
+            for(i=0;i<elements.length;i++){
+                elements[i] = { eID: "place" + i , description: "test description " + i, emoticon: "happy", icon: "timelost", postit: "post it text"};
+            }
+            updateElements();
+        }
+
+        function elementClick() {
+            var e = this.id.substring(5);
+            focusElement = parseInt(e);
+            //alert("mouse down on " + focusElement);
+            changeFocus();
+        }
+
+        function updateElements(){
+            for(i=0;i<numElements;i++){
+                element = elements[i];
+                //mouse event listener
+                ePlace = document.getElementById("group" + i);
+                ePlace.addEventListener("click", elementClick);
+                eRect = document.getElementById("place"+ i);
+                eRect.setAttribute('fill','Snow');
+                eRect.setAttribute('fill-opacity','1.0');
+                if(vlElements.includes(i)){
+                    eRect.setAttribute("x",rectXV);
+                }
+                else if(vrElements.includes(i)){
+                    eRect.setAttribute("y",rectY);
+                }
+                else{
+                    eRect.setAttribute("y",rectY);
+                }
+                //description
+                eText = document.getElementById("description" + i);
+                //alert("changing text on description" + elementText + " to " + element.description);
+                eText.textContent = element.description;
+                if(vlElements.includes(i)){
+                    eText.setAttribute("x",textXV);
+                    eText.setAttribute("y",textYV);
+                }
+                else if(vrElements.includes(i)){
+                    eText.setAttribute("x",textXVR);
+                    eText.setAttribute("y",textYVR);
+                }
+                else{
+                    eText.setAttribute("x",textX);
+                    eText.setAttribute("y",textY);
+                }
+                //emoticon
+                eEmo = document.getElementById("emoticon"+i);
+                if(element.emoticon != "none"){
+                    
+                    for(j=0;j<emoticonFiles.length;j++){
+    
+                        if(emoticonFiles[j].name == element.emoticon){
+                            eEmo.setAttribute("height",emoticonHeight);
+                            eEmo.setAttribute("width",emoticonWidth);
+                            if(vlElements.includes(i)){
+                                eEmo.setAttribute("x",emoticonXV);
+                                eEmo.setAttribute("y",emoticonYV);
+                            }
+                            else if(vrElements.includes(i)){
+                                eEmo.setAttribute("x",emoticonXVR);
+                                eEmo.setAttribute("y",emoticonYVR);
+                            }
+                            else{
+                                eEmo.setAttribute("x",emoticonX);
+                                eEmo.setAttribute("y",emoticonY);
+                            }
+                            eEmo.setAttribute('display',"inline");
+                            eEmo.setAttribute('href',emoticonFiles[j].file);
+                        }
+                    }
+                }
+                else{
+                    eEmo.setAttribute('display',"none");
+                }
+                //icon
+                eIcon = document.getElementById("icon"+i);
+                if(element.icon != "none"){
+
+                    for(j=0;j<iconFiles.length;j++){
+    
+                        if(iconFiles[j].name == element.icon){
+                            eIcon.setAttribute("height",iconHeight);
+                            eIcon.setAttribute("width",iconWidth);
+                            if(vlElements.includes(i)){
+                                eIcon.setAttribute("x",iconXV);
+                                eIcon.setAttribute("y",iconYV);
+                            }
+                            else{
+                                eIcon.setAttribute("x",iconX);
+                                eIcon.setAttribute("y",iconY);
+                            }
+                            eIcon.setAttribute('display',"inline");
+                            eIcon.setAttribute("href",iconFiles[j].file);
+                        }
+                    }
+                }
+                else{
+                    eIcon.setAttribute('display',"none");
+                }
+                //postit
+                if(element.postit != ""){
+                        ePostIt = document.getElementById("postit"+i);
+                        ePostItText = document.getElementById("postittext"+i);
+                        ePostIt.setAttribute("visibility","visible");
+                        ePostItText.setAttribute("visibility","visible");
+
+                        if(vlElements.includes(i)){
+                            ePostIt.setAttribute("y",postitVY);
+                            ePostItText.setAttribute("y",postitVY);
+                            ePostItText.setAttribute("x",postitTextVX);
+                        }
+                        else if(vrElements.includes(i)){
+                            ePostIt.setAttribute("x",postitVRX);
+                            ePostItText.setAttribute("x",postitVRX);
+                            ePostIt.setAttribute("y",postitVY);
+                            ePostItText.setAttribute("y",postitVY);
+                        }
+                        else{
+                            ePostIt.setAttribute("x",postitX);
+                            ePostItText.setAttribute("x",postitTextX);
+                        }
+                        ePostItText.textContent = element.postit;
+                }
+            
+            }
+        }
+
+        function changeBackground(){
+            document.body.style.background = document.getElementById('background_select' ).value;
+        }
+
+        function addKeyboardFocus(){
+            $("#journey-canvas")
+            // Add tab index to ensure the canvas retains focus
+            .attr("tabindex", "0")
+            .keydown(function(){keyResponse(event.which)});
+            // Mouse down override to prevent default browser controls from appearing
+            //.mousedown(function(){ $(this).focus(); return false; })
+            //d3.select("body").on("keydown", function(){keyResponse(event.which)});
+            document.addEventListener('keydown',function(){keyResponse(event.which)});
+            
+        }
+
+        function changeFocus(){
+            for(i=0;i<elements.length;i++){
+                element = document.getElementById(elements[i].eID);
+                element.setAttribute("stroke", "black");
+                //focus.setAttribute("stroke-width", 1);
+            }
+            focus =  document.getElementById(elements[focusElement].eID);
+            focus.setAttribute("stroke", "blue");
+            focus.scrollIntoView(true);
+            window.scrollBy(0, -200);
+
+            //focus.setAttribute("stroke-width", 4);
+
+            document.getElementById("event_desc").value = elements[focusElement].description;
+            document.getElementById("icon_select").value = elements[focusElement].icon;
+            document.getElementById("emoticon_select").value = elements[focusElement].emoticon;
+            document.getElementById("post_it_text").value = elements[focusElement].postit;
+            document.getElementById("updateButton").removeAttribute('disabled');
+            document.getElementById("backButton").removeAttribute('disabled');
+            document.getElementById("fwdButton").removeAttribute('disabled');
+            document.getElementById("deleteButton").removeAttribute('disabled');
+
+        }
+
+        function canvasGotFocus(){
+            //events when focus shifts to canvas?
+            //alert("canvase got focus");
+            canvasInFocus = true;
+            focusElement = -1;
+        }
+
+        function canvasLostFocus(){
+            //alert("canvas lost focus");
+            canvasInFocus = false;
+        }
+
+        function cycleNextFocus(){
+            //move to the next focus element, if no more elements, release focus outside of canvas
+            //alert("last focus is " + focusElement);
+            if((elements.length-1) > focusElement){
+                focusElement++;
+                changeFocus();
+                
+            }
+            else{
+                //alert("leave canvas");
+                //removeFocus();
+            }
+
+        }
+
+        function cyclePrevFocus(){
+            if(focusElement > 0){
+                focusElement--;
+                changeFocus();
+            }
+            else{
+                //alert("leave canvas backwards");
+                //removeFocus();
+            }
+        }
+
+        function keyResponse(k){
+            alert("key down");
+            switch(k){
+                case 9:
+                    //cycleNextFocus();
+                    break;
+                case 16:
+                    //alert("shift"); 
+                    break;
+                case 38:
+                    cyclePrevFocus();
+                    break;
+                case 37:
+                    cyclePrevFocus();
+                    break;
+                case 39:
+                    cycleNextFocus();
+                    break;
+                case 40:
+                    cycleNextFocus();
+                    break;
+            }
+            return false;
+        }
+
+        function updateElement(){
+            //change existing element according to form
+            //alert("changing values of " + document.getElementById('event_desc').value);
+            elements[focusElement].description = document.getElementById('event_desc').value;
+            elements[focusElement].icon = document.getElementById('icon_select' ).value;
+            elements[focusElement].emoticon = document.getElementById('emoticon_select').value;
+            elements[focusElement].postit = document.getElementById('post_it_text').value;
+            updateElements();
+        }
+
+        function deleteElement(){
+            //deletes focused on element.
+            elements[focusElement] = { eID: "place" + focusElement , text: " ", emoticon: " ", icon: " ", postit: " "};
+            updateElements();
+        }
+
+        function moveBackElement(){
+            //moves an element back towards the start
+            if(focusElement > 0){
+                var swap = elements[focusElement-1];
+                elements[focusElement-1] = elements[focusElement];
+                elements[focusElement] = swap;
+                focusElement--;
+            }
+            updateElements();
+        }
+
+        function moveFwdElement(){
+            //moves an element forward from its current position
+            if(focusElement < (elements.length-1)){
+                var swap = elements[focusElement+1];
+                elements[focusElement+1] = elements[focusElement];
+                elements[focusElement] = swap;
+                focusElement++;
+            }
+            updateElements();
+        }
+
+    </script>
+    </head>
+    <body>
+        <div class = "editorbar">
+            <form>
+                    <p>
+                    What happened?
+                    <textarea rows=2 maxlength=40 cols=20 id="event_desc" value=""></textarea>
+                    Event:
+                    <select id="icon_select">
+                        
+                        <option value="achievement">Achievement</option>
+                        <option value="admin">Admininstration</option>
+                        <option value="assessment">Assessment</option>
+                        <option value="studybreak">Break from study</option>
+                        <option value="communication">Communication</option>
+                        <option value="duedates">Due dates</option>
+                        <option value="studygoal">Goal</option>
+                        <option value="helpneeded">Help needed</option>
+                        <option value="highpressure">High pressure</option>
+                        <option value="Information">Information</option>
+                        <option value="lostdirection">Lost direction</option>
+                        <option value="lowenergy">Low energy</option>
+                        <option value="lowscores">Low scores</option>
+                        <option value="studymilestone">Milestone</option>
+                        <option value="nosupport">No support</option>
+                        <option value="peersupport">Peer support</option>
+                        <option value="problem">Problem</option>
+                        <option value="register">Registering</option>
+                        <option value="studyexperience">Study experience</option>
+                        <option value="studysuccess">Study success</option>
+                        <option value="studysupport">Support</option>
+                        <option value="timelost">Time Lost</option>
+                    </select>
+                    Emotion:
+                    <select id="emoticon_select">
+                        <option value="none">None</option>
+                        <option value="achieve">Achievement</option>
+                        <option value="angry">Angry</option>
+                        <option value="bored">Bored</option>
+                        <option value="confused">Confused</option>
+                        <option value="excited">Excited</option>
+                        <option value="happy">Happy</option>
+                        <option value="nervous">Nervous</option>
+                        <option value="sick">Sick</option>
+                        <option value="thinking">Thinking</option>
+                        <option value="unhappy">Unhappy</option>
+                        <option value="upset">Upset</option>
+                    </select>
+                    Note:
+                    <textarea rows=2 maxlength=40 cols=20 id="post_it_text" value=""></textarea>
+                    <input type="button" value="Update" id="updateButton" onclick="updateElement();" disabled>
+                    <input type="button" value="Clear" id="deleteButton" onclick="deleteElement();" disabled>
+                    <input type="button" value="Move Forward" id="fwdButton" onclick="moveFwdElement();" disabled>
+                    <input type="button" value="Move Back" id="backButton" onclick="moveBackElement();" disabled>
+                    <br>
+                    Background:
+                    <select id="background_select">
+                        <option value="none">None</option>
+                        <option value="Beige">Beige</option>
+                        <option value="BurlyWood">Wood</option>
+                        <option value="DarkSeaGreen">Green</option>
+                        <option value="PaleTurquoise">Turquoise</option>
+                        <option value="SkyBlue">Blue</option>
+                        <option value="LightPink">Pink</option>
+                        <option value="Lavender">Lavender</option>
+                        <option value="LightGray">Grey</option>
+                        <option value="Coral">Orange</option>
+                    </select>
+                    <input type="button" value="Update" id="updateButton" onclick="changeBackground();">
+                </form> 
+                </p>
+        </div>
+
+        <div class="main">
+            <svg width="100%" height="2600" onfocusout="canvasLostFocus()" onfocusin="canvasGotFocus()" id="journey-canvas">
+                <title role="img" id="title" aria-labelledby="desc-space">Journey</title>
+                <style>
+                    .in_card { font: bold 14px sans-serif}
+                </style>
+            <desc id="start-card">Start of the journey</desc>
+            <desc id="desc-space">This is the space in which the journey is represented</desc>
+            <desc id="desc-card-0">First card in the journey</desc>
+            <desc id="group-0">Card group</desc>
+            <desc id="empty-card">Empty journey card</desc>
+            <desc id="desc-icon-rocket">rocket icon</desc>
+
+            <svg x = "120" y = "0">
+                    <rect aria-labelledby="start-card"  width = "130" height="110"  stroke="black" fill="" stroke-width="1" id="start_place" fill-opacity="0.0"/>
+                    <image xlink:href = "Arrow-down.svg" x = "20" y = "0" height="100" width="100" id="startIcon" aria-labelledby="desc-icon-rocket"/>
+                    <text x = "20" y = "80" class="in_card">START HERE!</text>
+            </svg>
+            <svg x = "20" y = "110" role = "button" id="group0" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place0" fill-opacity="0.0"/>
+                <image href = "" id="icon0" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description0" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description0" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon0" aria-labelledby="desc-icon-rocket"/> 
+
+                <image id="postit0" href = "PostIt.png" width = "100" height="100" visibility="collapse"></image>
+                <switch>
+                        <foreignObject id="postittext0" class="in_card" width="100" height="100" visibility="collapse">
+                        <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                        </foreignObject>
+                        <text id="postittext0" class="in_card">not filled</text>
+                </switch>
+            </svg>
+            <svg x = "250" y = "120" role = "button" id="group1" aria-labelledby="group-0">
+                    <rect role="button" aria-labelledby="desc-card-0"  width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place1" fill-opacity="0.0"/>
+                    <image href = "" id="icon1" aria-labelledby="desc-icon-rocket"/>
+                    <switch>
+                        <foreignObject id="description1" class="in_card" width="100" height="200">
+                        <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                        </foreignObject>
+                        <text id="description1" class="in_card">not filled</text>
+                    </switch>
+                    <image href = "" id="emoticon1" aria-labelledby="desc-icon-rocket"/> 
+                    <image id="postit1" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                <switch>
+                        <foreignObject id="postittext1" class="in_card" width="100" height="100" visibility="collapse">
+                        <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                        </foreignObject>
+                        <text id="postittext1" class="in_card">not filled</text>
+                </switch>
+            </svg>
+            <svg x = "490" y = "120" role = "button" id="group2" aria-labelledby="group-0">
+                    <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place2" fill-opacity="0.0"/>
+                    <image href = "" id="icon2" aria-labelledby="desc-icon-rocket"/>
+                    <switch>
+                        <foreignObject id="description2" class="in_card" width="100" height="200">
+                        <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                        </foreignObject>
+                        <text id="description2" class="in_card">not filled</text>
+                    </switch>
+                    <image href = "" id="emoticon2" aria-labelledby="desc-icon-rocket"/> 
+                    <image id="postit2" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext2" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext2" class="in_card">not filled</text>
+                    </switch>
+            </svg>
+            <svg x = "730" y = "120" role = "button" id="group3" aria-labelledby="group-0">
+                    <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place3" fill-opacity="0.0"/>
+                    <image href = "" id="icon3" aria-labelledby="desc-icon-rocket"/>
+                    <switch>
+                        <foreignObject id="description3" class="in_card" width="100" height="200">
+                        <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                        </foreignObject>
+                        <text id="description3" class="in_card">not filled</text>
+                    </switch>
+                    <image href = "" id="emoticon3" aria-labelledby="desc-icon-rocket"/> 
+                    <image id="postit3" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext3" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext3" class="in_card">not filled</text>
+                    </switch>
+            </svg>
+            <svg x = "970" y = "120" role = "button" id="group4" aria-labelledby="group-0">
+                    <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place4" fill-opacity="0.0"/>
+                    <image href = "" id="icon4" aria-labelledby="desc-icon-rocket"/>
+                    <switch>
+                        <foreignObject id="description4" class="in_card" width="100" height="200">
+                        <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                        </foreignObject>
+                        <text id="description4" class="in_card">not filled</text>
+                    </switch>
+                    <image href = "" id="emoticon4" aria-labelledby="desc-icon-rocket"/>
+                    <image id="postit4" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext4" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext4" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "970" y = "360" role = "button" id="group5" aria-labelledby="group-0">
+                    <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place5" fill-opacity="0.0"/>
+                    <image href = "" id="icon5" aria-labelledby="desc-icon-rocket"/>
+                    <switch>
+                        <foreignObject id="description5" class="in_card" width="100" height="200">
+                        <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                        </foreignObject>
+                        <text id="description5" class="in_card">not filled</text>
+                    </switch>
+                    <image href = "" id="emoticon5" aria-labelledby="desc-icon-rocket"/> 
+                    <image id="postit5" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext5" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext5" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "730" y = "470" role = "button" id="group6" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place6" fill-opacity="0.0"/>
+                <image href = "" id="icon6" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description6" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description6" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon6" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit6" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext6" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext6" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "490" y = "470" role = "button" id="group7" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place7" fill-opacity="0.0"/>
+                <image href = "" id="icon7" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description7" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description7" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon7" aria-labelledby="desc-icon-rocket"/>
+                <image id="postit7" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext7" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext7" class="in_card">not filled</text>
+                    </switch>  
+            </svg>
+            <svg x = "250" y = "470" role = "button" id="group8" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place8" fill-opacity="0.0"/>
+                <image href = "" id="icon8" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description8" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description8" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon8" aria-labelledby="desc-icon-rocket"/>
+                <image id="postit8" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext8" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext8" class="in_card">not filled</text>
+                    </switch>  
+            </svg>
+            <svg x = "20" y = "570" role = "button" id="group9" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place9" fill-opacity="0.0"/>
+                <image href = "" id="icon9" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description9" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description9" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon9" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit9" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext9" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext9" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "20" y = "810" role = "button" id="group10" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place10" fill-opacity="0.0"/>
+                <image href = "" id="icon10" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description10" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description10" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon10" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit10" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext10" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext10" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "250" y = "820" role = "button" id="group11" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place11" fill-opacity="0.0"/>
+                <image href = "" id="icon11" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description11" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description11" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon11" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit11" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext11" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext11" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "490" y = "820" role = "button" id="group12" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place12" fill-opacity="0.0"/>
+                <image href = "" id="icon12" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description12" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description12" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon12" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit12" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext12" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext12" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "730" y = "820" role = "button" id="group13" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place13" fill-opacity="0.0"/>
+                <image href = "" id="icon13" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description13" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description13" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon13" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit13" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext13" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext13" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "970" y = "820" role = "button" id="group14" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place14" fill-opacity="0.0"/>
+                <image href = "" id="icon14" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description14" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description14" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon14" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit14" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext14" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext14" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "970" y = "1060" role = "button" id="group15" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place15" fill-opacity="0.0"/>
+                <image href = "" id="icon15" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description15" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description15" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon15" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit15" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext15" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext15" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "730" y = "1170" role = "button" id="group16" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place16" fill-opacity="0.0"/>
+                <image href = "" id="icon16" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description16" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description16" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon16" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit16" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext16" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext16" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "490" y = "1170" role = "button" id="group17" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place17" fill-opacity="0.0"/>
+                <image href = "" id="icon17" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description17" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description17" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon17" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit17" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext17" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext17" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "250" y = "1170" role = "button" id="group18" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place18" fill-opacity="0.0"/>
+                <image href = "" id="icon18" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description18" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description18" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon18" aria-labelledby="desc-icon-rocket"/>
+                <image id="postit18" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext18" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext18" class="in_card">not filled</text>
+                    </switch>  
+            </svg>
+            <svg x = "20" y = "1270" role = "button" id="group19" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place19" fill-opacity="0.0"/>
+                <image href = "" id="icon19" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description19" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description19" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon19" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit19" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext19" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext19" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "20" y = "1510" role = "button" id="group20" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place20" fill-opacity="0.0"/>
+                <image href = "" id="icon20" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description20" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description20" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon20" aria-labelledby="desc-icon-rocket"/>
+                <image id="postit20" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext20" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext20" class="in_card">not filled</text>
+                    </switch>  
+            </svg>
+            <svg x = "250" y = "1520" role = "button" id="group21" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place21" fill-opacity="0.0"/>
+                <image href = "" id="icon21" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description21" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description21" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon21" aria-labelledby="desc-icon-rocket"/>
+                <image id="postit21" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext21" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext21" class="in_card">not filled</text>
+                    </switch>  
+            </svg>
+            <svg x = "490" y = "1520" role = "button" id="group22" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place22" fill-opacity="0.0"/>
+                <image href = "" id="icon22" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description22" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description22" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon22" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit22" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext22" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext22" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "730" y = "1520" role = "button" id="group23" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place23" fill-opacity="0.0"/>
+                <image href = "" id="icon23" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description23" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description23" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon23" aria-labelledby="desc-icon-rocket"/>
+                <image id="postit23" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext23" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext23" class="in_card">not filled</text>
+                    </switch>  
+            </svg>
+            <svg x = "970" y = "1520" role = "button" id="group24" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place24" fill-opacity="0.0"/>
+                <image href = "" id="icon24" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description24" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description24" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon24" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit24" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext24" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext24" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "970" y = "1760" role = "button" id="group25" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place25" fill-opacity="0.0"/>
+                <image href = "" id="icon25" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description25" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description25" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon25" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit25" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext25" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext25" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "730" y = "1870" role = "button" id="group26" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place26" fill-opacity="0.0"/>
+                <image href = "" id="icon26" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description26" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description26" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon26" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit26" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext26" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext26" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "490" y = "1870" role = "button" id="group27" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place27" fill-opacity="0.0"/>
+                <image href = "" id="icon27" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description27" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description27" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon27" aria-labelledby="desc-icon-rocket"/> 
+                <image id="postit27" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext27" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext27" class="in_card">not filled</text>
+                    </switch> 
+            </svg>
+            <svg x = "250" y = "1870" role = "button" id="group28" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place28" fill-opacity="0.0"/>
+                <image href = "" id="icon28" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description28" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description28" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon28" aria-labelledby="desc-icon-rocket"/>
+                <image id="postit28" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext28" class="in_card" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext28" class="in_card">not filled</text>
+                    </switch>  
+            </svg>
+
+            <svg x = "120" y = "310" id="floating-editor" width = "250" height = "250" visibility = "collapse">
+                <rect role="button" width = "220" height="250"  stroke="black" fill="" stroke-width="1" fill-opacity="0.0"/>
+                <foreignObject id="floating-f1" class="in_card" width="100" height="200">
+                    <textarea xmlns="http://www.w3.org/1999/xhtml" rows=2 maxlength=40 cols=28 id="floating-text-desc" value=""></textarea>
+                    Add icon:
+                    <select id="floating-icon_select">
+                        <option value="time">Time lost</option>
+                        <option value="comms">Communications</option>
+                        <option value="goal">My goal</option>
+                    </select>
+                    Add emotion:
+                    <select id="floating-emoticon_select">
+                        <option value="stressed">Stress</option>
+                        <option value="happy">Happy</option>
+                    </select>
+                    <input type="button" value="Update" id="floating-updateButton" onclick="updateElement();" >
+                    <input type="button" value="Clear" id="floating-deleteButton" onclick="clearElement();" >
+                    <input type="button" value="Move Forward" id="floating-fwdButton" onclick="moveFwdElement();">
+                    <input type="button" value="Move Back" id="floating-backButton" onclick="moveBackElement();">
+                    <input type="button" value="Add Note" id="floating-noteButton" onclick="addNoteElement();">
+                    </form> 
+                </foreignObject>
+
+            </svg>
+        </svg>
+    </div>
+    <script>
+        initialiseElements();
+        focusElement=0;
+        changeFocus();
+        //demoFill();
+    </script>
+    </body>
+</html>
