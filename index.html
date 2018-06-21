@@ -5,11 +5,14 @@
         var elements = [];
         var focusElement = -1;
         var canvasInFocus = false;
-        
 
-        //Presentation variables
+
+        // Presentation variables
         var iconFiles = [{name: "achievement", file: "Achievement_card.png"} , {name: "admin", file: "Admin_card.png"}, {name: "assessment", file: "Assessments_card.png"} , {name: "communication", file: "Communication_card.png"} , {name: "confidence", file: "ConfidenceBoost_card.png"} , {name: "duedates", file: "DueDates_card.png"} , {name: "helpneeded", file: "HelpNeeded_card.png"} , {name: "highpressure", file: "HighPressure_card.png"} , {name: "information", file: "Information_card.png"} , {name: "lostdirection", file: "LostDirection_card.png"} , {name: "lowenergy", file: "LowEnergy_card.png"} , {name: "lowscores", file: "LowScores_card.png"} , {name: "nosupport", file: "NoSupport_card.png"} , {name: "peersupport", file: "PeerSupport_card.png"} , {name: "problem", file: "Problem_card.png"} , {name: "register", file: "Register_card.png"} , {name: "studybreak", file: "StudyBreak_card.png"} , {name: "studyexperience", file: "StudyExperience_card.png"}, {name: "studygoal", file: "StudyGoal_card.png"} , {name: "studymilestone", file: "StudyMilestone_card.png"},{name: "studysuccess", file: "StudySuccess_card.png"} , {name: "studysupport", file: "StudySupport_card.png"},{name: "timelost", file: "TimeLost_card.png"}];
         var emoticonFiles = [{name: "angry", file: "Angry_emoji.png"}, {name: "achieve", file: "Achieve_emoji.png"}, {name: "bored", file: "Bored_emoji.png"}, {name: "confused", file: "Confused_emoji.png"},{name: "excited", file: "Excited_emoji.png"}, {name: "happy", file: "Happy_emoji.png"}, {name: "nervous", file: "Nervous_emoji.png"}, {name: "sick", file: "Sick_emoji.png"}, {name: "angry", file: "Angry_emoji.png"}, {name: "achieve", file: "Achieve_emoji.png"}, {name: "unhappy", file: "Unhappy_emoji.png"}, {name: "upset", file: "Upset_emoji.png"},{name: "thinking", file: "Thinking_emoji.png"}];
+        // var assetDir = 'assets/';
+        var emojiDir = 'assets/emoji/';
+        var cardDir = 'assets/card/';
         var iconWidth = 110;
         var iconHeight = 110;
         var iconXV = 110;
@@ -137,9 +140,9 @@
                 //emoticon
                 eEmo = document.getElementById("emoticon"+i);
                 if(element.emoticon != "none"){
-                    
+
                     for(j=0;j<emoticonFiles.length;j++){
-    
+
                         if(emoticonFiles[j].name == element.emoticon){
                             eEmo.setAttribute("height",emoticonHeight);
                             eEmo.setAttribute("width",emoticonWidth);
@@ -156,7 +159,7 @@
                                 eEmo.setAttribute("y",emoticonY);
                             }
                             eEmo.setAttribute('display',"inline");
-                            eEmo.setAttribute('href',emoticonFiles[j].file);
+                            eEmo.setAttribute('href',emojiDir + emoticonFiles[j].file);
                         }
                     }
                 }
@@ -168,7 +171,7 @@
                 if(element.icon != "none"){
 
                     for(j=0;j<iconFiles.length;j++){
-    
+
                         if(iconFiles[j].name == element.icon){
                             eIcon.setAttribute("height",iconHeight);
                             eIcon.setAttribute("width",iconWidth);
@@ -181,7 +184,7 @@
                                 eIcon.setAttribute("y",iconY);
                             }
                             eIcon.setAttribute('display',"inline");
-                            eIcon.setAttribute("href",iconFiles[j].file);
+                            eIcon.setAttribute("href",cardDir + iconFiles[j].file);
                         }
                     }
                 }
@@ -212,7 +215,7 @@
                         }
                         ePostItText.textContent = element.postit;
                 }
-            
+
             }
         }
 
@@ -229,7 +232,7 @@
             //.mousedown(function(){ $(this).focus(); return false; })
             //d3.select("body").on("keydown", function(){keyResponse(event.which)});
             document.addEventListener('keydown',function(){keyResponse(event.which)});
-            
+
         }
 
         function changeFocus(){
@@ -274,7 +277,7 @@
             if((elements.length-1) > focusElement){
                 focusElement++;
                 changeFocus();
-                
+
             }
             else{
                 //alert("leave canvas");
@@ -301,7 +304,7 @@
                     //cycleNextFocus();
                     break;
                 case 16:
-                    //alert("shift"); 
+                    //alert("shift");
                     break;
                 case 38:
                     cyclePrevFocus();
@@ -367,7 +370,7 @@
                     <textarea rows=2 maxlength=40 cols=20 id="event_desc" value=""></textarea>
                     Event:
                     <select id="icon_select">
-                        
+
                         <option value="achievement">Achievement</option>
                         <option value="admin">Admininstration</option>
                         <option value="assessment">Assessment</option>
@@ -427,7 +430,7 @@
                         <option value="Coral">Orange</option>
                     </select>
                     <input type="button" value="Update" id="updateButton" onclick="changeBackground();">
-                </form> 
+                </form>
                 </p>
         </div>
 
@@ -458,9 +461,9 @@
                     </foreignObject>
                     <text id="description0" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon0" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon0" aria-labelledby="desc-icon-rocket"/>
 
-                <image id="postit0" href = "PostIt.png" width = "100" height="100" visibility="collapse"></image>
+                <image id="postit0" href = "assets/PostIt.png" width = "100" height="100" visibility="collapse"></image>
                 <switch>
                         <foreignObject id="postittext0" class="in_card" width="100" height="100" visibility="collapse">
                         <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
@@ -477,7 +480,7 @@
                         </foreignObject>
                         <text id="description1" class="in_card">not filled</text>
                     </switch>
-                    <image href = "" id="emoticon1" aria-labelledby="desc-icon-rocket"/> 
+                    <image href = "" id="emoticon1" aria-labelledby="desc-icon-rocket"/>
                     <image id="postit1" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                 <switch>
                         <foreignObject id="postittext1" class="in_card" width="100" height="100" visibility="collapse">
@@ -495,7 +498,7 @@
                         </foreignObject>
                         <text id="description2" class="in_card">not filled</text>
                     </switch>
-                    <image href = "" id="emoticon2" aria-labelledby="desc-icon-rocket"/> 
+                    <image href = "" id="emoticon2" aria-labelledby="desc-icon-rocket"/>
                     <image id="postit2" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext2" class="in_card" width="100" height="100" visibility="collapse">
@@ -513,7 +516,7 @@
                         </foreignObject>
                         <text id="description3" class="in_card">not filled</text>
                     </switch>
-                    <image href = "" id="emoticon3" aria-labelledby="desc-icon-rocket"/> 
+                    <image href = "" id="emoticon3" aria-labelledby="desc-icon-rocket"/>
                     <image id="postit3" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext3" class="in_card" width="100" height="100" visibility="collapse">
@@ -538,7 +541,7 @@
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext4" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "970" y = "360" role = "button" id="group5" aria-labelledby="group-0">
                     <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place5" fill-opacity="0.0"/>
@@ -549,14 +552,14 @@
                         </foreignObject>
                         <text id="description5" class="in_card">not filled</text>
                     </switch>
-                    <image href = "" id="emoticon5" aria-labelledby="desc-icon-rocket"/> 
+                    <image href = "" id="emoticon5" aria-labelledby="desc-icon-rocket"/>
                     <image id="postit5" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext5" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext5" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "730" y = "470" role = "button" id="group6" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place6" fill-opacity="0.0"/>
@@ -567,14 +570,14 @@
                     </foreignObject>
                     <text id="description6" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon6" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon6" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit6" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext6" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext6" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "490" y = "470" role = "button" id="group7" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place7" fill-opacity="0.0"/>
@@ -592,7 +595,7 @@
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext7" class="in_card">not filled</text>
-                    </switch>  
+                    </switch>
             </svg>
             <svg x = "250" y = "470" role = "button" id="group8" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place8" fill-opacity="0.0"/>
@@ -610,7 +613,7 @@
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext8" class="in_card">not filled</text>
-                    </switch>  
+                    </switch>
             </svg>
             <svg x = "20" y = "570" role = "button" id="group9" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place9" fill-opacity="0.0"/>
@@ -621,14 +624,14 @@
                     </foreignObject>
                     <text id="description9" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon9" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon9" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit9" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext9" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext9" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "20" y = "810" role = "button" id="group10" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place10" fill-opacity="0.0"/>
@@ -639,14 +642,14 @@
                     </foreignObject>
                     <text id="description10" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon10" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon10" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit10" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext10" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext10" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "250" y = "820" role = "button" id="group11" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place11" fill-opacity="0.0"/>
@@ -657,14 +660,14 @@
                     </foreignObject>
                     <text id="description11" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon11" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon11" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit11" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext11" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext11" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "490" y = "820" role = "button" id="group12" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place12" fill-opacity="0.0"/>
@@ -675,14 +678,14 @@
                     </foreignObject>
                     <text id="description12" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon12" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon12" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit12" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext12" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext12" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "730" y = "820" role = "button" id="group13" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place13" fill-opacity="0.0"/>
@@ -693,14 +696,14 @@
                     </foreignObject>
                     <text id="description13" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon13" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon13" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit13" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext13" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext13" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "970" y = "820" role = "button" id="group14" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place14" fill-opacity="0.0"/>
@@ -711,14 +714,14 @@
                     </foreignObject>
                     <text id="description14" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon14" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon14" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit14" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext14" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext14" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "970" y = "1060" role = "button" id="group15" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place15" fill-opacity="0.0"/>
@@ -729,14 +732,14 @@
                     </foreignObject>
                     <text id="description15" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon15" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon15" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit15" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext15" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext15" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "730" y = "1170" role = "button" id="group16" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place16" fill-opacity="0.0"/>
@@ -747,14 +750,14 @@
                     </foreignObject>
                     <text id="description16" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon16" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon16" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit16" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext16" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext16" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "490" y = "1170" role = "button" id="group17" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place17" fill-opacity="0.0"/>
@@ -765,14 +768,14 @@
                     </foreignObject>
                     <text id="description17" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon17" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon17" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit17" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext17" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext17" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "250" y = "1170" role = "button" id="group18" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place18" fill-opacity="0.0"/>
@@ -790,7 +793,7 @@
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext18" class="in_card">not filled</text>
-                    </switch>  
+                    </switch>
             </svg>
             <svg x = "20" y = "1270" role = "button" id="group19" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place19" fill-opacity="0.0"/>
@@ -801,14 +804,14 @@
                     </foreignObject>
                     <text id="description19" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon19" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon19" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit19" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext19" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext19" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "20" y = "1510" role = "button" id="group20" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place20" fill-opacity="0.0"/>
@@ -826,7 +829,7 @@
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext20" class="in_card">not filled</text>
-                    </switch>  
+                    </switch>
             </svg>
             <svg x = "250" y = "1520" role = "button" id="group21" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place21" fill-opacity="0.0"/>
@@ -844,7 +847,7 @@
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext21" class="in_card">not filled</text>
-                    </switch>  
+                    </switch>
             </svg>
             <svg x = "490" y = "1520" role = "button" id="group22" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place22" fill-opacity="0.0"/>
@@ -855,14 +858,14 @@
                     </foreignObject>
                     <text id="description22" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon22" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon22" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit22" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext22" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext22" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "730" y = "1520" role = "button" id="group23" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place23" fill-opacity="0.0"/>
@@ -880,7 +883,7 @@
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext23" class="in_card">not filled</text>
-                    </switch>  
+                    </switch>
             </svg>
             <svg x = "970" y = "1520" role = "button" id="group24" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place24" fill-opacity="0.0"/>
@@ -891,14 +894,14 @@
                     </foreignObject>
                     <text id="description24" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon24" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon24" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit24" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext24" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext24" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "970" y = "1760" role = "button" id="group25" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place25" fill-opacity="0.0"/>
@@ -909,14 +912,14 @@
                     </foreignObject>
                     <text id="description25" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon25" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon25" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit25" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext25" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext25" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "730" y = "1870" role = "button" id="group26" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place26" fill-opacity="0.0"/>
@@ -927,14 +930,14 @@
                     </foreignObject>
                     <text id="description26" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon26" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon26" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit26" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext26" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext26" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "490" y = "1870" role = "button" id="group27" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place27" fill-opacity="0.0"/>
@@ -945,14 +948,14 @@
                     </foreignObject>
                     <text id="description27" class="in_card">not filled</text>
                 </switch>
-                <image href = "" id="emoticon27" aria-labelledby="desc-icon-rocket"/> 
+                <image href = "" id="emoticon27" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit27" href = "Sticky_note.svg" width = "100" height="100" visibility="collapse"></image>
                     <switch>
                             <foreignObject id="postittext27" class="in_card" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext27" class="in_card">not filled</text>
-                    </switch> 
+                    </switch>
             </svg>
             <svg x = "250" y = "1870" role = "button" id="group28" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place28" fill-opacity="0.0"/>
@@ -970,7 +973,7 @@
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext28" class="in_card">not filled</text>
-                    </switch>  
+                    </switch>
             </svg>
 
             <svg x = "120" y = "310" id="floating-editor" width = "250" height = "250" visibility = "collapse">
@@ -993,7 +996,7 @@
                     <input type="button" value="Move Forward" id="floating-fwdButton" onclick="moveFwdElement();">
                     <input type="button" value="Move Back" id="floating-backButton" onclick="moveBackElement();">
                     <input type="button" value="Add Note" id="floating-noteButton" onclick="addNoteElement();">
-                    </form> 
+                    </form>
                 </foreignObject>
 
             </svg>
