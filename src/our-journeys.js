@@ -95,6 +95,52 @@ function demoFill(){
     updateElements();
 }
 
+function saveJourney(){
+    var filename = document.getElementById('filenamearea' ).value + ".json";
+    var type = "text/plain";
+    var data = JSON.stringify(elements);
+    var a = document.createElement('a');
+    a.setAttribute('href', 'data:text/plain;charset=utf-u,'+encodeURIComponent(data));
+    a.setAttribute('download', filename);
+    a.click();
+}
+
+function loadJourney(){
+    var input, file, fr;
+
+    if (typeof window.FileReader !== 'function') {
+    alert("The file API isn't supported on this browser yet.");
+    return;
+    }
+
+    input = document.getElementById('fileinput');
+    if (!input) {
+    alert("Um, couldn't find the fileinput element.");
+    }
+    else if (!input.files) {
+    alert("This browser doesn't seem to support the `files` property of file inputs.");
+    }
+    else if (!input.files[0]) {
+    alert("Please select a file before clicking 'Load'");
+    }
+    else {
+    file = input.files[0];
+    fr = new FileReader();
+    fr.onload = receivedText;
+    fr.readAsText(file);
+    }
+
+    function receivedText(e) {
+        let lines = e.target.result;
+        var newArr = JSON.parse(lines); 
+        alert("got data " + newArr[0].eID.toString());
+        for(i=0;i<numElements;i++){
+            elements[i] = { eID: newArr[i].eID , description: newArr[i].description, emoticon: newArr[i].emoticon, icon: newArr[i].icon, postit: newArr[i].postit};
+            }
+            updateElements();
+        }
+    }
+
 function elementClick() {
     var e = this.id.substring(5);
     focusElement = parseInt(e);
@@ -110,6 +156,16 @@ function toggleEditor(t){
     }
     else if(t==0){
         editor.style.display = "none";
+    }
+}
+
+function toggleOptions(){
+    var options = document.getElementById('options');
+    if(options.style.display == "none"){
+        options.style.display = "block";
+    }
+    else{
+        options.style.display = "none";
     }
 }
 
