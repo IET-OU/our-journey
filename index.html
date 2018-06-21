@@ -1,20 +1,24 @@
 <!doctype html>
 <html lang="en">
     <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+
     <title> Our Journeys interactive </title>
     <meta name="copyright" content="© 2018 The Open University (IET-OU)." />
 
-    <link rel="stylesheet" href="style/journeystyle.css">
+    <link rel="stylesheet" href="style/journeystyle.css" />
     <script src="src/our-journeys.js"></script>
     </head>
     <body>
-        <div class = "editorbar" id = "editor">
+        <div class="editorbar" id="editor">
         <h2>Journey editor:</h2>
             <form>
                     <p>
-                    What happened?
+                    <label for="event_desc">What happened?</label>
                     <textarea rows=2 maxlength=40 cols=20 id="event_desc" value=""></textarea>
-                    Event:
+                    <label for="icon_select">Event:</label>
                     <select id="icon_select">
 
                         <option value="achievement">Achievement</option>
@@ -40,7 +44,7 @@
                         <option value="studysupport">Support</option>
                         <option value="timelost">Time Lost</option>
                     </select>
-                    Emotion:
+                    <label for="emoticon_select">Emotion:</label>
                     <select id="emoticon_select">
                         <option value="none">None</option>
                         <option value="achieve">Achievement</option>
@@ -55,7 +59,7 @@
                         <option value="unhappy">Unhappy</option>
                         <option value="upset">Upset</option>
                     </select>
-                    Note:
+                    <label for="post_it_text">Note:</label>
                     <textarea rows=2 maxlength=40 cols=20 id="post_it_text" value=""></textarea>
                     <input type="button" value="Update" id="updateButton" onclick="updateElement();" disabled>
                     <input type="button" value="Clear" id="deleteButton" onclick="deleteElement();" disabled>
@@ -67,7 +71,7 @@
                 <div class = "optionsbar" id = "options">
                    <h2>Options:</h2>
                         <form>
-                                Background:
+                                <label for="background_select">Background:</label>
                                 <select id="background_select">
                                     <option value="none">None</option>
                                     <option value="Beige">Beige</option>
@@ -93,9 +97,9 @@
                             <input type='button' id='btnLoad' value='Load' onclick='loadJourney();'>
                         </form>
                     </div>
-                </div>   
+                </div>
         </div>
-        
+
 
         <div class="main">
             <svg width="100%" height="2400" onfocusout="canvasLostFocus()" onfocusin="canvasGotFocus()" id="journey-canvas">
@@ -114,7 +118,7 @@
                     <rect aria-labelledby="start-card"  width = "130" height="90" y="20" x="0" stroke="black" fill="red" stroke-width="1" id="start_place" fill-opacity="1.0"/>
                     <image xlink:href = "assets/Arrow-down.svg" x = "18" y = "0" height="100" width="100" id="startIcon" aria-labelledby="desc-icon-rocket"/>
                     <image xlink:href = "assets/Arrow-down.svg" x = "18" y = "30" height="100" width="100" id="startIcon" aria-labelledby="desc-icon-rocket"/>
-                    
+
             </svg>
             <svg x = "20" y = "110" role = "button" id="group0" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place0" fill-opacity="0.0"/>
