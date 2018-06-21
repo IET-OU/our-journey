@@ -1,7 +1,7 @@
 /*!
   Our Journeys | © 2018 The Open University (IET-OU).
 */
-
+//Status variables
 var elements = [];
 var focusElement = -1;
 var canvasInFocus = false;
@@ -100,6 +100,17 @@ function elementClick() {
     focusElement = parseInt(e);
     //alert("mouse down on " + focusElement);
     changeFocus();
+    toggleEditor(1);
+}
+
+function toggleEditor(t){
+    var editor = document.getElementById('editor');
+    if(t==1){
+        editor.style.display = "block";
+    }
+    else if(t==0){
+        editor.style.display = "none";
+    }
 }
 
 function updateElements(){

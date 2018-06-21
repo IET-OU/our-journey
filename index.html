@@ -8,7 +8,7 @@
     <script src="src/our-journeys.js"></script>
     </head>
     <body>
-        <div class = "editorbar">
+        <div class = "editorbar" id = "editor">
             <form>
                     <p>
                     What happened?
@@ -75,6 +75,7 @@
                         <option value="Coral">Orange</option>
                     </select>
                     <input type="button" value="Update" id="updateButton" onclick="changeBackground();">
+                    <input type="button" value="Hide editor" id="hideButton" onclick="toggleEditor(0);">
                 </form>
                 </p>
         </div>
