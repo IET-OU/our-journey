@@ -98,7 +98,7 @@
         
 
         <div class="main">
-            <svg width="100%" height="2600" onfocusout="canvasLostFocus()" onfocusin="canvasGotFocus()" id="journey-canvas">
+            <svg width="100%" height="2400" onfocusout="canvasLostFocus()" onfocusin="canvasGotFocus()" id="journey-canvas">
                 <title role="img" id="title" aria-labelledby="desc-space">Journey</title>
                 <style>
                     .in_card { font: bold 14px sans-serif}
@@ -111,9 +111,10 @@
             <desc id="desc-icon-rocket">rocket icon</desc>
 
             <svg x = "120" y = "0">
-                    <rect aria-labelledby="start-card"  width = "130" height="110"  stroke="black" fill="" stroke-width="1" id="start_place" fill-opacity="0.0"/>
-                    <image xlink:href = "assets/Arrow-down.svg" x = "20" y = "0" height="100" width="100" id="startIcon" aria-labelledby="desc-icon-rocket"/>
-                    <text x = "20" y = "80" class="in_card">START HERE!</text>
+                    <rect aria-labelledby="start-card"  width = "130" height="90" y="20" x="0" stroke="black" fill="red" stroke-width="1" id="start_place" fill-opacity="1.0"/>
+                    <image xlink:href = "assets/Arrow-down.svg" x = "18" y = "0" height="100" width="100" id="startIcon" aria-labelledby="desc-icon-rocket"/>
+                    <image xlink:href = "assets/Arrow-down.svg" x = "18" y = "30" height="100" width="100" id="startIcon" aria-labelledby="desc-icon-rocket"/>
+                    
             </svg>
             <svg x = "20" y = "110" role = "button" id="group0" aria-labelledby="group-0">
                 <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place0" fill-opacity="0.0"/>
@@ -638,7 +639,24 @@
                             <text id="postittext28" class="in_card">not filled</text>
                     </switch>
             </svg>
-
+            <svg x = "20" y = "1970" role = "button" id="group29" aria-labelledby="group-0">
+                    <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place29" fill-opacity="0.0"/>
+                    <image href = "" id="icon29" aria-labelledby="desc-icon-rocket"/>
+                    <switch>
+                        <foreignObject id="description29" class="in_card" width="100" height="200">
+                        <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                        </foreignObject>
+                        <text id="description29" class="in_card">not filled</text>
+                    </switch>
+                    <image href = "" id="emoticon29" aria-labelledby="desc-icon-rocket"/>
+                    <image id="postit29" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
+                        <switch>
+                                <foreignObject id="postittext29" class="in_card" width="100" height="100" visibility="collapse">
+                                <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                                </foreignObject>
+                                <text id="postittext29" class="in_card">not filled</text>
+                        </switch>
+                </svg>
         </svg>
     </div>
 
@@ -648,7 +666,7 @@
         initialiseElements();
         focusElement=0;
         changeFocus();
-        //demoFill();
+        demoFill();
         toggleOptions(0);
     </script>
     </body>
