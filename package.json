@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "iet-ou--our-journeys",
+  "description": "Our Journeys interactive ... | © 2018 The Open University (IET-OU).",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Tim Coughlan"
+  },
+  "browser": "src/our-journeys.js",
+  "repository": "https://github.com/IET-OU/our-journey.git",
+  "keywords": [ "accessibility", "education", "game", "learning-journey" ],
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.0",
+    "semistandard": "^12.0.1"
+  },
+  "scripts": {
+    "start": "live-server --port=9000",
+    "fix": "semistandard --fix",
+    "test": "semistandard"
+  }
+}
