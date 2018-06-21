@@ -20,14 +20,12 @@ var iconX = 10;
 var iconY = 110;
 var emoticonWidth = 72;
 var emoticonHeight = 72;
-var emoticonXV = 95;
+var emoticonXV = 130;
 var emoticonYV = 170;
-var emoticonXVR = 35;
-var emoticonYVR = 260;
-var emoticonX = 110;
+var emoticonXVR = 30;
+var emoticonYVR = 270;
+var emoticonX = 140;
 var emoticonY = 160;
-var emoticontextX = 130;
-var emoticontextY = 260;
 var textXV = 110;
 var textYV = 130;
 var textXVR = 10;
@@ -38,9 +36,9 @@ var rectY = 100;
 var rectXV = 100;
 var postitX = 75;
 var postitVY = 75;
-var postitVRX = 100;
-var postitTextX = 100;
-var postitTextVX = 20;
+var postitVRX = 135;
+var postitTextX = 80;
+var postitTextVX = 10;
 var numElements = 29;
 var vlElements = [0,9,10,19,20];
 var vrElements = [4,5,14,15,24,25];
@@ -82,7 +80,7 @@ switch(keyName){
 
 function initialiseElements(){
     for(i=0;i<numElements;i++){
-        var element = { eID: "place" + i , text: " ", emoticon: "none", icon: "none", postit: ""};
+        var element = { eID: "place" + i , description: " ", emoticon: "none", icon: "none", postit: ""};
         elements.push(element);
     }
     updateElements();
@@ -115,7 +113,7 @@ function loadJourney(){
 
     input = document.getElementById('fileinput');
     if (!input) {
-    alert("Um, couldn't find the fileinput element.");
+    alert("Couldn't find the fileinput element.");
     }
     else if (!input.files) {
     alert("This browser doesn't seem to support the `files` property of file inputs.");
@@ -133,7 +131,7 @@ function loadJourney(){
     function receivedText(e) {
         let lines = e.target.result;
         var newArr = JSON.parse(lines); 
-        alert("got data " + newArr[0].eID.toString());
+        //alert("file loaded");
         for(i=0;i<numElements;i++){
             elements[i] = { eID: newArr[i].eID , description: newArr[i].description, emoticon: newArr[i].emoticon, icon: newArr[i].icon, postit: newArr[i].postit};
             }
