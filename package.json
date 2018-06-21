@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "live-server --port=9000",
-    "fix": "semistandard --fix",
+    "fix": "semistandard --fix # There were ~814 errors ;).",
     "test": "semistandard"
   }
 }

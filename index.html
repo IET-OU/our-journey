@@ -667,11 +667,13 @@
     <p><small>Our Journeys | © 2018 The Open University (IET-OU).</small>
 
     <script>
-        initialiseElements();
-        focusElement=0;
-        changeFocus();
-        demoFill();
-        toggleOptions(0);
+    (function (WIN, OJ) {
+        OJ.initialiseElements();
+        WIN.focusElement = 0;
+        OJ.changeFocus();
+        OJ.demoFill();
+        OJ.toggleOptions(0);
+    })(window, window.our_journeys);
     </script>
     </body>
 </html>

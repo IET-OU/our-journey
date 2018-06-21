@@ -1,6 +1,32 @@
 /*!
   Our Journeys | © 2018 The Open University (IET-OU).
 */
+
+// API.
+window.our_journeys = /* module.exports = */ {
+  // Functions.
+  initialiseElements: initialiseElements,
+  changeFocus: changeFocus,
+  demoFill: demoFill,
+  updateElement: updateElement,
+  deleteElement: deleteElement,
+  moveFwdElement: moveFwdElement,
+  moveBackElement: moveBackElement,
+  changeBackground: changeBackground,
+  addKeyboardFocus: addKeyboardFocus, // Not used ?!
+  canvasGotFocus: canvasGotFocus,
+  canvasLostFocus: canvasLostFocus,
+  toggleOptions: toggleOptions,
+  saveJourney: saveJourney,
+  loadJourney: loadJourney
+  // Properties.
+  // focusElement: focusElement
+};
+
+// Semistandard -- these were NOT defined ;).
+var $ = window.jQuery; // Missing dependency ??
+var i, j, element, ePlace, eRect, eEmo, eIcon, eText, ePostIt, ePostItText, event, focus;
+
 // Status variables
 var elements = [];
 var focusElement = -1;
@@ -80,7 +106,7 @@ document.addEventListener('keydown', (event) => {
 
 function initialiseElements () {
   for (i = 0; i < numElements; i++) {
-    var element = { eID: 'place' + i, description: ' ', emoticon: 'none', icon: 'none', postit: ''};
+    var element = { eID: 'place' + i, description: ' ', emoticon: 'none', icon: 'none', postit: '' };
     elements.push(element);
   }
   updateElements();
@@ -88,7 +114,7 @@ function initialiseElements () {
 
 function demoFill () {
   for (i = 0; i < elements.length; i++) {
-    elements[i] = { eID: 'place' + i, description: 'test description ' + i, emoticon: 'happy', icon: 'timelost', postit: 'post it text'};
+    elements[i] = { eID: 'place' + i, description: 'test description ' + i, emoticon: 'happy', icon: 'timelost', postit: 'post it text' };
   }
   updateElements();
 }
@@ -105,6 +131,7 @@ function saveJourney () {
 
 function loadJourney () {
   var input, file, fr;
+  var alert = window.alert;
 
   if (typeof window.FileReader !== 'function') {
     alert("The file API isn't supported on this browser yet.");
@@ -120,7 +147,7 @@ function loadJourney () {
     alert("Please select a file before clicking 'Load'");
   } else {
     file = input.files[0];
-    fr = new FileReader();
+    fr = new window.FileReader();
     fr.onload = receivedText;
     fr.readAsText(file);
   }
@@ -128,9 +155,9 @@ function loadJourney () {
   function receivedText (e) {
     let lines = e.target.result;
     var newArr = JSON.parse(lines);
-    // alert("file loaded");
+    // alert('file loaded');
     for (i = 0; i < numElements; i++) {
-      elements[i] = { eID: newArr[i].eID, description: newArr[i].description, emoticon: newArr[i].emoticon, icon: newArr[i].icon, postit: newArr[i].postit};
+      elements[i] = { eID: newArr[i].eID, description: newArr[i].description, emoticon: newArr[i].emoticon, icon: newArr[i].icon, postit: newArr[i].postit };
     }
     updateElements();
   }
@@ -139,23 +166,23 @@ function loadJourney () {
 function elementClick () {
   var e = this.id.substring(5);
   focusElement = parseInt(e);
-  // alert("mouse down on " + focusElement);
+  // alert('mouse down on ' + focusElement);
   changeFocus();
   toggleEditor(1);
 }
 
 function toggleEditor (t) {
   var editor = document.getElementById('editor');
-  if (t == 1) {
+  if (t === 1) {
     editor.style.display = 'block';
-  } else if (t == 0) {
+  } else if (t === 0) {
     editor.style.display = 'none';
   }
 }
 
 function toggleOptions () {
   var options = document.getElementById('options');
-  if (options.style.display == 'none') {
+  if (options.style.display === 'none') {
     options.style.display = 'block';
   } else {
     options.style.display = 'none';
@@ -194,9 +221,9 @@ function updateElements () {
     }
     // emoticon
     eEmo = document.getElementById('emoticon' + i);
-    if (element.emoticon != 'none') {
+    if (element.emoticon !== 'none') {
       for (j = 0; j < emoticonFiles.length; j++) {
-        if (emoticonFiles[j].name == element.emoticon) {
+        if (emoticonFiles[j].name === element.emoticon) {
           eEmo.setAttribute('height', emoticonHeight);
           eEmo.setAttribute('width', emoticonWidth);
           if (vlElements.includes(i)) {
@@ -218,9 +245,9 @@ function updateElements () {
     }
     // icon
     eIcon = document.getElementById('icon' + i);
-    if (element.icon != 'none') {
+    if (element.icon !== 'none') {
       for (j = 0; j < iconFiles.length; j++) {
-        if (iconFiles[j].name == element.icon) {
+        if (iconFiles[j].name === element.icon) {
           eIcon.setAttribute('height', iconHeight);
           eIcon.setAttribute('width', iconWidth);
           if (vlElements.includes(i)) {
@@ -238,7 +265,7 @@ function updateElements () {
       eIcon.setAttribute('display', 'none');
     }
     // postit
-    if (element.postit != '') {
+    if (element.postit !== '') {
       ePostIt = document.getElementById('postit' + i);
       ePostItText = document.getElementById('postittext' + i);
       ePostIt.setAttribute('visibility', 'visible');
@@ -302,7 +329,7 @@ function changeFocus () {
 
 function canvasGotFocus () {
   // events when focus shifts to canvas?
-  // alert("canvase got focus");
+  // alert("canvas got focus");
   canvasInFocus = true;
   focusElement = -1;
 }
@@ -335,7 +362,7 @@ function cyclePrevFocus () {
 }
 
 function keyResponse (k) {
-  alert('key down');
+  window.alert('key down');
   switch (k) {
     case 9:
       // cycleNextFocus();
@@ -371,7 +398,7 @@ function updateElement () {
 
 function deleteElement () {
   // deletes focused on element.
-  elements[focusElement] = { eID: 'place' + focusElement, text: ' ', emoticon: ' ', icon: ' ', postit: ' '};
+  elements[focusElement] = { eID: 'place' + focusElement, text: ' ', emoticon: ' ', icon: ' ', postit: ' ' };
   updateElements();
 }
 
