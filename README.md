@@ -11,7 +11,7 @@ Use [Node][] and npm to aid development:
 npm install
 npm start
 npm test
-npm fix
+npm run fix
 ```
 
 ---
