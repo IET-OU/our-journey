@@ -16,16 +16,17 @@ window.our_journeys = /* module.exports = */ {
   addKeyboardFocus: addKeyboardFocus, // Not used ?!
   canvasGotFocus: canvasGotFocus,
   canvasLostFocus: canvasLostFocus,
+  toggleEditor: toggleEditor,
   toggleOptions: toggleOptions,
   saveJourney: saveJourney,
-  loadJourney: loadJourney
+  loadJourney: loadJourney,
   // Properties.
-  // focusElement: focusElement
+  setFocusElement: setFocusElement
 };
 
 // Semistandard -- these were NOT defined ;).
 var $ = window.jQuery; // Missing dependency ??
-var i, j, element, ePlace, eRect, eEmo, eIcon, eText, ePostIt, ePostItText, event, focus;
+var element, event, focus;
 
 // Status variables
 var elements = [];
@@ -72,7 +73,7 @@ var postitTextVX = 5;
 var postitTextVRX = 140;
 var postitTextY = 15;
 var postitTextWidth = 90;
-//These variables state which elements are vertical ones for presentation. On the left (vl) or the right (vr).
+// These variables state which elements are vertical ones for presentation. On the left (vl) or the right (vr).
 var vlElements = [ 0, 9, 10, 19, 20, 29, 30 ];
 var vrElements = [ 4, 5, 14, 15, 24, 25, 34 ];
 
@@ -110,7 +111,7 @@ document.addEventListener('keydown', (event) => {
 }, false);
 
 function initialiseElements () {
-  for (i = 0; i < numElements; i++) {
+  for (var i = 0; i < numElements; i++) {
     var element = { eID: 'place' + i, description: '', emoticon: 'none', icon: 'none', postit: '' };
     elements.push(element);
   }
@@ -118,7 +119,7 @@ function initialiseElements () {
 }
 
 function demoFill () {
-  for (i = 0; i < elements.length; i++) {
+  for (var i = 0; i < elements.length; i++) {
     elements[i] = { eID: 'place' + i, description: 'test description ' + i, emoticon: 'happy', icon: 'timelost', postit: 'post it text' };
   }
   updateElements();
@@ -126,7 +127,7 @@ function demoFill () {
 
 function saveJourney () {
   var filename = document.getElementById('filenamearea').value + '.json';
-  var type = 'text/plain';
+  // var type = 'text/plain';
   var data = JSON.stringify(elements);
   var a = document.createElement('a');
   a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(data));
@@ -161,7 +162,7 @@ function loadJourney () {
     let lines = e.target.result;
     var newArr = JSON.parse(lines);
     // alert('file loaded');
-    for (i = 0; i < newArr.length; i++) {
+    for (var i = 0; i < newArr.length; i++) {
       elements[i] = { eID: newArr[i].eID, description: newArr[i].description, emoticon: newArr[i].emoticon, icon: newArr[i].icon, postit: newArr[i].postit };
     }
     updateElements();
@@ -173,14 +174,14 @@ function elementClick () {
   focusElement = parseInt(e);
   // alert('mouse down on ' + focusElement);
   changeFocus();
-  toggleEditor(1);
+  toggleEditor('show');
 }
 
-function toggleEditor (t) {
+function toggleEditor (tog) {
   var editor = document.getElementById('editor');
-  if (t === 1) {
+  if (tog === 1 || tog === 'show') {
     editor.style.display = 'block';
-  } else if (t === 0) {
+  } else if (tog === 0 || tog === 'hide') {
     editor.style.display = 'none';
   }
 }
@@ -195,12 +196,12 @@ function toggleOptions () {
 }
 
 function updateElements () {
-  for (i = 0; i < numElements; i++) {
+  for (var i = 0; i < numElements; i++) {
     element = elements[i];
     // mouse event listener
-    ePlace = document.getElementById('group' + i);
+    var ePlace = document.getElementById('group' + i);
     ePlace.addEventListener('click', elementClick);
-    eRect = document.getElementById('place' + i);
+    var eRect = document.getElementById('place' + i);
     eRect.setAttribute('fill', 'Snow');
     eRect.setAttribute('fill-opacity', '1.0');
     if (vlElements.includes(i)) {
@@ -211,7 +212,7 @@ function updateElements () {
       eRect.setAttribute('y', rectY);
     }
     // description
-    eText = document.getElementById('description' + i);
+    var eText = document.getElementById('description' + i);
     // alert("changing text on description" + elementText + " to " + element.description);
     eText.textContent = element.description;
     if (vlElements.includes(i)) {
@@ -225,9 +226,9 @@ function updateElements () {
       eText.setAttribute('y', textY);
     }
     // emoticon
-    eEmo = document.getElementById('emoticon' + i);
+    var eEmo = document.getElementById('emoticon' + i);
     if (element.emoticon !== 'none') {
-      for (j = 0; j < emoticonFiles.length; j++) {
+      for (var j = 0; j < emoticonFiles.length; j++) {
         if (emoticonFiles[j].name === element.emoticon) {
           eEmo.setAttribute('height', emoticonHeight);
           eEmo.setAttribute('width', emoticonWidth);
@@ -249,7 +250,7 @@ function updateElements () {
       eEmo.setAttribute('display', 'none');
     }
     // icon
-    eIcon = document.getElementById('icon' + i);
+    var eIcon = document.getElementById('icon' + i);
     if (element.icon !== 'none') {
       for (j = 0; j < iconFiles.length; j++) {
         if (iconFiles[j].name === element.icon) {
@@ -270,13 +271,13 @@ function updateElements () {
       eIcon.setAttribute('display', 'none');
     }
     // postit
-    ePostIt = document.getElementById('postit' + i);
-    ePostItText = document.getElementById('postittext' + i);
+    var ePostIt = document.getElementById('postit' + i);
+    var ePostItText = document.getElementById('postittext' + i);
     if (element.postit !== '') {
       ePostIt.setAttribute('visibility', 'visible');
       ePostItText.setAttribute('visibility', 'visible');
       ePostItText.setAttribute('width', postitTextWidth);
-      //ePostItText.setAttribute('y', postitTextY);
+      // ePostItText.setAttribute('y', postitTextY);
 
       if (vlElements.includes(i)) {
         ePostIt.setAttribute('y', postitVY);
@@ -294,8 +295,7 @@ function updateElements () {
         ePostItText.setAttribute('y', postitTextY);
       }
       ePostItText.textContent = element.postit;
-    }
-    else{
+    } else {
       ePostIt.setAttribute('visibility', 'collapse');
       ePostItText.setAttribute('visibility', 'collapse');
     }
@@ -318,7 +318,7 @@ function addKeyboardFocus () {
 }
 
 function changeFocus () {
-  for (i = 0; i < elements.length; i++) {
+  for (var i = 0; i < elements.length; i++) {
     element = document.getElementById(elements[i].eID);
     element.setAttribute('stroke', 'black');
     // focus.setAttribute("stroke-width", 1);
@@ -418,16 +418,16 @@ function clearElement () {
 function moveBackElement () {
   // moves the focused on element back towards the start
   if (focusElement > 0) {
-    //swap the elements
+    // swap the elements
     var swap = elements[focusElement - 1];
     elements[focusElement - 1] = elements[focusElement];
     elements[focusElement] = swap;
-    //swap the eID strings for the elements to maintain correct link to the locations
-    swapeIDfore = elements[focusElement].eID;
-    swapeIDback = elements[focusElement - 1].eID;
+    // swap the eID strings for the elements to maintain correct link to the locations
+    var swapeIDfore = elements[focusElement].eID;
+    var swapeIDback = elements[focusElement - 1].eID;
     elements[focusElement - 1].eID = swapeIDfore;
     elements[focusElement].eID = swapeIDback;
-    //return focus to the same element as at the start of this process
+    // return focus to the same element as at the start of this process
     focusElement--;
     changeFocus();
   }
@@ -437,17 +437,21 @@ function moveBackElement () {
 function moveFwdElement () {
   // moves the focused on element forward from its current position
   if (focusElement < (elements.length - 1)) {
-    //swap the elements
+    // swap the elements
     var swap = elements[focusElement + 1];
     elements[focusElement + 1] = elements[focusElement];
     elements[focusElement] = swap;
-    //swap the eID strings for the elements to maintain correct link to the locations
-    swapeIDfore = elements[focusElement].eID;
-    swapeIDback = elements[focusElement + 1].eID;
+    // swap the eID strings for the elements to maintain correct link to the locations
+    var swapeIDfore = elements[focusElement].eID;
+    var swapeIDback = elements[focusElement + 1].eID;
     elements[focusElement + 1].eID = swapeIDfore;
     elements[focusElement].eID = swapeIDback;
     focusElement++;
     changeFocus();
   }
   updateElements();
+}
+
+function setFocusElement (num) {
+  focusElement = num;
 }
