@@ -19,6 +19,12 @@ h2 {
     font-size: 1rem; /* Was: 12pt; */
 }
 
+.in_postit{
+    font-family: 'Comic Sans MS';
+    font-size: .92rem;
+    text-align: center;
+}
+
 .X-textarea, .X-select, .X-p, .X-input
     {
         font-size: 11pt;

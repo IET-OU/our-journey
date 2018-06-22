@@ -33,7 +33,7 @@ var focusElement = -1;
 var canvasInFocus = false;
 
 // Number of card elements presented in page
-var numElements = 30;
+var numElements = 35;
 
 // Presentation variables
 var iconFiles = [ {name: 'achievement', file: 'Achievement_card.png'}, {name: 'admin', file: 'Admin_card.png'}, {name: 'assessment', file: 'Assessments_card.png'}, {name: 'communication', file: 'Communication_card.png'}, {name: 'confidence', file: 'ConfidenceBoost_card.png'}, {name: 'duedates', file: 'DueDates_card.png'}, {name: 'helpneeded', file: 'HelpNeeded_card.png'}, {name: 'highpressure', file: 'HighPressure_card.png'}, {name: 'information', file: 'Information_card.png'}, {name: 'lostdirection', file: 'LostDirection_card.png'}, {name: 'lowenergy', file: 'LowEnergy_card.png'}, {name: 'lowscores', file: 'LowScores_card.png'}, {name: 'nosupport', file: 'NoSupport_card.png'}, {name: 'peersupport', file: 'PeerSupport_card.png'}, {name: 'problem', file: 'Problem_card.png'}, {name: 'register', file: 'Register_card.png'}, {name: 'studybreak', file: 'StudyBreak_card.png'}, {name: 'studyexperience', file: 'StudyExperience_card.png'}, {name: 'studygoal', file: 'StudyGoal_card.png'}, {name: 'studymilestone', file: 'StudyMilestone_card.png'}, {name: 'studysuccess', file: 'StudySuccess_card.png'}, {name: 'studysupport', file: 'StudySupport_card.png'}, {name: 'timelost', file: 'TimeLost_card.png'} ];
@@ -44,7 +44,7 @@ var cardDir = 'assets/card/';
 var iconWidth = 110;
 var iconHeight = 110;
 var iconXV = 110;
-var iconYV = 5;
+var iconYV = 10;
 var iconX = 10;
 var iconY = 110;
 var emoticonWidth = 72;
@@ -52,13 +52,13 @@ var emoticonHeight = 72;
 var emoticonXV = 130;
 var emoticonYV = 170;
 var emoticonXVR = 30;
-var emoticonYVR = 270;
+var emoticonYVR = 267;
 var emoticonX = 140;
 var emoticonY = 160;
 var textXV = 110;
 var textYV = 130;
 var textXVR = 10;
-var textYVR = 230;
+var textYVR = 225;
 var textX = 130;
 var textY = 110;
 var rectY = 100;
@@ -70,10 +70,11 @@ var postitVRX = 135;
 var postitTextX = 80;
 var postitTextVX = 5;
 var postitTextVRX = 140;
-var postitTextY = 20;
+var postitTextY = 15;
 var postitTextWidth = 90;
-var vlElements = [ 0, 9, 10, 19, 20, 29 ];
-var vrElements = [ 4, 5, 14, 15, 24, 25 ];
+//These variables state which elements are vertical ones for presentation. On the left (vl) or the right (vr).
+var vlElements = [ 0, 9, 10, 19, 20, 29, 30 ];
+var vrElements = [ 4, 5, 14, 15, 24, 25, 34 ];
 
 document.addEventListener('keydown', (event) => {
   const keyName = event.key;
@@ -160,7 +161,7 @@ function loadJourney () {
     let lines = e.target.result;
     var newArr = JSON.parse(lines);
     // alert('file loaded');
-    for (i = 0; i < numElements; i++) {
+    for (i = 0; i < newArr.length; i++) {
       elements[i] = { eID: newArr[i].eID, description: newArr[i].description, emoticon: newArr[i].emoticon, icon: newArr[i].icon, postit: newArr[i].postit };
     }
     updateElements();
