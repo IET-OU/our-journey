@@ -9,7 +9,7 @@ window.our_journeys = /* module.exports = */ {
   changeFocus: changeFocus,
   demoFill: demoFill,
   updateElement: updateElement,
-  deleteElement: deleteElement,
+  clearElement: clearElement,
   moveFwdElement: moveFwdElement,
   moveBackElement: moveBackElement,
   changeBackground: changeBackground,
@@ -64,7 +64,8 @@ var textY = 110;
 var rectY = 100;
 var rectXV = 100;
 var postitX = 75;
-var postitVY = 75;
+var postitVY = 70;
+var postitVRY = 160;
 var postitVRX = 135;
 var postitTextX = 80;
 var postitTextVX = 5;
@@ -109,7 +110,7 @@ document.addEventListener('keydown', (event) => {
 
 function initialiseElements () {
   for (i = 0; i < numElements; i++) {
-    var element = { eID: 'place' + i, description: ' ', emoticon: 'none', icon: 'none', postit: '' };
+    var element = { eID: 'place' + i, description: '', emoticon: 'none', icon: 'none', postit: '' };
     elements.push(element);
   }
   updateElements();
@@ -283,8 +284,8 @@ function updateElements () {
       } else if (vrElements.includes(i)) {
         ePostIt.setAttribute('x', postitVRX);
         ePostItText.setAttribute('x', postitVRX);
-        ePostIt.setAttribute('y', postitVY);
-        ePostItText.setAttribute('y', postitTextY + postitVY);
+        ePostIt.setAttribute('y', postitVRY);
+        ePostItText.setAttribute('y', postitTextY + postitVRY);
         ePostItText.setAttribute('x', postitTextVRX);
       } else {
         ePostIt.setAttribute('x', postitX);
@@ -320,7 +321,7 @@ function changeFocus () {
   focus = document.getElementById(elements[focusElement].eID);
   focus.setAttribute('stroke', 'blue');
   focus.scrollIntoView(true);
-  window.scrollBy(0, -200);
+  window.scrollBy(0, -300);
 
   // focus.setAttribute("stroke-width", 4);
 
@@ -403,14 +404,14 @@ function updateElement () {
   updateElements();
 }
 
-function deleteElement () {
-  // deletes focused on element.
-  elements[focusElement] = { eID: 'place' + focusElement, text: ' ', emoticon: ' ', icon: ' ', postit: ' ' };
+function clearElement () {
+  // clears the information contained in the focused on element.
+  elements[focusElement] = { eID: 'place' + focusElement, text: '', emoticon: 'none', icon: 'none', postit: '' };
   updateElements();
 }
 
 function moveBackElement () {
-  // moves an element back towards the start
+  // moves the focused on element back towards the start
   if (focusElement > 0) {
     var swap = elements[focusElement - 1];
     elements[focusElement - 1] = elements[focusElement];
@@ -421,7 +422,7 @@ function moveBackElement () {
 }
 
 function moveFwdElement () {
-  // moves an element forward from its current position
+  // moves the focused on element forward from its current position
   if (focusElement < (elements.length - 1)) {
     var swap = elements[focusElement + 1];
     elements[focusElement + 1] = elements[focusElement];
