@@ -67,7 +67,10 @@ var postitX = 75;
 var postitVY = 75;
 var postitVRX = 135;
 var postitTextX = 80;
-var postitTextVX = 10;
+var postitTextVX = 5;
+var postitTextVRX = 140;
+var postitTextY = 20;
+var postitTextWidth = 90;
 var vlElements = [ 0, 9, 10, 19, 20, 29 ];
 var vrElements = [ 4, 5, 14, 15, 24, 25 ];
 
@@ -270,19 +273,23 @@ function updateElements () {
       ePostItText = document.getElementById('postittext' + i);
       ePostIt.setAttribute('visibility', 'visible');
       ePostItText.setAttribute('visibility', 'visible');
+      ePostItText.setAttribute('width', postitTextWidth);
+      //ePostItText.setAttribute('y', postitTextY);
 
       if (vlElements.includes(i)) {
         ePostIt.setAttribute('y', postitVY);
-        ePostItText.setAttribute('y', postitVY);
+        ePostItText.setAttribute('y', postitTextY + postitVY);
         ePostItText.setAttribute('x', postitTextVX);
       } else if (vrElements.includes(i)) {
         ePostIt.setAttribute('x', postitVRX);
         ePostItText.setAttribute('x', postitVRX);
         ePostIt.setAttribute('y', postitVY);
-        ePostItText.setAttribute('y', postitVY);
+        ePostItText.setAttribute('y', postitTextY + postitVY);
+        ePostItText.setAttribute('x', postitTextVRX);
       } else {
         ePostIt.setAttribute('x', postitX);
         ePostItText.setAttribute('x', postitTextX);
+        ePostItText.setAttribute('y', postitTextY);
       }
       ePostItText.textContent = element.postit;
     }
