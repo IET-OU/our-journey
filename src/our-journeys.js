@@ -413,10 +413,18 @@ function clearElement () {
 function moveBackElement () {
   // moves the focused on element back towards the start
   if (focusElement > 0) {
+    //swap the elements
     var swap = elements[focusElement - 1];
     elements[focusElement - 1] = elements[focusElement];
     elements[focusElement] = swap;
+    //swap the eID strings for the elements to maintain correct link to the locations
+    swapeIDfore = elements[focusElement].eID;
+    swapeIDback = elements[focusElement - 1].eID;
+    elements[focusElement - 1].eID = swapeIDfore;
+    elements[focusElement].eID = swapeIDback;
+    //return focus to the same element as at the start of this process
     focusElement--;
+    changeFocus();
   }
   updateElements();
 }
@@ -424,10 +432,17 @@ function moveBackElement () {
 function moveFwdElement () {
   // moves the focused on element forward from its current position
   if (focusElement < (elements.length - 1)) {
+    //swap the elements
     var swap = elements[focusElement + 1];
     elements[focusElement + 1] = elements[focusElement];
     elements[focusElement] = swap;
+    //swap the eID strings for the elements to maintain correct link to the locations
+    swapeIDfore = elements[focusElement].eID;
+    swapeIDback = elements[focusElement + 1].eID;
+    elements[focusElement + 1].eID = swapeIDfore;
+    elements[focusElement].eID = swapeIDback;
     focusElement++;
+    changeFocus();
   }
   updateElements();
 }
