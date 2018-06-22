@@ -29,11 +29,12 @@
                         <option value="assessment">Assessment</option>
                         <option value="studybreak">Break from study</option>
                         <option value="communication">Communication</option>
+                        <option value="confidence">Confidence Boosted</option>
                         <option value="duedates">Due dates</option>
+                        <option value="information">Getting information</option>
                         <option value="studygoal">Goal</option>
                         <option value="helpneeded">Help needed</option>
                         <option value="highpressure">High pressure</option>
-                        <option value="Information">Information</option>
                         <option value="lostdirection">Lost direction</option>
                         <option value="lowenergy">Low energy</option>
                         <option value="lowscores">Low scores</option>
@@ -44,20 +45,20 @@
                         <option value="register">Registering</option>
                         <option value="studyexperience">Study experience</option>
                         <option value="studysuccess">Study success</option>
-                        <option value="studysupport">Support</option>
+                        <option value="studysupport">Study support</option>
                         <option value="timelost">Time Lost</option>
                     </select>
                     <label for="emoticon_select">Emotion:</label>
                     <select id="emoticon_select">
                         <option value="none">None</option>
-                        <option value="achieve">Achievement</option>
+                        <option value="achieve">Proud</option>
                         <option value="angry">Angry</option>
                         <option value="bored">Bored</option>
                         <option value="confused">Confused</option>
                         <option value="excited">Excited</option>
                         <option value="happy">Happy</option>
                         <option value="nervous">Nervous</option>
-                        <option value="sick">Sick</option>
+                        <option value="sick">Unwell</option>
                         <option value="thinking">Thinking</option>
                         <option value="unhappy">Unhappy</option>
                         <option value="upset">Upset</option>
@@ -68,11 +69,21 @@
                     <input type="button" value="Clear" id="deleteButton" onclick="OJ.clearElement();" disabled>
                     <input type="button" value="Move Back" id="backButton" onclick="OJ.moveBackElement();" disabled>
                     <input type="button" value="Move Forward" id="fwdButton" onclick="OJ.moveFwdElement();" disabled>
-                    <input type="button" value="Options" id="optionsButton" onclick="OJ.toggleOptions();">
+                    <input type="button" value="Show/Hide Options" id="optionsButton" onclick="OJ.toggleOptions();">
                 </form>
                 </p>
                 <div class = "optionsbar" id = "options">
                    <h2>Options:</h2>
+                        <h3>File:</h3>
+                        <form>
+                            <label for="filenamearea">Save:</label>
+                            <input type='text' value="journey_file" id="filenamearea">
+                            <input type="button" value="Save" id="hideButton" onclick="OJ.saveJourney();">
+                            | <label for="fileinput">Load:</label>
+                            <input type='file' id='fileinput'>
+                            <input type="button" id="btnLoad" value="Load" onclick="OJ.loadJourney();">
+                        </form>
+                        <h3>View:</h3>
                         <form>
                                 <label for="background_select">Background:</label>
                                 <select id="background_select">
@@ -88,24 +99,16 @@
                                     <option value="Coral">Orange</option>
                                 </select>
                                 <input type="button" value="Update" id="updateButton" onclick="OJ.changeBackground();">
-                                <input type="button" value="Hide editor" id="hideButton" onclick="OJ.toggleEditor('hide');">
+                                <input type="button" value="Hide editor for printing" id="hideButton" onclick="OJ.toggleEditor(0);">
                         </form>
-                        <h3>Save / load:</h2>
-                        <form>
-                            <label for="filenamearea">Save:</label>
-                            <input type='text' value="journey_file" id="filenamearea">
-                            <input type="button" value="Save" id="hideButton" onclick="OJ.saveJourney();">
-                            | Load:
-                            <input type='file' id='fileinput'>
-                            <input type="button" id="btnLoad" value="Load" onclick="OJ.loadJourney();">
-                        </form>
+                        <br>
                     </div>
                 </div>
         </div>
 
 
         <div class="main">
-            <svg width="100%" height="2400" onfocusout="canvasLostFocus()" onfocusin="canvasGotFocus()" id="journey-canvas">
+            <svg width="100%" height="2600" onfocusout="canvasLostFocus()" onfocusin="canvasGotFocus()" id="journey-canvas">
                 <title role="img" id="title" aria-labelledby="desc-space">Journey</title>
                 <style>
                     .in_card { font: bold 14px sans-serif}
@@ -136,7 +139,7 @@
 
                 <image id="postit0" href = "assets/PostIt.png" width = "100" height="100" visibility="collapse"></image>
                 <switch>
-                        <foreignObject id="postittext0" class="in_card" width="100" height="100" visibility="collapse">
+                        <foreignObject id="postittext0" class="in_postit" width="100" height="100" visibility="collapse">
                         <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                         </foreignObject>
                         <text id="postittext0" class="in_card">not filled</text>
@@ -154,7 +157,7 @@
                     <image href = "" id="emoticon1" aria-labelledby="desc-icon-rocket"/>
                     <image id="postit1" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                 <switch>
-                        <foreignObject id="postittext1" class="in_card" width="100" height="100" visibility="collapse">
+                        <foreignObject id="postittext1" class="in_postit" width="100" height="100" visibility="collapse">
                         <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                         </foreignObject>
                         <text id="postittext1" class="in_card">not filled</text>
@@ -172,7 +175,7 @@
                     <image href = "" id="emoticon2" aria-labelledby="desc-icon-rocket"/>
                     <image id="postit2" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext2" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext2" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext2" class="in_card">not filled</text>
@@ -190,7 +193,7 @@
                     <image href = "" id="emoticon3" aria-labelledby="desc-icon-rocket"/>
                     <image id="postit3" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext3" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext3" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext3" class="in_card">not filled</text>
@@ -208,7 +211,7 @@
                     <image href = "" id="emoticon4" aria-labelledby="desc-icon-rocket"/>
                     <image id="postit4" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext4" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext4" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext4" class="in_card">not filled</text>
@@ -226,7 +229,7 @@
                     <image href = "" id="emoticon5" aria-labelledby="desc-icon-rocket"/>
                     <image id="postit5" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext5" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext5" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext5" class="in_card">not filled</text>
@@ -244,7 +247,7 @@
                 <image href = "" id="emoticon6" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit6" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext6" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext6" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext6" class="in_card">not filled</text>
@@ -262,7 +265,7 @@
                 <image href = "" id="emoticon7" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit7" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext7" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext7" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext7" class="in_card">not filled</text>
@@ -280,7 +283,7 @@
                 <image href = "" id="emoticon8" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit8" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext8" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext8" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext8" class="in_card">not filled</text>
@@ -298,7 +301,7 @@
                 <image href = "" id="emoticon9" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit9" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext9" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext9" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext9" class="in_card">not filled</text>
@@ -316,7 +319,7 @@
                 <image href = "" id="emoticon10" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit10" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext10" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext10" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext10" class="in_card">not filled</text>
@@ -334,7 +337,7 @@
                 <image href = "" id="emoticon11" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit11" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext11" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext11" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext11" class="in_card">not filled</text>
@@ -352,7 +355,7 @@
                 <image href = "" id="emoticon12" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit12" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext12" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext12" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext12" class="in_card">not filled</text>
@@ -370,7 +373,7 @@
                 <image href = "" id="emoticon13" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit13" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext13" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext13" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext13" class="in_card">not filled</text>
@@ -388,7 +391,7 @@
                 <image href = "" id="emoticon14" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit14" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext14" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext14" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext14" class="in_card">not filled</text>
@@ -406,7 +409,7 @@
                 <image href = "" id="emoticon15" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit15" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext15" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext15" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext15" class="in_card">not filled</text>
@@ -424,7 +427,7 @@
                 <image href = "" id="emoticon16" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit16" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext16" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext16" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext16" class="in_card">not filled</text>
@@ -442,7 +445,7 @@
                 <image href = "" id="emoticon17" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit17" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext17" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext17" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext17" class="in_card">not filled</text>
@@ -460,7 +463,7 @@
                 <image href = "" id="emoticon18" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit18" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext18" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext18" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext18" class="in_card">not filled</text>
@@ -478,7 +481,7 @@
                 <image href = "" id="emoticon19" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit19" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext19" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext19" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext19" class="in_card">not filled</text>
@@ -496,7 +499,7 @@
                 <image href = "" id="emoticon20" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit20" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext20" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext20" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext20" class="in_card">not filled</text>
@@ -514,7 +517,7 @@
                 <image href = "" id="emoticon21" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit21" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext21" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext21" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext21" class="in_card">not filled</text>
@@ -532,7 +535,7 @@
                 <image href = "" id="emoticon22" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit22" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext22" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext22" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext22" class="in_card">not filled</text>
@@ -550,7 +553,7 @@
                 <image href = "" id="emoticon23" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit23" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext23" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext23" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext23" class="in_card">not filled</text>
@@ -568,7 +571,7 @@
                 <image href = "" id="emoticon24" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit24" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext24" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext24" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext24" class="in_card">not filled</text>
@@ -586,7 +589,7 @@
                 <image href = "" id="emoticon25" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit25" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext25" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext25" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext25" class="in_card">not filled</text>
@@ -604,7 +607,7 @@
                 <image href = "" id="emoticon26" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit26" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext26" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext26" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext26" class="in_card">not filled</text>
@@ -622,7 +625,7 @@
                 <image href = "" id="emoticon27" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit27" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext27" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext27" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext27" class="in_card">not filled</text>
@@ -640,7 +643,7 @@
                 <image href = "" id="emoticon28" aria-labelledby="desc-icon-rocket"/>
                 <image id="postit28" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                     <switch>
-                            <foreignObject id="postittext28" class="in_card" width="100" height="100" visibility="collapse">
+                            <foreignObject id="postittext28" class="in_postit" width="100" height="100" visibility="collapse">
                             <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                             </foreignObject>
                             <text id="postittext28" class="in_card">not filled</text>
@@ -658,12 +661,102 @@
                     <image href = "" id="emoticon29" aria-labelledby="desc-icon-rocket"/>
                     <image id="postit29" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
                         <switch>
-                                <foreignObject id="postittext29" class="in_card" width="100" height="100" visibility="collapse">
+                                <foreignObject id="postittext29" class="in_postit" width="100" height="100" visibility="collapse">
                                 <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
                                 </foreignObject>
                                 <text id="postittext29" class="in_card">not filled</text>
                         </switch>
-                </svg>
+            </svg>
+            <svg x = "20" y = "2210" role = "button" id="group30" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place30" fill-opacity="0.0"/>
+                <image href = "" id="icon30" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description30" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description30" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon30" aria-labelledby="desc-icon-rocket"/>
+                <image id="postit30" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext30" class="in_postit" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext30" class="in_card">not filled</text>
+                    </switch>
+            </svg>
+            <svg x = "250" y = "2220" role = "button" id="group31" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place31" fill-opacity="0.0"/>
+                <image href = "" id="icon31" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description31" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description31" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon31" aria-labelledby="desc-icon-rocket"/>
+                <image id="postit31" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext31" class="in_postit" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext31" class="in_card">not filled</text>
+                    </switch>
+            </svg>
+            <svg x = "490" y = "2220" role = "button" id="group32" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place32" fill-opacity="0.0"/>
+                <image href = "" id="icon32" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description32" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description32" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon32" aria-labelledby="desc-icon-rocket"/>
+                <image id="postit32" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext32" class="in_postit" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext32" class="in_card">not filled</text>
+                    </switch>
+            </svg>
+            <svg x = "730" y = "2220" role = "button" id="group33" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "240" height="130"  stroke="black" fill="" stroke-width="1" id="place33" fill-opacity="0.0"/>
+                <image href = "" id="icon33" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description33" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description33" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon33" aria-labelledby="desc-icon-rocket"/>
+                <image id="postit33" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext33" class="in_postit" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext33" class="in_card">not filled</text>
+                    </switch>
+            </svg>
+            <svg x = "970" y = "2220" role = "button" id="group34" aria-labelledby="group-0">
+                <rect role="button" aria-labelledby="desc-card-0" width = "130" height="240"  stroke="black" fill="" stroke-width="1" id="place34" fill-opacity="0.0"/>
+                <image href = "" id="icon34" aria-labelledby="desc-icon-rocket"/>
+                <switch>
+                    <foreignObject id="description34" class="in_card" width="100" height="200">
+                    <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                    </foreignObject>
+                    <text id="description34" class="in_card">not filled</text>
+                </switch>
+                <image href = "" id="emoticon34" aria-labelledby="desc-icon-rocket"/>
+                <image id="postit34" href="assets/PostIt.png" width="100" height="100" visibility="collapse"></image>
+                    <switch>
+                            <foreignObject id="postittext34" class="in_postit" width="100" height="100" visibility="collapse">
+                            <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+                            </foreignObject>
+                            <text id="postittext34" class="in_card">not filled</text>
+                    </switch>
+            </svg>
         </svg>
     </div>
 
@@ -672,7 +765,7 @@
     <script>
     (function (WIN, OJ) {
         OJ.initialiseElements();
-        OJ.demoFill();
+        // OJ.demoFill();
         OJ.setFocusElement(0);
         OJ.changeFocus();
         OJ.toggleOptions();

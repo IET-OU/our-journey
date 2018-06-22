@@ -20,6 +20,16 @@ h2 {
     font-size: 1rem; /* Was: 12pt; */
 }
 
+h3 {
+    font-size: .9rem;
+}
+
+.in_postit {
+    font-family: 'Comic Sans MS', sans-serif;
+    font-size: .92rem;
+    text-align: center;
+}
+
 .startcard
     {
         font-size: 1.1rem; /* Was: 16pt; */
