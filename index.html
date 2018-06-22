@@ -66,11 +66,21 @@
                     <input type="button" value="Clear" id="deleteButton" onclick="clearElement();" disabled>
                     <input type="button" value="Move Back" id="backButton" onclick="moveBackElement();" disabled>
                     <input type="button" value="Move Forward" id="fwdButton" onclick="moveFwdElement();" disabled>
-                    <input type="button" value="Options" id="optionsButton" onclick="toggleOptions();">
+                    <input type="button" value="Show/Hide Options" id="optionsButton" onclick="toggleOptions();">
                 </form>
                 </p>
                 <div class = "optionsbar" id = "options">
                    <h2>Options:</h2>
+                        <h3>File:</h3>
+                        <form>
+                            Save:
+                            <input type='text' value="journey_file" id="filenamearea">
+                            <input type="button" value="Save" id="hideButton" onclick="saveJourney();">
+                            | Load:
+                            <input type='file' id='fileinput'>
+                            <input type='button' id='btnLoad' value='Load' onclick='loadJourney();'>
+                        </form>
+                        <h3>View</h3>
                         <form>
                                 <label for="background_select">Background:</label>
                                 <select id="background_select">
@@ -86,16 +96,7 @@
                                     <option value="Coral">Orange</option>
                                 </select>
                                 <input type="button" value="Update" id="updateButton" onclick="changeBackground();">
-                                <input type="button" value="Hide editor" id="hideButton" onclick="toggleEditor(0);">
-                        </form>
-                        <h3>Save / load:</h2>
-                        <form>
-                            Save:
-                            <input type='text' value="journey_file" id="filenamearea">
-                            <input type="button" value="Save" id="hideButton" onclick="saveJourney();">
-                            | Load:
-                            <input type='file' id='fileinput'>
-                            <input type='button' id='btnLoad' value='Load' onclick='loadJourney();'>
+                                <input type="button" value="Hide editor for printing" id="hideButton" onclick="toggleEditor(0);">
                         </form>
                         <br>
                     </div>
