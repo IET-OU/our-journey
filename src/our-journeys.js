@@ -16,11 +16,12 @@ window.our_journeys = /* module.exports = */ {
   addKeyboardFocus: addKeyboardFocus, // Not used ?!
   canvasGotFocus: canvasGotFocus,
   canvasLostFocus: canvasLostFocus,
+  toggleEditor: toggleEditor,
   toggleOptions: toggleOptions,
   saveJourney: saveJourney,
-  loadJourney: loadJourney
+  loadJourney: loadJourney,
   // Properties.
-  // focusElement: focusElement
+  setFocusElement: setFocusElement
 };
 
 // Semistandard -- these were NOT defined ;).
@@ -175,11 +176,11 @@ function elementClick () {
   toggleEditor(1);
 }
 
-function toggleEditor (t) {
+function toggleEditor (tog) {
   var editor = document.getElementById('editor');
-  if (t === 1) {
+  if (tog === 1 || tog === 'show') {
     editor.style.display = 'block';
-  } else if (t === 0) {
+  } else if (tog === 0 || tog === 'hide') {
     editor.style.display = 'none';
   }
 }
@@ -445,4 +446,8 @@ function moveFwdElement () {
     changeFocus();
   }
   updateElements();
+}
+
+function setFocusElement(num) {
+  focusElement = num;
 }
