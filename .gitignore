@@ -1,8 +1,12 @@
 
 # A missing image ?!
-# assets/Sticky_note.svg
+## assets/Sticky_note.svg
+
+test*.html
 
 node_modules/
 package-lock.json
+*BAK*
+*.log
 
 # End.

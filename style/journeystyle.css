@@ -2,55 +2,45 @@
   Our Journeys | © 2018 The Open University (IET-OU).
 */
 
-h2{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12pt;
+body,
+input,
+textarea,
+select {
+  background: #fff;
+  color: #222;
+  font: .9rem Arial, Helvetica, sans-serif; /* Was: font-size: 11pt; */
 }
 
-textarea
-    {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 11pt;
-        }
+input[ type = button ] {
+  font-size: .97rem;
+}
 
-select
-    {
-        font-family:Arial, Helvetica, sans-serif;
-        font-size: 11pt;
-    }
+h2 {
+    font-size: 1rem; /* Was: 12pt; */
+}
 
-p
+.X-textarea, .X-select, .X-p, .X-input
     {
-        font-family:Arial, Helvetica, sans-serif;
-        font-size: 11pt;
-    }
-input
-    {
-        font-family:Arial, Helvetica, sans-serif;
         font-size: 11pt;
     }
 
 .startcard
     {
-        font-family:Arial, Helvetica, sans-serif;
-        font-size: 16pt;
+        font-size: 1.1rem; /* Was: 16pt; */
         background-color: red;
         color: ivory;
     }
 
 .editorbar
     {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 11pt;
         position: fixed;
         top: 0;
         width: 100%;
         background: ivory;
     }
 
-.optionsbar
+.X-optionsbar
     {
-        font-family: Arial, Helvetica, sans-serif;
         font-size: 11pt;
     }
 
@@ -59,6 +49,5 @@ input
 }
 
 .in_card {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 14pt;
+        font-size: 1.05rem; /* Was: 14pt; */
 }

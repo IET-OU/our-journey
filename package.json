@@ -1,15 +1,22 @@
 {
   "private": true,
   "name": "iet-ou--our-journeys",
-  "description": "Our Journeys interactive ... | © 2018 The Open University (IET-OU).",
+  "description": "Our Journeys interactive. | © 2018 The Open University (IET-OU).",
   "version": "1.0.0",
   "license": "UNLICENSED",
+  "browser": "src/our-journeys.js",
   "author": {
     "name": "Tim Coughlan"
   },
-  "browser": "src/our-journeys.js",
+  "contributors": [ {
+    "name": "The LTI-LTT developers (IET-OU)",
+    "email": "iet-ltt-support@open.ac.uk",
+    "url": "https://iet.open.ac.uk"
+  } ],
   "repository": "https://github.com/IET-OU/our-journey.git",
+  "bugs": "https://github.com/IET-OU/our-journey/issues",
   "keywords": [ "accessibility", "education", "game", "learning-journey" ],
+  "engines": { "node": ">= 6" },
   "dependencies": {},
   "devDependencies": {
     "live-server": "^1.2.0",
@@ -17,7 +24,7 @@
   },
   "scripts": {
     "start": "live-server --port=9000",
-    "fix": "semistandard --fix",
+    "fix": "semistandard --fix # There were ~814 errors ;).",
     "test": "semistandard"
   }
 }
