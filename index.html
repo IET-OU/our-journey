@@ -10,6 +10,9 @@
 
     <link rel="stylesheet" href="style/journeystyle.css" />
     <script src="src/our-journeys.js"></script>
+    <script>
+        var OJ = window.our_journeys;
+    </script>
     </head>
     <body>
         <div class="editorbar" id="editor">
@@ -62,25 +65,25 @@
                     </select>
                     <label for="post_it_text">Note:</label>
                     <textarea rows=3 maxlength=44 cols=12 id="post_it_text" value=""></textarea>
-                    <input type="button" value="Update" id="updateButton" onclick="updateElement();" disabled>
-                    <input type="button" value="Clear" id="deleteButton" onclick="clearElement();" disabled>
-                    <input type="button" value="Move Back" id="backButton" onclick="moveBackElement();" disabled>
-                    <input type="button" value="Move Forward" id="fwdButton" onclick="moveFwdElement();" disabled>
-                    <input type="button" value="Show/Hide Options" id="optionsButton" onclick="toggleOptions();">
+                    <input type="button" value="Update" id="updateButton" onclick="OJ.updateElement();" disabled>
+                    <input type="button" value="Clear" id="deleteButton" onclick="OJ.clearElement();" disabled>
+                    <input type="button" value="Move Back" id="backButton" onclick="OJ.moveBackElement();" disabled>
+                    <input type="button" value="Move Forward" id="fwdButton" onclick="OJ.moveFwdElement();" disabled>
+                    <input type="button" value="Show/Hide Options" id="optionsButton" onclick="OJ.toggleOptions();">
                 </form>
                 </p>
                 <div class = "optionsbar" id = "options">
                    <h2>Options:</h2>
                         <h3>File:</h3>
                         <form>
-                            Save:
+                            <label for="filenamearea">Save:</label>
                             <input type='text' value="journey_file" id="filenamearea">
-                            <input type="button" value="Save" id="hideButton" onclick="saveJourney();">
-                            | Load:
+                            <input type="button" value="Save" id="hideButton" onclick="OJ.saveJourney();">
+                            | <label for="fileinput">Load:</label>
                             <input type='file' id='fileinput'>
-                            <input type='button' id='btnLoad' value='Load' onclick='loadJourney();'>
+                            <input type="button" id="btnLoad" value="Load" onclick="OJ.loadJourney();">
                         </form>
-                        <h3>View</h3>
+                        <h3>View:</h3>
                         <form>
                                 <label for="background_select">Background:</label>
                                 <select id="background_select">
@@ -95,8 +98,8 @@
                                     <option value="LightGray">Grey</option>
                                     <option value="Coral">Orange</option>
                                 </select>
-                                <input type="button" value="Update" id="updateButton" onclick="changeBackground();">
-                                <input type="button" value="Hide editor for printing" id="hideButton" onclick="toggleEditor(0);">
+                                <input type="button" value="Update" id="updateButton" onclick="OJ.changeBackground();">
+                                <input type="button" value="Hide editor for printing" id="hideButton" onclick="OJ.toggleEditor(0);">
                         </form>
                         <br>
                     </div>
@@ -757,15 +760,15 @@
         </svg>
     </div>
 
-    <p><small>Our Journeys | © 2018 The Open University (IET-OU).</small>
+    <p><small>Our Journeys | © 2018 <a href="http://www.open.ac.uk">The Open University</a> (<a href="https://iet.open.ac.uk/" title="Institute of Educational Technology">IET</a>).</small>
 
     <script>
     (function (WIN, OJ) {
         OJ.initialiseElements();
-        //OJ.demoFill();
-        WIN.focusElement = 0;
+        // OJ.demoFill();
+        OJ.setFocusElement(0);
         OJ.changeFocus();
-        OJ.toggleOptions(0);
+        OJ.toggleOptions();
     })(window, window.our_journeys);
     </script>
     </body>

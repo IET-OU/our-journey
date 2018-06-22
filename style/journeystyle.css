@@ -7,10 +7,11 @@ input,
 textarea,
 select {
   background: #fff;
-  color: #222;
+  color: #111;
   font: .9rem Arial, Helvetica, sans-serif; /* Was: font-size: 11pt; */
 }
 
+input[ type = file ],
 input[ type = button ] {
   font-size: .97rem;
 }
@@ -20,19 +21,14 @@ h2 {
 }
 
 h3 {
-    font-size: .9rem; /* Was: 12pt; */
+    font-size: .9rem;
 }
 
-.in_postit{
-    font-family: 'Comic Sans MS';
+.in_postit {
+    font-family: 'Comic Sans MS', sans-serif;
     font-size: .92rem;
     text-align: center;
 }
-
-.X-textarea, .X-select, .X-p, .X-input
-    {
-        font-size: 11pt;
-    }
 
 .startcard
     {
@@ -41,15 +37,13 @@ h3 {
 
 .editorbar
     {
+        border: 1px solid #aaa;
+        border-radius: 3px;
         position: fixed;
         top: 0;
         width: 100%;
         background: ivory;
-    }
-
-.X-optionsbar
-    {
-        font-size: 11pt;
+        padding: 5px;
     }
 
 .main {
