@@ -270,9 +270,9 @@ function updateElements () {
       eIcon.setAttribute('display', 'none');
     }
     // postit
+    ePostIt = document.getElementById('postit' + i);
+    ePostItText = document.getElementById('postittext' + i);
     if (element.postit !== '') {
-      ePostIt = document.getElementById('postit' + i);
-      ePostItText = document.getElementById('postittext' + i);
       ePostIt.setAttribute('visibility', 'visible');
       ePostItText.setAttribute('visibility', 'visible');
       ePostItText.setAttribute('width', postitTextWidth);
@@ -294,6 +294,10 @@ function updateElements () {
         ePostItText.setAttribute('y', postitTextY);
       }
       ePostItText.textContent = element.postit;
+    }
+    else{
+      ePostIt.setAttribute('visibility', 'collapse');
+      ePostItText.setAttribute('visibility', 'collapse');
     }
   }
 }
