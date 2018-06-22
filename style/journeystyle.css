@@ -15,6 +15,10 @@ input[ type = button ] {
   font-size: .97rem;
 }
 
+h1{
+    font-size: 1rem;
+}
+
 h2 {
     font-size: 1rem; /* Was: 12pt; */
 }
