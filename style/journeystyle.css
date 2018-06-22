@@ -7,10 +7,11 @@ input,
 textarea,
 select {
   background: #fff;
-  color: #222;
+  color: #111;
   font: .9rem Arial, Helvetica, sans-serif; /* Was: font-size: 11pt; */
 }
 
+input[ type = file ],
 input[ type = button ] {
   font-size: .97rem;
 }
@@ -19,11 +20,6 @@ h2 {
     font-size: 1rem; /* Was: 12pt; */
 }
 
-.X-textarea, .X-select, .X-p, .X-input
-    {
-        font-size: 11pt;
-    }
-
 .startcard
     {
         font-size: 1.1rem; /* Was: 16pt; */
@@ -31,15 +27,13 @@ h2 {
 
 .editorbar
     {
+        border: 1px solid #aaa;
+        border-radius: 3px;
         position: fixed;
         top: 0;
         width: 100%;
         background: ivory;
-    }
-
-.X-optionsbar
-    {
-        font-size: 11pt;
+        padding: 5px;
     }
 
 .main {
