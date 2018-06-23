@@ -127,9 +127,10 @@ function demoFill () {
 
 function saveJourney () {
   var filename = document.getElementById('filenamearea').value + '.json';
-  // var type = 'text/plain';
-  var data = JSON.stringify(elements);
+  // Pretty print JSON.
+  var data = JSON.stringify(elements, null, 2);
   var a = document.createElement('a');
+
   a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(data));
   a.setAttribute('download', filename);
   a.click();
