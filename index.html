@@ -101,7 +101,8 @@
                                 <input type="button" value="Update" id="updateButton" onclick="OJ.changeBackground();">
                                 <input type="button" value="Hide editor for printing" id="hideButton" onclick="OJ.toggleEditor(0);">
                         </form>
-                        <br>
+
+                        <p><a href="?demo=1">Demo fill</a> | <a href="?demo=0">Reset &ndash; no fill</a>
                     </div>
                 </div>
         </div>
@@ -763,13 +764,16 @@
     <p><small>Our Journeys | © 2018 <a href="http://www.open.ac.uk">The Open University</a> (<a href="https://iet.open.ac.uk/" title="Institute of Educational Technology">IET</a>).</small>
 
     <script>
-    (function (WIN, OJ) {
+    (function (LOC, OJ) {
         OJ.initialiseElements();
-        // OJ.demoFill();
+        if (LOC.search.match(/[\?&]demo=1/)) {
+            OJ.demoFill();
+            document.body.className += ' demo-fill';
+        }
         OJ.setFocusElement(0);
         OJ.changeFocus();
         OJ.toggleOptions();
-    })(window, window.our_journeys);
+    })(window.location, window.our_journeys);
     </script>
     </body>
 </html>
