@@ -6,6 +6,7 @@
 window.our_journeys = /* module.exports = */ {
   // Functions.
   initialiseElements: initialiseElements,
+  updateElements: updateElements,
   changeFocus: changeFocus,
   demoFill: demoFill,
   updateElement: updateElement,
@@ -21,6 +22,7 @@ window.our_journeys = /* module.exports = */ {
   saveJourney: saveJourney,
   loadJourney: loadJourney,
   // Properties.
+  getElements: getElements,
   setFocusElement: setFocusElement
 };
 
@@ -455,4 +457,8 @@ function moveFwdElement () {
 
 function setFocusElement (num) {
   focusElement = num;
+}
+
+function getElements () {
+  return elements;
 }

@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.9" />
     <meta name="robots" content="noindex,nofollow" />
 
     <title> Our Journeys interactive </title>
@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="style/journeystyle.css" />
     <script src="src/our-journeys.js"></script>
+    <script src="src/share-link.js"></script>
     <script>
         var OJ = window.our_journeys;
     </script>
@@ -106,6 +107,8 @@
                         </form>
 
                         <p><a href="?demo=1">Demo fill</a> | <a href="?demo=0">Reset &ndash; no fill</a>
+
+                          | <a id="oj-share-link" class="oj-share-link" href="?empty" rel="nofollow" title="Base64 encoded!">Share</a>
                     </div>
                 </div>
         </div>
@@ -774,7 +777,7 @@
     </p>
 
     <script>
-    (function (LOC, OJ) {
+    (function (LOC, OJ, OJS) {
         OJ.initialiseElements();
         if (LOC.search.match(/[\?&]demo=1/)) {
             OJ.demoFill();
@@ -783,7 +786,11 @@
         OJ.setFocusElement(0);
         OJ.changeFocus();
         OJ.toggleOptions();
-    })(window.location, window.our_journeys);
+
+        OJS.createShareLink(OJ.getElements());
+        OJS.loadShareLink(OJ.getElements());
+
+    })(window.location, window.our_journeys, window.OJS);
     </script>
     </body>
 </html>
