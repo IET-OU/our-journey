@@ -6,7 +6,10 @@
     <meta name="robots" content="noindex,nofollow" />
 
     <title> Our Journeys interactive </title>
-    <meta name="copyright" content="© 2018 The Open University (IET-OU)." />
+
+    <meta name="description" content=
+    "'Our Journeys' is an interactive activity to chart the highs and lows of your student learning journey. Developed in the Institute of Educational Technology (IET), at The Open University." />
+    <meta name="copyright" content="© 2018 The Open University (IET)." />
 
     <link rel="stylesheet" href="style/journeystyle.css" />
     <script src="src/our-journeys.js"></script>
@@ -101,7 +104,8 @@
                                 <input type="button" value="Update" id="updateButton" onclick="OJ.changeBackground();">
                                 <input type="button" value="Hide editor for printing" id="hideButton" onclick="OJ.toggleEditor(0);">
                         </form>
-                        <br>
+
+                        <p><a href="?demo=1">Demo fill</a> | <a href="?demo=0">Reset &ndash; no fill</a>
                     </div>
                 </div>
         </div>
@@ -760,16 +764,26 @@
         </svg>
     </div>
 
-    <p><small>Our Journeys | © 2018 <a href="http://www.open.ac.uk">The Open University</a> (<a href="https://iet.open.ac.uk/" title="Institute of Educational Technology">IET</a>).</small>
+    <p class="footer-copy">Our Journeys | © 2018 <a href="http://www.open.ac.uk/">The Open University</a>
+        (<a href="https://iet.open.ac.uk/" title="Institute of Educational Technology">IET</a>).
+    </p>
+
+    <p class="footer-logos">
+        <a href="https://iet.open.ac.uk/"><img src="assets/iet-logo.svg" alt="Institute of Educational Technology" title="Institute of Educational Technology" /></a>
+        <a href="http://www.open.ac.uk/"><img src="assets/ou-logo.svg" alt="The Open University" title="The Open University" /></a>
+    </p>
 
     <script>
-    (function (WIN, OJ) {
+    (function (LOC, OJ) {
         OJ.initialiseElements();
-        // OJ.demoFill();
+        if (LOC.search.match(/[\?&]demo=1/)) {
+            OJ.demoFill();
+            document.body.className += ' demo-fill';
+        }
         OJ.setFocusElement(0);
         OJ.changeFocus();
         OJ.toggleOptions();
-    })(window, window.our_journeys);
+    })(window.location, window.our_journeys);
     </script>
     </body>
 </html>
