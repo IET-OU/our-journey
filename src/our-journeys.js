@@ -6,6 +6,7 @@
 window.our_journeys = /* module.exports = */ {
   // Functions.
   initialiseElements: initialiseElements,
+  updateElements: updateElements,
   changeFocus: changeFocus,
   demoFill: demoFill,
   updateElement: updateElement,
@@ -21,6 +22,7 @@ window.our_journeys = /* module.exports = */ {
   saveJourney: saveJourney,
   loadJourney: loadJourney,
   // Properties.
+  getElements: getElements,
   setFocusElement: setFocusElement
 };
 
@@ -127,9 +129,10 @@ function demoFill () {
 
 function saveJourney () {
   var filename = document.getElementById('filenamearea').value + '.json';
-  // var type = 'text/plain';
-  var data = JSON.stringify(elements);
+  // Pretty print JSON.
+  var data = JSON.stringify(elements, null, 2);
   var a = document.createElement('a');
+
   a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(data));
   a.setAttribute('download', filename);
   a.click();
@@ -454,4 +457,8 @@ function moveFwdElement () {
 
 function setFocusElement (num) {
   focusElement = num;
+}
+
+function getElements () {
+  return elements;
 }
