@@ -3,16 +3,16 @@
 
 # Our Journeys interactive
 
-_Our Journeys_ is an interactive online game to chart the highs and lows of your student learning journey ([ORO][]).
+_Our Journeys_ is an interactive online tool to chart the highs and lows of student journeys. It is being developed for use by all students, but is informed by research conducted to explore the experiences of disabled students (see [ORO] and [ORO2]).
 
  * [iet-ou.github.io/our-journey][web]
 
 ![Screenshot 1 - the editor.][img-rel]
 
-The paper-based game was developed by the Institute of Educational Technology (IET)
-and [LTI-Translate][lti], with [HEIF funding][heif].
+A physical version of the tool has been developed by the Institute of Educational Technology (IET)
+and [LTI-Translation][lti], with [HEIF funding][heif].
 
-The prototype online game is developed in the Institute of Educational Technology (IET),
+This prototype online version is being developed in the Institute of Educational Technology (IET),
 at The Open University.
 
 Author: [Tim Coughlan][tim], IET.
@@ -42,7 +42,9 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [img]: https://github.com/nfreear/our-journey/blob/nfreear/demo-fill/assets/screenshot-1.png?raw=true
 [img-rel]: assets/screenshot-1.png "'Our Journeys' screenshot 1 - the editor."
 [oro]: http://oro.open.ac.uk/54760/
-  "The accessibility of administrative processes: Assessing the impacts on students in higher education. Tim Coughlan, Kate Lister, 2018 (ORO). [Related ??]"
+  "The accessibility of administrative processes: Assessing the impacts on students in higher education. Tim Coughlan, Kate Lister, 2018"
+[oro2]: http://oro.open.ac.uk/48991/
+  "Understanding Accessibility as a Process through the Analysis of Feedback from Disabled Students. Tim Coughlan, Thomas Daniel Ullmann, & Kate Lister, 2017.
 [lti]: http://intranet6.open.ac.uk/learning-teaching-innovation/main/
   "Glen Darby, Graphics Media Developer, Learning & Teaching Innovation (LTI-Translate) (login required)"
 [heif]: https://re.ukri.org/knowledge-exchange/the-higher-education-innovation-fund-heif/
