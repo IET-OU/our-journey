@@ -6,6 +6,7 @@
 window.our_journeys = /* module.exports = */ {
   // Functions.
   initialiseElements: initialiseElements,
+  initialiseEventHandlers: initialiseEventHandlers,
   updateElements: updateElements,
   changeFocus: changeFocus,
   demoFill: demoFill,
@@ -118,6 +119,55 @@ function initialiseElements () {
     elements.push(element);
   }
   updateElements();
+}
+
+function initialiseEventHandlers() {
+  //initialises the event handlers for form submit buttons
+
+  document.getElementById("updateform").addEventListener('submit', function(e) {
+    e.preventDefault();
+    updateElement();
+  });
+
+  document.getElementById("deleteform").addEventListener('submit', function(e) {
+    e.preventDefault();
+    clearElement();
+  });
+
+  document.getElementById("backform").addEventListener('submit', function(e) {
+    e.preventDefault();
+    moveBackElement();
+  });
+
+  document.getElementById("forwardform").addEventListener('submit', function(e) {
+    e.preventDefault();
+    moveFwdElement();
+  });
+
+  document.getElementById("optionsform").addEventListener('submit', function(e) {
+    e.preventDefault();
+    toggleOptions();
+  });
+
+  document.getElementById("backgroundform").addEventListener('submit', function(e) {
+    e.preventDefault();
+    changeBackground();
+  });
+
+  document.getElementById("hideeditorform").addEventListener('submit', function(e) {
+    e.preventDefault();
+    toggleEditor('hide');
+  });
+
+  document.getElementById("loadform").addEventListener('submit', function(e) {
+    e.preventDefault();
+    loadJourney();
+  });
+
+  document.getElementById("saveform").addEventListener('submit', function(e) {
+    e.preventDefault();
+    saveJourney();
+  });
 }
 
 function demoFill () {
@@ -405,6 +455,7 @@ function keyResponse (k) {
 function updateElement () {
   // change existing element according to form
   // alert("changing values of " + document.getElementById('event_desc').value);
+  
   elements[focusElement].description = document.getElementById('event_desc').value;
   elements[focusElement].icon = document.getElementById('icon_select').value;
   elements[focusElement].emoticon = document.getElementById('emoticon_select').value;

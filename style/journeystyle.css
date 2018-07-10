@@ -34,6 +34,10 @@ a[ href *= '?demo=' ] {
   color: #2b6ab7;
 }
 
+form {
+  display: inline; 
+}
+
 h1{
     font-size: 1rem;
 }
@@ -66,6 +70,7 @@ h3 {
         width: 100%;
         background: ivory;
         padding: 5px;
+        display: inline;
     }
 
 .main {

@@ -21,8 +21,9 @@
     <body>
         <div class="editorbar" id="editor">
         <h1>Journey editor</h1>
-            <form>
-                    <p>
+        <p></p>
+            <form id="updateform">
+                    
                     <label for="event_desc">What happened?</label>
                     <textarea rows=3 maxlength=38 cols=12 id="event_desc" value=""></textarea>
                     <label for="icon_select">Event:</label>
@@ -69,26 +70,35 @@
                     </select>
                     <label for="post_it_text">Note:</label>
                     <textarea rows=3 maxlength=44 cols=12 id="post_it_text" value=""></textarea>
-                    <input type="button" value="Update" id="updateButton" onclick="OJ.updateElement();" disabled>
-                    <input type="button" value="Clear" id="deleteButton" onclick="OJ.clearElement();" disabled>
-                    <input type="button" value="Move Back" id="backButton" onclick="OJ.moveBackElement();" disabled>
-                    <input type="button" value="Move Forward" id="fwdButton" onclick="OJ.moveFwdElement();" disabled>
-                    <input type="button" value="Show/Hide Options" id="optionsButton" onclick="OJ.toggleOptions();">
+                    <input type="submit" aria-label="Update element" value="Update" id="updateButton" disabled>
                 </form>
-                </p>
+                <form id="deleteform">
+                    <input type="submit" aria-label="Delete element" value="Clear" id="deleteButton" disabled>
+                </form>
+                <form id="backform">
+                    <input type="submit" aria-label="Move element backwards" value="Move Back" id="backButton" disabled>
+                </form>
+                <form id="forwardform">
+                    <input type="submit" aria-label="Move element forwards" value="Move Forward" id="fwdButton" disabled>
+                </form>
+                <form id="optionsform">
+                    <input type="submit" aria-label="Show or hide other options" value="Show/Hide Options" id="optionsButton">
+                </form>
                 <div class = "optionsbar" id = "options">
                    <h2>Options:</h2>
                         <h3>File:</h3>
-                        <form>
+                        <form id="saveform" aria-label="Save journey to file">
                             <label for="filenamearea">Save:</label>
                             <input type='text' value="journey_file" id="filenamearea">
-                            <input type="button" value="Save" id="hideButton" onclick="OJ.saveJourney();">
-                            | <label for="fileinput">Load:</label>
-                            <input type='file' id='fileinput'>
-                            <input type="button" id="btnLoad" value="Load" onclick="OJ.loadJourney();">
+                            <input type="submit" value="Save" id="saveButton" >
+                        </form>
+                        <form id="loadform" aria-label="Load journey from file">
+                            <label for="fileinput">Load:</label>
+                            <input type='file' id='fileinput' required aria-required="true">
+                            <input type="submit" id="loadButton" value="Load" >
                         </form>
                         <h3>View:</h3>
-                        <form>
+                        <form id="backgroundform" aria-label="Choose background colour">
                                 <label for="background_select">Background:</label>
                                 <select id="background_select">
                                     <option value="none">None</option>
@@ -102,8 +112,10 @@
                                     <option value="LightGray">Grey</option>
                                     <option value="Coral">Orange</option>
                                 </select>
-                                <input type="button" value="Update" id="updateButton" onclick="OJ.changeBackground();">
-                                <input type="button" value="Hide editor for printing" id="hideButton" onclick="OJ.toggleEditor(0);">
+                                <input type="submit" value="Update" id="updateButton">
+                        </form>
+                        <form id="hideeditorform">
+                            <input type="submit" aria-label="Hide editor" value="Hide editor" id="hideButton">
                         </form>
 
                         <p><a href="?demo=1">Demo fill</a> | <a href="?demo=0">Reset &ndash; no fill</a>
@@ -777,8 +789,10 @@
     </p>
 
     <script>
+        
     (function (LOC, OJ, OJS) {
         OJ.initialiseElements();
+        OJ.initialiseEventHandlers();
         if (LOC.search.match(/[\?&]demo=1/)) {
             OJ.demoFill();
             document.body.className += ' demo-fill';
@@ -786,11 +800,13 @@
         OJ.setFocusElement(0);
         OJ.changeFocus();
         OJ.toggleOptions();
+        
 
         OJS.createShareLink(OJ.getElements());
         OJS.loadShareLink(OJ.getElements());
 
     })(window.location, window.our_journeys, window.OJS);
+
     </script>
     </body>
 </html>
