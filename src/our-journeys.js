@@ -371,17 +371,17 @@ function addKeyboardFocus () {
 }
 
 function changeFocus () {
+  
   for (var i = 0; i < elements.length; i++) {
     element = document.getElementById(elements[i].eID);
     element.setAttribute('stroke', 'black');
-    // focus.setAttribute("stroke-width", 1);
+    element.setAttribute("stroke-width", 1);
   }
   focus = document.getElementById(elements[focusElement].eID);
   focus.setAttribute('stroke', 'blue');
   focus.scrollIntoView(true);
   window.scrollBy(0, -300);
-
-  // focus.setAttribute("stroke-width", 4);
+  focus.setAttribute("stroke-width", 3);
 
   document.getElementById('event_desc').value = elements[focusElement].description;
   document.getElementById('icon_select').value = elements[focusElement].icon;
@@ -391,6 +391,8 @@ function changeFocus () {
   document.getElementById('backButton').removeAttribute('disabled');
   document.getElementById('fwdButton').removeAttribute('disabled');
   document.getElementById('deleteButton').removeAttribute('disabled');
+ 
+  document.getElementById("title").innerHTML = "Journey Editor: Card " + focusElement;
 }
 
 function canvasGotFocus () {
