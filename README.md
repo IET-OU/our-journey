@@ -1,5 +1,6 @@
 
 [![js-semistandard-style][semi-icon]][semi]
+[![Browserify][br-icon]][browserify]
 
 # Our Journeys interactive student journey creator
 
@@ -23,6 +24,7 @@ Use [Node][] and npm to aid development:
 
 ```sh
 npm install
+npm run build
 npm start
 npm test
 npm run fix
@@ -37,7 +39,7 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [web]: https://iet-ou.github.io/our-journey/?demo=1
 [gh]: https://github.com/IET-OU/learningdesign
 [tim]: https://iet.open.ac.uk/profiles/tim.coughlan
-[kate]: http://www.open.ac.uk/people/kml322 
+[kate]: http://www.open.ac.uk/people/kml322
 [node]: https://nodejs.org/en/
 [Help: Relative Image URL]: https://github.com/mark-anders/relative-image-url
 [img]: https://github.com/nfreear/our-journey/blob/nfreear/demo-fill/assets/screenshot-1.png?raw=true
@@ -51,5 +53,7 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [semi]: https://github.com/Flet/semistandard
 [semi-icon]: https://nick.freear.org.uk/badge/semi.svg "Javascript coding style — semistandard"
 [sem-i0]: https://img.shields.io/badge/code_style-semistandard-brightgreen.svg?_style=flat-square
+[browserify]: http://browserify.org/ "Built with Browserify"
+[br-icon]: https://nick.freear.org.uk/badge/browserify.svg
 
 [End]: //.

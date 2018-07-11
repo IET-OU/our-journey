@@ -2,10 +2,12 @@
   Our Journeys - share-link | © 2018 The Open University (IET-OU).
 */
 
-window.OJS = {
-  createShareLink: createShareLink,
-  loadShareLink: loadShareLink
+module.exports = {
+  createLink: createShareLink,
+  loadLink: loadShareLink
 };
+
+const CORE = require('./our-journeys'); // TODO: rename to './core' !
 
 function createShareLink (elements) {
   var share = document.getElementById('oj-share-link');
@@ -18,7 +20,7 @@ function createShareLink (elements) {
 function loadShareLink (elements) {
   console.warn('loadShareLink - start');
 
-  var OJ = window.our_journeys;
+  // var OJ = window.our_journeys;
 
   var qm = window.location.search.match(/\?j=base64:(.+(%3D%3D|==))/);
   if (qm) {
@@ -36,7 +38,7 @@ function loadShareLink (elements) {
       elements[ i ] = { eID: decoded[i].eID, description: decoded[i].description, emoticon: decoded[i].emoticon, icon: decoded[i].icon, postit: decoded[i].postit };
     }
 
-    OJ.updateElements();
+    CORE.updateElements();
 
     console.warn('loadShareLink - load COMPLETE ;) !');
   }

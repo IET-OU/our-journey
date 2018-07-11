@@ -1,12 +1,11 @@
 /*!
-  Our Journeys | © 2018 The Open University (IET-OU).
+  CORE | © 2018 The Open University (IET-OU).
 */
 
-// API.
-window.our_journeys = /* module.exports = */ {
+// Core API.
+module.exports = /* WAS: window.our_journeys */ {
   // Functions.
   initialiseElements: initialiseElements,
-  initialiseEventHandlers: initialiseEventHandlers,
   updateElements: updateElements,
   changeFocus: changeFocus,
   demoFill: demoFill,
@@ -14,18 +13,17 @@ window.our_journeys = /* module.exports = */ {
   clearElement: clearElement,
   moveFwdElement: moveFwdElement,
   moveBackElement: moveBackElement,
-  changeBackground: changeBackground,
   addKeyboardFocus: addKeyboardFocus, // Not used ?!
   canvasGotFocus: canvasGotFocus,
   canvasLostFocus: canvasLostFocus,
-  toggleEditor: toggleEditor,
-  toggleOptions: toggleOptions,
-  saveJourney: saveJourney,
-  loadJourney: loadJourney,
   // Properties.
   getElements: getElements,
   setFocusElement: setFocusElement
 };
+
+const UI = require('./user-interface');
+const ASSET = require('./assets');
+const DIM = require('./dimension.json');
 
 // Semistandard -- these were NOT defined ;).
 var $ = window.jQuery; // Missing dependency ??
@@ -40,42 +38,8 @@ var canvasInFocus = false;
 var numElements = 35;
 
 // Presentation variables
-var iconFiles = [ {name: 'achievement', file: 'Achievement_card.png'}, {name: 'admin', file: 'Admin_card.png'}, {name: 'assessment', file: 'Assessments_card.png'}, {name: 'communication', file: 'Communication_card.png'}, {name: 'confidence', file: 'ConfidenceBoost_card.png'}, {name: 'duedates', file: 'DueDates_card.png'}, {name: 'helpneeded', file: 'HelpNeeded_card.png'}, {name: 'highpressure', file: 'HighPressure_card.png'}, {name: 'information', file: 'Information_card.png'}, {name: 'lostdirection', file: 'LostDirection_card.png'}, {name: 'lowenergy', file: 'LowEnergy_card.png'}, {name: 'lowscores', file: 'LowScores_card.png'}, {name: 'nosupport', file: 'NoSupport_card.png'}, {name: 'peersupport', file: 'PeerSupport_card.png'}, {name: 'problem', file: 'Problem_card.png'}, {name: 'register', file: 'Register_card.png'}, {name: 'studybreak', file: 'StudyBreak_card.png'}, {name: 'studyexperience', file: 'StudyExperience_card.png'}, {name: 'studygoal', file: 'StudyGoal_card.png'}, {name: 'studymilestone', file: 'StudyMilestone_card.png'}, {name: 'studysuccess', file: 'StudySuccess_card.png'}, {name: 'studysupport', file: 'StudySupport_card.png'}, {name: 'timelost', file: 'TimeLost_card.png'} ];
-var emoticonFiles = [ {name: 'angry', file: 'Angry_emoji.png'}, {name: 'achieve', file: 'Achieve_emoji.png'}, {name: 'bored', file: 'Bored_emoji.png'}, {name: 'confused', file: 'Confused_emoji.png'}, {name: 'excited', file: 'Excited_emoji.png'}, {name: 'happy', file: 'Happy_emoji.png'}, {name: 'nervous', file: 'Nervous_emoji.png'}, {name: 'sick', file: 'Sick_emoji.png'}, {name: 'angry', file: 'Angry_emoji.png'}, {name: 'achieve', file: 'Achieve_emoji.png'}, {name: 'unhappy', file: 'Unhappy_emoji.png'}, {name: 'upset', file: 'Upset_emoji.png'}, {name: 'thinking', file: 'Thinking_emoji.png'} ];
-// var assetDir = 'assets/';
-var emojiDir = 'assets/emoji/';
-var cardDir = 'assets/card/';
-var iconWidth = 110;
-var iconHeight = 110;
-var iconXV = 110;
-var iconYV = 10;
-var iconX = 10;
-var iconY = 110;
-var emoticonWidth = 72;
-var emoticonHeight = 72;
-var emoticonXV = 130;
-var emoticonYV = 170;
-var emoticonXVR = 30;
-var emoticonYVR = 267;
-var emoticonX = 140;
-var emoticonY = 160;
-var textXV = 110;
-var textYV = 130;
-var textXVR = 10;
-var textYVR = 225;
-var textX = 130;
-var textY = 110;
-var rectY = 100;
-var rectXV = 100;
-var postitX = 75;
-var postitVY = 70;
-var postitVRY = 160;
-var postitVRX = 135;
-var postitTextX = 80;
-var postitTextVX = 5;
-var postitTextVRX = 140;
-var postitTextY = 15;
-var postitTextWidth = 90;
+// ...
+
 // These variables state which elements are vertical ones for presentation. On the left (vl) or the right (vr).
 var vlElements = [ 0, 9, 10, 19, 20, 29, 30 ];
 var vrElements = [ 4, 5, 14, 15, 24, 25, 34 ];
@@ -121,55 +85,6 @@ function initialiseElements () {
   updateElements();
 }
 
-function initialiseEventHandlers() {
-  //initialises the event handlers for form submit buttons
-
-  document.getElementById("updateform").addEventListener('submit', function(e) {
-    e.preventDefault();
-    updateElement();
-  });
-
-  document.getElementById("deleteform").addEventListener('submit', function(e) {
-    e.preventDefault();
-    clearElement();
-  });
-
-  document.getElementById("backform").addEventListener('submit', function(e) {
-    e.preventDefault();
-    moveBackElement();
-  });
-
-  document.getElementById("forwardform").addEventListener('submit', function(e) {
-    e.preventDefault();
-    moveFwdElement();
-  });
-
-  document.getElementById("optionsform").addEventListener('submit', function(e) {
-    e.preventDefault();
-    toggleOptions();
-  });
-
-  document.getElementById("backgroundform").addEventListener('submit', function(e) {
-    e.preventDefault();
-    changeBackground();
-  });
-
-  document.getElementById("hideeditorform").addEventListener('submit', function(e) {
-    e.preventDefault();
-    toggleEditor('hide');
-  });
-
-  document.getElementById("loadform").addEventListener('submit', function(e) {
-    e.preventDefault();
-    loadJourney();
-  });
-
-  document.getElementById("saveform").addEventListener('submit', function(e) {
-    e.preventDefault();
-    saveJourney();
-  });
-}
-
 function demoFill () {
   for (var i = 0; i < elements.length; i++) {
     elements[i] = { eID: 'place' + i, description: 'test description ' + i, emoticon: 'happy', icon: 'timelost', postit: 'post it text' };
@@ -177,80 +92,17 @@ function demoFill () {
   updateElements();
 }
 
-function saveJourney () {
-  var filename = document.getElementById('filenamearea').value + '.json';
-  // Pretty print JSON.
-  var data = JSON.stringify(elements, null, 2);
-  var a = document.createElement('a');
-
-  a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(data));
-  a.setAttribute('download', filename);
-  a.click();
-}
-
-function loadJourney () {
-  var input, file, fr;
-  var alert = window.alert;
-
-  if (typeof window.FileReader !== 'function') {
-    alert("The file API isn't supported on this browser yet.");
-    return;
-  }
-
-  input = document.getElementById('fileinput');
-  if (!input) {
-    alert("Couldn't find the fileinput element.");
-  } else if (!input.files) {
-    alert("This browser doesn't seem to support the `files` property of file inputs.");
-  } else if (!input.files[0]) {
-    alert("Please select a file before clicking 'Load'");
-  } else {
-    file = input.files[0];
-    fr = new window.FileReader();
-    fr.onload = receivedText;
-    fr.readAsText(file);
-  }
-
-  function receivedText (e) {
-    let lines = e.target.result;
-    var newArr = JSON.parse(lines);
-    // alert('file loaded');
-    for (var i = 0; i < newArr.length; i++) {
-      elements[i] = { eID: newArr[i].eID, description: newArr[i].description, emoticon: newArr[i].emoticon, icon: newArr[i].icon, postit: newArr[i].postit };
-    }
-    updateElements();
-  }
-}
-
 function elementClick () {
   var e = this.id.substring(5);
   focusElement = parseInt(e);
   // alert('mouse down on ' + focusElement);
   changeFocus();
-  toggleEditor('show');
-}
-
-function toggleEditor (tog) {
-  var editor = document.getElementById('editor');
-  if (tog === 1 || tog === 'show') {
-    editor.style.display = 'block';
-  } else if (tog === 0 || tog === 'hide') {
-    editor.style.display = 'none';
-  }
-}
-
-function toggleOptions () {
-  var options = document.getElementById('options');
-  if (options.style.display === 'none') {
-    options.style.display = 'block';
-  } else {
-    options.style.display = 'none';
-  }
+  UI.toggleEditor('show');
 }
 
 function updateElements () {
   for (var i = 0; i < numElements; i++) {
-    element = elements[i];
+    var element = elements[i];
     // mouse event listener
     var ePlace = document.getElementById('group' + i);
     ePlace.addEventListener('click', elementClick);
@@ -258,45 +110,45 @@ function updateElements () {
     eRect.setAttribute('fill', 'Snow');
     eRect.setAttribute('fill-opacity', '1.0');
     if (vlElements.includes(i)) {
-      eRect.setAttribute('x', rectXV);
+      eRect.setAttribute('x', DIM.rectXV);
     } else if (vrElements.includes(i)) {
-      eRect.setAttribute('y', rectY);
+      eRect.setAttribute('y', DIM.rectY);
     } else {
-      eRect.setAttribute('y', rectY);
+      eRect.setAttribute('y', DIM.rectY);
     }
     // description
     var eText = document.getElementById('description' + i);
     // alert("changing text on description" + elementText + " to " + element.description);
     eText.textContent = element.description;
     if (vlElements.includes(i)) {
-      eText.setAttribute('x', textXV);
-      eText.setAttribute('y', textYV);
+      eText.setAttribute('x', DIM.textXV);
+      eText.setAttribute('y', DIM.textYV);
     } else if (vrElements.includes(i)) {
-      eText.setAttribute('x', textXVR);
-      eText.setAttribute('y', textYVR);
+      eText.setAttribute('x', DIM.textXVR);
+      eText.setAttribute('y', DIM.textYVR);
     } else {
-      eText.setAttribute('x', textX);
-      eText.setAttribute('y', textY);
+      eText.setAttribute('x', DIM.textX);
+      eText.setAttribute('y', DIM.textY);
     }
     // emoticon
     var eEmo = document.getElementById('emoticon' + i);
     if (element.emoticon !== 'none') {
-      for (var j = 0; j < emoticonFiles.length; j++) {
-        if (emoticonFiles[j].name === element.emoticon) {
-          eEmo.setAttribute('height', emoticonHeight);
-          eEmo.setAttribute('width', emoticonWidth);
+      for (var j = 0; j < ASSET.emoticonCount(); j++) {
+        if (ASSET.hasEmoticon(j, element)) {
+          eEmo.setAttribute('height', DIM.emoticonHeight);
+          eEmo.setAttribute('width', DIM.emoticonWidth);
           if (vlElements.includes(i)) {
-            eEmo.setAttribute('x', emoticonXV);
-            eEmo.setAttribute('y', emoticonYV);
+            eEmo.setAttribute('x', DIM.emoticonXV);
+            eEmo.setAttribute('y', DIM.emoticonYV);
           } else if (vrElements.includes(i)) {
-            eEmo.setAttribute('x', emoticonXVR);
-            eEmo.setAttribute('y', emoticonYVR);
+            eEmo.setAttribute('x', DIM.emoticonXVR);
+            eEmo.setAttribute('y', DIM.emoticonYVR);
           } else {
-            eEmo.setAttribute('x', emoticonX);
-            eEmo.setAttribute('y', emoticonY);
+            eEmo.setAttribute('x', DIM.emoticonX);
+            eEmo.setAttribute('y', DIM.emoticonY);
           }
           eEmo.setAttribute('display', 'inline');
-          eEmo.setAttribute('href', emojiDir + emoticonFiles[j].file);
+          eEmo.setAttribute('href', ASSET.getEmoticonPath(j));
         }
       }
     } else {
@@ -305,19 +157,19 @@ function updateElements () {
     // icon
     var eIcon = document.getElementById('icon' + i);
     if (element.icon !== 'none') {
-      for (j = 0; j < iconFiles.length; j++) {
-        if (iconFiles[j].name === element.icon) {
-          eIcon.setAttribute('height', iconHeight);
-          eIcon.setAttribute('width', iconWidth);
+      for (j = 0; j < ASSET.iconCount(); j++) {
+        if (ASSET.hasIcon(j, element)) {
+          eIcon.setAttribute('height', DIM.iconHeight);
+          eIcon.setAttribute('width', DIM.iconWidth);
           if (vlElements.includes(i)) {
-            eIcon.setAttribute('x', iconXV);
-            eIcon.setAttribute('y', iconYV);
+            eIcon.setAttribute('x', DIM.iconXV);
+            eIcon.setAttribute('y', DIM.iconYV);
           } else {
-            eIcon.setAttribute('x', iconX);
-            eIcon.setAttribute('y', iconY);
+            eIcon.setAttribute('x', DIM.iconX);
+            eIcon.setAttribute('y', DIM.iconY);
           }
           eIcon.setAttribute('display', 'inline');
-          eIcon.setAttribute('href', cardDir + iconFiles[j].file);
+          eIcon.setAttribute('href', ASSET.getIconPath(j));
         }
       }
     } else {
@@ -329,23 +181,23 @@ function updateElements () {
     if (element.postit !== '') {
       ePostIt.setAttribute('visibility', 'visible');
       ePostItText.setAttribute('visibility', 'visible');
-      ePostItText.setAttribute('width', postitTextWidth);
-      // ePostItText.setAttribute('y', postitTextY);
+      ePostItText.setAttribute('width', DIM.postitTextWidth);
+      // ePostItText.setAttribute('y', DIM.postitTextY);
 
       if (vlElements.includes(i)) {
-        ePostIt.setAttribute('y', postitVY);
-        ePostItText.setAttribute('y', postitTextY + postitVY);
-        ePostItText.setAttribute('x', postitTextVX);
+        ePostIt.setAttribute('y', DIM.postitVY);
+        ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVY);
+        ePostItText.setAttribute('x', DIM.postitTextVX);
       } else if (vrElements.includes(i)) {
-        ePostIt.setAttribute('x', postitVRX);
-        ePostItText.setAttribute('x', postitVRX);
-        ePostIt.setAttribute('y', postitVRY);
-        ePostItText.setAttribute('y', postitTextY + postitVRY);
-        ePostItText.setAttribute('x', postitTextVRX);
+        ePostIt.setAttribute('x', DIM.postitVRX);
+        ePostItText.setAttribute('x', DIM.postitVRX);
+        ePostIt.setAttribute('y', DIM.postitVRY);
+        ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVRY);
+        ePostItText.setAttribute('x', DIM.postitTextVRX);
       } else {
-        ePostIt.setAttribute('x', postitX);
-        ePostItText.setAttribute('x', postitTextX);
-        ePostItText.setAttribute('y', postitTextY);
+        ePostIt.setAttribute('x', DIM.postitX);
+        ePostItText.setAttribute('x', DIM.postitTextX);
+        ePostItText.setAttribute('y', DIM.postitTextY);
       }
       ePostItText.textContent = element.postit;
     } else {
@@ -353,10 +205,6 @@ function updateElements () {
       ePostItText.setAttribute('visibility', 'collapse');
     }
   }
-}
-
-function changeBackground () {
-  document.body.style.background = document.getElementById('background_select').value;
 }
 
 function addKeyboardFocus () {
@@ -371,17 +219,16 @@ function addKeyboardFocus () {
 }
 
 function changeFocus () {
-  
   for (var i = 0; i < elements.length; i++) {
     element = document.getElementById(elements[i].eID);
     element.setAttribute('stroke', 'black');
-    element.setAttribute("stroke-width", 1);
+    element.setAttribute('stroke-width', 1);
   }
   focus = document.getElementById(elements[focusElement].eID);
   focus.setAttribute('stroke', 'blue');
   focus.scrollIntoView(true);
   window.scrollBy(0, -300);
-  focus.setAttribute("stroke-width", 3);
+  focus.setAttribute('stroke-width', 3);
 
   document.getElementById('event_desc').value = elements[focusElement].description;
   document.getElementById('icon_select').value = elements[focusElement].icon;
@@ -391,8 +238,8 @@ function changeFocus () {
   document.getElementById('backButton').removeAttribute('disabled');
   document.getElementById('fwdButton').removeAttribute('disabled');
   document.getElementById('deleteButton').removeAttribute('disabled');
- 
-  document.getElementById("title").innerHTML = "Journey Editor: Card " + focusElement;
+
+  document.getElementById('title').innerHTML = 'Journey Editor: Card ' + focusElement;
 }
 
 function canvasGotFocus () {
@@ -457,7 +304,7 @@ function keyResponse (k) {
 function updateElement () {
   // change existing element according to form
   // alert("changing values of " + document.getElementById('event_desc').value);
-  
+
   elements[focusElement].description = document.getElementById('event_desc').value;
   elements[focusElement].icon = document.getElementById('icon_select').value;
   elements[focusElement].emoticon = document.getElementById('emoticon_select').value;

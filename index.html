@@ -12,10 +12,13 @@
     <meta name="copyright" content="© 2018 The Open University (IET)." />
 
     <link rel="stylesheet" href="style/journeystyle.css" />
+    <!--
     <script src="src/our-journeys.js"></script>
     <script src="src/share-link.js"></script>
+    -->
+    <script src="dist/our-journey.js"></script>
     <script>
-        var OJ = window.our_journeys;
+        var OJ = require('our_journey'); // Was: window.our_journeys;
     </script>
     </head>
     <body>
@@ -23,7 +26,7 @@
         <h1 id="title">Journey editor</h1>
         <p></p>
             <form id="updateform">
-                    
+
                     <label for="event_desc">What happened?</label>
                     <textarea rows=3 maxlength=38 cols=12 id="event_desc" value=""></textarea>
                     <label for="icon_select">Event:</label>
@@ -127,7 +130,7 @@
 
 
         <div class="main">
-            <svg width="100%" height="2600" onfocusout="canvasLostFocus()" onfocusin="canvasGotFocus()" id="journey-canvas">
+            <svg width="100%" height="2600" onfocusout="OJ.core.canvasLostFocus()" onfocusin="OJ.core.canvasGotFocus()" id="journey-canvas">
                 <title role="img" id="title" aria-labelledby="desc-space">Journey</title>
                 <style>
                     .in_card { font: bold 14px sans-serif}
@@ -789,23 +792,31 @@
     </p>
 
     <script>
-        
-    (function (LOC, OJ, OJS) {
-        OJ.initialiseElements();
-        OJ.initialiseEventHandlers();
+
+    (function (W, LOC) {
+        const OJ = require('our_journey');
+
+        console.warn('our-journey API:', OJ);
+
+        OJ.core.initialiseElements();
+
+        OJ.events.initialise();
+
         if (LOC.search.match(/[\?&]demo=1/)) {
-            OJ.demoFill();
+            OJ.core.demoFill();
+
             document.body.className += ' demo-fill';
         }
-        OJ.setFocusElement(0);
-        OJ.changeFocus();
-        OJ.toggleOptions();
-        
 
-        OJS.createShareLink(OJ.getElements());
-        OJS.loadShareLink(OJ.getElements());
+        OJ.core.setFocusElement(0);
+        OJ.core.changeFocus();
 
-    })(window.location, window.our_journeys, window.OJS);
+        OJ.ui.toggleOptions();
+
+        OJ.share.createLink(OJ.core.getElements());
+        OJ.share.loadLink(OJ.core.getElements());
+
+    })(window, window.location);
 
     </script>
     </body>

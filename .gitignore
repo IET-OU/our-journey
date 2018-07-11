@@ -1,4 +1,6 @@
 
+dist/
+
 .pa11yci*
 
 node_modules/
