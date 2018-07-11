@@ -1,5 +1,5 @@
 /*!
-  Setup form event handlers | © 2018 The Open University (IET-OU).
+  Setup form & 'canvas' event handlers | © 2018 The Open University (IET-OU).
 */
 
 module.exports = {
@@ -55,5 +55,13 @@ function initialiseEventHandlers () {
   document.getElementById('saveform').addEventListener('submit', function (e) {
     e.preventDefault();
     FILE.saveJourney();
+  });
+
+  document.getElementById('journey-canvas').addEventListener('focusin', function (e) {
+    CORE.canvasGotFocus();
+  });
+
+  document.getElementById('journey-canvas').addEventListener('focusout', function (e) {
+    CORE.canvasLostFocus();
   });
 }
