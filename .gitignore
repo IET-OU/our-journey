@@ -8,5 +8,6 @@ package-lock.json
 *BAK*
 *.diff
 *.log
+*.tgz
 
 # End.

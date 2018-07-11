@@ -31,7 +31,7 @@
     "pa11y-config": "git+https://github.com/nfreear/pa11y-config.git",
     "semistandard": "^12.0.1"
   },
-  "semistandard": {
+  "x-semistandard": {
     "ignore": [ "dist/" ]
   },
   "pa11yCiConfig": {
@@ -43,11 +43,12 @@
       "http://127.0.0.1:9000/index.html?demo=1&_ua=pa11y-ci"
     ]
   },
+  "files": [ "index.html", "assets/", "dist/", "src/", "style/*.css" ],
   "scripts": {
     "build": "mkdir -p dist/; browserify --no-bf -r ./index.js:our_journey -o dist/our-journey.js",
     "x-pa11yci-2x-preinstall": "export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1 # A hack!",
     "start": "live-server --port=9000",
-    "fix": "semistandard --fix # There were ~814 errors ;).",
+    "fix": "semistandard --fix",
     "pa11y-ci": "pa11y-config --pkg && pa11y-ci",
     "test": "semistandard"
   }
