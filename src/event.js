@@ -6,7 +6,7 @@ module.exports = {
   initialise: initialiseEventHandlers
 };
 
-const CORE = require('./our-journeys'); // TODO: rename to './core' !
+const CORE = require('./core');
 const FILE = require('./file');
 const UI = require('./user-interface');
 

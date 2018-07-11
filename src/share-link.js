@@ -7,7 +7,7 @@ module.exports = {
   loadLink: loadShareLink
 };
 
-const CORE = require('./our-journeys'); // TODO: rename to './core' !
+const CORE = require('./core');
 
 function createShareLink (elements) {
   var share = document.getElementById('oj-share-link');

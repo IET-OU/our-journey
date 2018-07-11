@@ -1,8 +1,7 @@
 /*!
-  CORE | © 2018 The Open University (IET-OU).
+  Core API | © 2018 The Open University (IET-OU).
 */
 
-// Core API.
 module.exports = /* WAS: window.our_journeys */ {
   // Functions.
   initialiseElements: initialiseElements,

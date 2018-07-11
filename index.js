@@ -4,7 +4,7 @@
 
 module.exports = {
 
-  core: require('./src/our-journeys'), // TODO: rename to './core' !
+  core: require('./src/core'),
 
   events: require('./src/event'),
 

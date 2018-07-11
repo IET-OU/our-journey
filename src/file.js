@@ -7,7 +7,7 @@ module.exports = {
   loadJourney: loadJourney
 };
 
-const CORE = require('./our-journeys'); // TODO: rename to './core' !
+const CORE = require('./core');
 const alert = window.alert;
 const FileReader = window.FileReader;
 
