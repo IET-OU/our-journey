@@ -26,7 +26,7 @@ const DIM = require('./dimension.json');
 
 // Semistandard -- these were NOT defined ;).
 var $ = window.jQuery; // Missing dependency ??
-var event, focus;
+var event;
 
 // Status variables
 var elements = [];
@@ -239,7 +239,7 @@ function changeFocus () {
     element.setAttribute('stroke', 'black');
     element.setAttribute('stroke-width', 1);
   }
-  focus = document.getElementById(elements[focusElement].eID);
+  var focus = document.getElementById(elements[focusElement].eID);
   focus.setAttribute('stroke', 'blue');
   focus.scrollIntoView(true);
   window.scrollBy(0, -300);
