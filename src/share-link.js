@@ -1,5 +1,5 @@
 /*!
-  Our Journeys - share-link | © 2018 The Open University (IET-OU).
+  A sharing-link | © 2018 The Open University (IET-OU).
 */
 
 module.exports = {
@@ -19,8 +19,6 @@ function createShareLink (elements) {
 
 function loadShareLink (elements) {
   console.warn('loadShareLink - start');
-
-  // var OJ = window.our_journeys;
 
   var qm = window.location.search.match(/\?j=base64:(.+(%3D%3D|==))/);
   if (qm) {

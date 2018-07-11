@@ -36,9 +36,6 @@ var canvasInFocus = false;
 // Number of card elements presented in page
 var numElements = 35;
 
-// Presentation variables
-// ...
-
 // These variables state which elements are vertical ones for presentation. On the left (vl) or the right (vr).
 var vlElements = [ 0, 9, 10, 19, 20, 29, 30 ];
 var vrElements = [ 4, 5, 14, 15, 24, 25, 34 ];

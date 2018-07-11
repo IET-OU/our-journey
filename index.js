@@ -1,8 +1,10 @@
 /*!
-  Our Journey | © 2018 The Open University (IET-OU).
+  Our Journey module | © 2018 The Open University (IET-OU).
 */
 
 module.exports = {
+
+  app: require('./src/app'),
 
   core: require('./src/core'),
 

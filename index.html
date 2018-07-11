@@ -789,30 +789,7 @@
 
     <script>
 
-    (function (W, LOC) {
-        const OJ = require('our_journey');
-
-        console.warn('our-journey API:', OJ);
-
-        OJ.core.initialiseElements();
-
-        OJ.events.initialise();
-
-        if (LOC.search.match(/[\?&]demo=1/)) {
-            OJ.core.demoFill();
-
-            document.body.className += ' demo-fill';
-        }
-
-        OJ.core.setFocusElement(0);
-        OJ.core.changeFocus();
-
-        OJ.ui.toggleOptions();
-
-        OJ.share.createLink(OJ.core.getElements());
-        OJ.share.loadLink(OJ.core.getElements());
-
-    })(window, window.location);
+        require('our_journey').app.run();
 
     </script>
     </body>
