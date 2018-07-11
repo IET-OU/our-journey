@@ -26,7 +26,7 @@ const DIM = require('./dimension.json');
 
 // Semistandard -- these were NOT defined ;).
 var $ = window.jQuery; // Missing dependency ??
-var element, event, focus;
+var event, focus;
 
 // Status variables
 var elements = [];
@@ -96,12 +96,12 @@ function elementClick () {
   focusElement = parseInt(e);
   // alert('mouse down on ' + focusElement);
   changeFocus();
+
   UI.toggleEditor('show');
 }
 
 function updateElements () {
   for (var i = 0; i < numElements; i++) {
-    var element = elements[i];
     // mouse event listener
     var ePlace = document.getElementById('group' + i);
     ePlace.addEventListener('click', elementClick);
@@ -115,94 +115,110 @@ function updateElements () {
     } else {
       eRect.setAttribute('y', DIM.rectY);
     }
-    // description
-    var eText = document.getElementById('description' + i);
-    // alert("changing text on description" + elementText + " to " + element.description);
-    eText.textContent = element.description;
-    if (vlElements.includes(i)) {
-      eText.setAttribute('x', DIM.textXV);
-      eText.setAttribute('y', DIM.textYV);
-    } else if (vrElements.includes(i)) {
-      eText.setAttribute('x', DIM.textXVR);
-      eText.setAttribute('y', DIM.textYVR);
-    } else {
-      eText.setAttribute('x', DIM.textX);
-      eText.setAttribute('y', DIM.textY);
-    }
-    // emoticon
-    var eEmo = document.getElementById('emoticon' + i);
-    if (element.emoticon !== 'none') {
-      for (var j = 0; j < ASSET.emoticonCount(); j++) {
-        if (ASSET.hasEmoticon(j, element)) {
-          eEmo.setAttribute('height', DIM.emoticonHeight);
-          eEmo.setAttribute('width', DIM.emoticonWidth);
-          if (vlElements.includes(i)) {
-            eEmo.setAttribute('x', DIM.emoticonXV);
-            eEmo.setAttribute('y', DIM.emoticonYV);
-          } else if (vrElements.includes(i)) {
-            eEmo.setAttribute('x', DIM.emoticonXVR);
-            eEmo.setAttribute('y', DIM.emoticonYVR);
-          } else {
-            eEmo.setAttribute('x', DIM.emoticonX);
-            eEmo.setAttribute('y', DIM.emoticonY);
-          }
-          eEmo.setAttribute('display', 'inline');
-          eEmo.setAttribute('href', ASSET.getEmoticonPath(j));
-        }
-      }
-    } else {
-      eEmo.setAttribute('display', 'none');
-    }
-    // icon
-    var eIcon = document.getElementById('icon' + i);
-    if (element.icon !== 'none') {
-      for (j = 0; j < ASSET.iconCount(); j++) {
-        if (ASSET.hasIcon(j, element)) {
-          eIcon.setAttribute('height', DIM.iconHeight);
-          eIcon.setAttribute('width', DIM.iconWidth);
-          if (vlElements.includes(i)) {
-            eIcon.setAttribute('x', DIM.iconXV);
-            eIcon.setAttribute('y', DIM.iconYV);
-          } else {
-            eIcon.setAttribute('x', DIM.iconX);
-            eIcon.setAttribute('y', DIM.iconY);
-          }
-          eIcon.setAttribute('display', 'inline');
-          eIcon.setAttribute('href', ASSET.getIconPath(j));
-        }
-      }
-    } else {
-      eIcon.setAttribute('display', 'none');
-    }
-    // postit
-    var ePostIt = document.getElementById('postit' + i);
-    var ePostItText = document.getElementById('postittext' + i);
-    if (element.postit !== '') {
-      ePostIt.setAttribute('visibility', 'visible');
-      ePostItText.setAttribute('visibility', 'visible');
-      ePostItText.setAttribute('width', DIM.postitTextWidth);
-      // ePostItText.setAttribute('y', DIM.postitTextY);
 
-      if (vlElements.includes(i)) {
-        ePostIt.setAttribute('y', DIM.postitVY);
-        ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVY);
-        ePostItText.setAttribute('x', DIM.postitTextVX);
-      } else if (vrElements.includes(i)) {
-        ePostIt.setAttribute('x', DIM.postitVRX);
-        ePostItText.setAttribute('x', DIM.postitVRX);
-        ePostIt.setAttribute('y', DIM.postitVRY);
-        ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVRY);
-        ePostItText.setAttribute('x', DIM.postitTextVRX);
-      } else {
-        ePostIt.setAttribute('x', DIM.postitX);
-        ePostItText.setAttribute('x', DIM.postitTextX);
-        ePostItText.setAttribute('y', DIM.postitTextY);
+    updateDescription(i);
+
+    updateEmoticon(i);
+
+    updateIcon(i);
+
+    updatePostIt(i);
+  }
+}
+
+function updateDescription (i) {
+  var eText = document.getElementById('description' + i);
+  // alert("changing text on description" + elementText + " to " + element.description);
+  eText.textContent = getElement(i).description;
+  if (vlElements.includes(i)) {
+    eText.setAttribute('x', DIM.textXV);
+    eText.setAttribute('y', DIM.textYV);
+  } else if (vrElements.includes(i)) {
+    eText.setAttribute('x', DIM.textXVR);
+    eText.setAttribute('y', DIM.textYVR);
+  } else {
+    eText.setAttribute('x', DIM.textX);
+    eText.setAttribute('y', DIM.textY);
+  }
+}
+
+function updateEmoticon (i) {
+  var eEmo = document.getElementById('emoticon' + i);
+  if (getElement(i).emoticon !== 'none') {
+    for (var j = 0; j < ASSET.emoticonCount(); j++) {
+      if (ASSET.hasEmoticon(j, getElement(i))) {
+        eEmo.setAttribute('height', DIM.emoticonHeight);
+        eEmo.setAttribute('width', DIM.emoticonWidth);
+        if (vlElements.includes(i)) {
+          eEmo.setAttribute('x', DIM.emoticonXV);
+          eEmo.setAttribute('y', DIM.emoticonYV);
+        } else if (vrElements.includes(i)) {
+          eEmo.setAttribute('x', DIM.emoticonXVR);
+          eEmo.setAttribute('y', DIM.emoticonYVR);
+        } else {
+          eEmo.setAttribute('x', DIM.emoticonX);
+          eEmo.setAttribute('y', DIM.emoticonY);
+        }
+        eEmo.setAttribute('display', 'inline');
+        eEmo.setAttribute('href', ASSET.getEmoticonPath(j));
       }
-      ePostItText.textContent = element.postit;
-    } else {
-      ePostIt.setAttribute('visibility', 'collapse');
-      ePostItText.setAttribute('visibility', 'collapse');
     }
+  } else {
+    eEmo.setAttribute('display', 'none');
+  }
+}
+
+function updateIcon (i) {
+  var eIcon = document.getElementById('icon' + i);
+  if (getElement(i).icon !== 'none') {
+    for (var j = 0; j < ASSET.iconCount(); j++) {
+      if (ASSET.hasIcon(j, getElement(i))) {
+        eIcon.setAttribute('height', DIM.iconHeight);
+        eIcon.setAttribute('width', DIM.iconWidth);
+        if (vlElements.includes(i)) {
+          eIcon.setAttribute('x', DIM.iconXV);
+          eIcon.setAttribute('y', DIM.iconYV);
+        } else {
+          eIcon.setAttribute('x', DIM.iconX);
+          eIcon.setAttribute('y', DIM.iconY);
+        }
+        eIcon.setAttribute('display', 'inline');
+        eIcon.setAttribute('href', ASSET.getIconPath(j));
+      }
+    }
+  } else {
+    eIcon.setAttribute('display', 'none');
+  }
+}
+
+function updatePostIt (i) {
+  var ePostIt = document.getElementById('postit' + i);
+  var ePostItText = document.getElementById('postittext' + i);
+  if (getElement(i).postit !== '') {
+    ePostIt.setAttribute('visibility', 'visible');
+    ePostItText.setAttribute('visibility', 'visible');
+    ePostItText.setAttribute('width', DIM.postitTextWidth);
+    // ePostItText.setAttribute('y', DIM.postitTextY);
+
+    if (vlElements.includes(i)) {
+      ePostIt.setAttribute('y', DIM.postitVY);
+      ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVY);
+      ePostItText.setAttribute('x', DIM.postitTextVX);
+    } else if (vrElements.includes(i)) {
+      ePostIt.setAttribute('x', DIM.postitVRX);
+      ePostItText.setAttribute('x', DIM.postitVRX);
+      ePostIt.setAttribute('y', DIM.postitVRY);
+      ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVRY);
+      ePostItText.setAttribute('x', DIM.postitTextVRX);
+    } else {
+      ePostIt.setAttribute('x', DIM.postitX);
+      ePostItText.setAttribute('x', DIM.postitTextX);
+      ePostItText.setAttribute('y', DIM.postitTextY);
+    }
+    ePostItText.textContent = getElement(i).postit;
+  } else {
+    ePostIt.setAttribute('visibility', 'collapse');
+    ePostItText.setAttribute('visibility', 'collapse');
   }
 }
 
@@ -219,7 +235,7 @@ function addKeyboardFocus () {
 
 function changeFocus () {
   for (var i = 0; i < elements.length; i++) {
-    element = document.getElementById(elements[i].eID);
+    var element = document.getElementById(elements[i].eID);
     element.setAttribute('stroke', 'black');
     element.setAttribute('stroke-width', 1);
   }
@@ -360,4 +376,8 @@ function setFocusElement (num) {
 
 function getElements () {
   return elements;
+}
+
+function getElement (idx) {
+  return elements[ idx ];
 }
