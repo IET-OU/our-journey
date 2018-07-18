@@ -80,7 +80,14 @@ svg#journey-canvas .in_card {
 }
 
 svg#journey-canvas .card > rect {
-  /* stroke: black; */
+  fill-opacity: 0.0;
+  stroke: black;
+  stroke-width: 1;
+}
+
+svg#journey-canvas .card > .focussed {
+  stroke: blue;
+  stroke-width: 3;
 }
 
 svg#journey-canvas .card.orient-horiz > rect {
