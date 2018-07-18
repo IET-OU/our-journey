@@ -1,5 +1,5 @@
 /*!
-  A default application | © 2018 The Open University (IET-OU).
+  Default application | © 2018 The Open University (IET-OU).
 */
 
 module.exports.run = run;
@@ -7,12 +7,15 @@ module.exports.run = run;
 const LOC = window.location;
 
 const CORE = require('./core');
+const LAYOUT = require('./layout');
 const EVENTS = require('./event');
 const SHARE = require('./share-link');
 const UI = require('./user-interface');
 
 function run () {
   console.warn('The our-journey API:', require('../index'));
+
+  LAYOUT.reflow();
 
   CORE.initialiseElements();
 
