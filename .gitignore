@@ -1,4 +1,6 @@
 
+dist/
+
 .pa11yci*
 
 node_modules/
@@ -6,5 +8,6 @@ package-lock.json
 *BAK*
 *.diff
 *.log
+*.tgz
 
 # End.
