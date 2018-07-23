@@ -8,11 +8,7 @@ module.exports = {
 
   core: require('./src/core'),
 
-  layout: require('./src/layout'),
-
   events: require('./src/event'),
-
-  file: require('./src/file'),
 
   share: require('./src/share-link'),
 

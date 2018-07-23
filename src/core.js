@@ -233,12 +233,14 @@ function addKeyboardFocus () {
 function changeFocus () {
   for (var i = 0; i < elements.length; i++) {
     var element = document.getElementById(elements[i].eID);
-    element.setAttribute('class', 'not-focussed');
+    element.setAttribute('stroke', 'black');
+    element.setAttribute('stroke-width', 1);
   }
   var focus = document.getElementById(elements[focusElement].eID);
-  focus.setAttribute('class', 'focussed');
+  focus.setAttribute('stroke', 'blue');
   focus.scrollIntoView(true);
   window.scrollBy(0, -300);
+  focus.setAttribute('stroke-width', 3);
 
   document.getElementById('event_desc').value = elements[focusElement].description;
   document.getElementById('icon_select').value = elements[focusElement].icon;
