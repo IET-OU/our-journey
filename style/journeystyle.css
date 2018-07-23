@@ -79,6 +79,27 @@ svg#journey-canvas .in_card {
   font: bold 1.05rem sans-serif; /* Was: 14pt; */
 }
 
+svg#journey-canvas .card > rect {
+  fill-opacity: 0.0;
+  stroke: black;
+  stroke-width: 1;
+}
+
+svg#journey-canvas .card > .focussed {
+  stroke: blue;
+  stroke-width: 3;
+}
+
+svg#journey-canvas .card.orient-horiz > rect {
+  height: 130px;
+  width: 240px;
+}
+
+svg#journey-canvas .card.orient-vert > rect {
+  height: 240px;
+  width: 130px;
+}
+
 .footer-copy {
   color: #333;
   float: left;
