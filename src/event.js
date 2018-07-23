@@ -64,6 +64,14 @@ function initialiseEventHandlers () {
   attachEvent('#journey-canvas', 'focusout', function (e) {
     CORE.canvasLostFocus();
   });
+
+  attachEvent('#floating_icon_select', 'change', function (e) {
+    CORE.updateElement();
+  });
+
+  attachEvent('#floating_emoticon_select', 'change', function (e) {
+    CORE.updateElement();
+  });
 }
 
 function attachEvent (selector, eventName, callback) {

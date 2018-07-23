@@ -14,8 +14,14 @@ const UI = require('./user-interface');
 
 function run () {
   console.warn('The our-journey API:', require('../index'));
-
-  LAYOUT.reflow();
+  
+  if (LOC.search.match(/[?&]layout=scol/)){
+    LAYOUT.reflow("scol");
+  }
+  else {
+      LAYOUT.reflow();
+  }
+  
 
   CORE.initialiseElements();
 

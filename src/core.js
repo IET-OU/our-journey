@@ -17,12 +17,14 @@ module.exports = /* WAS: window.our_journeys */ {
   canvasLostFocus: canvasLostFocus,
   // Properties.
   getElements: getElements,
-  setFocusElement: setFocusElement
+  setFocusElement: setFocusElement,
+  getNumElements: getNumElements
 };
 
 const UI = require('./user-interface');
 const ASSET = require('./assets');
 const DIM = require('./dimension.json');
+const LAYOUT = require('./layout');
 
 // Semistandard -- these were NOT defined ;).
 var $ = window.jQuery; // Missing dependency ??
@@ -36,7 +38,7 @@ var canvasInFocus = false;
 // Number of card elements presented in page
 var numElements = 35;
 
-// These variables state which elements are vertical ones for presentation. On the left (vl) or the right (vr).
+// These variables state which elements are vertical ones for the default layout presentation. On the left (vl) or the right (vr).
 var vlElements = [ 0, 9, 10, 19, 20, 29, 30 ];
 var vrElements = [ 4, 5, 14, 15, 24, 25, 34 ];
 
@@ -91,7 +93,7 @@ function demoFill () {
 function elementClick () {
   var e = this.id.substring(5);
   focusElement = parseInt(e);
-  // alert('mouse down on ' + focusElement);
+  //alert('mouse down on ' + focusElement);
   changeFocus();
 
   UI.toggleEditor('show');
@@ -99,17 +101,15 @@ function elementClick () {
 
 function updateElements () {
   for (var i = 0; i < numElements; i++) {
-    // mouse event listener
     var ePlace = document.getElementById('group' + i);
     ePlace.addEventListener('click', elementClick);
     var eRect = document.getElementById('place' + i);
     eRect.setAttribute('fill', 'Snow');
     eRect.setAttribute('fill-opacity', '1.0');
-    if (vlElements.includes(i)) {
+    if ((LAYOUT.getLayout() == "default") && vlElements.includes(i)){
       eRect.setAttribute('x', DIM.rectXV);
-    } else if (vrElements.includes(i)) {
-      eRect.setAttribute('y', DIM.rectY);
-    } else {
+    } 
+    else {
       eRect.setAttribute('y', DIM.rectY);
     }
 
@@ -127,10 +127,10 @@ function updateDescription (i) {
   var eText = document.getElementById('description' + i);
   // alert("changing text on description" + elementText + " to " + element.description);
   eText.textContent = getElement(i).description;
-  if (vlElements.includes(i)) {
+  if ((LAYOUT.set_layout=="default") && vlElements.includes(i)) {
     eText.setAttribute('x', DIM.textXV);
     eText.setAttribute('y', DIM.textYV);
-  } else if (vrElements.includes(i)) {
+  } else if ((LAYOUT.set_layout=="default") && vrElements.includes(i)) {
     eText.setAttribute('x', DIM.textXVR);
     eText.setAttribute('y', DIM.textYVR);
   } else {
@@ -141,15 +141,16 @@ function updateDescription (i) {
 
 function updateEmoticon (i) {
   var eEmo = document.getElementById('emoticon' + i);
+  var layout = LAYOUT.getLayout();
   if (getElement(i).emoticon !== 'none') {
     for (var j = 0; j < ASSET.emoticonCount(); j++) {
       if (ASSET.hasEmoticon(j, getElement(i))) {
         eEmo.setAttribute('height', DIM.emoticonHeight);
         eEmo.setAttribute('width', DIM.emoticonWidth);
-        if (vlElements.includes(i)) {
+        if ((layout=="default") && (vlElements.includes(i))) {
           eEmo.setAttribute('x', DIM.emoticonXV);
           eEmo.setAttribute('y', DIM.emoticonYV);
-        } else if (vrElements.includes(i)) {
+        } else if ((layout=="default") && (vrElements.includes(i))) {
           eEmo.setAttribute('x', DIM.emoticonXVR);
           eEmo.setAttribute('y', DIM.emoticonYVR);
         } else {
@@ -167,12 +168,13 @@ function updateEmoticon (i) {
 
 function updateIcon (i) {
   var eIcon = document.getElementById('icon' + i);
+  var layout = LAYOUT.getLayout();
   if (getElement(i).icon !== 'none') {
     for (var j = 0; j < ASSET.iconCount(); j++) {
       if (ASSET.hasIcon(j, getElement(i))) {
         eIcon.setAttribute('height', DIM.iconHeight);
         eIcon.setAttribute('width', DIM.iconWidth);
-        if (vlElements.includes(i)) {
+        if ((layout=="default") && (vlElements.includes(i))) {
           eIcon.setAttribute('x', DIM.iconXV);
           eIcon.setAttribute('y', DIM.iconYV);
         } else {
@@ -191,23 +193,30 @@ function updateIcon (i) {
 function updatePostIt (i) {
   var ePostIt = document.getElementById('postit' + i);
   var ePostItText = document.getElementById('postittext' + i);
+  var layout = LAYOUT.getLayout();
   if (getElement(i).postit !== '') {
     ePostIt.setAttribute('visibility', 'visible');
     ePostItText.setAttribute('visibility', 'visible');
     ePostItText.setAttribute('width', DIM.postitTextWidth);
     // ePostItText.setAttribute('y', DIM.postitTextY);
 
-    if (vlElements.includes(i)) {
+    if (((layout=="default") && vlElements.includes(i))) {
       ePostIt.setAttribute('y', DIM.postitVY);
       ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVY);
       ePostItText.setAttribute('x', DIM.postitTextVX);
-    } else if (vrElements.includes(i)) {
+    } else if ((layout=="default") && vrElements.includes(i)) {
       ePostIt.setAttribute('x', DIM.postitVRX);
-      ePostItText.setAttribute('x', DIM.postitVRX);
       ePostIt.setAttribute('y', DIM.postitVRY);
       ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVRY);
       ePostItText.setAttribute('x', DIM.postitTextVRX);
-    } else {
+    }
+    else if(layout=="scol"){
+      ePostIt.setAttribute('x', DIM.postitScolX);
+      ePostIt.setAttribute('y', DIM.postitScolY);
+      ePostItText.setAttribute('y', DIM.postitTextScolY + DIM.postitScolY);
+      ePostItText.setAttribute('x', DIM.postitTextScolX);
+    } 
+    else if(layout=="default") {
       ePostIt.setAttribute('x', DIM.postitX);
       ePostItText.setAttribute('x', DIM.postitTextX);
       ePostItText.setAttribute('y', DIM.postitTextY);
@@ -237,26 +246,35 @@ function changeFocus () {
   }
   var focus = document.getElementById(elements[focusElement].eID);
   focus.setAttribute('class', 'focussed');
-  focus.scrollIntoView(true);
-  window.scrollBy(0, -300);
 
-  document.getElementById('event_desc').value = elements[focusElement].description;
-  document.getElementById('icon_select').value = elements[focusElement].icon;
-  document.getElementById('emoticon_select').value = elements[focusElement].emoticon;
-  document.getElementById('post_it_text').value = elements[focusElement].postit;
-  document.getElementById('updateButton').removeAttribute('disabled');
-  document.getElementById('backButton').removeAttribute('disabled');
-  document.getElementById('fwdButton').removeAttribute('disabled');
-  document.getElementById('deleteButton').removeAttribute('disabled');
+  if(UI.getEditor()=='fixed'){
+    focus.scrollIntoView(true);
+    window.scrollBy(0, -300);
 
-  document.getElementById('title').innerHTML = 'Journey Editor: Card ' + focusElement;
+    document.getElementById('event_desc').value = elements[focusElement].description;
+    document.getElementById('icon_select').value = elements[focusElement].icon;
+    document.getElementById('emoticon_select').value = elements[focusElement].emoticon;
+    document.getElementById('post_it_text').value = elements[focusElement].postit;
+    document.getElementById('updateButton').removeAttribute('disabled');
+    document.getElementById('backButton').removeAttribute('disabled');
+    document.getElementById('fwdButton').removeAttribute('disabled');
+    document.getElementById('deleteButton').removeAttribute('disabled');
+    document.getElementById('title').innerHTML = 'Journey Editor: Card ' + focusElement;
+  }
+  else if(UI.getEditor()=='float'){
+    var newY = (focusElement * 130) + 230;
+    document.getElementById('floating_editor').setAttribute('x','0');
+    document.getElementById('floating_editor').setAttribute('y',newY);
+    document.getElementById('floating_icon_select').value = elements[focusElement].icon;
+    document.getElementById('floating_emoticon_select').value = elements[focusElement].emoticon;
+  }
 }
 
 function canvasGotFocus () {
   // events when focus shifts to canvas?
   // alert("canvas got focus");
   canvasInFocus = true;
-  focusElement = -1;
+  //focusElement = -1;
 }
 
 function canvasLostFocus () {
@@ -314,11 +332,17 @@ function keyResponse (k) {
 function updateElement () {
   // change existing element according to form
   // alert("changing values of " + document.getElementById('event_desc').value);
-
-  elements[focusElement].description = document.getElementById('event_desc').value;
-  elements[focusElement].icon = document.getElementById('icon_select').value;
-  elements[focusElement].emoticon = document.getElementById('emoticon_select').value;
-  elements[focusElement].postit = document.getElementById('post_it_text').value;
+  if(UI.getEditor() == 'fixed'){
+    elements[focusElement].description = document.getElementById('event_desc').value;
+    elements[focusElement].icon = document.getElementById('icon_select').value;
+    elements[focusElement].emoticon = document.getElementById('emoticon_select').value;
+    elements[focusElement].postit = document.getElementById('post_it_text').value;
+  }
+  else if(UI.getEditor() == 'float'){
+    elements[focusElement].icon = document.getElementById('floating_icon_select').value;
+    elements[focusElement].emoticon = document.getElementById('floating_emoticon_select').value;
+    //to complete - text and post it
+  }
   updateElements();
 }
 
@@ -375,4 +399,8 @@ function getElements () {
 
 function getElement (idx) {
   return elements[ idx ];
+}
+
+function getNumElements(){
+  return numElements;
 }
