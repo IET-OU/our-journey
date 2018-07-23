@@ -45,7 +45,7 @@
   },
   "files": [ "index.html", "assets/", "dist/", "src/", "style/*.css" ],
   "scripts": {
-    "build": "mkdir -p dist; browserify --no-bf -r ./index.js:our-journey > dist/our-journey.js",
+    "build": "browserify --no-bf -r ./index.js:our-journey > dist/our-journey.js",
     "x-pa11yci-2x-preinstall": "export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1 # A hack!",
     "start": "live-server --port=9000",
     "fix": "semistandard --fix",
