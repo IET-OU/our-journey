@@ -12,7 +12,6 @@ select {
 }
 
 input[ type = file ],
-input[ type = submit ],
 input[ type = button ] {
   cursor: pointer;
   font-size: .97rem;
@@ -36,10 +35,13 @@ a[ href *= '?demo=' ] {
 }
 
 form {
-  display: inline;
+  display: inline; 
 }
 
-h1,
+h1{
+    font-size: 1rem;
+}
+
 h2 {
     font-size: 1rem; /* Was: 12pt; */
 }
@@ -48,13 +50,13 @@ h3 {
     font-size: .92rem;
 }
 
-svg#journey-canvas .in_postit {
+.in_postit {
     font-family: 'Comic Sans MS', sans-serif;
     font-size: .92rem;
     text-align: center;
 }
 
-svg#journey-canvas .startcard
+.startcard
     {
         font-size: 1.1rem; /* Was: 16pt; */
     }
@@ -75,8 +77,8 @@ svg#journey-canvas .startcard
         margin-top: 100px;
 }
 
-svg#journey-canvas .in_card {
-  font: bold 1.05rem sans-serif; /* Was: 14pt; */
+.in_card {
+        font-size: 1.05rem; /* Was: 14pt; */
 }
 
 svg#journey-canvas .card > rect {
