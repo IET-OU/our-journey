@@ -33,6 +33,8 @@ function reflow (layout) {
     scol_layout.forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
+    document.getElementById('journey-canvas').setAttribute('height', '4700');
+    document.getElementById('start_point').setAttribute('visibility','collapse');
   }
   else{
     LAYOUTS[ layout ].forEach(function (elem) {

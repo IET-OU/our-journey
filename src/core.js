@@ -262,9 +262,6 @@ function changeFocus () {
   focus.setAttribute('class', 'focussed');
 
   if(UI.getEditor()=='fixed'){
-    focus.scrollIntoView(true);
-    window.scrollBy(0, -300);
-
     document.getElementById('event_desc').value = elements[focusElement].description;
     document.getElementById('icon_select').value = elements[focusElement].icon;
     document.getElementById('emoticon_select').value = elements[focusElement].emoticon;
@@ -273,6 +270,17 @@ function changeFocus () {
   }
   else if(UI.getEditor()=='float'){
     stopFloatingFocus();
+  }
+
+  if(LAYOUT.getLayout()=='scol'){
+    focusY = 130 * focusElement;
+    window.scrollTo(0,focusY);
+  }
+  else if(LAYOUT.getLayout()=='default'){
+    focus.scrollIntoView(true);
+    focusY = LAYOUT.getLayoutData()['default'][focusElement]['{y}'];
+    focusY = focusY - 100;
+    window.scrollTo(0, focusY);
   }
 }
 
