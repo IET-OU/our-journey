@@ -218,12 +218,13 @@ function updateElements () {
 
 function updateDescription (i) {
   var eText = document.getElementById('description' + i);
+  var layout = LAYOUT.getLayout();
   // alert("changing text on description" + elementText + " to " + element.description);
   eText.textContent = getElement(i).description;
-  if ((LAYOUT.set_layout=="default") && vlElements.includes(i)) {
+  if ((layout=="default") && vlElements.includes(i)) {
     eText.setAttribute('x', DIM.textXV);
     eText.setAttribute('y', DIM.textYV);
-  } else if ((LAYOUT.set_layout=="default") && vrElements.includes(i)) {
+  } else if ((layout=="default") && vrElements.includes(i)) {
     eText.setAttribute('x', DIM.textXVR);
     eText.setAttribute('y', DIM.textYVR);
   } else {
