@@ -355,11 +355,13 @@ function changeFocus () {
     document.getElementById('title').innerHTML = 'Journey Editor: Card ' + focusElement;
   }
   else if(UI.getEditor()=='float'){
-    var newY = (focusElement * 130) + 230;
+    var newY = (focusElement * 130) + 100;
     document.getElementById('floating_editor').setAttribute('x','0');
     document.getElementById('floating_editor').setAttribute('y',newY);
     document.getElementById('floating_icon_select').value = elements[focusElement].icon;
     document.getElementById('floating_emoticon_select').value = elements[focusElement].emoticon;
+    document.getElementById('floating_event_desc').value = elements[focusElement].description;
+    document.getElementById('floating_post_it_text').value = elements[focusElement].postit;
   }
 }
 
@@ -434,7 +436,8 @@ function updateElement () {
   else if(UI.getEditor() == 'float'){
     elements[focusElement].icon = document.getElementById('floating_icon_select').value;
     elements[focusElement].emoticon = document.getElementById('floating_emoticon_select').value;
-    //to complete - text and post it
+    elements[focusElement].description = document.getElementById('floating_event_desc').value;
+    elements[focusElement].postit = document.getElementById('floating_post_it_text').value;
   }
   updateElements();
 }
@@ -575,6 +578,16 @@ function initialiseEventHandlers () {
     CORE.moveFwdElement();
   });
 
+  attachEvent('#floating_backform', 'submit', function (e) {
+    e.preventDefault();
+    CORE.moveBackElement();
+  });
+
+  attachEvent('#floating_forwardform', 'submit', function (e) {
+    e.preventDefault();
+    CORE.moveFwdElement();
+  });
+
   attachEvent('#optionsform', 'submit', function (e) {
     e.preventDefault();
     UI.toggleOptions();
@@ -613,6 +626,14 @@ function initialiseEventHandlers () {
   });
 
   attachEvent('#floating_emoticon_select', 'change', function (e) {
+    CORE.updateElement();
+  });
+
+  attachEvent('#floating_event_desc', 'change', function (e) {
+    CORE.updateElement();
+  });
+
+  attachEvent('#floating_post_it_text', 'change', function (e) {
     CORE.updateElement();
   });
 }

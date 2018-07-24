@@ -144,9 +144,15 @@
 
             <g class="card-holder"> </g>
 
-            <svg id="floating_editor" x=0 y=0 width = "240" height="50" visibility = "collapse">
-                <rect width = "240" height="50" stroke="black" background = "ivory" stroke-width="1" fill-opacity="0.0"/>
-                <foreignObject>
+            <svg id="floating_editor" x=0 y=0 width = "370" height="130" visibility = "collapse">
+                <rect width = "240" height="130" stroke="black" background = "ivory" stroke-width="1" fill-opacity="0.0"/>
+                <foreignObject x=125 y=5>
+                    <textarea id="floating_event_desc" rows=3 cols=12></textarea>
+                </foreignObject>
+                <foreignObject x=245 y=30>
+                    <textarea id="floating_post_it_text" rows=3 cols=12></textarea>
+                </foreignObject>
+                <foreignObject y=100>
                     <form>
                         <div class="floatingeditor" xmlns="http://www.w3.org/1999/xhtml">
                             <select id="floating_icon_select">
@@ -192,6 +198,17 @@
                     </form>
                 </div>
                 </foreignObject>
+                <foreignObject x=245>
+                    <form id="floating_backform">
+                            <input type="submit" aria-label="Move element backwards" value="Move Back" id="floating_backButton">
+                        </form>
+                </foreignObject>
+                <foreignObject x=245 y=100>
+                        <form id="floating_forwardform">
+                                <input type="submit" aria-label="Move element forwards" value="Move Forward" id="floating_fwdButton">
+                            </form>
+                </foreignObject>
+                    
             </svg>
 
         </svg>
