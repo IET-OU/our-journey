@@ -288,10 +288,23 @@ function editFocus(){
       document.getElementById("journey-canvas").focus();
     }
     else{
-      var newY = (focusElement * 130) + 100;
-      document.getElementById('floating_editor').setAttribute('visibility','visible');
-      document.getElementById('floating_editor').setAttribute('x','0');
-      document.getElementById('floating_editor').setAttribute('y',newY);
+      if(LAYOUT.getLayout()=='scol'){
+        var newY = (focusElement * 130) + 100;
+        document.getElementById('floating_editor').setAttribute('x','0');
+        document.getElementById('floating_editor').setAttribute('y',newY);
+        document.getElementById('floating_editor').setAttribute('visibility','visible');
+      }
+      else if(LAYOUT.getLayout()=='default'){
+        layoutData = LAYOUT.getLayoutData();
+        newX = layoutData['default'][focusElement]['{x}'];
+        newY = layoutData['default'][focusElement]['{y}'];
+        orient = layoutData['default'][focusElement]['{orient}'];
+        newY = newY + DIM.rectY;
+        document.getElementById('floating_editor').setAttribute('x',newX);
+        document.getElementById('floating_editor').setAttribute('y',newY);
+        document.getElementById('floating_editor').setAttribute('visibility','visible');
+      }
+      
       document.getElementById('floating_icon_select').value = elements[focusElement].icon;
       document.getElementById('floating_emoticon_select').value = elements[focusElement].emoticon;
       document.getElementById('floating_event_desc').value = elements[focusElement].description;

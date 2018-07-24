@@ -47,6 +47,7 @@ function chooseEditor(newEdit){
     editor = newEdit;
     document.getElementById('journey-canvas').setAttribute('height', '4700');
     document.getElementById('start_point').setAttribute('visibility','collapse');
+    
   }
   else if(newEdit == 'fixed'){
     document.getElementById('floating_editor').setAttribute('visibility','collapse');

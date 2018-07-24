@@ -4,7 +4,8 @@
 
 //module.exports.reflow = reflow;
 module.exports = { reflow: reflow, 
-  getLayout: getLayout
+  getLayout: getLayout,
+  getLayoutData: getLayoutData
 }
 
 const LAYOUTS = require('./layouts.json');
@@ -53,4 +54,8 @@ function replaceObj (str, mapObj) {
 
 function getLayout(){
   return set_layout;
+}
+
+function getLayoutData(){
+  return LAYOUTS;
 }

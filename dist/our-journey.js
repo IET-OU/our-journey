@@ -23,6 +23,9 @@ function run () {
       LAYOUT.reflow();
   }
   
+  if (LOC.search.match(/[?&]edit=float/)){
+    UI.chooseEditor('float');
+  }
 
   CORE.initialiseElements();
 
@@ -41,6 +44,7 @@ function run () {
 
   SHARE.createLink(CORE.getElements());
   SHARE.loadLink(CORE.getElements());
+  document.getElementById("journey-canvas").focus();
 }
 
 },{"../index":"our-journey","./core":3,"./event":5,"./layout":7,"./share-link":9,"./user-interface":10}],2:[function(require,module,exports){
@@ -381,10 +385,23 @@ function editFocus(){
       document.getElementById("journey-canvas").focus();
     }
     else{
-      var newY = (focusElement * 130) + 100;
-      document.getElementById('floating_editor').setAttribute('visibility','visible');
-      document.getElementById('floating_editor').setAttribute('x','0');
-      document.getElementById('floating_editor').setAttribute('y',newY);
+      if(LAYOUT.getLayout()=='scol'){
+        var newY = (focusElement * 130) + 100;
+        document.getElementById('floating_editor').setAttribute('x','0');
+        document.getElementById('floating_editor').setAttribute('y',newY);
+        document.getElementById('floating_editor').setAttribute('visibility','visible');
+      }
+      else if(LAYOUT.getLayout()=='default'){
+        layoutData = LAYOUT.getLayoutData();
+        newX = layoutData['default'][focusElement]['{x}'];
+        newY = layoutData['default'][focusElement]['{y}'];
+        orient = layoutData['default'][focusElement]['{orient}'];
+        newY = newY + DIM.rectY;
+        document.getElementById('floating_editor').setAttribute('x',newX);
+        document.getElementById('floating_editor').setAttribute('y',newY);
+        document.getElementById('floating_editor').setAttribute('visibility','visible');
+      }
+      
       document.getElementById('floating_icon_select').value = elements[focusElement].icon;
       document.getElementById('floating_emoticon_select').value = elements[focusElement].emoticon;
       document.getElementById('floating_event_desc').value = elements[focusElement].description;
@@ -742,7 +759,8 @@ function receivedText (ev) {
 
 //module.exports.reflow = reflow;
 module.exports = { reflow: reflow, 
-  getLayout: getLayout
+  getLayout: getLayout,
+  getLayoutData: getLayoutData
 }
 
 const LAYOUTS = require('./layouts.json');
@@ -791,6 +809,10 @@ function replaceObj (str, mapObj) {
 
 function getLayout(){
   return set_layout;
+}
+
+function getLayoutData(){
+  return LAYOUTS;
 }
 
 },{"./core":3,"./layouts.json":8,"./user-interface":10}],8:[function(require,module,exports){
@@ -952,6 +974,7 @@ function chooseEditor(newEdit){
     editor = newEdit;
     document.getElementById('journey-canvas').setAttribute('height', '4700');
     document.getElementById('start_point').setAttribute('visibility','collapse');
+    
   }
   else if(newEdit == 'fixed'){
     document.getElementById('floating_editor').setAttribute('visibility','collapse');
