@@ -416,7 +416,9 @@ function editFocus(){
       document.getElementById('floating_post_it_text').value = elements[focusElement].postit;
       float_editing = true;
     }
-    
+  }
+  else if(UI.getEditor()=='fixed'){
+    document.getElementById('event_desc').focus();
   }
 }
 
@@ -456,31 +458,6 @@ function cyclePrevFocus () {
   }
 }
 
-function keyResponse (k) {
-  window.alert('key down');
-  switch (k) {
-    case 9:
-      // cycleNextFocus();
-      break;
-    case 16:
-      // alert("shift");
-      break;
-    case 38:
-      cyclePrevFocus();
-      break;
-    case 37:
-      cyclePrevFocus();
-      break;
-    case 39:
-      cycleNextFocus();
-      break;
-    case 40:
-      cycleNextFocus();
-      break;
-  }
-  return false;
-}
-
 function updateElement () {
   // change existing element according to form
   // alert("changing values of " + document.getElementById('event_desc').value);
@@ -497,6 +474,7 @@ function updateElement () {
     elements[focusElement].postit = document.getElementById('floating_post_it_text').value;
   }
   updateElements();
+  document.getElementById('journey-canvas').focus();
 }
 
 function clearElement () {
