@@ -71,6 +71,18 @@ svg#journey-canvas .startcard
       display: inline;
     }
 
+.scol_bar
+    {
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: ivory;
+      padding: 5px;
+      display: inline;
+    }
+
 .floatingeditor
   {
     display: flex;
