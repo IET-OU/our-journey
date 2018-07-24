@@ -35,7 +35,7 @@ function reflow (layout) {
     });
     document.getElementById('journey-canvas').setAttribute('height', '4700');
     document.getElementById('start_point').setAttribute('visibility','collapse');
-    document.getElementById('scol_saveload').style.display = 'none';
+    document.getElementById('scol_start_point').setAttribute('visibility','visible');
   }
   else{
     LAYOUTS[ layout ].forEach(function (elem) {
@@ -43,6 +43,7 @@ function reflow (layout) {
     });
     document.getElementById('scol_bar').style.display = 'none';
     document.getElementById('scol_saveload').style.display = 'none'; 
+    document.getElementById('scol_start_point').setAttribute('visibility','collapse');
   }
 
   HOLDER.innerHTML = cards.join('\n');

@@ -22,7 +22,7 @@ function run () {
   else {
       LAYOUT.reflow();
   }
-  
+
   if (LOC.search.match(/[?&]edit=float/)){
     UI.chooseEditor('float');
   }
@@ -44,7 +44,9 @@ function run () {
 
   SHARE.createLink(CORE.getElements());
   SHARE.loadLink(CORE.getElements());
+
   document.getElementById("journey-canvas").focus();
+  window.scrollTo(0,0);
 }
 
 },{"../index":"our-journey","./core":3,"./event":5,"./layout":7,"./share-link":9,"./user-interface":10}],2:[function(require,module,exports){
@@ -791,7 +793,7 @@ function reflow (layout) {
     });
     document.getElementById('journey-canvas').setAttribute('height', '4700');
     document.getElementById('start_point').setAttribute('visibility','collapse');
-    document.getElementById('scol_saveload').style.display = 'none';
+    document.getElementById('scol_start_point').setAttribute('visibility','visible');
   }
   else{
     LAYOUTS[ layout ].forEach(function (elem) {
@@ -799,6 +801,7 @@ function reflow (layout) {
     });
     document.getElementById('scol_bar').style.display = 'none';
     document.getElementById('scol_saveload').style.display = 'none'; 
+    document.getElementById('scol_start_point').setAttribute('visibility','collapse');
   }
 
   HOLDER.innerHTML = cards.join('\n');

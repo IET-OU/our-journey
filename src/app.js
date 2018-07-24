@@ -21,7 +21,7 @@ function run () {
   else {
       LAYOUT.reflow();
   }
-  
+
   if (LOC.search.match(/[?&]edit=float/)){
     UI.chooseEditor('float');
   }
@@ -43,5 +43,7 @@ function run () {
 
   SHARE.createLink(CORE.getElements());
   SHARE.loadLink(CORE.getElements());
+
   document.getElementById("journey-canvas").focus();
+  window.scrollTo(0,0);
 }
