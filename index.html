@@ -119,8 +119,25 @@
                           | <a id="oj-share-link" class="oj-share-link" href="?empty" rel="nofollow" title="Base64 encoded!">Share</a>
                     </div>
                 </div>
-        </div>
 
+        <div class='scol_bar' id='scol_bar'>
+            <h1 id="scol_title">Journey editor: Map your study journey onto the cards</h1>
+            <form id="scol_options" aria-label="Show or hide load and save options">
+                <input type='submit' value="Load/Save" id='scolOptionsButton'>
+            </form>
+            <div id='scol_saveload'>
+                <form id="scol_saveform" aria-label="Save journey to file">
+                        <label for="filenamearea">Save:</label>
+                        <input type='text' value="journey_file" id="filenamearea">
+                        <input type="submit" value="Save" id="saveButton" >
+                </form>
+                <form id="scol_loadform" aria-label="Load journey from file">
+                    <label for="fileinput">Load:</label>
+                    <input type='file' id='fileinput' required aria-required="true">
+                    <input type="submit" id="loadButton" value="Load" >
+                </form>
+            </div>
+        </div>
 
         <div class="main">
             <svg width="100%" height="2600" id="journey-canvas">
@@ -133,8 +150,6 @@
             <desc id="empty-card">Empty journey card</desc>
             <desc id="desc-icon-rocket">rocket icon</desc>
 
-            
-
             <svg x = "120" y = "0" id="start_point">
                     <rect aria-labelledby="start-card"  width = "130" height="90" y="20" x="0" stroke="black" fill="crimson" stroke-width="1" id="start_place" fill-opacity="1.0"/>
                     <image xlink:href = "assets/Arrow-down.svg" x = "18" y = "0" height="100" width="100" id="startIcon" aria-labelledby="desc-icon-rocket"/>
@@ -145,7 +160,7 @@
             <g class="card-holder"> </g>
 
             <svg id="floating_editor" x=0 y=0 width = "370" height="180" visibility = "collapse">
-                <rect width = "240" height="130" stroke="black" background = "ivory" stroke-width="1" fill-opacity="0.0"/>
+                <rect width = "240" height="130" stroke="black" stroke-width="2" fill-opacity="0.0"/>
                 <foreignObject y=130>
                     <form>
                         <div class="floatingeditor" xmlns="http://www.w3.org/1999/xhtml">
@@ -193,10 +208,10 @@
                     </form>
                 </div>
                 </foreignObject>
-                <foreignObject x=125 y=5>
+                <foreignObject x=125 y=10>
                         <textarea id="floating_event_desc" rows=3 cols=12 tabindex="0"></textarea>
                 </foreignObject>
-                <foreignObject x=245 y=5>
+                <foreignObject x=245 y=10>
                         <textarea id="floating_post_it_text" rows=3 cols=12></textarea>
                     </foreignObject>
                 <foreignObject x=245 y=70>

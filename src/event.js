@@ -37,6 +37,11 @@ function initialiseEventHandlers () {
     CORE.moveBackElement();
   });
 
+  attachEvent('#scol_options', 'submit', function (e) {
+    e.preventDefault();
+    UI.toggleScolOptions();
+  });
+
   attachEvent('#floating_forwardform', 'submit', function (e) {
     e.preventDefault();
     CORE.moveFwdElement();
@@ -65,6 +70,16 @@ function initialiseEventHandlers () {
   attachEvent('#saveform', 'submit', function (e) {
     e.preventDefault();
     FILE.saveJourney();
+  });
+
+  attachEvent('#scol_saveform', 'submit', function (e) {
+    e.preventDefault();
+    FILE.saveJourney();
+  });
+
+  attachEvent('#scol_loadform', 'submit', function (e) {
+    e.preventDefault();
+    FILE.loadJourney();
   });
 
   attachEvent('#journey-canvas', 'focusin', function (e) {

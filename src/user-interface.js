@@ -7,7 +7,8 @@ module.exports = {
   toggleOptions: toggleOptions,
   changeBackground: changeBackground,
   chooseEditor: chooseEditor,
-  getEditor: getEditor
+  getEditor: getEditor,
+  toggleScolOptions: toggleScolOptions
 };
 
 var editor = 'fixed';
@@ -24,6 +25,15 @@ var editorElement;
     editorElement.style.display = 'block';
   } else if (tog === 0 || tog === 'hide') {
     editorElement.style.display = 'none';
+  }
+}
+
+function toggleScolOptions(){
+  var saveload = document.getElementById('scol_saveload');
+  if (saveload.style.display === 'none') {
+    saveload.style.display = 'block';
+  } else {
+    saveload.style.display = 'none';
   }
 }
 

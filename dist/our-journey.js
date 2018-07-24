@@ -618,6 +618,11 @@ function initialiseEventHandlers () {
     CORE.moveBackElement();
   });
 
+  attachEvent('#scol_options', 'submit', function (e) {
+    e.preventDefault();
+    UI.toggleScolOptions();
+  });
+
   attachEvent('#floating_forwardform', 'submit', function (e) {
     e.preventDefault();
     CORE.moveFwdElement();
@@ -646,6 +651,16 @@ function initialiseEventHandlers () {
   attachEvent('#saveform', 'submit', function (e) {
     e.preventDefault();
     FILE.saveJourney();
+  });
+
+  attachEvent('#scol_saveform', 'submit', function (e) {
+    e.preventDefault();
+    FILE.saveJourney();
+  });
+
+  attachEvent('#scol_loadform', 'submit', function (e) {
+    e.preventDefault();
+    FILE.loadJourney();
   });
 
   attachEvent('#journey-canvas', 'focusin', function (e) {
@@ -776,13 +791,16 @@ function reflow (layout) {
     });
     document.getElementById('journey-canvas').setAttribute('height', '4700');
     document.getElementById('start_point').setAttribute('visibility','collapse');
+    document.getElementById('scol_saveload').style.display = 'none';
   }
   else{
     LAYOUTS[ layout ].forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
+    document.getElementById('scol_bar').style.display = 'none';
+    document.getElementById('scol_saveload').style.display = 'none'; 
   }
-  
+
   HOLDER.innerHTML = cards.join('\n');
 }
 
@@ -922,7 +940,8 @@ module.exports = {
   toggleOptions: toggleOptions,
   changeBackground: changeBackground,
   chooseEditor: chooseEditor,
-  getEditor: getEditor
+  getEditor: getEditor,
+  toggleScolOptions: toggleScolOptions
 };
 
 var editor = 'fixed';
@@ -939,6 +958,15 @@ var editorElement;
     editorElement.style.display = 'block';
   } else if (tog === 0 || tog === 'hide') {
     editorElement.style.display = 'none';
+  }
+}
+
+function toggleScolOptions(){
+  var saveload = document.getElementById('scol_saveload');
+  if (saveload.style.display === 'none') {
+    saveload.style.display = 'block';
+  } else {
+    saveload.style.display = 'none';
   }
 }
 

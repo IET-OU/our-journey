@@ -35,13 +35,16 @@ function reflow (layout) {
     });
     document.getElementById('journey-canvas').setAttribute('height', '4700');
     document.getElementById('start_point').setAttribute('visibility','collapse');
+    document.getElementById('scol_saveload').style.display = 'none';
   }
   else{
     LAYOUTS[ layout ].forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
+    document.getElementById('scol_bar').style.display = 'none';
+    document.getElementById('scol_saveload').style.display = 'none'; 
   }
-  
+
   HOLDER.innerHTML = cards.join('\n');
 }
 
