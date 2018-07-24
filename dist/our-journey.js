@@ -105,13 +105,14 @@ module.exports = /* WAS: window.our_journeys */ {
   clearElement: clearElement,
   moveFwdElement: moveFwdElement,
   moveBackElement: moveBackElement,
-  addKeyboardFocus: addKeyboardFocus, // Not used ?!
   canvasGotFocus: canvasGotFocus,
   canvasLostFocus: canvasLostFocus,
   // Properties.
   getElements: getElements,
   setFocusElement: setFocusElement,
-  getNumElements: getNumElements
+  getNumElements: getNumElements,
+  editFocus: editFocus,
+  stopFloatingFocus: stopFloatingFocus
 };
 
 const UI = require('./user-interface');
@@ -127,6 +128,7 @@ var event;
 var elements = [];
 var focusElement = -1;
 var canvasInFocus = false;
+var float_editing = false;
 
 // Number of card elements presented in page
 var numElements = 35;
@@ -143,26 +145,46 @@ document.addEventListener('keydown', (event) => {
       shifted = true;
       return;
     }
-    // alert("key " + keyName);
+    //alert("key " + keyName);
     switch (keyName) {
-      case 'Tab':
+      /*case 'Tab':
         if (shifted) {
           cyclePrevFocus();
         } else {
           cycleNextFocus();
         }
-        break;
+        break;*/
       case 'ArrowUp':
-        cyclePrevFocus();
+        if(!float_editing){
+          cyclePrevFocus();
+        }
         break;
       case 'ArrowLeft':
-        cyclePrevFocus();
+        if(!float_editing){
+          cyclePrevFocus();
+        }
         break;
       case 'ArrowRight':
-        cycleNextFocus();
+        if(!float_editing){  
+          cycleNextFocus();
+        }
         break;
       case 'ArrowDown':
-        cycleNextFocus();
+        if(!float_editing){
+          cycleNextFocus();
+        }
+        break;
+      case 'Enter':
+        var active = document.activeElement.getAttribute('id');
+        if(active == "floating_backform"){
+          moveBackElement();
+        }
+        else if(active == "floating_forwardform"){
+          moveFwdElement();
+        }
+        else{
+          editFocus();
+        }
         break;
     }
   }
@@ -188,8 +210,10 @@ function elementClick () {
   focusElement = parseInt(e);
   //alert('mouse down on ' + focusElement);
   changeFocus();
-
-  UI.toggleEditor('show');
+  editFocus();
+  if(UI.getEditor()=='fixed'){
+    UI.toggleEditor('show');
+  }
 }
 
 function updateElements () {
@@ -322,17 +346,6 @@ function updatePostIt (i) {
   }
 }
 
-function addKeyboardFocus () {
-  $('#journey-canvas')
-    // Add tab index to ensure the canvas retains focus
-    .attr('tabindex', '0')
-    .keydown(function () { keyResponse(event.which); });
-  // Mouse down override to prevent default browser controls from appearing
-  // .mousedown(function(){ $(this).focus(); return false; })
-  // d3.select("body").on("keydown", function(){keyResponse(event.which)});
-  document.addEventListener('keydown', function () { keyResponse(event.which); });
-}
-
 function changeFocus () {
   for (var i = 0; i < elements.length; i++) {
     var element = document.getElementById(elements[i].eID);
@@ -349,20 +362,36 @@ function changeFocus () {
     document.getElementById('icon_select').value = elements[focusElement].icon;
     document.getElementById('emoticon_select').value = elements[focusElement].emoticon;
     document.getElementById('post_it_text').value = elements[focusElement].postit;
-    document.getElementById('updateButton').removeAttribute('disabled');
-    document.getElementById('backButton').removeAttribute('disabled');
-    document.getElementById('fwdButton').removeAttribute('disabled');
-    document.getElementById('deleteButton').removeAttribute('disabled');
     document.getElementById('title').innerHTML = 'Journey Editor: Card ' + focusElement;
   }
   else if(UI.getEditor()=='float'){
-    var newY = (focusElement * 130) + 100;
-    document.getElementById('floating_editor').setAttribute('x','0');
-    document.getElementById('floating_editor').setAttribute('y',newY);
-    document.getElementById('floating_icon_select').value = elements[focusElement].icon;
-    document.getElementById('floating_emoticon_select').value = elements[focusElement].emoticon;
-    document.getElementById('floating_event_desc').value = elements[focusElement].description;
-    document.getElementById('floating_post_it_text').value = elements[focusElement].postit;
+    stopFloatingFocus();
+  }
+}
+
+function stopFloatingFocus(){
+  document.getElementById('floating_editor').setAttribute('visibility','collapse');
+  float_editing = false;
+} 
+
+function editFocus(){
+  if(UI.getEditor()=='float'){
+    if(float_editing){
+      stopFloatingFocus();
+      document.getElementById("journey-canvas").focus();
+    }
+    else{
+      var newY = (focusElement * 130) + 100;
+      document.getElementById('floating_editor').setAttribute('visibility','visible');
+      document.getElementById('floating_editor').setAttribute('x','0');
+      document.getElementById('floating_editor').setAttribute('y',newY);
+      document.getElementById('floating_icon_select').value = elements[focusElement].icon;
+      document.getElementById('floating_emoticon_select').value = elements[focusElement].emoticon;
+      document.getElementById('floating_event_desc').value = elements[focusElement].description;
+      document.getElementById('floating_post_it_text').value = elements[focusElement].postit;
+      float_editing = true;
+    }
+    
   }
 }
 
@@ -370,6 +399,8 @@ function canvasGotFocus () {
   // events when focus shifts to canvas?
   // alert("canvas got focus");
   canvasInFocus = true;
+  focus.scrollIntoView(true);
+  //window.scrollBy(0, -300);
   //focusElement = -1;
 }
 
@@ -916,7 +947,7 @@ function changeBackground () {
 
 function chooseEditor(newEdit){
   if(newEdit == 'float'){
-    document.getElementById('floating_editor').setAttribute('visibility','visible');
+    //document.getElementById('floating_editor').setAttribute('visibility','visible');
     document.getElementById('editor').style.display = 'none';
     editor = newEdit;
     document.getElementById('journey-canvas').setAttribute('height', '4700');

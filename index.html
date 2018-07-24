@@ -144,18 +144,12 @@
 
             <g class="card-holder"> </g>
 
-            <svg id="floating_editor" x=0 y=0 width = "370" height="130" visibility = "collapse">
+            <svg id="floating_editor" x=0 y=0 width = "370" height="180" visibility = "collapse">
                 <rect width = "240" height="130" stroke="black" background = "ivory" stroke-width="1" fill-opacity="0.0"/>
-                <foreignObject x=125 y=5>
-                    <textarea id="floating_event_desc" rows=3 cols=12></textarea>
-                </foreignObject>
-                <foreignObject x=245 y=30>
-                    <textarea id="floating_post_it_text" rows=3 cols=12></textarea>
-                </foreignObject>
-                <foreignObject y=100>
+                <foreignObject y=130>
                     <form>
                         <div class="floatingeditor" xmlns="http://www.w3.org/1999/xhtml">
-                            <select id="floating_icon_select">
+                            <select id="floating_icon_select" tabindex="0">
                                 <option value="none">None</option>
                                 <option value="achievement">Achievement</option>
                                 <option value="admin">Admin</option>
@@ -171,7 +165,7 @@
                                 <option value="lostdirection">Lost direction</option>
                                 <option value="lowenergy">Low energy</option>
                                 <option value="lowscores">Low scores</option>
-                                <option value="studymilestone">Milestone</option>
+                                <option value="studymilestone">Milestone</option>   
                                 <option value="nosupport">No support</option>
                                 <option value="peersupport">Peer support</option>
                                 <option value="problem">Problem</option>
@@ -181,7 +175,8 @@
                                 <option value="studysupport">Study support</option>
                                 <option value="timelost">Time Lost</option>
                         </select>
-                        <select id="floating_emoticon_select">
+                        
+                        <select id="floating_emoticon_select" tabindex="0">
                             <option value="none">None</option>
                             <option value="angry">Angry</option>
                             <option value="bored">Bored</option>
@@ -198,13 +193,19 @@
                     </form>
                 </div>
                 </foreignObject>
-                <foreignObject x=245>
-                    <form id="floating_backform">
+                <foreignObject x=125 y=5>
+                        <textarea id="floating_event_desc" rows=3 cols=12 tabindex="0"></textarea>
+                </foreignObject>
+                <foreignObject x=245 y=5>
+                        <textarea id="floating_post_it_text" rows=3 cols=12></textarea>
+                    </foreignObject>
+                <foreignObject x=245 y=70>
+                    <form id="floating_backform" tabindex="0">
                             <input type="submit" aria-label="Move element backwards" value="Move Back" id="floating_backButton">
                         </form>
                 </foreignObject>
                 <foreignObject x=245 y=100>
-                        <form id="floating_forwardform">
+                        <form id="floating_forwardform" tabindex="0">
                                 <input type="submit" aria-label="Move element forwards" value="Move Forward" id="floating_fwdButton">
                             </form>
                 </foreignObject>

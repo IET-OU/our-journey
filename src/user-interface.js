@@ -42,7 +42,7 @@ function changeBackground () {
 
 function chooseEditor(newEdit){
   if(newEdit == 'float'){
-    document.getElementById('floating_editor').setAttribute('visibility','visible');
+    //document.getElementById('floating_editor').setAttribute('visibility','visible');
     document.getElementById('editor').style.display = 'none';
     editor = newEdit;
     document.getElementById('journey-canvas').setAttribute('height', '4700');
