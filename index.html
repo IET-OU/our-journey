@@ -26,13 +26,13 @@
                     <select id="icon_select">
                         <option value="none">None</option>
                         <option value="achievement">Achievement</option>
-                        <option value="admin">Admininstration</option>
+                        <option value="admin">Admin</option>
                         <option value="assessment">Assessment</option>
                         <option value="studybreak">Break from study</option>
                         <option value="communication">Communication</option>
-                        <option value="confidence">Confidence Boosted</option>
+                        <option value="confidence">Confidence Boost</option>
                         <option value="duedates">Due dates</option>
-                        <option value="information">Getting information</option>
+                        <option value="information">Find information</option>
                         <option value="studygoal">Goal</option>
                         <option value="helpneeded">Help needed</option>
                         <option value="highpressure">High pressure</option>
@@ -66,16 +66,16 @@
                     </select>
                     <label for="post_it_text">Note:</label>
                     <textarea rows=3 maxlength=44 cols=12 id="post_it_text" value=""></textarea>
-                    <input type="submit" aria-label="Update element" value="Update" id="updateButton" disabled>
+                    <input type="submit" aria-label="Update element" value="Update" id="updateButton">
                 </form>
                 <form id="deleteform">
-                    <input type="submit" aria-label="Delete element" value="Clear" id="deleteButton" disabled>
+                    <input type="submit" aria-label="Delete element" value="Clear" id="deleteButton">
                 </form>
                 <form id="backform">
-                    <input type="submit" aria-label="Move element backwards" value="Move Back" id="backButton" disabled>
+                    <input type="submit" aria-label="Move element backwards" value="Move Back" id="backButton">
                 </form>
                 <form id="forwardform">
-                    <input type="submit" aria-label="Move element forwards" value="Move Forward" id="fwdButton" disabled>
+                    <input type="submit" aria-label="Move element forwards" value="Move Forward" id="fwdButton">
                 </form>
                 <form id="optionsform">
                     <input type="submit" aria-label="Show or hide other options" value="Show/Hide Options" id="optionsButton">
@@ -133,7 +133,9 @@
             <desc id="empty-card">Empty journey card</desc>
             <desc id="desc-icon-rocket">rocket icon</desc>
 
-            <svg x = "120" y = "0">
+            
+
+            <svg x = "120" y = "0" id="start_point">
                     <rect aria-labelledby="start-card"  width = "130" height="90" y="20" x="0" stroke="black" fill="crimson" stroke-width="1" id="start_place" fill-opacity="1.0"/>
                     <image xlink:href = "assets/Arrow-down.svg" x = "18" y = "0" height="100" width="100" id="startIcon" aria-labelledby="desc-icon-rocket"/>
                     <image xlink:href = "assets/Arrow-down.svg" x = "18" y = "30" height="100" width="100" id="startIcon" aria-labelledby="desc-icon-rocket"/>
@@ -141,8 +143,79 @@
             </svg>
 
             <g class="card-holder"> </g>
+
+            <svg id="floating_editor" x=0 y=0 width = "370" height="180" visibility = "collapse">
+                <rect width = "240" height="130" stroke="black" background = "ivory" stroke-width="1" fill-opacity="0.0"/>
+                <foreignObject y=130>
+                    <form>
+                        <div class="floatingeditor" xmlns="http://www.w3.org/1999/xhtml">
+                            <select id="floating_icon_select" tabindex="0">
+                                <option value="none">None</option>
+                                <option value="achievement">Achievement</option>
+                                <option value="admin">Admin</option>
+                                <option value="assessment">Assessment</option>
+                                <option value="studybreak">Break from study</option>
+                                <option value="communication">Communication</option>
+                                <option value="confidence">Confidence Boost</option>
+                                <option value="duedates">Due dates</option>
+                                <option value="information">Find information</option>
+                                <option value="studygoal">Goal</option>
+                                <option value="helpneeded">Help needed</option>
+                                <option value="highpressure">High pressure</option>
+                                <option value="lostdirection">Lost direction</option>
+                                <option value="lowenergy">Low energy</option>
+                                <option value="lowscores">Low scores</option>
+                                <option value="studymilestone">Milestone</option>   
+                                <option value="nosupport">No support</option>
+                                <option value="peersupport">Peer support</option>
+                                <option value="problem">Problem</option>
+                                <option value="register">Registering</option>
+                                <option value="studyexperience">Study experience</option>
+                                <option value="studysuccess">Study success</option>
+                                <option value="studysupport">Study support</option>
+                                <option value="timelost">Time Lost</option>
+                        </select>
+                        
+                        <select id="floating_emoticon_select" tabindex="0">
+                            <option value="none">None</option>
+                            <option value="angry">Angry</option>
+                            <option value="bored">Bored</option>
+                            <option value="confused">Confused</option>
+                            <option value="excited">Excited</option>
+                            <option value="happy">Happy</option>
+                            <option value="nervous">Nervous</option>
+                            <option value="achieve">Proud</option>
+                            <option value="thinking">Thinking</option>
+                            <option value="unhappy">Unhappy</option>
+                            <option value="sick">Unwell</option>
+                            <option value="upset">Upset</option>
+                        </select>
+                    </form>
+                </div>
+                </foreignObject>
+                <foreignObject x=125 y=5>
+                        <textarea id="floating_event_desc" rows=3 cols=12 tabindex="0"></textarea>
+                </foreignObject>
+                <foreignObject x=245 y=5>
+                        <textarea id="floating_post_it_text" rows=3 cols=12></textarea>
+                    </foreignObject>
+                <foreignObject x=245 y=70>
+                    <form id="floating_backform" tabindex="0">
+                            <input type="submit" aria-label="Move element backwards" value="Move Back" id="floating_backButton">
+                        </form>
+                </foreignObject>
+                <foreignObject x=245 y=100>
+                        <form id="floating_forwardform" tabindex="0">
+                                <input type="submit" aria-label="Move element forwards" value="Move Forward" id="floating_fwdButton">
+                            </form>
+                </foreignObject>
+                    
+            </svg>
+
         </svg>
     </div>
+
+    
 
 
     <script id="oj-svg-card-template" type="text/template">

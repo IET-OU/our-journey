@@ -61,15 +61,22 @@ svg#journey-canvas .startcard
 
 .editorbar
     {
-        border: 1px solid #aaa;
-        border-radius: 5px;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background: ivory;
-        padding: 5px;
-        display: inline;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: ivory;
+      padding: 5px;
+      display: inline;
     }
+
+.floatingeditor
+  {
+    display: flex;
+    flex-direction: row; 
+    background: red;
+  }
 
 .main {
         margin-top: 100px;

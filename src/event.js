@@ -32,6 +32,16 @@ function initialiseEventHandlers () {
     CORE.moveFwdElement();
   });
 
+  attachEvent('#floating_backform', 'submit', function (e) {
+    e.preventDefault();
+    CORE.moveBackElement();
+  });
+
+  attachEvent('#floating_forwardform', 'submit', function (e) {
+    e.preventDefault();
+    CORE.moveFwdElement();
+  });
+
   attachEvent('#optionsform', 'submit', function (e) {
     e.preventDefault();
     UI.toggleOptions();
@@ -63,6 +73,22 @@ function initialiseEventHandlers () {
 
   attachEvent('#journey-canvas', 'focusout', function (e) {
     CORE.canvasLostFocus();
+  });
+
+  attachEvent('#floating_icon_select', 'change', function (e) {
+    CORE.updateElement();
+  });
+
+  attachEvent('#floating_emoticon_select', 'change', function (e) {
+    CORE.updateElement();
+  });
+
+  attachEvent('#floating_event_desc', 'change', function (e) {
+    CORE.updateElement();
+  });
+
+  attachEvent('#floating_post_it_text', 'change', function (e) {
+    CORE.updateElement();
   });
 }
 

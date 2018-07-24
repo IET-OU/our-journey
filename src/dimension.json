@@ -31,5 +31,10 @@
   "postitTextVX": 5,
   "postitTextVRX": 140,
   "postitTextY": 15,
-  "postitTextWidth": 90
+  "postitTextWidth": 90,
+  "postitScolX": 245,
+  "postitTextScolX": 250,
+  "postitScolY": 100,
+  "postitTextScolY": 15 
+
 }
