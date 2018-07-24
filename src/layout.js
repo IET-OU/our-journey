@@ -24,7 +24,7 @@ function reflow (layout) {
 
   if(layout == "scol"){
     set_layout = "scol";
-    UI.setSColLayout();
+    UI.chooseEditor('float');
     scol_layout = [];
     for(i=0;i<CORE.getNumElements();i++){
       scol_layout.push({ "{j}": i,  "{x}": 0,   "{y}": i*130,  "{orient}": "horiz" });

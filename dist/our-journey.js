@@ -731,7 +731,7 @@ function reflow (layout) {
 
   if(layout == "scol"){
     set_layout = "scol";
-    UI.setSColLayout();
+    UI.chooseEditor('float');
     scol_layout = [];
     for(i=0;i<CORE.getNumElements();i++){
       scol_layout.push({ "{j}": i,  "{x}": 0,   "{y}": i*130,  "{orient}": "horiz" });
@@ -880,7 +880,6 @@ module.exports = {
   toggleEditor: toggleEditor,
   toggleOptions: toggleOptions,
   changeBackground: changeBackground,
-  setSColLayout: setSColLayout,
   chooseEditor: chooseEditor,
   getEditor: getEditor
 };
@@ -920,16 +919,12 @@ function chooseEditor(newEdit){
     document.getElementById('floating_editor').setAttribute('visibility','visible');
     document.getElementById('editor').style.display = 'none';
     editor = newEdit;
+    document.getElementById('journey-canvas').setAttribute('height', '4700');
+    document.getElementById('start_point').setAttribute('visibility','collapse');
   }
   else if(newEdit == 'fixed'){
     document.getElementById('floating_editor').setAttribute('visibility','collapse');
-    
   }
-}
-
-function setSColLayout(){
-  document.getElementById('start_point').setAttribute('visibility','collapse');
-  chooseEditor('float');
 }
 
 function getEditor(){
