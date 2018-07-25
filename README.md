@@ -42,6 +42,25 @@ npm run fix
 npm run pa11y-ci
 ```
 
+## API
+
+### URL parameters
+
+ * `. . . . ?demo=1` — Load an empty demonstration journey;
+ * `. .?layout=scol` — Display with a single-column layout;
+ * `. . ?edit=float` — Use a _floating_ editor;
+ * `. ?j=base64:...` — Load a journey represented in the URL parameter as Base64-encoded JSON;
+
+([Search][q-location].)
+
+### Javascript
+
+```js
+console.log('Inspect:', require('our-journey'));
+
+require('our-journey').app.run();
+```
+
 ---
 Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of Educational Technology][iet])
 
@@ -68,5 +87,6 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [br-icon]: https://nick.freear.org.uk/badge/browserify.svg
 [hook]: https://npmjs.com/package/husky "Git hooks made easy 🐶"
 [hook-icon]: https://img.shields.io/badge/git--hook-husky-ff69b4.svg
+[q-location]: https://github.com/IET-OU/our-journey/search?q=location&type=Code "GitHub search: 'location'"
 
 [End]: //.
