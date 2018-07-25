@@ -27,15 +27,11 @@ const ASSET = require('./assets');
 const DIM = require('./dimension.json');
 const LAYOUT = require('./layout');
 
-// Semistandard -- these were NOT defined ;).
-var $ = window.jQuery; // Missing dependency ??
-var event;
-
 // Status variables
 var elements = [];
 var focusElement = -1;
 var canvasInFocus = false;
-var float_editing = false;
+var floatEditing = false;
 
 // Number of card elements presented in page
 var numElements = 35;
@@ -46,38 +42,25 @@ var vrElements = [ 4, 5, 14, 15, 24, 25, 34 ];
 
 document.addEventListener('keydown', (event) => {
   const keyName = event.key;
-  var shifted = false;
   if (canvasInFocus) {
-    if (keyName === 'Shift') {
-      shifted = true;
-      return;
-    }
-    // alert("key " + keyName);
     switch (keyName) {
-      /* case 'Tab':
-        if (shifted) {
-          cyclePrevFocus();
-        } else {
-          cycleNextFocus();
-        }
-        break; */
       case 'ArrowUp':
-        if (!float_editing) {
+        if (!floatEditing) {
           cyclePrevFocus();
         }
         break;
       case 'ArrowLeft':
-        if (!float_editing) {
+        if (!floatEditing) {
           cyclePrevFocus();
         }
         break;
       case 'ArrowRight':
-        if (!float_editing) {
+        if (!floatEditing) {
           cycleNextFocus();
         }
         break;
       case 'ArrowDown':
-        if (!float_editing) {
+        if (!floatEditing) {
           cycleNextFocus();
         }
         break;
@@ -253,6 +236,7 @@ function changeFocus () {
     var element = document.getElementById(elements[i].eID);
     element.setAttribute('class', 'not-focussed');
   }
+
   var focus = document.getElementById(elements[focusElement].eID);
   focus.setAttribute('class', 'focussed');
 
@@ -267,37 +251,36 @@ function changeFocus () {
   }
 
   if (LAYOUT.getLayout() === 'scol') {
-    focusY = 130 * focusElement;
-    window.scrollTo(0, focusY);
+    window.scrollTo(0, (130 * focusElement));
   } else if (LAYOUT.getLayout() === 'default') {
     focus.scrollIntoView(true);
-    focusY = LAYOUT.getLayoutData()['default'][focusElement]['{y}'];
-    focusY = focusY - 100;
+    var focusY = (LAYOUT.getLayoutData()['default'][focusElement]['{y}']) - 100;
     window.scrollTo(0, focusY);
   }
 }
 
 function stopFloatingFocus () {
   document.getElementById('floating_editor').setAttribute('visibility', 'collapse');
-  float_editing = false;
+  floatEditing = false;
 }
 
 function editFocus () {
+  var newX;
+  var newY;
   if (UI.getEditor() === 'float') {
-    if (float_editing) {
+    if (floatEditing) {
       stopFloatingFocus();
       document.getElementById('journey-canvas').focus();
     } else {
       if (LAYOUT.getLayout() === 'scol') {
-        var newY = (focusElement * 130) + 100;
+        newY = (focusElement * 130) + 100;
         document.getElementById('floating_editor').setAttribute('x', '0');
         document.getElementById('floating_editor').setAttribute('y', newY);
         document.getElementById('floating_editor').setAttribute('visibility', 'visible');
       } else if (LAYOUT.getLayout() === 'default') {
-        layoutData = LAYOUT.getLayoutData();
+        var layoutData = LAYOUT.getLayoutData();
         newX = layoutData['default'][focusElement]['{x}'];
         newY = layoutData['default'][focusElement]['{y}'];
-        orient = layoutData['default'][focusElement]['{orient}'];
         newY = newY + DIM.rectY;
         document.getElementById('floating_editor').setAttribute('x', newX);
         document.getElementById('floating_editor').setAttribute('y', newY);
@@ -308,7 +291,7 @@ function editFocus () {
       document.getElementById('floating_emoticon_select').value = elements[focusElement].emoticon;
       document.getElementById('floating_event_desc').value = elements[focusElement].description;
       document.getElementById('floating_post_it_text').value = elements[focusElement].postit;
-      float_editing = true;
+      floatEditing = true;
     }
   } else if (UI.getEditor() === 'fixed') {
     document.getElementById('event_desc').focus();
@@ -316,16 +299,10 @@ function editFocus () {
 }
 
 function canvasGotFocus () {
-  // events when focus shifts to canvas?
-  // alert("canvas got focus");
   canvasInFocus = true;
-  focus.scrollIntoView(true);
-  // window.scrollBy(0, -300);
-  // focusElement = -1;
 }
 
 function canvasLostFocus () {
-  // alert("canvas lost focus");
   canvasInFocus = false;
 }
 

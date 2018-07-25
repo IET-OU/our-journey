@@ -14,7 +14,7 @@ const HOLDER = document.querySelector('#journey-canvas .card-holder');
 const CORE = require('./core');
 const UI = require('./user-interface');
 
-var set_layout = 'default';
+var setLayout = 'default';
 
 function reflow (layout) {
   layout = layout || 'default';
@@ -24,13 +24,13 @@ function reflow (layout) {
   let cards = [];
 
   if (layout === 'scol') {
-    set_layout = 'scol';
+    setLayout = 'scol';
     UI.chooseEditor('float');
-    scol_layout = [];
-    for (i = 0; i < CORE.getNumElements(); i++) {
-      scol_layout.push({ '{j}': i, '{x}': 0, '{y}': i * 130, '{orient}': 'horiz' });
+    var scolLayout = [];
+    for (var i = 0; i < CORE.getNumElements(); i++) {
+      scolLayout.push({ '{j}': i, '{x}': 0, '{y}': i * 130, '{orient}': 'horiz' });
     }
-    scol_layout.forEach(function (elem) {
+    scolLayout.forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
     document.getElementById('journey-canvas').setAttribute('height', '4700');
@@ -58,7 +58,7 @@ function replaceObj (str, mapObj) {
 }
 
 function getLayout () {
-  return set_layout;
+  return setLayout;
 }
 
 function getLayoutData () {

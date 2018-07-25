@@ -9,21 +9,34 @@
   "author": {
     "name": "Tim Coughlan"
   },
-  "contributors": [ {
-    "name": "Glen Darby {designer}"
-  }, {
-    "name": "Nick Freear"
-  }, {
-    "name": "The LTI-LTT developers (IET-OU)",
-    "email": "iet-ltt-support@open.ac.uk",
-    "url": "https://iet.open.ac.uk"
-  } ],
+  "contributors": [
+    {
+      "name": "Glen Darby {designer}"
+    },
+    {
+      "name": "Nick Freear"
+    },
+    {
+      "name": "The LTI-LTT developers (IET-OU)",
+      "email": "iet-ltt-support@open.ac.uk",
+      "url": "https://iet.open.ac.uk"
+    }
+  ],
   "homepage": "https://iet-ou.github.io/our-journey/?demo=1",
   "repository": "https://github.com/IET-OU/our-journey.git",
   "bugs": "https://github.com/IET-OU/our-journey/issues",
-  "keywords": [ "accessibility", "education", "game", "learning-journey" ],
-  "engines": { "node": ">= 6" },
-  "dependencies": {},
+  "keywords": [
+    "accessibility",
+    "education",
+    "game",
+    "learning-journey"
+  ],
+  "engines": {
+    "node": ">= 6"
+  },
+  "dependencies": {
+    "lint": "^1.1.2"
+  },
   "devDependencies": {
     "browserify": "^16.2.2",
     "live-server": "^1.2.0",
@@ -32,7 +45,10 @@
     "semistandard": "^12.0.1"
   },
   "semistandard": {
-    "ignore": [ "dist/", "dropbox/" ]
+    "ignore": [
+      "dist/",
+      "dropbox/"
+    ]
   },
   "pa11yCiConfig": {
     "defaults": {
@@ -43,7 +59,13 @@
       "http://127.0.0.1:9000/index.html?demo=1&_ua=pa11y-ci"
     ]
   },
-  "files": [ "index.html", "assets/", "dist/", "src/", "style/*.css" ],
+  "files": [
+    "index.html",
+    "assets/",
+    "dist/",
+    "src/",
+    "style/*.css"
+  ],
   "scripts": {
     "add-hook": "cp _git-hook/pre-commit.sh .git/hooks/pre-commit",
     "build": "browserify --no-bf -r ./index.js:our-journey > dist/our-journey.js",
