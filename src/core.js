@@ -52,44 +52,42 @@ document.addEventListener('keydown', (event) => {
       shifted = true;
       return;
     }
-    //alert("key " + keyName);
+    // alert("key " + keyName);
     switch (keyName) {
-      /*case 'Tab':
+      /* case 'Tab':
         if (shifted) {
           cyclePrevFocus();
         } else {
           cycleNextFocus();
         }
-        break;*/
+        break; */
       case 'ArrowUp':
-        if(!float_editing){
+        if (!float_editing) {
           cyclePrevFocus();
         }
         break;
       case 'ArrowLeft':
-        if(!float_editing){
+        if (!float_editing) {
           cyclePrevFocus();
         }
         break;
       case 'ArrowRight':
-        if(!float_editing){  
+        if (!float_editing) {
           cycleNextFocus();
         }
         break;
       case 'ArrowDown':
-        if(!float_editing){
+        if (!float_editing) {
           cycleNextFocus();
         }
         break;
       case 'Enter':
         var active = document.activeElement.getAttribute('id');
-        if(active == "floating_backform"){
+        if (active === 'floating_backform') {
           moveBackElement();
-        }
-        else if(active == "floating_forwardform"){
+        } else if (active === 'floating_forwardform') {
           moveFwdElement();
-        }
-        else{
+        } else {
           editFocus();
         }
         break;
@@ -115,10 +113,10 @@ function demoFill () {
 function elementClick () {
   var e = this.id.substring(5);
   focusElement = parseInt(e);
-  //alert('mouse down on ' + focusElement);
+  // alert('mouse down on ' + focusElement);
   changeFocus();
   editFocus();
-  if(UI.getEditor()=='fixed'){
+  if (UI.getEditor() === 'fixed') {
     UI.toggleEditor('show');
   }
 }
@@ -130,10 +128,9 @@ function updateElements () {
     var eRect = document.getElementById('place' + i);
     eRect.setAttribute('fill', 'Snow');
     eRect.setAttribute('fill-opacity', '1.0');
-    if ((LAYOUT.getLayout() == "default") && vlElements.includes(i)){
+    if ((LAYOUT.getLayout() === 'default') && vlElements.includes(i)) {
       eRect.setAttribute('x', DIM.rectXV);
-    } 
-    else {
+    } else {
       eRect.setAttribute('y', DIM.rectY);
     }
 
@@ -152,10 +149,10 @@ function updateDescription (i) {
   var layout = LAYOUT.getLayout();
   // alert("changing text on description" + elementText + " to " + element.description);
   eText.textContent = getElement(i).description;
-  if ((layout=="default") && vlElements.includes(i)) {
+  if ((layout === 'default') && vlElements.includes(i)) {
     eText.setAttribute('x', DIM.textXV);
     eText.setAttribute('y', DIM.textYV);
-  } else if ((layout=="default") && vrElements.includes(i)) {
+  } else if ((layout === 'default') && vrElements.includes(i)) {
     eText.setAttribute('x', DIM.textXVR);
     eText.setAttribute('y', DIM.textYVR);
   } else {
@@ -172,10 +169,10 @@ function updateEmoticon (i) {
       if (ASSET.hasEmoticon(j, getElement(i))) {
         eEmo.setAttribute('height', DIM.emoticonHeight);
         eEmo.setAttribute('width', DIM.emoticonWidth);
-        if ((layout=="default") && (vlElements.includes(i))) {
+        if ((layout === 'default') && (vlElements.includes(i))) {
           eEmo.setAttribute('x', DIM.emoticonXV);
           eEmo.setAttribute('y', DIM.emoticonYV);
-        } else if ((layout=="default") && (vrElements.includes(i))) {
+        } else if ((layout === 'default') && (vrElements.includes(i))) {
           eEmo.setAttribute('x', DIM.emoticonXVR);
           eEmo.setAttribute('y', DIM.emoticonYVR);
         } else {
@@ -199,7 +196,7 @@ function updateIcon (i) {
       if (ASSET.hasIcon(j, getElement(i))) {
         eIcon.setAttribute('height', DIM.iconHeight);
         eIcon.setAttribute('width', DIM.iconWidth);
-        if ((layout=="default") && (vlElements.includes(i))) {
+        if ((layout === 'default') && (vlElements.includes(i))) {
           eIcon.setAttribute('x', DIM.iconXV);
           eIcon.setAttribute('y', DIM.iconYV);
         } else {
@@ -225,23 +222,21 @@ function updatePostIt (i) {
     ePostItText.setAttribute('width', DIM.postitTextWidth);
     // ePostItText.setAttribute('y', DIM.postitTextY);
 
-    if (((layout=="default") && vlElements.includes(i))) {
+    if (((layout === 'default') && vlElements.includes(i))) {
       ePostIt.setAttribute('y', DIM.postitVY);
       ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVY);
       ePostItText.setAttribute('x', DIM.postitTextVX);
-    } else if ((layout=="default") && vrElements.includes(i)) {
+    } else if ((layout === 'default') && vrElements.includes(i)) {
       ePostIt.setAttribute('x', DIM.postitVRX);
       ePostIt.setAttribute('y', DIM.postitVRY);
       ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVRY);
       ePostItText.setAttribute('x', DIM.postitTextVRX);
-    }
-    else if(layout=="scol"){
+    } else if (layout === 'scol') {
       ePostIt.setAttribute('x', DIM.postitScolX);
       ePostIt.setAttribute('y', DIM.postitScolY);
       ePostItText.setAttribute('y', DIM.postitTextScolY + DIM.postitScolY);
       ePostItText.setAttribute('x', DIM.postitTextScolX);
-    } 
-    else if(layout=="default") {
+    } else if (layout === 'default') {
       ePostIt.setAttribute('x', DIM.postitX);
       ePostItText.setAttribute('x', DIM.postitTextX);
       ePostItText.setAttribute('y', DIM.postitTextY);
@@ -261,22 +256,20 @@ function changeFocus () {
   var focus = document.getElementById(elements[focusElement].eID);
   focus.setAttribute('class', 'focussed');
 
-  if(UI.getEditor()=='fixed'){
+  if (UI.getEditor() === 'fixed') {
     document.getElementById('event_desc').value = elements[focusElement].description;
     document.getElementById('icon_select').value = elements[focusElement].icon;
     document.getElementById('emoticon_select').value = elements[focusElement].emoticon;
     document.getElementById('post_it_text').value = elements[focusElement].postit;
     document.getElementById('title').innerHTML = 'Journey Editor: Card ' + focusElement;
-  }
-  else if(UI.getEditor()=='float'){
+  } else if (UI.getEditor() === 'float') {
     stopFloatingFocus();
   }
 
-  if(LAYOUT.getLayout()=='scol'){
+  if (LAYOUT.getLayout() === 'scol') {
     focusY = 130 * focusElement;
-    window.scrollTo(0,focusY);
-  }
-  else if(LAYOUT.getLayout()=='default'){
+    window.scrollTo(0, focusY);
+  } else if (LAYOUT.getLayout() === 'default') {
     focus.scrollIntoView(true);
     focusY = LAYOUT.getLayoutData()['default'][focusElement]['{y}'];
     focusY = focusY - 100;
@@ -284,43 +277,40 @@ function changeFocus () {
   }
 }
 
-function stopFloatingFocus(){
-  document.getElementById('floating_editor').setAttribute('visibility','collapse');
+function stopFloatingFocus () {
+  document.getElementById('floating_editor').setAttribute('visibility', 'collapse');
   float_editing = false;
-} 
+}
 
-function editFocus(){
-  if(UI.getEditor()=='float'){
-    if(float_editing){
+function editFocus () {
+  if (UI.getEditor() === 'float') {
+    if (float_editing) {
       stopFloatingFocus();
-      document.getElementById("journey-canvas").focus();
-    }
-    else{
-      if(LAYOUT.getLayout()=='scol'){
+      document.getElementById('journey-canvas').focus();
+    } else {
+      if (LAYOUT.getLayout() === 'scol') {
         var newY = (focusElement * 130) + 100;
-        document.getElementById('floating_editor').setAttribute('x','0');
-        document.getElementById('floating_editor').setAttribute('y',newY);
-        document.getElementById('floating_editor').setAttribute('visibility','visible');
-      }
-      else if(LAYOUT.getLayout()=='default'){
+        document.getElementById('floating_editor').setAttribute('x', '0');
+        document.getElementById('floating_editor').setAttribute('y', newY);
+        document.getElementById('floating_editor').setAttribute('visibility', 'visible');
+      } else if (LAYOUT.getLayout() === 'default') {
         layoutData = LAYOUT.getLayoutData();
         newX = layoutData['default'][focusElement]['{x}'];
         newY = layoutData['default'][focusElement]['{y}'];
         orient = layoutData['default'][focusElement]['{orient}'];
         newY = newY + DIM.rectY;
-        document.getElementById('floating_editor').setAttribute('x',newX);
-        document.getElementById('floating_editor').setAttribute('y',newY);
-        document.getElementById('floating_editor').setAttribute('visibility','visible');
+        document.getElementById('floating_editor').setAttribute('x', newX);
+        document.getElementById('floating_editor').setAttribute('y', newY);
+        document.getElementById('floating_editor').setAttribute('visibility', 'visible');
       }
-      
+
       document.getElementById('floating_icon_select').value = elements[focusElement].icon;
       document.getElementById('floating_emoticon_select').value = elements[focusElement].emoticon;
       document.getElementById('floating_event_desc').value = elements[focusElement].description;
       document.getElementById('floating_post_it_text').value = elements[focusElement].postit;
       float_editing = true;
     }
-  }
-  else if(UI.getEditor()=='fixed'){
+  } else if (UI.getEditor() === 'fixed') {
     document.getElementById('event_desc').focus();
   }
 }
@@ -330,8 +320,8 @@ function canvasGotFocus () {
   // alert("canvas got focus");
   canvasInFocus = true;
   focus.scrollIntoView(true);
-  //window.scrollBy(0, -300);
-  //focusElement = -1;
+  // window.scrollBy(0, -300);
+  // focusElement = -1;
 }
 
 function canvasLostFocus () {
@@ -364,13 +354,12 @@ function cyclePrevFocus () {
 function updateElement () {
   // change existing element according to form
   // alert("changing values of " + document.getElementById('event_desc').value);
-  if(UI.getEditor() == 'fixed'){
+  if (UI.getEditor() === 'fixed') {
     elements[focusElement].description = document.getElementById('event_desc').value;
     elements[focusElement].icon = document.getElementById('icon_select').value;
     elements[focusElement].emoticon = document.getElementById('emoticon_select').value;
     elements[focusElement].postit = document.getElementById('post_it_text').value;
-  }
-  else if(UI.getEditor() == 'float'){
+  } else if (UI.getEditor() === 'float') {
     elements[focusElement].icon = document.getElementById('floating_icon_select').value;
     elements[focusElement].emoticon = document.getElementById('floating_emoticon_select').value;
     elements[focusElement].description = document.getElementById('floating_event_desc').value;
@@ -435,6 +424,6 @@ function getElement (idx) {
   return elements[ idx ];
 }
 
-function getNumElements(){
+function getNumElements () {
   return numElements;
 }
