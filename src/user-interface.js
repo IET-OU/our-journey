@@ -14,11 +14,10 @@ module.exports = {
 var editor = 'fixed';
 
 function toggleEditor (tog) {
-var editorElement;
-  if(editor == 'fixed'){
+  var editorElement;
+  if (editor === 'fixed') {
     editorElement = document.getElementById('editor');
-  }
-  else if(editor == 'float'){
+  } else if (editor === 'float') {
     editorElement = document.getElementById('floating_editor');
   }
   if (tog === 1 || tog === 'show') {
@@ -28,7 +27,7 @@ var editorElement;
   }
 }
 
-function toggleScolOptions(){
+function toggleScolOptions () {
   var saveload = document.getElementById('scol_saveload');
   if (saveload.style.display === 'none') {
     saveload.style.display = 'block';
@@ -50,17 +49,16 @@ function changeBackground () {
   document.body.style.background = document.getElementById('background_select').value;
 }
 
-function chooseEditor(newEdit){
-  if(newEdit == 'float'){
-    //document.getElementById('floating_editor').setAttribute('visibility','visible');
+function chooseEditor (newEdit) {
+  if (newEdit === 'float') {
+    // document.getElementById('floating_editor').setAttribute('visibility','visible');
     document.getElementById('editor').style.display = 'none';
     editor = newEdit;
-  }
-  else if(newEdit == 'fixed'){
-    document.getElementById('floating_editor').setAttribute('visibility','collapse');
+  } else if (newEdit === 'fixed') {
+    document.getElementById('floating_editor').setAttribute('visibility', 'collapse');
   }
 }
 
-function getEditor(){
+function getEditor () {
   return editor;
 }

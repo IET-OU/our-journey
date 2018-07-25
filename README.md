@@ -31,6 +31,8 @@ Author: [Tim Coughlan][tim], IET.
 Use [Node][] and npm to aid development:
 
 ```sh
+npm run add-hook
+
 npm install
 npm run build
 npm start

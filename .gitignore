@@ -1,5 +1,4 @@
 
-
 .pa11yci*
 
 node_modules/
@@ -8,5 +7,7 @@ package-lock.json
 *.diff
 *.log
 *.tgz
+/dropbox
+test*.html
 
 # End.

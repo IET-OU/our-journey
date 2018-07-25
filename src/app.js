@@ -14,15 +14,14 @@ const UI = require('./user-interface');
 
 function run () {
   console.warn('The our-journey API:', require('../index'));
-  
-  if (LOC.search.match(/[?&]layout=scol/)){
-    LAYOUT.reflow("scol");
-  }
-  else {
-      LAYOUT.reflow();
+
+  if (LOC.search.match(/[?&]layout=scol/)) {
+    LAYOUT.reflow('scol');
+  } else {
+    LAYOUT.reflow();
   }
 
-  if (LOC.search.match(/[?&]edit=float/)){
+  if (LOC.search.match(/[?&]edit=float/)) {
     UI.chooseEditor('float');
   }
 
@@ -44,6 +43,6 @@ function run () {
   SHARE.createLink(CORE.getElements());
   SHARE.loadLink(CORE.getElements());
 
-  document.getElementById("journey-canvas").focus();
-  window.scrollTo(0,0);
+  document.getElementById('journey-canvas').focus();
+  window.scrollTo(0, 0);
 }

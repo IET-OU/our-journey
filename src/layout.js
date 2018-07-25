@@ -2,11 +2,11 @@
   Layout the SVG journey cards | © 2018 The Open University (IET-OU).
 */
 
-//module.exports.reflow = reflow;
-module.exports = { reflow: reflow, 
+module.exports = {
+  reflow: reflow,
   getLayout: getLayout,
   getLayoutData: getLayoutData
-}
+};
 
 const LAYOUTS = require('./layouts.json');
 const SVG_TEMPLATE = document.querySelector('#oj-svg-card-template').innerText;
@@ -14,7 +14,7 @@ const HOLDER = document.querySelector('#journey-canvas .card-holder');
 const CORE = require('./core');
 const UI = require('./user-interface');
 
-var set_layout = "default";
+var set_layout = 'default';
 
 function reflow (layout) {
   layout = layout || 'default';
@@ -23,27 +23,26 @@ function reflow (layout) {
 
   let cards = [];
 
-  if(layout == "scol"){
-    set_layout = "scol";
+  if (layout === 'scol') {
+    set_layout = 'scol';
     UI.chooseEditor('float');
     scol_layout = [];
-    for(i=0;i<CORE.getNumElements();i++){
-      scol_layout.push({ "{j}": i,  "{x}": 0,   "{y}": i*130,  "{orient}": "horiz" });
+    for (i = 0; i < CORE.getNumElements(); i++) {
+      scol_layout.push({ '{j}': i, '{x}': 0, '{y}': i * 130, '{orient}': 'horiz' });
     }
     scol_layout.forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
     document.getElementById('journey-canvas').setAttribute('height', '4700');
-    document.getElementById('start_point').setAttribute('visibility','collapse');
-    document.getElementById('scol_start_point').setAttribute('visibility','visible');
-  }
-  else{
+    document.getElementById('start_point').setAttribute('visibility', 'collapse');
+    document.getElementById('scol_start_point').setAttribute('visibility', 'visible');
+  } else {
     LAYOUTS[ layout ].forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
     document.getElementById('scol_bar').style.display = 'none';
-    document.getElementById('scol_saveload').style.display = 'none'; 
-    document.getElementById('scol_start_point').setAttribute('visibility','collapse');
+    document.getElementById('scol_saveload').style.display = 'none';
+    document.getElementById('scol_start_point').setAttribute('visibility', 'collapse');
   }
 
   HOLDER.innerHTML = cards.join('\n');
@@ -58,10 +57,10 @@ function replaceObj (str, mapObj) {
   });
 }
 
-function getLayout(){
+function getLayout () {
   return set_layout;
 }
 
-function getLayoutData(){
+function getLayoutData () {
   return LAYOUTS;
 }
