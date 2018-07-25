@@ -29,11 +29,9 @@ function toggleEditor (tog) {
 
 function toggleScolOptions () {
   var saveload = document.getElementById('scol_saveload');
-  if ((saveload.style.display === 'none') || (!saveload.style.display)) 
-  {
+  if ((saveload.style.display === 'none') || (!saveload.style.display)) {
     saveload.style.display = 'block';
-  }
-  else {
+  } else {
     saveload.style.display = 'none';
   }
 }

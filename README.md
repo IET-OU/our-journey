@@ -1,6 +1,7 @@
 
 [![js-semistandard-style][semi-icon]][semi]
 [![Browserify][br-icon]][browserify]
+[![Husky Git hooks][hook-icon]][hook]
 
 # Our Journeys interactive student journey creator
 
@@ -31,7 +32,7 @@ Author: [Tim Coughlan][tim], IET.
 Use [Node][] and npm to aid development:
 
 ```sh
-npm run add-hook
+rm .git/hooks/pre-commit ## Remove previous Git hook!
 
 npm install
 npm run build
@@ -65,5 +66,7 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [sem-i0]: https://img.shields.io/badge/code_style-semistandard-brightgreen.svg
 [browserify]: http://browserify.org/ "Built with Browserify"
 [br-icon]: https://nick.freear.org.uk/badge/browserify.svg
+[hook]: https://npmjs.com/package/husky "Git hooks made easy 🐶"
+[hook-icon]: https://img.shields.io/badge/git--hook-husky-ff69b4.svg
 
 [End]: //.
