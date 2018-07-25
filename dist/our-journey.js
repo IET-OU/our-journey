@@ -15,15 +15,14 @@ const UI = require('./user-interface');
 
 function run () {
   console.warn('The our-journey API:', require('../index'));
-  
-  if (LOC.search.match(/[?&]layout=scol/)){
-    LAYOUT.reflow("scol");
-  }
-  else {
-      LAYOUT.reflow();
+
+  if (LOC.search.match(/[?&]layout=scol/)) {
+    LAYOUT.reflow('scol');
+  } else {
+    LAYOUT.reflow();
   }
 
-  if (LOC.search.match(/[?&]edit=float/)){
+  if (LOC.search.match(/[?&]edit=float/)) {
     UI.chooseEditor('float');
   }
 
@@ -45,8 +44,8 @@ function run () {
   SHARE.createLink(CORE.getElements());
   SHARE.loadLink(CORE.getElements());
 
-  document.getElementById("journey-canvas").focus();
-  window.scrollTo(0,0);
+  document.getElementById('journey-canvas').focus();
+  window.scrollTo(0, 0);
 }
 
 },{"../index":"our-journey","./core":3,"./event":5,"./layout":7,"./share-link":9,"./user-interface":10}],2:[function(require,module,exports){
@@ -126,15 +125,11 @@ const ASSET = require('./assets');
 const DIM = require('./dimension.json');
 const LAYOUT = require('./layout');
 
-// Semistandard -- these were NOT defined ;).
-var $ = window.jQuery; // Missing dependency ??
-var event;
-
 // Status variables
 var elements = [];
 var focusElement = -1;
 var canvasInFocus = false;
-var float_editing = false;
+var floatEditing = false;
 
 // Number of card elements presented in page
 var numElements = 35;
@@ -145,50 +140,35 @@ var vrElements = [ 4, 5, 14, 15, 24, 25, 34 ];
 
 document.addEventListener('keydown', (event) => {
   const keyName = event.key;
-  var shifted = false;
   if (canvasInFocus) {
-    if (keyName === 'Shift') {
-      shifted = true;
-      return;
-    }
-    //alert("key " + keyName);
     switch (keyName) {
-      /*case 'Tab':
-        if (shifted) {
-          cyclePrevFocus();
-        } else {
-          cycleNextFocus();
-        }
-        break;*/
       case 'ArrowUp':
-        if(!float_editing){
+        if (!floatEditing) {
           cyclePrevFocus();
         }
         break;
       case 'ArrowLeft':
-        if(!float_editing){
+        if (!floatEditing) {
           cyclePrevFocus();
         }
         break;
       case 'ArrowRight':
-        if(!float_editing){  
+        if (!floatEditing) {
           cycleNextFocus();
         }
         break;
       case 'ArrowDown':
-        if(!float_editing){
+        if (!floatEditing) {
           cycleNextFocus();
         }
         break;
       case 'Enter':
         var active = document.activeElement.getAttribute('id');
-        if(active == "floating_backform"){
+        if (active === 'floating_backform') {
           moveBackElement();
-        }
-        else if(active == "floating_forwardform"){
+        } else if (active === 'floating_forwardform') {
           moveFwdElement();
-        }
-        else{
+        } else {
           editFocus();
         }
         break;
@@ -214,10 +194,10 @@ function demoFill () {
 function elementClick () {
   var e = this.id.substring(5);
   focusElement = parseInt(e);
-  //alert('mouse down on ' + focusElement);
+  // alert('mouse down on ' + focusElement);
   changeFocus();
   editFocus();
-  if(UI.getEditor()=='fixed'){
+  if (UI.getEditor() === 'fixed') {
     UI.toggleEditor('show');
   }
 }
@@ -229,10 +209,9 @@ function updateElements () {
     var eRect = document.getElementById('place' + i);
     eRect.setAttribute('fill', 'Snow');
     eRect.setAttribute('fill-opacity', '1.0');
-    if ((LAYOUT.getLayout() == "default") && vlElements.includes(i)){
+    if ((LAYOUT.getLayout() === 'default') && vlElements.includes(i)) {
       eRect.setAttribute('x', DIM.rectXV);
-    } 
-    else {
+    } else {
       eRect.setAttribute('y', DIM.rectY);
     }
 
@@ -251,10 +230,10 @@ function updateDescription (i) {
   var layout = LAYOUT.getLayout();
   // alert("changing text on description" + elementText + " to " + element.description);
   eText.textContent = getElement(i).description;
-  if ((layout=="default") && vlElements.includes(i)) {
+  if ((layout === 'default') && vlElements.includes(i)) {
     eText.setAttribute('x', DIM.textXV);
     eText.setAttribute('y', DIM.textYV);
-  } else if ((layout=="default") && vrElements.includes(i)) {
+  } else if ((layout === 'default') && vrElements.includes(i)) {
     eText.setAttribute('x', DIM.textXVR);
     eText.setAttribute('y', DIM.textYVR);
   } else {
@@ -271,10 +250,10 @@ function updateEmoticon (i) {
       if (ASSET.hasEmoticon(j, getElement(i))) {
         eEmo.setAttribute('height', DIM.emoticonHeight);
         eEmo.setAttribute('width', DIM.emoticonWidth);
-        if ((layout=="default") && (vlElements.includes(i))) {
+        if ((layout === 'default') && (vlElements.includes(i))) {
           eEmo.setAttribute('x', DIM.emoticonXV);
           eEmo.setAttribute('y', DIM.emoticonYV);
-        } else if ((layout=="default") && (vrElements.includes(i))) {
+        } else if ((layout === 'default') && (vrElements.includes(i))) {
           eEmo.setAttribute('x', DIM.emoticonXVR);
           eEmo.setAttribute('y', DIM.emoticonYVR);
         } else {
@@ -298,7 +277,7 @@ function updateIcon (i) {
       if (ASSET.hasIcon(j, getElement(i))) {
         eIcon.setAttribute('height', DIM.iconHeight);
         eIcon.setAttribute('width', DIM.iconWidth);
-        if ((layout=="default") && (vlElements.includes(i))) {
+        if ((layout === 'default') && (vlElements.includes(i))) {
           eIcon.setAttribute('x', DIM.iconXV);
           eIcon.setAttribute('y', DIM.iconYV);
         } else {
@@ -324,23 +303,21 @@ function updatePostIt (i) {
     ePostItText.setAttribute('width', DIM.postitTextWidth);
     // ePostItText.setAttribute('y', DIM.postitTextY);
 
-    if (((layout=="default") && vlElements.includes(i))) {
+    if (((layout === 'default') && vlElements.includes(i))) {
       ePostIt.setAttribute('y', DIM.postitVY);
       ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVY);
       ePostItText.setAttribute('x', DIM.postitTextVX);
-    } else if ((layout=="default") && vrElements.includes(i)) {
+    } else if ((layout === 'default') && vrElements.includes(i)) {
       ePostIt.setAttribute('x', DIM.postitVRX);
       ePostIt.setAttribute('y', DIM.postitVRY);
       ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVRY);
       ePostItText.setAttribute('x', DIM.postitTextVRX);
-    }
-    else if(layout=="scol"){
+    } else if (layout === 'scol') {
       ePostIt.setAttribute('x', DIM.postitScolX);
       ePostIt.setAttribute('y', DIM.postitScolY);
       ePostItText.setAttribute('y', DIM.postitTextScolY + DIM.postitScolY);
       ePostItText.setAttribute('x', DIM.postitTextScolX);
-    } 
-    else if(layout=="default") {
+    } else if (layout === 'default') {
       ePostIt.setAttribute('x', DIM.postitX);
       ePostItText.setAttribute('x', DIM.postitTextX);
       ePostItText.setAttribute('y', DIM.postitTextY);
@@ -357,84 +334,73 @@ function changeFocus () {
     var element = document.getElementById(elements[i].eID);
     element.setAttribute('class', 'not-focussed');
   }
+
   var focus = document.getElementById(elements[focusElement].eID);
   focus.setAttribute('class', 'focussed');
 
-  if(UI.getEditor()=='fixed'){
+  if (UI.getEditor() === 'fixed') {
     document.getElementById('event_desc').value = elements[focusElement].description;
     document.getElementById('icon_select').value = elements[focusElement].icon;
     document.getElementById('emoticon_select').value = elements[focusElement].emoticon;
     document.getElementById('post_it_text').value = elements[focusElement].postit;
     document.getElementById('title').innerHTML = 'Journey Editor: Card ' + focusElement;
-  }
-  else if(UI.getEditor()=='float'){
+  } else if (UI.getEditor() === 'float') {
     stopFloatingFocus();
   }
 
-  if(LAYOUT.getLayout()=='scol'){
-    focusY = 130 * focusElement;
-    window.scrollTo(0,focusY);
-  }
-  else if(LAYOUT.getLayout()=='default'){
+  if (LAYOUT.getLayout() === 'scol') {
+    window.scrollTo(0, (130 * focusElement));
+  } else if (LAYOUT.getLayout() === 'default') {
     focus.scrollIntoView(true);
-    focusY = LAYOUT.getLayoutData()['default'][focusElement]['{y}'];
-    focusY = focusY - 100;
+    var focusY = (LAYOUT.getLayoutData()['default'][focusElement]['{y}']) - 100;
     window.scrollTo(0, focusY);
   }
 }
 
-function stopFloatingFocus(){
-  document.getElementById('floating_editor').setAttribute('visibility','collapse');
-  float_editing = false;
-} 
+function stopFloatingFocus () {
+  document.getElementById('floating_editor').setAttribute('visibility', 'collapse');
+  floatEditing = false;
+}
 
-function editFocus(){
-  if(UI.getEditor()=='float'){
-    if(float_editing){
+function editFocus () {
+  var newX;
+  var newY;
+  if (UI.getEditor() === 'float') {
+    if (floatEditing) {
       stopFloatingFocus();
-      document.getElementById("journey-canvas").focus();
-    }
-    else{
-      if(LAYOUT.getLayout()=='scol'){
-        var newY = (focusElement * 130) + 100;
-        document.getElementById('floating_editor').setAttribute('x','0');
-        document.getElementById('floating_editor').setAttribute('y',newY);
-        document.getElementById('floating_editor').setAttribute('visibility','visible');
-      }
-      else if(LAYOUT.getLayout()=='default'){
-        layoutData = LAYOUT.getLayoutData();
+      document.getElementById('journey-canvas').focus();
+    } else {
+      if (LAYOUT.getLayout() === 'scol') {
+        newY = (focusElement * 130) + 100;
+        document.getElementById('floating_editor').setAttribute('x', '0');
+        document.getElementById('floating_editor').setAttribute('y', newY);
+        document.getElementById('floating_editor').setAttribute('visibility', 'visible');
+      } else if (LAYOUT.getLayout() === 'default') {
+        var layoutData = LAYOUT.getLayoutData();
         newX = layoutData['default'][focusElement]['{x}'];
         newY = layoutData['default'][focusElement]['{y}'];
-        orient = layoutData['default'][focusElement]['{orient}'];
         newY = newY + DIM.rectY;
-        document.getElementById('floating_editor').setAttribute('x',newX);
-        document.getElementById('floating_editor').setAttribute('y',newY);
-        document.getElementById('floating_editor').setAttribute('visibility','visible');
+        document.getElementById('floating_editor').setAttribute('x', newX);
+        document.getElementById('floating_editor').setAttribute('y', newY);
+        document.getElementById('floating_editor').setAttribute('visibility', 'visible');
       }
-      
+
       document.getElementById('floating_icon_select').value = elements[focusElement].icon;
       document.getElementById('floating_emoticon_select').value = elements[focusElement].emoticon;
       document.getElementById('floating_event_desc').value = elements[focusElement].description;
       document.getElementById('floating_post_it_text').value = elements[focusElement].postit;
-      float_editing = true;
+      floatEditing = true;
     }
-  }
-  else if(UI.getEditor()=='fixed'){
+  } else if (UI.getEditor() === 'fixed') {
     document.getElementById('event_desc').focus();
   }
 }
 
 function canvasGotFocus () {
-  // events when focus shifts to canvas?
-  // alert("canvas got focus");
   canvasInFocus = true;
-  focus.scrollIntoView(true);
-  //window.scrollBy(0, -300);
-  //focusElement = -1;
 }
 
 function canvasLostFocus () {
-  // alert("canvas lost focus");
   canvasInFocus = false;
 }
 
@@ -463,13 +429,12 @@ function cyclePrevFocus () {
 function updateElement () {
   // change existing element according to form
   // alert("changing values of " + document.getElementById('event_desc').value);
-  if(UI.getEditor() == 'fixed'){
+  if (UI.getEditor() === 'fixed') {
     elements[focusElement].description = document.getElementById('event_desc').value;
     elements[focusElement].icon = document.getElementById('icon_select').value;
     elements[focusElement].emoticon = document.getElementById('emoticon_select').value;
     elements[focusElement].postit = document.getElementById('post_it_text').value;
-  }
-  else if(UI.getEditor() == 'float'){
+  } else if (UI.getEditor() === 'float') {
     elements[focusElement].icon = document.getElementById('floating_icon_select').value;
     elements[focusElement].emoticon = document.getElementById('floating_emoticon_select').value;
     elements[focusElement].description = document.getElementById('floating_event_desc').value;
@@ -534,7 +499,7 @@ function getElement (idx) {
   return elements[ idx ];
 }
 
-function getNumElements(){
+function getNumElements () {
   return numElements;
 }
 
@@ -760,11 +725,11 @@ function receivedText (ev) {
   Layout the SVG journey cards | © 2018 The Open University (IET-OU).
 */
 
-//module.exports.reflow = reflow;
-module.exports = { reflow: reflow, 
+module.exports = {
+  reflow: reflow,
   getLayout: getLayout,
   getLayoutData: getLayoutData
-}
+};
 
 const LAYOUTS = require('./layouts.json');
 const SVG_TEMPLATE = document.querySelector('#oj-svg-card-template').innerText;
@@ -772,7 +737,7 @@ const HOLDER = document.querySelector('#journey-canvas .card-holder');
 const CORE = require('./core');
 const UI = require('./user-interface');
 
-var set_layout = "default";
+var setLayout = 'default';
 
 function reflow (layout) {
   layout = layout || 'default';
@@ -781,27 +746,26 @@ function reflow (layout) {
 
   let cards = [];
 
-  if(layout == "scol"){
-    set_layout = "scol";
+  if (layout === 'scol') {
+    setLayout = 'scol';
     UI.chooseEditor('float');
-    scol_layout = [];
-    for(i=0;i<CORE.getNumElements();i++){
-      scol_layout.push({ "{j}": i,  "{x}": 0,   "{y}": i*130,  "{orient}": "horiz" });
+    var scolLayout = [];
+    for (var i = 0; i < CORE.getNumElements(); i++) {
+      scolLayout.push({ '{j}': i, '{x}': 0, '{y}': i * 130, '{orient}': 'horiz' });
     }
-    scol_layout.forEach(function (elem) {
+    scolLayout.forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
     document.getElementById('journey-canvas').setAttribute('height', '4700');
-    document.getElementById('start_point').setAttribute('visibility','collapse');
-    document.getElementById('scol_start_point').setAttribute('visibility','visible');
-  }
-  else{
+    document.getElementById('start_point').setAttribute('visibility', 'collapse');
+    document.getElementById('scol_start_point').setAttribute('visibility', 'visible');
+  } else {
     LAYOUTS[ layout ].forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
     document.getElementById('scol_bar').style.display = 'none';
-    document.getElementById('scol_saveload').style.display = 'none'; 
-    document.getElementById('scol_start_point').setAttribute('visibility','collapse');
+    document.getElementById('scol_saveload').style.display = 'none';
+    document.getElementById('scol_start_point').setAttribute('visibility', 'collapse');
   }
 
   HOLDER.innerHTML = cards.join('\n');
@@ -816,11 +780,11 @@ function replaceObj (str, mapObj) {
   });
 }
 
-function getLayout(){
-  return set_layout;
+function getLayout () {
+  return setLayout;
 }
 
-function getLayoutData(){
+function getLayoutData () {
   return LAYOUTS;
 }
 
@@ -950,11 +914,10 @@ module.exports = {
 var editor = 'fixed';
 
 function toggleEditor (tog) {
-var editorElement;
-  if(editor == 'fixed'){
+  var editorElement;
+  if (editor === 'fixed') {
     editorElement = document.getElementById('editor');
-  }
-  else if(editor == 'float'){
+  } else if (editor === 'float') {
     editorElement = document.getElementById('floating_editor');
   }
   if (tog === 1 || tog === 'show') {
@@ -964,7 +927,7 @@ var editorElement;
   }
 }
 
-function toggleScolOptions(){
+function toggleScolOptions () {
   var saveload = document.getElementById('scol_saveload');
   if (saveload.style.display === 'none') {
     saveload.style.display = 'block';
@@ -986,20 +949,20 @@ function changeBackground () {
   document.body.style.background = document.getElementById('background_select').value;
 }
 
-function chooseEditor(newEdit){
-  if(newEdit == 'float'){
-    //document.getElementById('floating_editor').setAttribute('visibility','visible');
+function chooseEditor (newEdit) {
+  if (newEdit === 'float') {
+    // document.getElementById('floating_editor').setAttribute('visibility','visible');
     document.getElementById('editor').style.display = 'none';
     editor = newEdit;
-  }
-  else if(newEdit == 'fixed'){
-    document.getElementById('floating_editor').setAttribute('visibility','collapse');
+  } else if (newEdit === 'fixed') {
+    document.getElementById('floating_editor').setAttribute('visibility', 'collapse');
   }
 }
 
-function getEditor(){
+function getEditor () {
   return editor;
 }
+
 },{}],"our-journey":[function(require,module,exports){
 /*!
   Our Journey module | © 2018 The Open University (IET-OU).
