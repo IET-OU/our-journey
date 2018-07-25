@@ -83,11 +83,15 @@ svg#journey-canvas .startcard
       display: inline;
     }
 
+.scol_saveload
+    {
+      display: none;
+    }
+
 .floatingeditor
   {
     display: flex;
     flex-direction: row; 
-    background: red;
   }
 
 .main {
