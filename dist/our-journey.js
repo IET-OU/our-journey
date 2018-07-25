@@ -17,7 +17,7 @@ function run () {
   console.warn('The our-journey API:', require('../index'));
 
   if (LOC.search.match(/[?&]layout=scol/)) {
-    LAYOUT.reflow('scol');
+    LAYOUT.setScol();
   } else {
     LAYOUT.reflow();
   }
@@ -26,7 +26,7 @@ function run () {
     UI.chooseEditor('float');
   }
 
-  CORE.initialiseElements();
+  CORE.initialiseElements(0);
 
   EVENTS.initialise();
 
@@ -117,7 +117,10 @@ module.exports = /* WAS: window.our_journeys */ {
   setFocusElement: setFocusElement,
   getNumElements: getNumElements,
   editFocus: editFocus,
-  stopFloatingFocus: stopFloatingFocus
+  stopFloatingFocus: stopFloatingFocus,
+  addElements: addElements,
+  getMaxElements: getMaxElements,
+  addMoreFocus: addMoreFocus
 };
 
 const UI = require('./user-interface');
@@ -130,13 +133,15 @@ var elements = [];
 var focusElement = -1;
 var canvasInFocus = false;
 var floatEditing = false;
+var focusOnAddMore = false;
 
 // Number of card elements presented in page
-var numElements = 35;
+var numElements = 15;
+var maxElements = 64;
 
 // These variables state which elements are vertical ones for the default layout presentation. On the left (vl) or the right (vr).
-var vlElements = [ 0, 9, 10, 19, 20, 29, 30 ];
-var vrElements = [ 4, 5, 14, 15, 24, 25, 34 ];
+var vlElements = [ 0, 9, 10, 19, 20, 29, 30, 39, 40, 49, 50, 59, 60 ];
+var vrElements = [ 4, 5, 14, 15, 24, 25, 34, 35, 44, 45, 54, 55, 64 ];
 
 document.addEventListener('keydown', (event) => {
   const keyName = event.key;
@@ -168,6 +173,8 @@ document.addEventListener('keydown', (event) => {
           moveBackElement();
         } else if (active === 'floating_forwardform') {
           moveFwdElement();
+        } else if (focusOnAddMore) {
+          LAYOUT.addElementsToLayout();
         } else {
           editFocus();
         }
@@ -176,8 +183,8 @@ document.addEventListener('keydown', (event) => {
   }
 }, false);
 
-function initialiseElements () {
-  for (var i = 0; i < numElements; i++) {
+function initialiseElements (start) {
+  for (var i = start; i < numElements; i++) {
     var element = { eID: 'place' + i, description: '', emoticon: 'none', icon: 'none', postit: '' };
     elements.push(element);
   }
@@ -194,12 +201,9 @@ function demoFill () {
 function elementClick () {
   var e = this.id.substring(5);
   focusElement = parseInt(e);
-  // alert('mouse down on ' + focusElement);
   changeFocus();
   editFocus();
-  if (UI.getEditor() === 'fixed') {
-    UI.toggleEditor('show');
-  }
+  UI.toggleEditor('show');
 }
 
 function updateElements () {
@@ -351,9 +355,18 @@ function changeFocus () {
   if (LAYOUT.getLayout() === 'scol') {
     window.scrollTo(0, (130 * focusElement));
   } else if (LAYOUT.getLayout() === 'default') {
-    focus.scrollIntoView(true);
-    var focusY = (LAYOUT.getLayoutData()['default'][focusElement]['{y}']) - 100;
+    var focusY = (LAYOUT.getLayoutData()['default'][focusElement]['{y}']);
     window.scrollTo(0, focusY);
+  }
+}
+
+function addMoreFocus (focusin) {
+  if (focusin) {
+    document.getElementById('add_more_rect').setAttribute('class', 'focussed');
+    focusOnAddMore = true;
+  } else {
+    document.getElementById('add_more_rect').setAttribute('class', 'not-focussed');
+    focusOnAddMore = false;
   }
 }
 
@@ -411,8 +424,11 @@ function cycleNextFocus () {
     focusElement++;
     changeFocus();
   } else {
-    // alert("leave canvas");
-    // removeFocus();
+    if (numElements < maxElements) {
+      addMoreFocus(true);
+      focusElement = -1;
+      changeFocus();
+    }
   }
 }
 
@@ -420,9 +436,11 @@ function cyclePrevFocus () {
   if (focusElement > 0) {
     focusElement--;
     changeFocus();
-  } else {
-    // alert("leave canvas backwards");
-    // removeFocus();
+  }
+  if (focusOnAddMore) {
+    addMoreFocus(false);
+    focusElement = numElements - 1;
+    changeFocus();
   }
 }
 
@@ -503,6 +521,14 @@ function getNumElements () {
   return numElements;
 }
 
+function addElements (addition) {
+  numElements = numElements + addition;
+}
+
+function getMaxElements () {
+  return maxElements;
+}
+
 },{"./assets":2,"./dimension.json":4,"./layout":7,"./user-interface":10}],4:[function(require,module,exports){
 module.exports={
   "#": "Sizes & positions of card and Post-it components.",
@@ -557,6 +583,7 @@ module.exports = {
 const CORE = require('./core');
 const FILE = require('./file');
 const UI = require('./user-interface');
+const LAYOUT = require('./layout');
 
 // Initialises the event handlers for form submit buttons.
 function initialiseEventHandlers () {
@@ -653,6 +680,14 @@ function initialiseEventHandlers () {
   attachEvent('#floating_post_it_text', 'change', function (e) {
     CORE.updateElement();
   });
+
+  attachEvent('#add_more_rect', 'click', function (e) {
+    LAYOUT.addElementsToLayout();
+  });
+
+  attachEvent('#add_more_text', 'click', function (e) {
+    LAYOUT.addElementsToLayout();
+  });
 }
 
 function attachEvent (selector, eventName, callback) {
@@ -661,7 +696,7 @@ function attachEvent (selector, eventName, callback) {
   });
 }
 
-},{"./core":3,"./file":6,"./user-interface":10}],6:[function(require,module,exports){
+},{"./core":3,"./file":6,"./layout":7,"./user-interface":10}],6:[function(require,module,exports){
 /*!
   Save and load journeys to file, in the browser. | © 2018 The Open University (IET-OU).
 */
@@ -728,7 +763,9 @@ function receivedText (ev) {
 module.exports = {
   reflow: reflow,
   getLayout: getLayout,
-  getLayoutData: getLayoutData
+  getLayoutData: getLayoutData,
+  addElementsToLayout: addElementsToLayout,
+  setScol: setScol
 };
 
 const LAYOUTS = require('./layouts.json');
@@ -739,16 +776,21 @@ const UI = require('./user-interface');
 
 var setLayout = 'default';
 
+function setScol () {
+  setLayout = 'scol';
+  document.getElementById('journey-canvas').setAttribute('height', '2200');
+  reflow(setLayout);
+  UI.chooseEditor('float');
+  document.getElementById('add_more_card').setAttribute('x', 55);
+  document.getElementById('start_point').setAttribute('visibility', 'collapse');
+  document.getElementById('scol_start_point').setAttribute('visibility', 'visible');
+}
+
 function reflow (layout) {
   layout = layout || 'default';
-
   console.warn('layout:', layout, LAYOUTS[ layout ], /* SVG_TEMPLATE, */ HOLDER);
-
   let cards = [];
-
   if (layout === 'scol') {
-    setLayout = 'scol';
-    UI.chooseEditor('float');
     var scolLayout = [];
     for (var i = 0; i < CORE.getNumElements(); i++) {
       scolLayout.push({ '{j}': i, '{x}': 0, '{y}': i * 130, '{orient}': 'horiz' });
@@ -756,9 +798,7 @@ function reflow (layout) {
     scolLayout.forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
-    document.getElementById('journey-canvas').setAttribute('height', '4700');
-    document.getElementById('start_point').setAttribute('visibility', 'collapse');
-    document.getElementById('scol_start_point').setAttribute('visibility', 'visible');
+    document.getElementById('add_more_card').setAttribute('y', (CORE.getNumElements() * 130) + 100);
   } else {
     LAYOUTS[ layout ].forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
@@ -767,8 +807,39 @@ function reflow (layout) {
     document.getElementById('scol_saveload').style.display = 'none';
     document.getElementById('scol_start_point').setAttribute('visibility', 'collapse');
   }
-
   HOLDER.innerHTML = cards.join('\n');
+}
+
+function addElementsToLayout () {
+  if (CORE.getNumElements() < CORE.getMaxElements()) {
+    var numExistingElements = CORE.getNumElements();
+    var newHeight;
+    var newAddMoreY;
+    CORE.addElements(10);
+    if (setLayout === 'default') {
+      reflow('default' + CORE.getNumElements());
+      newHeight = parseInt(document.getElementById('journey-canvas').getAttribute('height')) + 720;
+      if (CORE.getNumElements() < CORE.getMaxElements()) {
+        newAddMoreY = parseInt(document.getElementById('add_more_card').getAttribute('y')) + 700;
+        document.getElementById('add_more_card').setAttribute('y', newAddMoreY);
+      } else {
+        document.getElementById('add_more_card').setAttribute('visibility', 'collapse');
+      }
+    } else if (setLayout === 'scol') {
+      reflow('scol');
+      newHeight = parseInt(document.getElementById('journey-canvas').getAttribute('height')) + 1400;
+      if (CORE.getNumElements() < CORE.getMaxElements()) {
+        newAddMoreY = parseInt(document.getElementById('add_more_card').getAttribute('y'));
+        document.getElementById('add_more_card').setAttribute('y', newAddMoreY);
+      } else {
+        document.getElementById('add_more_card').setAttribute('visibility', 'collapse');
+      }
+    }
+    document.getElementById('journey-canvas').setAttribute('height', newHeight);
+    CORE.initialiseElements(numExistingElements);
+    CORE.setFocusElement(numExistingElements);
+    CORE.changeFocus();
+  }
 }
 
 // https://github.com/nfreear/gaad-widget/blob/3.x/src/methods.js#L90-L96
@@ -807,6 +878,52 @@ module.exports={
     { "{j}": 11,  "{x}": 250,  "{y}": 820,  "{orient}": "horiz" },
     { "{j}": 12,  "{x}": 490,  "{y}": 820,  "{orient}": "horiz" },
     { "{j}": 13,  "{x}": 730,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 14,  "{x}": 970,  "{y}": 820,  "{orient}": "vert" }
+  ],
+  
+  "default25": [
+    { "{j}": 0,  "{x}": 20,   "{y}": 110,  "{orient}": "vert" },
+    { "{j}": 1,  "{x}": 250,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 2,  "{x}": 490,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 3,  "{x}": 730,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 4,  "{x}": 970,  "{y}": 120,  "{orient}": "vert" },
+    { "{j}": 5,  "{x}": 970,  "{y}": 360,  "{orient}": "vert" },
+    { "{j}": 6,  "{x}": 730,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 7,  "{x}": 490,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 8,  "{x}": 250,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 9,   "{x}": 20,  "{y}": 570,  "{orient}": "vert" },
+    { "{j}": 10,  "{x}": 20,  "{y}": 810,  "{orient}": "vert" },
+    { "{j}": 11,  "{x}": 250,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 12,  "{x}": 490,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 13,  "{x}": 730,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 14,  "{x}": 970,  "{y}": 820,  "{orient}": "vert" },
+    { "{j}": 15,  "{x}": 970,  "{y}": 1060,  "{orient}": "vert" },
+    { "{j}": 16,  "{x}": 730,  "{y}": 1170,  "{orient}": "horiz" },
+    { "{j}": 17,  "{x}": 490,  "{y}": 1170,  "{orient}": "horiz" },
+    { "{j}": 18,  "{x}": 250,  "{y}": 1170,  "{orient}": "horiz" },
+    { "{j}": 19,  "{x}": 20,   "{y}": 1270,  "{orient}": "vert" },
+    { "{j}": 20,  "{x}": 20,   "{y}": 1510,  "{orient}": "vert" },
+    { "{j}": 21,  "{x}": 250,  "{y}": 1520,  "{orient}": "horiz" },
+    { "{j}": 22,  "{x}": 490,  "{y}": 1520,  "{orient}": "horiz" },
+    { "{j}": 23,  "{x}": 730,  "{y}": 1520,  "{orient}": "horiz" },
+    { "{j}": 24,  "{x}": 970,  "{y}": 1520,  "{orient}": "vert" }
+  ],
+
+  "default35": [
+    { "{j}": 0,  "{x}": 20,   "{y}": 110,  "{orient}": "vert" },
+    { "{j}": 1,  "{x}": 250,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 2,  "{x}": 490,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 3,  "{x}": 730,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 4,  "{x}": 970,  "{y}": 120,  "{orient}": "vert" },
+    { "{j}": 5,  "{x}": 970,  "{y}": 360,  "{orient}": "vert" },
+    { "{j}": 6,  "{x}": 730,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 7,  "{x}": 490,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 8,  "{x}": 250,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 9,   "{x}": 20,  "{y}": 570,  "{orient}": "vert" },
+    { "{j}": 10,  "{x}": 20,  "{y}": 810,  "{orient}": "vert" },
+    { "{j}": 11,  "{x}": 250,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 12,  "{x}": 490,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 13,  "{x}": 730,  "{y}": 820,  "{orient}": "horiz" },
     { "{j}": 14,  "{x}": 970,  "{y}": 820,  "{orient}": "vert" },
     { "{j}": 15,  "{x}": 970,  "{y}": 1060,  "{orient}": "vert" },
     { "{j}": 16,  "{x}": 730,  "{y}": 1170,  "{orient}": "horiz" },
@@ -828,6 +945,180 @@ module.exports={
     { "{j}": 32,  "{x}": 490,  "{y}": 2220,  "{orient}": "horiz" },
     { "{j}": 33,  "{x}": 730,  "{y}": 2220,  "{orient}": "horiz" },
     { "{j}": 34,  "{x}": 970,  "{y}": 2220,  "{orient}": "vert"    }
+  ],
+
+  "default45": [
+    { "{j}": 0,  "{x}": 20,   "{y}": 110,  "{orient}": "vert" },
+    { "{j}": 1,  "{x}": 250,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 2,  "{x}": 490,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 3,  "{x}": 730,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 4,  "{x}": 970,  "{y}": 120,  "{orient}": "vert" },
+    { "{j}": 5,  "{x}": 970,  "{y}": 360,  "{orient}": "vert" },
+    { "{j}": 6,  "{x}": 730,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 7,  "{x}": 490,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 8,  "{x}": 250,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 9,   "{x}": 20,  "{y}": 570,  "{orient}": "vert" },
+    { "{j}": 10,  "{x}": 20,  "{y}": 810,  "{orient}": "vert" },
+    { "{j}": 11,  "{x}": 250,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 12,  "{x}": 490,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 13,  "{x}": 730,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 14,  "{x}": 970,  "{y}": 820,  "{orient}": "vert" },
+    { "{j}": 15,  "{x}": 970,  "{y}": 1060,  "{orient}": "vert" },
+    { "{j}": 16,  "{x}": 730,  "{y}": 1170,  "{orient}": "horiz" },
+    { "{j}": 17,  "{x}": 490,  "{y}": 1170,  "{orient}": "horiz" },
+    { "{j}": 18,  "{x}": 250,  "{y}": 1170,  "{orient}": "horiz" },
+    { "{j}": 19,  "{x}": 20,   "{y}": 1270,  "{orient}": "vert" },
+    { "{j}": 20,  "{x}": 20,   "{y}": 1510,  "{orient}": "vert" },
+    { "{j}": 21,  "{x}": 250,  "{y}": 1520,  "{orient}": "horiz" },
+    { "{j}": 22,  "{x}": 490,  "{y}": 1520,  "{orient}": "horiz" },
+    { "{j}": 23,  "{x}": 730,  "{y}": 1520,  "{orient}": "horiz" },
+    { "{j}": 24,  "{x}": 970,  "{y}": 1520,  "{orient}": "vert" },
+    { "{j}": 25,  "{x}": 970,  "{y}": 1760,  "{orient}": "vert" },
+    { "{j}": 26,  "{x}": 730,  "{y}": 1870,  "{orient}": "horiz" },
+    { "{j}": 27,  "{x}": 490,  "{y}": 1870,  "{orient}": "horiz" },
+    { "{j}": 28,  "{x}": 250,  "{y}": 1870,  "{orient}": "horiz" },
+    { "{j}": 29,  "{x}": 20,   "{y}": 1970,  "{orient}": "vert" },
+    { "{j}": 30,  "{x}": 20,   "{y}": 2210,  "{orient}": "vert" },
+    { "{j}": 31,  "{x}": 250,  "{y}": 2220,  "{orient}": "horiz" },
+    { "{j}": 32,  "{x}": 490,  "{y}": 2220,  "{orient}": "horiz" },
+    { "{j}": 33,  "{x}": 730,  "{y}": 2220,  "{orient}": "horiz" },
+    { "{j}": 34,  "{x}": 970,  "{y}": 2220,  "{orient}": "vert" },
+    { "{j}": 35,  "{x}": 970,  "{y}": 2460,  "{orient}": "vert" },
+    { "{j}": 36,  "{x}": 730,  "{y}": 2570,  "{orient}": "horiz" },
+    { "{j}": 37,  "{x}": 490,  "{y}": 2570,  "{orient}": "horiz" },
+    { "{j}": 38,  "{x}": 250,  "{y}": 2570,  "{orient}": "horiz" },
+    { "{j}": 39,  "{x}": 20,   "{y}": 2670,  "{orient}": "vert" },
+    { "{j}": 40,  "{x}": 20,   "{y}": 2910,  "{orient}": "vert" },
+    { "{j}": 41,  "{x}": 250,  "{y}": 2920,  "{orient}": "horiz" },
+    { "{j}": 42,  "{x}": 490,  "{y}": 2920,  "{orient}": "horiz" },
+    { "{j}": 43,  "{x}": 730,  "{y}": 2920,  "{orient}": "horiz" },
+    { "{j}": 44,  "{x}": 970,  "{y}": 2920,  "{orient}": "vert"  }
+  ],
+
+  "default55": [
+    { "{j}": 0,  "{x}": 20,   "{y}": 110,  "{orient}": "vert" },
+    { "{j}": 1,  "{x}": 250,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 2,  "{x}": 490,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 3,  "{x}": 730,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 4,  "{x}": 970,  "{y}": 120,  "{orient}": "vert" },
+    { "{j}": 5,  "{x}": 970,  "{y}": 360,  "{orient}": "vert" },
+    { "{j}": 6,  "{x}": 730,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 7,  "{x}": 490,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 8,  "{x}": 250,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 9,   "{x}": 20,  "{y}": 570,  "{orient}": "vert" },
+    { "{j}": 10,  "{x}": 20,  "{y}": 810,  "{orient}": "vert" },
+    { "{j}": 11,  "{x}": 250,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 12,  "{x}": 490,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 13,  "{x}": 730,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 14,  "{x}": 970,  "{y}": 820,  "{orient}": "vert" },
+    { "{j}": 15,  "{x}": 970,  "{y}": 1060,  "{orient}": "vert" },
+    { "{j}": 16,  "{x}": 730,  "{y}": 1170,  "{orient}": "horiz" },
+    { "{j}": 17,  "{x}": 490,  "{y}": 1170,  "{orient}": "horiz" },
+    { "{j}": 18,  "{x}": 250,  "{y}": 1170,  "{orient}": "horiz" },
+    { "{j}": 19,  "{x}": 20,   "{y}": 1270,  "{orient}": "vert" },
+    { "{j}": 20,  "{x}": 20,   "{y}": 1510,  "{orient}": "vert" },
+    { "{j}": 21,  "{x}": 250,  "{y}": 1520,  "{orient}": "horiz" },
+    { "{j}": 22,  "{x}": 490,  "{y}": 1520,  "{orient}": "horiz" },
+    { "{j}": 23,  "{x}": 730,  "{y}": 1520,  "{orient}": "horiz" },
+    { "{j}": 24,  "{x}": 970,  "{y}": 1520,  "{orient}": "vert" },
+    { "{j}": 25,  "{x}": 970,  "{y}": 1760,  "{orient}": "vert" },
+    { "{j}": 26,  "{x}": 730,  "{y}": 1870,  "{orient}": "horiz" },
+    { "{j}": 27,  "{x}": 490,  "{y}": 1870,  "{orient}": "horiz" },
+    { "{j}": 28,  "{x}": 250,  "{y}": 1870,  "{orient}": "horiz" },
+    { "{j}": 29,  "{x}": 20,   "{y}": 1970,  "{orient}": "vert" },
+    { "{j}": 30,  "{x}": 20,   "{y}": 2210,  "{orient}": "vert" },
+    { "{j}": 31,  "{x}": 250,  "{y}": 2220,  "{orient}": "horiz" },
+    { "{j}": 32,  "{x}": 490,  "{y}": 2220,  "{orient}": "horiz" },
+    { "{j}": 33,  "{x}": 730,  "{y}": 2220,  "{orient}": "horiz" },
+    { "{j}": 34,  "{x}": 970,  "{y}": 2220,  "{orient}": "vert" },
+    { "{j}": 35,  "{x}": 970,  "{y}": 2460,  "{orient}": "vert" },
+    { "{j}": 36,  "{x}": 730,  "{y}": 2570,  "{orient}": "horiz" },
+    { "{j}": 37,  "{x}": 490,  "{y}": 2570,  "{orient}": "horiz" },
+    { "{j}": 38,  "{x}": 250,  "{y}": 2570,  "{orient}": "horiz" },
+    { "{j}": 39,  "{x}": 20,   "{y}": 2670,  "{orient}": "vert" },
+    { "{j}": 40,  "{x}": 20,   "{y}": 2910,  "{orient}": "vert" },
+    { "{j}": 41,  "{x}": 250,  "{y}": 2920,  "{orient}": "horiz" },
+    { "{j}": 42,  "{x}": 490,  "{y}": 2920,  "{orient}": "horiz" },
+    { "{j}": 43,  "{x}": 730,  "{y}": 2920,  "{orient}": "horiz" },
+    { "{j}": 44,  "{x}": 970,  "{y}": 2920,  "{orient}": "vert" },
+    { "{j}": 45,  "{x}": 970,  "{y}": 3160,  "{orient}": "vert" },
+    { "{j}": 46,  "{x}": 730,  "{y}": 3270,  "{orient}": "horiz" },
+    { "{j}": 47,  "{x}": 490,  "{y}": 3270,  "{orient}": "horiz" },
+    { "{j}": 48,  "{x}": 250,  "{y}": 3270,  "{orient}": "horiz" },
+    { "{j}": 49,  "{x}": 20,   "{y}": 3370,  "{orient}": "vert" },
+    { "{j}": 50,  "{x}": 20,   "{y}": 3610,  "{orient}": "vert" },
+    { "{j}": 51,  "{x}": 250,  "{y}": 3620,  "{orient}": "horiz" },
+    { "{j}": 52,  "{x}": 490,  "{y}": 3620,  "{orient}": "horiz" },
+    { "{j}": 53,  "{x}": 730,  "{y}": 3620,  "{orient}": "horiz" },
+    { "{j}": 54,  "{x}": 970,  "{y}": 3620,  "{orient}": "vert"  }
+  ],
+
+  "default65": [
+    { "{j}": 0,  "{x}": 20,   "{y}": 110,  "{orient}": "vert" },
+    { "{j}": 1,  "{x}": 250,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 2,  "{x}": 490,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 3,  "{x}": 730,  "{y}": 120,  "{orient}": "horiz" },
+    { "{j}": 4,  "{x}": 970,  "{y}": 120,  "{orient}": "vert" },
+    { "{j}": 5,  "{x}": 970,  "{y}": 360,  "{orient}": "vert" },
+    { "{j}": 6,  "{x}": 730,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 7,  "{x}": 490,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 8,  "{x}": 250,  "{y}": 470,  "{orient}": "horiz" },
+    { "{j}": 9,   "{x}": 20,  "{y}": 570,  "{orient}": "vert" },
+    { "{j}": 10,  "{x}": 20,  "{y}": 810,  "{orient}": "vert" },
+    { "{j}": 11,  "{x}": 250,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 12,  "{x}": 490,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 13,  "{x}": 730,  "{y}": 820,  "{orient}": "horiz" },
+    { "{j}": 14,  "{x}": 970,  "{y}": 820,  "{orient}": "vert" },
+    { "{j}": 15,  "{x}": 970,  "{y}": 1060,  "{orient}": "vert" },
+    { "{j}": 16,  "{x}": 730,  "{y}": 1170,  "{orient}": "horiz" },
+    { "{j}": 17,  "{x}": 490,  "{y}": 1170,  "{orient}": "horiz" },
+    { "{j}": 18,  "{x}": 250,  "{y}": 1170,  "{orient}": "horiz" },
+    { "{j}": 19,  "{x}": 20,   "{y}": 1270,  "{orient}": "vert" },
+    { "{j}": 20,  "{x}": 20,   "{y}": 1510,  "{orient}": "vert" },
+    { "{j}": 21,  "{x}": 250,  "{y}": 1520,  "{orient}": "horiz" },
+    { "{j}": 22,  "{x}": 490,  "{y}": 1520,  "{orient}": "horiz" },
+    { "{j}": 23,  "{x}": 730,  "{y}": 1520,  "{orient}": "horiz" },
+    { "{j}": 24,  "{x}": 970,  "{y}": 1520,  "{orient}": "vert" },
+    { "{j}": 25,  "{x}": 970,  "{y}": 1760,  "{orient}": "vert" },
+    { "{j}": 26,  "{x}": 730,  "{y}": 1870,  "{orient}": "horiz" },
+    { "{j}": 27,  "{x}": 490,  "{y}": 1870,  "{orient}": "horiz" },
+    { "{j}": 28,  "{x}": 250,  "{y}": 1870,  "{orient}": "horiz" },
+    { "{j}": 29,  "{x}": 20,   "{y}": 1970,  "{orient}": "vert" },
+    { "{j}": 30,  "{x}": 20,   "{y}": 2210,  "{orient}": "vert" },
+    { "{j}": 31,  "{x}": 250,  "{y}": 2220,  "{orient}": "horiz" },
+    { "{j}": 32,  "{x}": 490,  "{y}": 2220,  "{orient}": "horiz" },
+    { "{j}": 33,  "{x}": 730,  "{y}": 2220,  "{orient}": "horiz" },
+    { "{j}": 34,  "{x}": 970,  "{y}": 2220,  "{orient}": "vert" },
+    { "{j}": 35,  "{x}": 970,  "{y}": 2460,  "{orient}": "vert" },
+    { "{j}": 36,  "{x}": 730,  "{y}": 2570,  "{orient}": "horiz" },
+    { "{j}": 37,  "{x}": 490,  "{y}": 2570,  "{orient}": "horiz" },
+    { "{j}": 38,  "{x}": 250,  "{y}": 2570,  "{orient}": "horiz" },
+    { "{j}": 39,  "{x}": 20,   "{y}": 2670,  "{orient}": "vert" },
+    { "{j}": 40,  "{x}": 20,   "{y}": 2910,  "{orient}": "vert" },
+    { "{j}": 41,  "{x}": 250,  "{y}": 2920,  "{orient}": "horiz" },
+    { "{j}": 42,  "{x}": 490,  "{y}": 2920,  "{orient}": "horiz" },
+    { "{j}": 43,  "{x}": 730,  "{y}": 2920,  "{orient}": "horiz" },
+    { "{j}": 44,  "{x}": 970,  "{y}": 2920,  "{orient}": "vert" },
+    { "{j}": 45,  "{x}": 970,  "{y}": 3160,  "{orient}": "vert" },
+    { "{j}": 46,  "{x}": 730,  "{y}": 3270,  "{orient}": "horiz" },
+    { "{j}": 47,  "{x}": 490,  "{y}": 3270,  "{orient}": "horiz" },
+    { "{j}": 48,  "{x}": 250,  "{y}": 3270,  "{orient}": "horiz" },
+    { "{j}": 49,  "{x}": 20,   "{y}": 3370,  "{orient}": "vert" },
+    { "{j}": 50,  "{x}": 20,   "{y}": 3610,  "{orient}": "vert" },
+    { "{j}": 51,  "{x}": 250,  "{y}": 3620,  "{orient}": "horiz" },
+    { "{j}": 52,  "{x}": 490,  "{y}": 3620,  "{orient}": "horiz" },
+    { "{j}": 53,  "{x}": 730,  "{y}": 3620,  "{orient}": "horiz" },
+    { "{j}": 54,  "{x}": 970,  "{y}": 3620,  "{orient}": "vert"  },
+    { "{j}": 55,  "{x}": 970,  "{y}": 3860,  "{orient}": "vert" },
+    { "{j}": 56,  "{x}": 730,  "{y}": 3970,  "{orient}": "horiz" },
+    { "{j}": 57,  "{x}": 490,  "{y}": 3970,  "{orient}": "horiz" },
+    { "{j}": 58,  "{x}": 250,  "{y}": 3970,  "{orient}": "horiz" },
+    { "{j}": 59,  "{x}": 20,   "{y}": 4070,  "{orient}": "vert" },
+    { "{j}": 60,  "{x}": 20,   "{y}": 4310,  "{orient}": "vert" },
+    { "{j}": 61,  "{x}": 250,  "{y}": 4320,  "{orient}": "horiz" },
+    { "{j}": 62,  "{x}": 490,  "{y}": 4320,  "{orient}": "horiz" },
+    { "{j}": 63,  "{x}": 730,  "{y}": 4320,  "{orient}": "horiz" },
+    { "{j}": 64,  "{x}": 970,  "{y}": 4320,  "{orient}": "vert"  }
   ]
 }
 
@@ -929,11 +1220,9 @@ function toggleEditor (tog) {
 
 function toggleScolOptions () {
   var saveload = document.getElementById('scol_saveload');
-  if ((saveload.style.display === 'none') || (!saveload.style.display)) 
-  {
+  if ((saveload.style.display === 'none') || (!saveload.style.display)) {
     saveload.style.display = 'block';
-  }
-  else {
+  } else {
     saveload.style.display = 'none';
   }
 }

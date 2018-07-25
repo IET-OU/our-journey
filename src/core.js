@@ -19,7 +19,10 @@ module.exports = /* WAS: window.our_journeys */ {
   setFocusElement: setFocusElement,
   getNumElements: getNumElements,
   editFocus: editFocus,
-  stopFloatingFocus: stopFloatingFocus
+  stopFloatingFocus: stopFloatingFocus,
+  addElements: addElements,
+  getMaxElements: getMaxElements,
+  addMoreFocus: addMoreFocus
 };
 
 const UI = require('./user-interface');
@@ -32,13 +35,15 @@ var elements = [];
 var focusElement = -1;
 var canvasInFocus = false;
 var floatEditing = false;
+var focusOnAddMore = false;
 
 // Number of card elements presented in page
-var numElements = 35;
+var numElements = 15;
+var maxElements = 64;
 
 // These variables state which elements are vertical ones for the default layout presentation. On the left (vl) or the right (vr).
-var vlElements = [ 0, 9, 10, 19, 20, 29, 30 ];
-var vrElements = [ 4, 5, 14, 15, 24, 25, 34 ];
+var vlElements = [ 0, 9, 10, 19, 20, 29, 30, 39, 40, 49, 50, 59, 60 ];
+var vrElements = [ 4, 5, 14, 15, 24, 25, 34, 35, 44, 45, 54, 55, 64 ];
 
 document.addEventListener('keydown', (event) => {
   const keyName = event.key;
@@ -70,6 +75,8 @@ document.addEventListener('keydown', (event) => {
           moveBackElement();
         } else if (active === 'floating_forwardform') {
           moveFwdElement();
+        } else if (focusOnAddMore) {
+          LAYOUT.addElementsToLayout();
         } else {
           editFocus();
         }
@@ -78,8 +85,8 @@ document.addEventListener('keydown', (event) => {
   }
 }, false);
 
-function initialiseElements () {
-  for (var i = 0; i < numElements; i++) {
+function initialiseElements (start) {
+  for (var i = start; i < numElements; i++) {
     var element = { eID: 'place' + i, description: '', emoticon: 'none', icon: 'none', postit: '' };
     elements.push(element);
   }
@@ -96,12 +103,9 @@ function demoFill () {
 function elementClick () {
   var e = this.id.substring(5);
   focusElement = parseInt(e);
-  // alert('mouse down on ' + focusElement);
   changeFocus();
   editFocus();
-  if (UI.getEditor() === 'fixed') {
-    UI.toggleEditor('show');
-  }
+  UI.toggleEditor('show');
 }
 
 function updateElements () {
@@ -253,9 +257,18 @@ function changeFocus () {
   if (LAYOUT.getLayout() === 'scol') {
     window.scrollTo(0, (130 * focusElement));
   } else if (LAYOUT.getLayout() === 'default') {
-    focus.scrollIntoView(true);
-    var focusY = (LAYOUT.getLayoutData()['default'][focusElement]['{y}']) - 100;
+    var focusY = (LAYOUT.getLayoutData()['default'][focusElement]['{y}']);
     window.scrollTo(0, focusY);
+  }
+}
+
+function addMoreFocus (focusin) {
+  if (focusin) {
+    document.getElementById('add_more_rect').setAttribute('class', 'focussed');
+    focusOnAddMore = true;
+  } else {
+    document.getElementById('add_more_rect').setAttribute('class', 'not-focussed');
+    focusOnAddMore = false;
   }
 }
 
@@ -313,8 +326,11 @@ function cycleNextFocus () {
     focusElement++;
     changeFocus();
   } else {
-    // alert("leave canvas");
-    // removeFocus();
+    if (numElements < maxElements) {
+      addMoreFocus(true);
+      focusElement = -1;
+      changeFocus();
+    }
   }
 }
 
@@ -322,9 +338,11 @@ function cyclePrevFocus () {
   if (focusElement > 0) {
     focusElement--;
     changeFocus();
-  } else {
-    // alert("leave canvas backwards");
-    // removeFocus();
+  }
+  if (focusOnAddMore) {
+    addMoreFocus(false);
+    focusElement = numElements - 1;
+    changeFocus();
   }
 }
 
@@ -403,4 +421,12 @@ function getElement (idx) {
 
 function getNumElements () {
   return numElements;
+}
+
+function addElements (addition) {
+  numElements = numElements + addition;
+}
+
+function getMaxElements () {
+  return maxElements;
 }

@@ -9,6 +9,7 @@ module.exports = {
 const CORE = require('./core');
 const FILE = require('./file');
 const UI = require('./user-interface');
+const LAYOUT = require('./layout');
 
 // Initialises the event handlers for form submit buttons.
 function initialiseEventHandlers () {
@@ -104,6 +105,14 @@ function initialiseEventHandlers () {
 
   attachEvent('#floating_post_it_text', 'change', function (e) {
     CORE.updateElement();
+  });
+
+  attachEvent('#add_more_rect', 'click', function (e) {
+    LAYOUT.addElementsToLayout();
+  });
+
+  attachEvent('#add_more_text', 'click', function (e) {
+    LAYOUT.addElementsToLayout();
   });
 }
 
