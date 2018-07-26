@@ -15,17 +15,16 @@ const UI = require('./user-interface');
 
 function run () {
   console.warn('The our-journey API:', require('../index'));
-  
   if (LOC.search.match(/[?&]layout=scol/)) {
     LAYOUT.setScol();
   } else {
     LAYOUT.reflow();
   }
-  
+
   if (LOC.search.match(/[?&]edit=float/)) {
     UI.chooseEditor('float');
   }
-  
+
   CORE.initialiseElements(0);
 
   EVENTS.initialise();
@@ -37,7 +36,7 @@ function run () {
   }
 
   CORE.setFocusElement(0);
-  
+
   CORE.changeFocus();
 
   UI.toggleOptions();
@@ -207,6 +206,7 @@ function elementClick () {
   changeFocus();
   editFocus();
   UI.toggleEditor('show');
+  document.getElementById('journey-canvas').focus();
 }
 
 function updateElements () {
@@ -354,12 +354,8 @@ function changeFocus () {
     stopFloatingFocus();
   }
 
-  if (LAYOUT.getLayout() === 'scol') {
-    window.scrollTo(0, (130 * focusElement));
-  } else if (LAYOUT.getLayout() === 'default') {
-    var focusY = (LAYOUT.getLayoutData()['default'][focusElement]['{y}']);
-    window.scrollTo(0, focusY);
-  }
+  var focusY = document.getElementById('group' + focusElement).getAttribute('y');
+  window.scrollTo(0, focusY);
 }
 
 function addMoreFocus (focusin) {

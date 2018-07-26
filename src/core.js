@@ -108,6 +108,7 @@ function elementClick () {
   changeFocus();
   editFocus();
   UI.toggleEditor('show');
+  document.getElementById('journey-canvas').focus();
 }
 
 function updateElements () {
@@ -255,12 +256,8 @@ function changeFocus () {
     stopFloatingFocus();
   }
 
-  if (LAYOUT.getLayout() === 'scol') {
-    window.scrollTo(0, (130 * focusElement));
-  } else if (LAYOUT.getLayout() === 'default') {
-    var focusY = (LAYOUT.getLayoutData()['default'][focusElement]['{y}']);
-    window.scrollTo(0, focusY);
-  }
+  var focusY = document.getElementById('group' + focusElement).getAttribute('y');
+  window.scrollTo(0, focusY);
 }
 
 function addMoreFocus (focusin) {
