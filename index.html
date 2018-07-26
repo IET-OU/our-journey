@@ -16,7 +16,7 @@
     </head>
     <body>
         <div class="editorbar" id="editor">
-        <h1 id="title">Journey editor</h1>
+        <h1 id="title">Journey editor: Map your study journey on to the cards</h1>
         <p></p>
             <form id="updateform">
 
@@ -120,21 +120,21 @@
                     </div>
                 </div>
 
-        <div class='scol_bar' id='scol_bar'>
-            <h1 id="scol_title">Journey editor: Map your study journey onto the cards</h1>
-            <form id="scol_options" aria-label="Show or hide load and save options">
-                <input type='submit' value="Load/Save" id='scolOptionsButton'>
+        <div class='float_bar' id='float_bar'>
+            <h1 id="float_title">Journey editor: Map your study journey onto the cards</h1>
+            <form id="float_options" aria-label="Show or hide load and save options">
+                <input type='submit' value="Load/Save" id='floatOptionsButton'>
             </form>
-            <div id='scol_saveload' class='scol_saveload'>
-                <form id="scol_saveform" aria-label="Save journey to file">
-                        <label for="filenamearea">Save:</label>
-                        <input type='text' value="journey_file" id="filenamearea">
-                        <input type="submit" value="Save" id="saveButton" >
+            <div id='float_saveload' class='float_saveload'>
+                <form id="float_saveform" aria-label="Save journey to file">
+                        <label for="float_saveform">Save:</label>
+                        <input type='text' value="journey_file" id="float_filenamearea">
+                        <input type="submit" value="Save" id="float_saveButton" >
                 </form>
-                <form id="scol_loadform" aria-label="Load journey from file">
+                <form id="float_loadform" aria-label="Load journey from file">
                     <label for="fileinput">Load:</label>
-                    <input type='file' id='fileinput' required aria-required="true">
-                    <input type="submit" id="loadButton" value="Load" >
+                    <input type='file' id='float_fileinput' required aria-required="true">
+                    <input type="submit" id="float_loadButton" value="Load" >
                 </form>
             </div>
         </div>

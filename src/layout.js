@@ -79,8 +79,6 @@ function addElementsToLayout () {
     }
     document.getElementById('journey-canvas').setAttribute('height', newHeight);
     CORE.initialiseElements(numExistingElements);
-    CORE.setFocusElement(numExistingElements);
-    CORE.changeFocus();
   }
 }
 

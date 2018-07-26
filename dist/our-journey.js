@@ -612,9 +612,9 @@ function initialiseEventHandlers () {
     CORE.moveBackElement();
   });
 
-  attachEvent('#scol_options', 'submit', function (e) {
+  attachEvent('#float_options', 'submit', function (e) {
     e.preventDefault();
-    UI.toggleScolOptions();
+    UI.toggleFloatOptions();
   });
 
   attachEvent('#floating_forwardform', 'submit', function (e) {
@@ -647,12 +647,12 @@ function initialiseEventHandlers () {
     FILE.saveJourney();
   });
 
-  attachEvent('#scol_saveform', 'submit', function (e) {
+  attachEvent('#float_saveform', 'submit', function (e) {
     e.preventDefault();
     FILE.saveJourney();
   });
 
-  attachEvent('#scol_loadform', 'submit', function (e) {
+  attachEvent('#float_loadform', 'submit', function (e) {
     e.preventDefault();
     FILE.loadJourney();
   });
@@ -707,6 +707,8 @@ module.exports = {
 };
 
 const CORE = require('./core');
+const LAYOUT = require('./layout');
+const UI = require('./user-interface');
 const alert = window.alert;
 const FileReader = window.FileReader;
 
@@ -728,8 +730,11 @@ function loadJourney () {
     alert("The file API isn't supported on this browser yet.");
     return;
   }
-
-  input = document.getElementById('fileinput');
+  if (UI.getEditor() === 'float') {
+    input = document.getElementById('float_fileinput');
+  } else {
+    input = document.getElementById('fileinput');
+  }
   if (!input) {
     alert("Couldn't find the fileinput element.");
   } else if (!input.files) {
@@ -748,14 +753,20 @@ function receivedText (ev) {
   let lines = ev.target.result;
   const newArr = JSON.parse(lines);
   var elements = CORE.getElements();
-  // alert('file loaded');
+  var additionalElements = newArr.length - CORE.getNumElements();
+  if (additionalElements > 0) {
+    var addIterations = additionalElements / 10;
+    for (var j = 0; j < addIterations; j++) {
+      LAYOUT.addElementsToLayout();
+    }
+  }
   for (var i = 0; i < newArr.length; i++) {
     elements[i] = { eID: newArr[i].eID, description: newArr[i].description, emoticon: newArr[i].emoticon, icon: newArr[i].icon, postit: newArr[i].postit };
   }
   CORE.updateElements();
 }
 
-},{"./core":3}],7:[function(require,module,exports){
+},{"./core":3,"./layout":7,"./user-interface":10}],7:[function(require,module,exports){
 /*!
   Layout the SVG journey cards | © 2018 The Open University (IET-OU).
 */
@@ -837,8 +848,6 @@ function addElementsToLayout () {
     }
     document.getElementById('journey-canvas').setAttribute('height', newHeight);
     CORE.initialiseElements(numExistingElements);
-    CORE.setFocusElement(numExistingElements);
-    CORE.changeFocus();
   }
 }
 
@@ -1199,7 +1208,7 @@ module.exports = {
   changeBackground: changeBackground,
   chooseEditor: chooseEditor,
   getEditor: getEditor,
-  toggleScolOptions: toggleScolOptions
+  toggleFloatOptions: toggleFloatOptions
 };
 
 var editor = 'fixed';
@@ -1218,8 +1227,8 @@ function toggleEditor (tog) {
   }
 }
 
-function toggleScolOptions () {
-  var saveload = document.getElementById('scol_saveload');
+function toggleFloatOptions () {
+  var saveload = document.getElementById('float_saveload');
   if ((saveload.style.display === 'none') || (!saveload.style.display)) {
     saveload.style.display = 'block';
   } else {

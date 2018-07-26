@@ -76,7 +76,7 @@ svg#journey-canvas .startcard
       display: inline;
     }
 
-.scol_bar
+.float_bar
     {
       border: 1px solid #aaa;
       border-radius: 5px;
@@ -88,7 +88,7 @@ svg#journey-canvas .startcard
       display: inline;
     }
 
-.scol_saveload
+.float_saveload
     {
       display: none;
     }

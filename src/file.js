@@ -8,6 +8,8 @@ module.exports = {
 };
 
 const CORE = require('./core');
+const LAYOUT = require('./layout');
+const UI = require('./user-interface');
 const alert = window.alert;
 const FileReader = window.FileReader;
 
@@ -29,8 +31,11 @@ function loadJourney () {
     alert("The file API isn't supported on this browser yet.");
     return;
   }
-
-  input = document.getElementById('fileinput');
+  if (UI.getEditor() === 'float') {
+    input = document.getElementById('float_fileinput');
+  } else {
+    input = document.getElementById('fileinput');
+  }
   if (!input) {
     alert("Couldn't find the fileinput element.");
   } else if (!input.files) {
@@ -49,7 +54,13 @@ function receivedText (ev) {
   let lines = ev.target.result;
   const newArr = JSON.parse(lines);
   var elements = CORE.getElements();
-  // alert('file loaded');
+  var additionalElements = newArr.length - CORE.getNumElements();
+  if (additionalElements > 0) {
+    var addIterations = additionalElements / 10;
+    for (var j = 0; j < addIterations; j++) {
+      LAYOUT.addElementsToLayout();
+    }
+  }
   for (var i = 0; i < newArr.length; i++) {
     elements[i] = { eID: newArr[i].eID, description: newArr[i].description, emoticon: newArr[i].emoticon, icon: newArr[i].icon, postit: newArr[i].postit };
   }

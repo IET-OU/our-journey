@@ -38,9 +38,9 @@ function initialiseEventHandlers () {
     CORE.moveBackElement();
   });
 
-  attachEvent('#scol_options', 'submit', function (e) {
+  attachEvent('#float_options', 'submit', function (e) {
     e.preventDefault();
-    UI.toggleScolOptions();
+    UI.toggleFloatOptions();
   });
 
   attachEvent('#floating_forwardform', 'submit', function (e) {
@@ -73,12 +73,12 @@ function initialiseEventHandlers () {
     FILE.saveJourney();
   });
 
-  attachEvent('#scol_saveform', 'submit', function (e) {
+  attachEvent('#float_saveform', 'submit', function (e) {
     e.preventDefault();
     FILE.saveJourney();
   });
 
-  attachEvent('#scol_loadform', 'submit', function (e) {
+  attachEvent('#float_loadform', 'submit', function (e) {
     e.preventDefault();
     FILE.loadJourney();
   });
