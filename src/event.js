@@ -9,6 +9,7 @@ module.exports = {
 const CORE = require('./core');
 const FILE = require('./file');
 const UI = require('./user-interface');
+const LAYOUT = require('./layout');
 
 // Initialises the event handlers for form submit buttons.
 function initialiseEventHandlers () {
@@ -37,9 +38,9 @@ function initialiseEventHandlers () {
     CORE.moveBackElement();
   });
 
-  attachEvent('#scol_options', 'submit', function (e) {
+  attachEvent('#float_options', 'submit', function (e) {
     e.preventDefault();
-    UI.toggleScolOptions();
+    UI.toggleFloatOptions();
   });
 
   attachEvent('#floating_forwardform', 'submit', function (e) {
@@ -72,12 +73,12 @@ function initialiseEventHandlers () {
     FILE.saveJourney();
   });
 
-  attachEvent('#scol_saveform', 'submit', function (e) {
+  attachEvent('#float_saveform', 'submit', function (e) {
     e.preventDefault();
     FILE.saveJourney();
   });
 
-  attachEvent('#scol_loadform', 'submit', function (e) {
+  attachEvent('#float_loadform', 'submit', function (e) {
     e.preventDefault();
     FILE.loadJourney();
   });
@@ -104,6 +105,14 @@ function initialiseEventHandlers () {
 
   attachEvent('#floating_post_it_text', 'change', function (e) {
     CORE.updateElement();
+  });
+
+  attachEvent('#add_more_rect', 'click', function (e) {
+    LAYOUT.addElementsToLayout();
+  });
+
+  attachEvent('#add_more_text', 'click', function (e) {
+    LAYOUT.addElementsToLayout();
   });
 }
 

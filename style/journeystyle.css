@@ -59,6 +59,11 @@ svg#journey-canvas .startcard
         font-size: 1.1rem; /* Was: 16pt; */
     }
 
+.addmore
+    {
+      font-size: 4rem;
+    }
+
 .editorbar
     {
       border: 1px solid #aaa;
@@ -71,7 +76,7 @@ svg#journey-canvas .startcard
       display: inline;
     }
 
-.scol_bar
+.float_bar
     {
       border: 1px solid #aaa;
       border-radius: 5px;
@@ -83,7 +88,7 @@ svg#journey-canvas .startcard
       display: inline;
     }
 
-.scol_saveload
+.float_saveload
     {
       display: none;
     }
@@ -134,6 +139,7 @@ svg#journey-canvas .card > .focussed {
   stroke-width: 3;
 }
 
+
 svg#journey-canvas .card.orient-horiz > rect {
   height: 130px;
   width: 240px;
@@ -142,6 +148,16 @@ svg#journey-canvas .card.orient-horiz > rect {
 svg#journey-canvas .card.orient-vert > rect {
   height: 240px;
   width: 130px;
+}
+
+.add_more_card > .focussed {
+  stroke: blue;
+  stroke-width: 3;
+}
+
+.add_more_card > .not-focussed {
+  stroke: black;
+  stroke-width: 1;
 }
 
 .footer-copy {
