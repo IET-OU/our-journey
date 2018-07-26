@@ -1,6 +1,8 @@
 
 .pa11yci*
 
+dist
+!dist/our-journey.js
 node_modules/
 package-lock.json
 *BAK*
@@ -9,5 +11,7 @@ package-lock.json
 *.tgz
 /dropbox
 test*.html
+
+src/help.js
 
 # End.

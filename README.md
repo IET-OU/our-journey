@@ -1,6 +1,7 @@
 
 [![js-semistandard-style][semi-icon]][semi]
 [![Browserify][br-icon]][browserify]
+[![Husky Git hooks][hook-icon]][hook]
 
 # Our Journeys interactive student journey creator
 
@@ -31,7 +32,7 @@ Author: [Tim Coughlan][tim], IET.
 Use [Node][] and npm to aid development:
 
 ```sh
-npm run add-hook
+rm .git/hooks/pre-commit ## Remove previous Git hook!
 
 npm install
 npm run build
@@ -39,6 +40,25 @@ npm start
 npm test
 npm run fix
 npm run pa11y-ci
+```
+
+## API
+
+### URL parameters
+
+ * `. . . . ?demo=1` — Load an empty demonstration journey;
+ * `. .?layout=scol` — Display with a single-column layout;
+ * `. . ?edit=float` — Use a _floating_ editor;
+ * `. ?j=base64:...` — Load a journey represented in the URL parameter as Base64-encoded JSON;
+
+([Search][q-location].)
+
+### Javascript
+
+```js
+console.log('Inspect:', require('our-journey'));
+
+require('our-journey').app.run();
 ```
 
 ---
@@ -65,5 +85,8 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [sem-i0]: https://img.shields.io/badge/code_style-semistandard-brightgreen.svg
 [browserify]: http://browserify.org/ "Built with Browserify"
 [br-icon]: https://nick.freear.org.uk/badge/browserify.svg
+[hook]: https://npmjs.com/package/husky "Git hooks made easy 🐶"
+[hook-icon]: https://img.shields.io/badge/git--hook-husky-ff69b4.svg
+[q-location]: https://github.com/IET-OU/our-journey/search?q=location&type=Code "GitHub search: 'location'"
 
 [End]: //.
