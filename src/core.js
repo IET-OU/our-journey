@@ -50,6 +50,7 @@ document.addEventListener('keydown', (event) => {
   if (canvasInFocus) {
     switch (keyName) {
       case 'ArrowUp':
+        event.preventDefault();
         if (!floatEditing) {
           cyclePrevFocus();
         }
@@ -65,6 +66,7 @@ document.addEventListener('keydown', (event) => {
         }
         break;
       case 'ArrowDown':
+        event.preventDefault();
         if (!floatEditing) {
           cycleNextFocus();
         }
@@ -240,7 +242,6 @@ function changeFocus () {
     var element = document.getElementById(elements[i].eID);
     element.setAttribute('class', 'not-focussed');
   }
-
   var focus = document.getElementById(elements[focusElement].eID);
   focus.setAttribute('class', 'focussed');
 

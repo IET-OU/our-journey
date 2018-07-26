@@ -15,17 +15,17 @@ const UI = require('./user-interface');
 
 function run () {
   console.warn('The our-journey API:', require('../index'));
-
+  
   if (LOC.search.match(/[?&]layout=scol/)) {
     LAYOUT.setScol();
   } else {
     LAYOUT.reflow();
   }
-
+  
   if (LOC.search.match(/[?&]edit=float/)) {
     UI.chooseEditor('float');
   }
-
+  
   CORE.initialiseElements(0);
 
   EVENTS.initialise();
@@ -37,6 +37,7 @@ function run () {
   }
 
   CORE.setFocusElement(0);
+  
   CORE.changeFocus();
 
   UI.toggleOptions();
@@ -148,6 +149,7 @@ document.addEventListener('keydown', (event) => {
   if (canvasInFocus) {
     switch (keyName) {
       case 'ArrowUp':
+        event.preventDefault();
         if (!floatEditing) {
           cyclePrevFocus();
         }
@@ -163,6 +165,7 @@ document.addEventListener('keydown', (event) => {
         }
         break;
       case 'ArrowDown':
+        event.preventDefault();
         if (!floatEditing) {
           cycleNextFocus();
         }
@@ -338,7 +341,6 @@ function changeFocus () {
     var element = document.getElementById(elements[i].eID);
     element.setAttribute('class', 'not-focussed');
   }
-
   var focus = document.getElementById(elements[focusElement].eID);
   focus.setAttribute('class', 'focussed');
 
@@ -814,8 +816,8 @@ function reflow (layout) {
     LAYOUTS[ layout ].forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
-    document.getElementById('scol_bar').style.display = 'none';
-    document.getElementById('scol_saveload').style.display = 'none';
+    document.getElementById('float_bar').style.display = 'none';
+    document.getElementById('float_saveload').style.display = 'none';
     document.getElementById('scol_start_point').setAttribute('visibility', 'collapse');
   }
   HOLDER.innerHTML = cards.join('\n');

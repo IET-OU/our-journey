@@ -14,17 +14,17 @@ const UI = require('./user-interface');
 
 function run () {
   console.warn('The our-journey API:', require('../index'));
-
+  
   if (LOC.search.match(/[?&]layout=scol/)) {
     LAYOUT.setScol();
   } else {
     LAYOUT.reflow();
   }
-
+  
   if (LOC.search.match(/[?&]edit=float/)) {
     UI.chooseEditor('float');
   }
-
+  
   CORE.initialiseElements(0);
 
   EVENTS.initialise();
@@ -36,6 +36,7 @@ function run () {
   }
 
   CORE.setFocusElement(0);
+  
   CORE.changeFocus();
 
   UI.toggleOptions();

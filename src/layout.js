@@ -45,8 +45,8 @@ function reflow (layout) {
     LAYOUTS[ layout ].forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
-    document.getElementById('scol_bar').style.display = 'none';
-    document.getElementById('scol_saveload').style.display = 'none';
+    document.getElementById('float_bar').style.display = 'none';
+    document.getElementById('float_saveload').style.display = 'none';
     document.getElementById('scol_start_point').setAttribute('visibility', 'collapse');
   }
   HOLDER.innerHTML = cards.join('\n');
