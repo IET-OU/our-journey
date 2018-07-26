@@ -28,7 +28,7 @@ function reflow (layout) {
     UI.chooseEditor('float');
     var scolLayout = [];
     for (var i = 0; i < CORE.getNumElements(); i++) {
-      scolLayout.push({ '{j}': i, '{x}': 0, '{y}': i * 130, '{orient}': 'horiz' });
+      scolLayout.push({ '{j}': i, '{x}': 0, '{y}': i * 130, '{w}': 240, '{h}': 130, '{orient}': 'horiz' });
     }
     scolLayout.forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
