@@ -27,7 +27,6 @@ function toggleEditor (tog) {
   }
 }
 
-
 function toggleFloatOptions () {
   var saveload = document.getElementById('float_saveload');
   if ((saveload.style.display === 'none') || (!saveload.style.display)) {

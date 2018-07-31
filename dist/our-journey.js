@@ -1225,6 +1225,7 @@ function toggleEditor (tog) {
   }
 }
 
+
 function toggleFloatOptions () {
   var saveload = document.getElementById('float_saveload');
   if ((saveload.style.display === 'none') || (!saveload.style.display)) {
@@ -1249,7 +1250,6 @@ function changeBackground () {
 
 function chooseEditor (newEdit) {
   if (newEdit === 'float') {
-    // document.getElementById('floating_editor').setAttribute('visibility','visible');
     document.getElementById('editor').style.display = 'none';
     editor = newEdit;
   } else if (newEdit === 'fixed') {

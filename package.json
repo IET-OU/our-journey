@@ -1,8 +1,7 @@
 {
-  "private": true,
-  "name": "iet-ou--our-journeys",
-  "description": "Our Journeys interactive. | © 2018 The Open University (IET-OU).",
-  "version": "1.0.0",
+  "name": "our-journey",
+  "description": "Our Journey interactive. | © 2018 The Open University (IET-OU).",
+  "version": "1.1.0",
   "license": "UNLICENSED",
   "main": "index.js",
   "browser": "dist/our-journey.js",
@@ -28,8 +27,8 @@
   "keywords": [
     "accessibility",
     "education",
-    "game",
-    "learning-journey"
+    "learning-journey",
+    "student-experience"
   ],
   "engines": {
     "node": ">= 6"
