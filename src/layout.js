@@ -5,7 +5,9 @@
 module.exports = {
   reflow: reflow,
   getLayout: getLayout,
-  getLayoutData: getLayoutData
+  getLayoutData: getLayoutData,
+  addElementsToLayout: addElementsToLayout,
+  setScol: setScol
 };
 
 const LAYOUTS = require('./layouts.json');
@@ -16,16 +18,21 @@ const UI = require('./user-interface');
 
 var setLayout = 'default';
 
+function setScol () {
+  setLayout = 'scol';
+  document.getElementById('journey-canvas').setAttribute('height', '2200');
+  reflow(setLayout);
+  UI.chooseEditor('float');
+  document.getElementById('add_more_card').setAttribute('x', 55);
+  document.getElementById('start_point').setAttribute('visibility', 'collapse');
+  document.getElementById('scol_start_point').setAttribute('visibility', 'visible');
+}
+
 function reflow (layout) {
   layout = layout || 'default';
-
   console.warn('layout:', layout, LAYOUTS[ layout ], /* SVG_TEMPLATE, */ HOLDER);
-
   let cards = [];
-
   if (layout === 'scol') {
-    setLayout = 'scol';
-    UI.chooseEditor('float');
     var scolLayout = [];
     for (var i = 0; i < CORE.getNumElements(); i++) {
       scolLayout.push({ '{j}': i, '{x}': 0, '{y}': i * 130, '{w}': 240, '{h}': 130, '{orient}': 'horiz' });
@@ -33,19 +40,46 @@ function reflow (layout) {
     scolLayout.forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
-    document.getElementById('journey-canvas').setAttribute('height', '4700');
-    document.getElementById('start_point').setAttribute('visibility', 'collapse');
-    document.getElementById('scol_start_point').setAttribute('visibility', 'visible');
+    document.getElementById('add_more_card').setAttribute('y', (CORE.getNumElements() * 130) + 100);
   } else {
     LAYOUTS[ layout ].forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
-    document.getElementById('scol_bar').style.display = 'none';
-    document.getElementById('scol_saveload').style.display = 'none';
+    document.getElementById('float_bar').style.display = 'none';
+    document.getElementById('float_saveload').style.display = 'none';
     document.getElementById('scol_start_point').setAttribute('visibility', 'collapse');
   }
-
   HOLDER.innerHTML = cards.join('\n');
+}
+
+function addElementsToLayout () {
+  if (CORE.getNumElements() < CORE.getMaxElements()) {
+    var numExistingElements = CORE.getNumElements();
+    var newHeight;
+    var newAddMoreY;
+    CORE.addElements(10);
+    if (setLayout === 'default') {
+      reflow('default' + CORE.getNumElements());
+      newHeight = parseInt(document.getElementById('journey-canvas').getAttribute('height')) + 720;
+      if (CORE.getNumElements() < CORE.getMaxElements()) {
+        newAddMoreY = parseInt(document.getElementById('add_more_card').getAttribute('y')) + 700;
+        document.getElementById('add_more_card').setAttribute('y', newAddMoreY);
+      } else {
+        document.getElementById('add_more_card').setAttribute('visibility', 'collapse');
+      }
+    } else if (setLayout === 'scol') {
+      reflow('scol');
+      newHeight = parseInt(document.getElementById('journey-canvas').getAttribute('height')) + 1400;
+      if (CORE.getNumElements() < CORE.getMaxElements()) {
+        newAddMoreY = parseInt(document.getElementById('add_more_card').getAttribute('y'));
+        document.getElementById('add_more_card').setAttribute('y', newAddMoreY);
+      } else {
+        document.getElementById('add_more_card').setAttribute('visibility', 'collapse');
+      }
+    }
+    document.getElementById('journey-canvas').setAttribute('height', newHeight);
+    CORE.initialiseElements(numExistingElements);
+  }
 }
 
 // https://github.com/nfreear/gaad-widget/blob/3.x/src/methods.js#L90-L96

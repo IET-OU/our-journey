@@ -8,7 +8,7 @@ module.exports = {
   changeBackground: changeBackground,
   chooseEditor: chooseEditor,
   getEditor: getEditor,
-  toggleScolOptions: toggleScolOptions
+  toggleFloatOptions: toggleFloatOptions
 };
 
 var editor = 'fixed';
@@ -27,8 +27,8 @@ function toggleEditor (tog) {
   }
 }
 
-function toggleScolOptions () {
-  var saveload = document.getElementById('scol_saveload');
+function toggleFloatOptions () {
+  var saveload = document.getElementById('float_saveload');
   if ((saveload.style.display === 'none') || (!saveload.style.display)) {
     saveload.style.display = 'block';
   } else {
