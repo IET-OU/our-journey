@@ -1,0 +1,48 @@
+<p><a href="https://github.com/Flet/semistandard" title="Javascript coding style — semistandard"><img src="https://nick.freear.org.uk/badge/semi.svg" alt="js-semistandard-style"></a>
+<a href="http://browserify.org/" title="Built with Browserify"><img src="https://nick.freear.org.uk/badge/browserify.svg" alt="Browserify"></a>
+<a href="https://npmjs.com/package/husky" title="Git hooks made easy 🐶"><img src="https://img.shields.io/badge/git--hook-husky-ff69b4.svg" alt="Husky Git hooks"></a></p>
+<h1>Our Journeys interactive student journey creator</h1>
+<p><em>Our Journeys</em> is an interactive online tool to chart the highs and lows of student journeys.</p>
+<p>The aim is to produce a simple and accessible structure for students to represent
+the events that occurred in their study and their experience of these.
+It is being developed for use by all students and different institutions.
+The design is informed by research conducted to understand the challenges faced
+by disabled students at the Open University (see <a href="http://oro.open.ac.uk/54760/" title="The accessibility of administrative processes: Assessing the impacts on students in higher education. Tim Coughlan, Kate Lister, 2018">Coughlan &amp; Lister, 2018</a>
+and <a href="http://oro.open.ac.uk/48991/" title="Understanding Accessibility as a Process through the Analysis of Feedback from Disabled Students. Tim Coughlan, Thomas Daniel Ullmann, &amp; Kate Lister, 2017.">Coughlan, Ullmann &amp; Lister, 2017)</a>).</p>
+<ul>
+<li><a href="https://iet-ou.github.io/our-journey/?demo=1">iet-ou.github.io/our-journey</a></li>
+</ul>
+<p><img src="assets/screenshot-1.png" alt="Screenshot 1 - the editor." title="'Our Journeys' screenshot 1 - the editor."></p>
+<p>A physical version of the tool has been developed by <a href="https://iet.open.ac.uk/profiles/tim.coughlan">Tim Coughlan</a> and
+<a href="http://www.open.ac.uk/people/kml322">Kate Lister</a> of the Institute of Educational Technology (IET)
+and Glen Darby in LTI Translation, with <a href="https://re.ukri.org/knowledge-exchange/the-higher-education-innovation-fund-heif/" title="The Higher Education Innovation Fund (HEIF)">HEIF funding</a>.</p>
+<p>This prototype online version is being developed in the
+Institute of Educational Technology (IET), at The Open University.</p>
+<p>Author: <a href="https://iet.open.ac.uk/profiles/tim.coughlan">Tim Coughlan</a>, IET.</p>
+<h2>Install .. serve .. test .. fix</h2>
+<p>Use <a href="https://nodejs.org/en/">Node</a> and npm to aid development:</p>
+<pre><code class="language-sh">rm .git/hooks/pre-commit ## Remove previous Git hook!
+
+npm install
+npm run build
+npm start
+npm test
+npm run fix
+npm run pa11y-ci
+</code></pre>
+<h2>API</h2>
+<h3>URL parameters</h3>
+<ul>
+<li><code>. . . . ?demo=1</code> — Load an empty demonstration journey;</li>
+<li><code>. .?layout=scol</code> — Display with a single-column layout;</li>
+<li><code>. . ?edit=float</code> — Use a <em>floating</em> editor;</li>
+<li><code>. ?j=base64:...</code> — Load a journey represented in the URL parameter as Base64-encoded JSON;</li>
+</ul>
+<p>(<a href="https://github.com/IET-OU/our-journey/search?q=location&amp;type=Code" title="GitHub search: 'location'">Search</a>.)</p>
+<h3>Javascript</h3>
+<pre><code class="language-js">console.log('Inspect:', require('our-journey'));
+
+require('our-journey').app.run();
+</code></pre>
+<hr>
+<p>Copyright © 2018 <a href="http://www.open.ac.uk/">The Open University</a>. All rights reserved. (<a href="https://iet.open.ac.uk/">Institute of Educational Technology</a>)</p>
