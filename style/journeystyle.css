@@ -96,7 +96,7 @@ svg#journey-canvas .startcard
 .floatingeditor
   {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
   }
 
 .main {

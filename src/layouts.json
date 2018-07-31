@@ -1,5 +1,5 @@
 {
-  "#": "Position data for the SVG cards. (240 * 130px)",
+  "#": "Position data for the SVG ards.",
 
   "default": [
     { "{j}": 0,  "{x}": 20,   "{y}": 110,  "{orient}": "vert" },
