@@ -802,7 +802,7 @@ function reflow (layout) {
   if (layout === 'scol') {
     var scolLayout = [];
     for (var i = 0; i < CORE.getNumElements(); i++) {
-      scolLayout.push({ '{j}': i, '{x}': 0, '{y}': i * 130, '{orient}': 'horiz' });
+      scolLayout.push({ '{j}': i, '{x}': 0, '{y}': i * 130, '{w}': 240, '{h}': 130, '{orient}': 'horiz' });
     }
     scolLayout.forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
@@ -868,7 +868,7 @@ function getLayoutData () {
 
 },{"./core":3,"./layouts.json":8,"./user-interface":10}],8:[function(require,module,exports){
 module.exports={
-  "#": "Position data for the SVG cards. (240 * 130px)",
+  "#": "Position data for the SVG ards.",
 
   "default": [
     { "{j}": 0,  "{x}": 20,   "{y}": 110,  "{orient}": "vert" },
@@ -1224,7 +1224,6 @@ function toggleEditor (tog) {
     editorElement.style.display = 'none';
   }
 }
-
 
 function toggleFloatOptions () {
   var saveload = document.getElementById('float_saveload');
