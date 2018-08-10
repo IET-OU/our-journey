@@ -370,7 +370,7 @@ function changeFocus () {
   }
 
   var focusY = document.getElementById('group' + focusElement).getAttribute('y');
-  window.scrollTo(0, focusY);
+  window.scrollTo(0, focusY - 250);
 }
 
 function addMoreFocus (focusin) {
