@@ -58,6 +58,16 @@ function initialiseEventHandlers () {
     UI.changeBackground();
   });
 
+  attachEvent('#backgroundelementsform', 'submit', function (e) {
+    e.preventDefault();
+    UI.changeBackgroundElements();
+  });
+
+  attachEvent('#cardcolourform', 'submit', function (e) {
+    e.preventDefault();
+    UI.changeCardColour();
+  });
+
   attachEvent('#hideeditorform', 'submit', function (e) {
     e.preventDefault();
     UI.toggleEditor('hide');
@@ -111,7 +121,7 @@ function initialiseEventHandlers () {
     LAYOUT.addElementsToLayout();
   });
 
-  attachEvent('#add_more_text', 'click', function (e) {
+  attachEvent('#add_more_img', 'click', function (e) {
     LAYOUT.addElementsToLayout();
   });
 }

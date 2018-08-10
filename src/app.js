@@ -39,6 +39,7 @@ function run () {
   CORE.changeFocus();
 
   UI.toggleOptions();
+  UI.changeBackground('Wheat');
 
   SHARE.createLink(CORE.getElements());
   SHARE.loadLink(CORE.getElements());

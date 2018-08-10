@@ -22,7 +22,8 @@ module.exports = /* WAS: window.our_journeys */ {
   stopFloatingFocus: stopFloatingFocus,
   addElements: addElements,
   getMaxElements: getMaxElements,
-  addMoreFocus: addMoreFocus
+  addMoreFocus: addMoreFocus,
+  setCardColour: setCardColour
 };
 
 const UI = require('./user-interface');
@@ -36,6 +37,7 @@ var focusElement = -1;
 var canvasInFocus = false;
 var floatEditing = false;
 var focusOnAddMore = false;
+var cardColour = 'Ivory';
 
 // Number of card elements presented in page
 var numElements = 15;
@@ -111,17 +113,21 @@ function elementClick () {
   document.getElementById('journey-canvas').focus();
 }
 
+function setCardColour (colour) {
+  cardColour = colour;
+  updateElements();
+}
+
 function updateElements () {
   for (var i = 0; i < numElements; i++) {
     var ePlace = document.getElementById('group' + i);
     ePlace.addEventListener('click', elementClick);
-    var eRect = document.getElementById('place' + i);
-    eRect.setAttribute('fill', 'Snow');
-    eRect.setAttribute('fill-opacity', '1.0');
+    var card = document.getElementById('place' + i);
+    card.style.fill = cardColour;
     if ((LAYOUT.getLayout() === 'default') && vlElements.includes(i)) {
-      eRect.setAttribute('x', DIM.rectXV);
+      card.setAttribute('x', DIM.rectXV);
     } else {
-      eRect.setAttribute('y', DIM.rectY);
+      card.setAttribute('y', DIM.rectY);
     }
 
     updateDescription(i);
@@ -214,12 +220,14 @@ function updatePostIt (i) {
 
     if (((layout === 'default') && vlElements.includes(i))) {
       ePostIt.setAttribute('y', DIM.postitVY);
+      ePostIt.setAttribute('x', DIM.postitVX);
       ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVY);
       ePostItText.setAttribute('x', DIM.postitTextVX);
+      ePostItText.setAttribute('y', DIM.postitTextVY);
     } else if ((layout === 'default') && vrElements.includes(i)) {
       ePostIt.setAttribute('x', DIM.postitVRX);
       ePostIt.setAttribute('y', DIM.postitVRY);
-      ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVRY);
+      ePostItText.setAttribute('y', DIM.postitTextVRY);
       ePostItText.setAttribute('x', DIM.postitTextVRX);
     } else if (layout === 'scol') {
       ePostIt.setAttribute('x', DIM.postitScolX);
@@ -228,6 +236,7 @@ function updatePostIt (i) {
       ePostItText.setAttribute('x', DIM.postitTextScolX);
     } else if (layout === 'default') {
       ePostIt.setAttribute('x', DIM.postitX);
+      ePostIt.setAttribute('y', DIM.postitY);
       ePostItText.setAttribute('x', DIM.postitTextX);
       ePostItText.setAttribute('y', DIM.postitTextY);
     }
@@ -284,7 +293,7 @@ function editFocus () {
       document.getElementById('journey-canvas').focus();
     } else {
       if (LAYOUT.getLayout() === 'scol') {
-        newY = (focusElement * 130) + 100;
+        newY = (focusElement * 130) + 170;
         document.getElementById('floating_editor').setAttribute('x', '0');
         document.getElementById('floating_editor').setAttribute('y', newY);
         document.getElementById('floating_editor').setAttribute('visibility', 'visible');

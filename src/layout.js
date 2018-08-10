@@ -20,9 +20,12 @@ var setLayout = 'default';
 
 function setScol () {
   setLayout = 'scol';
-  document.getElementById('journey-canvas').setAttribute('height', '2200');
+  document.getElementById('journey-canvas').setAttribute('height', '2400');
+  document.getElementById('journey-canvas').setAttribute('width', '500');
   reflow(setLayout);
   UI.chooseEditor('float');
+  UI.changeBackgroundElements('none');
+  document.getElementById('journey_logo').setAttribute('visibility', 'collapse');
   document.getElementById('add_more_card').setAttribute('x', 55);
   document.getElementById('start_point').setAttribute('visibility', 'collapse');
   document.getElementById('scol_start_point').setAttribute('visibility', 'visible');
@@ -35,12 +38,12 @@ function reflow (layout) {
   if (layout === 'scol') {
     var scolLayout = [];
     for (var i = 0; i < CORE.getNumElements(); i++) {
-      scolLayout.push({ '{j}': i, '{x}': 0, '{y}': i * 130, '{w}': 240, '{h}': 130, '{orient}': 'horiz' });
+      scolLayout.push({ '{j}': i, '{x}': 0, '{y}': (i * 130) + 70, '{w}': 240, '{h}': 130, '{orient}': 'horiz' });
     }
     scolLayout.forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
-    document.getElementById('add_more_card').setAttribute('y', (CORE.getNumElements() * 130) + 100);
+    document.getElementById('add_more_card').setAttribute('y', (CORE.getNumElements() * 130) + 170);
   } else {
     LAYOUTS[ layout ].forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
@@ -62,7 +65,7 @@ function addElementsToLayout () {
       reflow('default' + CORE.getNumElements());
       newHeight = parseInt(document.getElementById('journey-canvas').getAttribute('height')) + 720;
       if (CORE.getNumElements() < CORE.getMaxElements()) {
-        newAddMoreY = parseInt(document.getElementById('add_more_card').getAttribute('y')) + 700;
+        newAddMoreY = parseInt(document.getElementById('add_more_card').getAttribute('y')) + 710;
         document.getElementById('add_more_card').setAttribute('y', newAddMoreY);
       } else {
         document.getElementById('add_more_card').setAttribute('visibility', 'collapse');
