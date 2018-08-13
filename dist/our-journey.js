@@ -472,7 +472,7 @@ function updateElement () {
     elements[focusElement].postit = document.getElementById('floating_post_it_text').value;
   }
   updateElements();
-  document.getElementById('journey-canvas').focus();
+  //document.getElementById('journey-canvas').focus();
 }
 
 function clearElement () {
@@ -549,19 +549,19 @@ module.exports={
   "iconWidth": 110,
   "iconHeight": 110,
   "iconXV": 110,
-  "iconYV": 10,
+  "iconYV": 5,
   "iconX": 10,
   "iconY": 110,
   "emoticonWidth": 72,
   "emoticonHeight": 72,
   "emoticonXV": 130,
-  "emoticonYV": 175,
+  "emoticonYV": 170,
   "emoticonXVR": 30,
   "emoticonYVR": 273,
   "emoticonX": 140,
   "emoticonY": 160,
   "textXV": 110,
-  "textYV": 125,
+  "textYV": 120,
   "textXVR": 10,
   "textYVR": 225,
   "textX": 130,
@@ -705,6 +705,22 @@ function initialiseEventHandlers () {
   });
 
   attachEvent('#floating_post_it_text', 'change', function (e) {
+    CORE.updateElement();
+  });
+
+  attachEvent('#icon_select', 'change', function (e) {
+    CORE.updateElement();
+  });
+
+  attachEvent('#emoticon_select', 'change', function (e) {
+    CORE.updateElement();
+  });
+
+  attachEvent('#event_desc', 'keyup', function (e) {
+    CORE.updateElement();
+  });
+
+  attachEvent('#post_it_text', 'keyup', function (e) {
     CORE.updateElement();
   });
 

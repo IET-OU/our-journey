@@ -117,6 +117,22 @@ function initialiseEventHandlers () {
     CORE.updateElement();
   });
 
+  attachEvent('#icon_select', 'change', function (e) {
+    CORE.updateElement();
+  });
+
+  attachEvent('#emoticon_select', 'change', function (e) {
+    CORE.updateElement();
+  });
+
+  attachEvent('#event_desc', 'keyup', function (e) {
+    CORE.updateElement();
+  });
+
+  attachEvent('#post_it_text', 'keyup', function (e) {
+    CORE.updateElement();
+  });
+
   attachEvent('#add_more_rect', 'click', function (e) {
     LAYOUT.addElementsToLayout();
   });

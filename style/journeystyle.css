@@ -24,6 +24,10 @@ textarea {
   padding: 3px;
 }
 
+textarea {
+  resize: none;
+}
+
 label,
 input,
 select {
