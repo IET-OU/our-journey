@@ -472,7 +472,7 @@ function updateElement () {
     elements[focusElement].postit = document.getElementById('floating_post_it_text').value;
   }
   updateElements();
-  //document.getElementById('journey-canvas').focus();
+  // document.getElementById('journey-canvas').focus();
 }
 
 function clearElement () {
