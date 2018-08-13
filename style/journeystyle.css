@@ -105,7 +105,7 @@ svg#journey-canvas .startcard
 }
 
 svg#journey-canvas .in_card {
-  font: bold 1.05rem sans-serif; /* Was: 14pt; */
+  font: 0.97rem sans-serif; /* Was: 14pt; */
 }
 
 svg#journey-canvas .card > rect {
