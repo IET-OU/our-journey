@@ -370,7 +370,7 @@ function changeFocus () {
   }
 
   var focusY = document.getElementById('group' + focusElement).getAttribute('y');
-  window.scrollTo(0, focusY - 250);
+  window.scrollTo(0, focusY - 300);
 }
 
 function addMoreFocus (focusin) {
@@ -424,6 +424,7 @@ function editFocus () {
 
 function canvasGotFocus () {
   canvasInFocus = true;
+  changeFocus();
 }
 
 function canvasLostFocus () {
@@ -477,8 +478,9 @@ function updateElement () {
 
 function clearElement () {
   // clears the information contained in the focused on element.
-  elements[focusElement] = { eID: 'place' + focusElement, text: '', emoticon: 'none', icon: 'none', postit: '' };
+  elements[focusElement] = { eID: 'place' + focusElement, description: '', emoticon: 'none', icon: 'none', postit: '' };
   updateElements();
+  changeFocus();
 }
 
 function moveBackElement () {
@@ -1291,8 +1293,10 @@ function toggleOptions () {
   var options = document.getElementById('options');
   if (options.style.display === 'none') {
     options.style.display = 'block';
+    document.getElementById('optionsButton').value = 'Hide Options';
   } else {
     options.style.display = 'none';
+    document.getElementById('optionsButton').value = 'Options';
   }
 }
 

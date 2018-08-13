@@ -45,8 +45,10 @@ function toggleOptions () {
   var options = document.getElementById('options');
   if (options.style.display === 'none') {
     options.style.display = 'block';
+    document.getElementById('optionsButton').value = 'Hide Options';
   } else {
     options.style.display = 'none';
+    document.getElementById('optionsButton').value = 'Options';
   }
 }
 
