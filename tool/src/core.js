@@ -272,7 +272,7 @@ function changeFocus () {
     document.getElementById('post_it_text').value = elements[focusElement].postit;
     document.getElementById('title').innerHTML = 'Journey Editor: Card ' + focusElement;
   } else if (UI.getEditor() === 'float') {
-    stopFloatingFocus();
+    // stopFloatingFocus();
   }
 
   var focusY = document.getElementById('group' + focusElement).getAttribute('y');

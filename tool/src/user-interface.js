@@ -93,6 +93,8 @@ function chooseEditor (newEdit) {
     editor = newEdit;
   } else if (newEdit === 'fixed') {
     document.getElementById('floating_editor').setAttribute('visibility', 'collapse');
+    document.getElementById('float_bar').style.display = 'none';
+    document.getElementById('float_saveload').style.display = 'none';
   }
 }
 

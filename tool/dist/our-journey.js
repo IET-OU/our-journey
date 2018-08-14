@@ -384,7 +384,7 @@ function changeFocus () {
     document.getElementById('post_it_text').value = elements[focusElement].postit;
     document.getElementById('title').innerHTML = 'Journey Editor: Card ' + focusElement;
   } else if (UI.getEditor() === 'float') {
-    stopFloatingFocus();
+    // stopFloatingFocus();
   }
 
   var focusY = document.getElementById('group' + focusElement).getAttribute('y');
@@ -880,8 +880,6 @@ function reflow (layout) {
     LAYOUTS[ layout ].forEach(function (elem) {
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
-    document.getElementById('float_bar').style.display = 'none';
-    document.getElementById('float_saveload').style.display = 'none';
     document.getElementById('scol_start_point').setAttribute('visibility', 'collapse');
   }
   HOLDER.innerHTML = cards.join('\n');
@@ -1359,6 +1357,8 @@ function chooseEditor (newEdit) {
     editor = newEdit;
   } else if (newEdit === 'fixed') {
     document.getElementById('floating_editor').setAttribute('visibility', 'collapse');
+    document.getElementById('float_bar').style.display = 'none';
+    document.getElementById('float_saveload').style.display = 'none';
   }
 }
 
