@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.9" />
+    <meta name="robots" content="noindex,nofollow" />
+
+    <title> Our Journeys interactive </title>
+
+    <meta name="description" content=
+    "'Our Journeys' is an interactive activity to chart the highs and lows of your student learning journey. Developed in the Institute of Educational Technology (IET), at The Open University." />
+    <meta name="copyright" content="© 2018 The Open University (IET)." />
+
+    <link rel="stylesheet" href="style/journeystyle.css" />
+
+    </head>
+    <body>
+        <div class="editorbar" id="editor">
+        <h1 id="title">Journey editor: Map your study journey on to the cards</h1>
+        <form id="updateform">
+                <select id="icon_select" aria-labelledby="What happened?">
+                    <option value="none">What happened?</option>
+                    <option value="achievement">Achievement</option>
+                    <option value="admin">Administrative tasks</option>
+                    <option value="assessment">Assessment</option>
+                    <option value="studybreak">Break from study</option>
+                    <option value="barrier">Barrier</option>
+                    <option value="communication">Communication</option>
+                    <option value="confidence">Confidence boost</option>
+                    <option value="considerstudy">Considering study</option>
+                    <option value="duedates">Due dates</option>
+                    <option value="employment">Employment</option>
+                    <option value="finances">Finances</option>
+                    <option value="information">Finding information</option>
+                    <option value="studygoal">Goal</option>
+                    <option value="helpneeded">Help needed</option>
+                    <option value="highpressure">High pressure</option>
+                    <option value="lostdirection">Lost direction</option>
+                    <option value="lowenergy">Low energy</option>
+                    <option value="lowscores">Low scores</option>
+                    <option value="moving">Moving home</option>
+                    <option value="studymilestone">Milestone</option>
+                    <option value="nosupport">No support</option>
+                    <option value="peersupport">Peer support</option>
+                    <option value="problem">Problem</option>
+                    <option value="register">Registering</option>
+                    <option value="repetition">Repetition</option>
+                    <option value="studyexperience">Study experience</option>
+                    <option value="studysuccess">Study success</option>
+                    <option value="studysupport">Study support</option>
+                    <option value="timelost">Time Lost</option>
+                </select>
+                <label for="event_desc">Describe it:</label>
+                <textarea rows=3 maxlength=38 cols=12 id="event_desc" value=""></textarea>
+                <select id="emoticon_select" aria-labelledby="How did you feel?">
+                    <option value="none">How did you feel?</option>
+                    <option value="angry">Angry</option>
+                    <option value="anxious">Anxious</option>
+                    <option value="bored">Bored</option>
+                    <option value="confident">Confident</option>
+                    <option value="confused">Confused</option>
+                    <option value="curious">Curious</option>
+                    <option value="embarrassed">Embarrassed</option>
+                    <option value="excited">Excited</option>
+                    <option value="happy">Happy</option>
+                    <option value="nervous">Nervous</option>
+                    <option value="proud">Proud</option>
+                    <option value="scared">Scared</option>
+                    <option value="stressed">Bored</option>
+                    <option value="thinking">Thinking</option>
+                    <option value="tired">Tired</option>
+                    <option value="unhappy">Unhappy</option>
+                    <option value="unwell">Unwell</option>
+                    <option value="upset">Upset</option>
+                </select>
+                <label for="post_it_text">Optional note:</label>
+                <textarea rows=3 maxlength=44 cols=12 id="post_it_text" value=""></textarea>
+                <input type="submit" aria-label="Update element" value="Update" id="updateButton">
+            </form>
+            <form id="deleteform">
+                <input type="submit" aria-label="Delete element" value="Clear" id="deleteButton">
+            </form>
+            <form id="backform">
+                <input type="submit" aria-label="Move element backwards" value="Move Back" id="backButton">
+            </form>
+            <form id="forwardform">
+                <input type="submit" aria-label="Move element forwards" value="Move Fwd" id="fwdButton">
+            </form>
+            <form id="optionsform">
+                <input type="submit" aria-label="Show or hide other options" value="Options" id="optionsButton">
+            </form>
+            <a href="https://iet-ou.github.io/our-journey/site/help.html" target="_blank">Help</a>
+            <div class = "optionsbar" id = "options">
+                <h2>Options:</h2>
+                    <h3>File:</h3>
+                    <form id="saveform" aria-label="Save journey to file">
+                        <label for="filenamearea">Save:</label>
+                        <input type='text' value="journey_file" id="filenamearea">
+                        <input type="submit" value="Save" id="saveButton" >
+                    </form>
+                    <form id="loadform" aria-label="Load journey from file">
+                        <label for="fileinput">Load:</label>
+                        <input type='file' id='fileinput' required aria-required="true">
+                        <input type="submit" id="loadButton" value="Load" >
+                    </form>
+                    <h3>View:</h3>
+                    <form id="backgroundform" aria-label="Choose background colour">
+                            <label for="background_select">Background Colour:</label>
+                            <select id="background_select">
+                                <option value="none">None</option>
+                                <option value="Ivory">Ivory</option>
+                                <option value="Linen">Linen</option>
+                                <option value="Beige">Beige</option>
+                                <option value="Wheat">Wheat</option>
+                                <option value="BurlyWood">Wood</option>
+                                <option value="DarkSeaGreen">Green</option>
+                                <option value="PaleTurquoise">Turquoise</option>
+                                <option value="SkyBlue">Blue</option>
+                                <option value="LightPink">Pink</option>
+                                <option value="Lavender">Lavender</option>
+                                <option value="LightGray">Grey</option>
+                                <option value="Coral">Orange</option>
+                            </select>
+                            <input type="submit" value="Update" id="updateButton">
+                    </form>
+                    <br>
+                    <form id="backgroundelementsform" aria-label="Show or hide background images">
+                        <label for="background_elements_select">Background Images:</label>
+                        <select id="background_elements_select">
+                            <option value="all">All images</option>
+                            <option value="some">Some images</option>
+                            <option value="none">No images</option>
+                            </select>
+                            <input type="submit" value="Update" id="updateElButton">
+                    </form>
+                    <br>
+                    <form id="cardcolourform" aria-label="Choose card colour">
+                            <label for="card_colour_select">Card Colour:</label>
+                            <select id="card_colour_select">
+                                <option value="none">None</option>
+                                <option value="Ivory">Ivory</option>
+                                <option value="Linen">Linen</option>
+                                <option value="Beige">Beige</option>
+                                <option value="Wheat">Wheat</option>
+                                <option value="BurlyWood">Wood</option>
+                                <option value="DarkSeaGreen">Green</option>
+                                <option value="PaleTurquoise">Turquoise</option>
+                                <option value="SkyBlue">Blue</option>
+                                <option value="LightPink">Pink</option>
+                                <option value="Lavender">Lavender</option>
+                                <option value="LightGray">Grey</option>
+                                <option value="Coral">Orange</option>
+                            </select>
+                            <input type="submit" value="Update" id="updateCButton">
+                    </form>
+                    <br>
+                    <form id="hideeditorform">
+                        <input type="submit" aria-label="Hide editor" value="Hide editor" id="hideButton">
+                    </form>
+
+                    <p><a href="?demo=1">Demo fill</a> | <a href="?demo=0">Reset &ndash; no fill</a>
+
+                    | <a id="oj-share-link" class="oj-share-link" href="?empty" rel="nofollow" title="Base64 encoded!">Share</a>
+                    </div>
+                </div>
+
+        <div class='float_bar' id='float_bar'>
+            <h1 id="float_title">Journey editor: Map your study journey onto the cards</h1>
+            <form id="float_options" aria-label="Show or hide load and save options">
+                <input type='submit' value="Load/Save" id='floatOptionsButton'>
+            </form>
+            <div id='float_saveload' class='float_saveload'>
+                <form id="float_saveform" aria-label="Save journey to file">
+                        <label for="float_saveform">Save:</label>
+                        <input type='text' value="journey_file" id="float_filenamearea">
+                        <input type="submit" value="Save" id="float_saveButton" >
+                </form>
+                <form id="float_loadform" aria-label="Load journey from file">
+                    <label for="fileinput">Load:</label>
+                    <input type='file' id='float_fileinput' required aria-required="true">
+                    <input type="submit" id="float_loadButton" value="Load" >
+                </form>
+            </div>
+        </div>
+
+        <div class="main">
+            <svg width="1240" height="1600" id="journey-canvas">
+                <title role="img" id="title" aria-labelledby="desc-space">Journey</title>
+
+            <desc id="start-card">Start of the journey</desc>
+            <desc id="desc-space">This is the space in which the journey is represented</desc>
+            <desc id="group-0">Card group</desc>
+            <desc id="empty-card">Empty journey card</desc>
+
+            <svg x = "270" y = "0" id="head_background">
+                <image xlink:href = "assets/background/head-background.png" x = "0" y = "0" height="315" width="952" id="headBackgroundImage"/>
+            </svg>
+
+            <svg x = "120" y = "20" id="start_point">
+                    <rect aria-labelledby="start-card"  width = "130" height="240" y="20" x="0" stroke="black" fill="crimson" stroke-width="1" id="start_place" fill-opacity="1.0"/>
+                    <image xlink:href = "assets/start-here-trans.png" x = "7" y = "60" height="156" width="115" id="startIcon"/>
+            </svg>
+            <svg x = "0" y = "0" id="scol_start_point" visibility = 'collapse'>
+                    <rect aria-labelledby="start-card"  width = "240" height="170" y="0" x="0" stroke="black" fill="crimson" stroke-width="1" id="start_place" fill-opacity="1.0"/>
+                    <image xlink:href = "assets/start-here-trans.png" x = "65" y = "5" height="156" width="115" id="startIcon"/>
+            </svg>
+
+            <svg x = "390" y = "530" id="journey_logo">
+                <image xlink:href = "assets/background/journey-logo.png" x = "0" y = "0" height="140" width="442" id="journeyLogoImage"/>
+            </svg>
+
+            <svg x = "320" y = "930" id="pencil_background">
+                <image xlink:href = "assets/background/pencil.png" x = "0" y = "0" height="97" width="161" id="pencilImage"/>
+            </svg>
+
+            <svg x = "1010" y = "920" id="plant_background">
+                <image xlink:href = "assets/background/plant.png" x = "0" y = "0" height="134" width="137" id="plantImage"/>
+            </svg>
+
+            <svg x = "100" y = "1260" id="calc_background">
+                <image xlink:href = "assets/background/calculator.png" x = "0" y = "0" height="145" width="141" id="calcImage"/>
+            </svg>
+
+            <svg x = "450" y = "1260" id="biscuits_background">
+                <image xlink:href = "assets/background/biscuits.png" x = "0" y = "0" height="144" width="139" id="biscuitsImage"/>
+            </svg>
+
+            <svg x = "770" y = "1280" id="glasses_background">
+                <image xlink:href = "assets/background/glasses.png" x = "0" y = "0" height="90" width="141" id="glassesImage"/>
+            </svg>
+
+            <svg x = "950" y = "1600" id="folder_background">
+                <image xlink:href = "assets/background/folder.png" x = "0" y = "0" height="202" width="209" id="folderImage"/>
+            </svg>
+
+            <svg x = "300" y = "1610" id="coffee_background">
+                <image xlink:href = "assets/background/coffee.png" x = "0" y = "0" height="110" width="115" id="coffeeImage"/>
+            </svg>
+
+            <svg x = "610" y = "1630" id="pens_background">
+                <image xlink:href = "assets/background/pens.png" x = "0" y = "0" height="122" width="197" id="pensImage"/>
+            </svg>
+
+            <svg x = "130" y = "1970" id="graph_background">
+                <image xlink:href = "assets/background/graph.png" x = "0" y = "0" height="191" width="247" id="graphImage"/>
+            </svg>
+
+            <svg x = "750" y = "1970" id="jammie_background">
+                <image xlink:href = "assets/background/jammie.png" x = "0" y = "0" height="124" width="134" id="jammieImage"/>
+            </svg>
+
+            <svg x = "990" y = "3780" id="pencil_background_2">
+                <image xlink:href = "assets/background/pencil.png" x = "0" y = "0" height="97" width="161" id="pencilImage"/>
+            </svg>
+
+            <svg x = "700" y = "2315" id="biscuits_background_2">
+                <image xlink:href = "assets/background/biscuits.png" x = "0" y = "0" height="144" width="139" id="biscuitsImage"/>
+            </svg>
+
+            <svg x = "440" y = "2315" id="plant_background_2">
+                <image xlink:href = "assets/background/plant.png" x = "0" y = "0" height="134" width="137" id="plantImage"/>
+            </svg>
+
+            <svg x = "900" y = "4450" id="tablet_background">
+                <image xlink:href = "assets/background/tablet.png" x = "0" y = "0" height="206" width="292" id="tabletImage"/>
+            </svg>
+
+            <svg x = "700" y = "2670" id="calc_background_2">
+                <image xlink:href = "assets/background/calculator.png" x = "0" y = "0" height="145" width="141" id="calcImage"/>
+            </svg>
+
+            <svg x = "30" y = "2660" id="tablet_background_2">
+                <image xlink:href = "assets/background/tablet.png" x = "0" y = "0" height="206" width="292" id="tabletImage"/>
+            </svg>
+
+            <svg x = "1030" y = "3080" id="glasses_background_2">
+                <image xlink:href = "assets/background/glasses.png" x = "0" y = "0" height="90" width="141" id="glassesImage"/>
+            </svg>
+
+            <svg x = "270" y = "3030" id="coffee_background_2">
+                <image xlink:href = "assets/background/coffee.png" x = "0" y = "0" height="110" width="115" id="coffeeImage"/>
+            </svg>
+
+            <svg x = "640" y = "3390" id="pens_background_2">
+                <image xlink:href = "assets/background/pens.png" x = "0" y = "0" height="122" width="197" id="pensImage"/>
+            </svg>
+
+            <svg x = "100" y = "3380" id="folder_background_2">
+                <image xlink:href = "assets/background/folder.png" x = "0" y = "0" height="202" width="209" id="folderImage"/>
+            </svg>
+
+            <svg x = "20" y = "4080" id="graph_background_2">
+                <image xlink:href = "assets/background/graph.png" x = "0" y = "0" height="191" width="247" id="graphImage"/>
+            </svg>
+
+            <svg x = "985" y = "4920" id="jammie_background_2">
+                <image xlink:href = "assets/background/jammie.png" x = "0" y = "0" height="124" width="134" id="jammieImage"/>
+            </svg>
+
+            <svg x = "800" y = "4100" id="coffee_background_3">
+                <image xlink:href = "assets/background/coffee.png" x = "0" y = "0" height="110" width="115" id="coffeeImage"/>
+            </svg>
+
+            <g class="card-holder"> </g>
+
+            <svg id="floating_editor" x=0 y=0 width = "370" height="180" visibility = "collapse">
+                <rect width = "240" height="130" stroke="black" stroke-width="2" fill-opacity="0.0"/>
+                <foreignObject y=130>
+                    <form>
+                        <div class="floatingeditor" xmlns="http://www.w3.org/1999/xhtml">
+                            <select id="floating_icon_select" tabindex="0">
+                                <option value="none">None</option>
+                                <option value="achievement">Achievement</option>
+                                <option value="admin">Administrative tasks</option>
+                                <option value="assessment">Assessment</option>
+                                <option value="studybreak">Break from study</option>
+                                <option value="barrier">Barrier</option>
+                                <option value="communication">Communication</option>
+                                <option value="confidence">Confidence boost</option>
+                                <option value="considerstudy">Considering study</option>
+                                <option value="duedates">Due dates</option>
+                                <option value="employment">Employment</option>
+                                <option value="finances">Finances</option>
+                                <option value="information">Finding information</option>
+                                <option value="studygoal">Goal</option>
+                                <option value="helpneeded">Help needed</option>
+                                <option value="highpressure">High pressure</option>
+                                <option value="lostdirection">Lost direction</option>
+                                <option value="lowenergy">Low energy</option>
+                                <option value="lowscores">Low scores</option>
+                                <option value="moving">Moving home</option>
+                                <option value="studymilestone">Milestone</option>
+                                <option value="nosupport">No support</option>
+                                <option value="peersupport">Peer support</option>
+                                <option value="problem">Problem</option>
+                                <option value="register">Registering</option>
+                                <option value="repetition">Repetition</option>
+                                <option value="studyexperience">Study experience</option>
+                                <option value="studysuccess">Study success</option>
+                                <option value="studysupport">Study support</option>
+                                <option value="timelost">Time Lost</option>
+                        </select>
+
+                        <select id="floating_emoticon_select" tabindex="0">
+                            <option value="none">None</option>
+                            <option value="angry">Angry</option>
+                            <option value="anxious">Anxious</option>
+                            <option value="bored">Bored</option>
+                            <option value="confident">Confident</option>
+                            <option value="confused">Confused</option>
+                            <option value="curious">Curious</option>
+                            <option value="embarrassed">Embarrassed</option>
+                            <option value="excited">Excited</option>
+                            <option value="happy">Happy</option>
+                            <option value="nervous">Nervous</option>
+                            <option value="proud">Proud</option>
+                            <option value="scared">Scared</option>
+                            <option value="stressed">Stressed</option>
+                            <option value="thinking">Thinking</option>
+                            <option value="tired">Tired</option>
+                            <option value="unhappy">Unhappy</option>
+                            <option value="unwell">Unwell</option>
+                            <option value="upset">Upset</option>
+                        </select>
+                     </div>
+                  </form>
+                </foreignObject>
+                <foreignObject x=125 y=10>
+                        <textarea id="floating_event_desc" rows=3 cols=12 tabindex="0"></textarea>
+                </foreignObject>
+                <foreignObject x=245 y=10>
+                        <textarea id="floating_post_it_text" rows=3 cols=12></textarea>
+                    </foreignObject>
+                <foreignObject x=245 y=75>
+                    <form id="floating_backform" tabindex="0">
+                            <input type="submit" aria-label="Move element backwards" value="Move Back" id="floating_backButton">
+                        </form>
+                </foreignObject>
+                <foreignObject x=245 y=105>
+                        <form id="floating_forwardform" tabindex="0">
+                                <input type="submit" aria-label="Move element forwards" value="Move Forward" id="floating_fwdButton">
+                            </form>
+                </foreignObject>
+
+            </svg>
+
+            <svg id="add_more_card" class="add_more_card" width="130" height="240" y="1350" x="990">
+                <rect role="button" fill="crimson" id="add_more_rect" width = "130" height = "240" stroke="black" fill="crimson" stroke-width="1" fill-opacity="1.0"/>
+                <image xlink:href = "assets/add-more.png" x = "4" y = "30" height="176" width="121" id="add_more_img" class="add_more_img"/>
+            </svg>
+
+        </svg>
+    </div>
+
+    <script id="oj-svg-card-template" type="text/template">
+
+    <svg x="{x}" y="{y}" role="button" id="group{j}" aria-labelledby="group-0" class="card orient-{orient}">
+        <rect role="button" width="{w}" height="{h}" id="place{j}"/>
+        <image href="" id="icon{j}"/>
+        <switch>
+            <foreignObject id="description{j}" class="in_card" width="105" height="200">
+                <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+            </foreignObject>
+            <text id="description{j}" class="in_card">not filled</text>
+        </switch>
+        <image href="" id="emoticon{j}"/>
+        <image id="postit{j}" href="assets/PostIt.png" width="90" height="90" visibility="collapse"></image>
+        <switch>
+            <foreignObject id="postittext{j}" class="in_postit" width="85" height="85" visibility="collapse">
+                <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
+            </foreignObject>
+            <text id="postittext{j}" class="in_card">not filled</text>
+        </switch>
+    </svg>
+
+    </script>
+
+
+    <p class="footer-copy">Our Journeys | © 2018 <a href="http://www.open.ac.uk/">The Open University</a>
+        (<a href="https://iet.open.ac.uk/" title="Institute of Educational Technology">IET</a>).
+    </p>
+
+    <p class="footer-logos">
+        <a href="https://iet.open.ac.uk/"><img src="assets/iet-logo.svg" alt="Institute of Educational Technology" title="Institute of Educational Technology" /></a>
+        <a href="http://www.open.ac.uk/"><img src="assets/ou-logo.svg" alt="The Open University" title="The Open University" /></a>
+    </p>
+
+    <script src="dist/our-journey.js"></script>
+
+    <script>
+
+        require('our-journey').app.run();
+
+    </script>
+
+    </body>
+</html>
