@@ -5,7 +5,6 @@
 module.exports.run = run;
 
 const LOC = window.location;
-
 const CORE = require('./core');
 const LAYOUT = require('./layout');
 const EVENTS = require('./event');

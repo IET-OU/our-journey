@@ -1,8 +1,6 @@
 
 .pa11yci*
 
-dist
-!dist/our-journey.js
 node_modules/
 package-lock.json
 *BAK*
