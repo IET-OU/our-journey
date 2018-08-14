@@ -192,7 +192,6 @@
 
             <desc id="start-card">Start of the journey</desc>
             <desc id="desc-space">This is the space in which the journey is represented</desc>
-            <desc id="desc-card-0">First card in the journey</desc>
             <desc id="group-0">Card group</desc>
             <desc id="empty-card">Empty journey card</desc>
 
@@ -399,7 +398,7 @@
     <script id="oj-svg-card-template" type="text/template">
 
     <svg x="{x}" y="{y}" role="button" id="group{j}" aria-labelledby="group-0" class="card orient-{orient}">
-        <rect role="button" aria-labelledby="desc-card-0" width="{w}" height="{h}" id="place{j}"/>
+        <rect role="button" width="{w}" height="{h}" id="place{j}"/>
         <image href="" id="icon{j}"/>
         <switch>
             <foreignObject id="description{j}" class="in_card" width="105" height="200">

@@ -57,9 +57,10 @@ function run () {
 module.exports = {
   emoticonCount: emoticonCount,
   iconCount: iconCount,
-
+  getEmoticonName: getEmoticonName,
   getEmoticonPath: getEmoticonPath,
   getIconPath: getIconPath,
+  getIconName: getIconName,
   getBackgroundElements: getBackgroundElements,
   hasEmoticon: hasEmoticon,
   hasIcon: hasIcon
@@ -85,8 +86,16 @@ function getEmoticonPath (j) {
   return emojiDir + emoticonFiles[ j ].file;
 }
 
+function getEmoticonName (j) {
+  return emoticonFiles[ j ].name;
+}
+
 function getIconPath (j) {
   return cardDir + iconFiles[ j ].file;
+}
+
+function getIconName (j) {
+  return iconFiles[ j ].name;
 }
 
 function hasEmoticon (j, element) {
@@ -241,6 +250,8 @@ function updateElements () {
     updateIcon(i);
 
     updatePostIt(i);
+
+    updateAltText(i);
   }
 }
 
@@ -281,6 +292,7 @@ function updateEmoticon (i) {
         }
         eEmo.setAttribute('display', 'inline');
         eEmo.setAttribute('href', ASSET.getEmoticonPath(j));
+        eEmo.setAttribute('alt', ASSET.getEmoticonName(j));
       }
     }
   } else {
@@ -305,6 +317,7 @@ function updateIcon (i) {
         }
         eIcon.setAttribute('display', 'inline');
         eIcon.setAttribute('href', ASSET.getIconPath(j));
+        eIcon.setAttribute('alt', ASSET.getIconName(j));
       }
     }
   } else {
@@ -349,6 +362,12 @@ function updatePostIt (i) {
     ePostIt.setAttribute('visibility', 'collapse');
     ePostItText.setAttribute('visibility', 'collapse');
   }
+}
+
+function updateAltText (i) {
+  var ePlace = document.getElementById('group' + i);
+  var alttext = 'Card ' + i + '. Event: ' + elements[i].icon + ' : ' + elements[i].description + '. Feeling ' + elements[i].emoticon + '. ' + elements[i].postit;
+  ePlace.setAttribute('aria-labelledby', alttext);
 }
 
 function changeFocus () {

@@ -5,9 +5,10 @@
 module.exports = {
   emoticonCount: emoticonCount,
   iconCount: iconCount,
-
+  getEmoticonName: getEmoticonName,
   getEmoticonPath: getEmoticonPath,
   getIconPath: getIconPath,
+  getIconName: getIconName,
   getBackgroundElements: getBackgroundElements,
   hasEmoticon: hasEmoticon,
   hasIcon: hasIcon
@@ -33,8 +34,16 @@ function getEmoticonPath (j) {
   return emojiDir + emoticonFiles[ j ].file;
 }
 
+function getEmoticonName (j) {
+  return emoticonFiles[ j ].name;
+}
+
 function getIconPath (j) {
   return cardDir + iconFiles[ j ].file;
+}
+
+function getIconName (j) {
+  return iconFiles[ j ].name;
 }
 
 function hasEmoticon (j, element) {
