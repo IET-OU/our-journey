@@ -89,7 +89,7 @@ svg#journey-canvas .startcard
       width: 100%;
       background: ivory;
       padding: 5px;
-      display: inline;
+      display: none;
     }
 
 .float_saveload

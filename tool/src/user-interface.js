@@ -90,6 +90,8 @@ function changeCardColour () {
 function chooseEditor (newEdit) {
   if (newEdit === 'float') {
     document.getElementById('editor').style.display = 'none';
+    document.getElementById('float_bar').style.display = 'inline';
+    document.getElementById('float_saveload').style.display = 'inline';
     editor = newEdit;
   } else if (newEdit === 'fixed') {
     document.getElementById('floating_editor').setAttribute('visibility', 'collapse');
