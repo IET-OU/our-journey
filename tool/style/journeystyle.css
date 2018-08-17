@@ -103,6 +103,16 @@ svg#journey-canvas .startcard
     flex-direction: row;
   }
 
+.floating_icon_select
+{
+  width: 110px;
+}
+
+.floating_emoticon_select
+{
+  width: 110px;
+}
+
 .main {
         margin-top: 100px;
         text-align: center;

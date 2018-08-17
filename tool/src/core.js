@@ -145,7 +145,6 @@ function updateElements () {
 function updateDescription (i) {
   var eText = document.getElementById('description' + i);
   var layout = LAYOUT.getLayout();
-  // alert("changing text on description" + elementText + " to " + element.description);
   eText.textContent = getElement(i).description;
   if ((layout === 'default') && vlElements.includes(i)) {
     eText.setAttribute('x', DIM.textXV);
@@ -161,6 +160,7 @@ function updateDescription (i) {
 
 function updateEmoticon (i) {
   var eEmo = document.getElementById('emoticon' + i);
+  var emptyEmo = document.getElementById('empty_emoticon');
   var layout = LAYOUT.getLayout();
   if (getElement(i).emoticon !== 'none') {
     for (var j = 0; j < ASSET.emoticonCount(); j++) {
@@ -180,15 +180,18 @@ function updateEmoticon (i) {
         eEmo.setAttribute('display', 'inline');
         eEmo.setAttribute('href', ASSET.getEmoticonPath(j));
         eEmo.setAttribute('alt', ASSET.getEmoticonName(j));
+        emptyEmo.setAttribute('fill-opacity', '0.0');
       }
     }
   } else {
     eEmo.setAttribute('display', 'none');
+    emptyEmo.setAttribute('fill-opacity', '0.5');
   }
 }
 
 function updateIcon (i) {
   var eIcon = document.getElementById('icon' + i);
+  var emptyIcon = document.getElementById('empty_icon');
   var layout = LAYOUT.getLayout();
   if (getElement(i).icon !== 'none') {
     for (var j = 0; j < ASSET.iconCount(); j++) {
@@ -205,10 +208,12 @@ function updateIcon (i) {
         eIcon.setAttribute('display', 'inline');
         eIcon.setAttribute('href', ASSET.getIconPath(j));
         eIcon.setAttribute('alt', ASSET.getIconName(j));
+        emptyIcon.setAttribute('fill-opacity', '0.0');
       }
     }
   } else {
     eIcon.setAttribute('display', 'none');
+    emptyIcon.setAttribute('fill-opacity', '0.5');
   }
 }
 
@@ -274,9 +279,6 @@ function changeFocus () {
   } else if (UI.getEditor() === 'float') {
     // stopFloatingFocus();
   }
-
-  var focusY = document.getElementById('group' + focusElement).getAttribute('y');
-  window.scrollTo(0, focusY - 300);
 }
 
 function addMoreFocus (focusin) {
@@ -311,14 +313,93 @@ function editFocus () {
         var layoutData = LAYOUT.getLayoutData();
         newX = layoutData['default'][focusElement]['{x}'];
         newY = layoutData['default'][focusElement]['{y}'];
-        newY = newY + DIM.rectY;
+        // newY = newY + DIM.rectY;
         document.getElementById('floating_editor').setAttribute('x', newX);
         document.getElementById('floating_editor').setAttribute('y', newY);
         document.getElementById('floating_editor').setAttribute('visibility', 'visible');
+        if (vlElements.includes(focusElement)) {
+          document.getElementById('floating_editor_outline').setAttribute('width', DIM.floatEditOutlineVW);
+          document.getElementById('floating_editor_outline').setAttribute('height', DIM.floatEditOutlineVH);
+          document.getElementById('floating_editor_outline').setAttribute('x', DIM.floatEditOutlineVX);
+          document.getElementById('floating_editor_outline').setAttribute('y', DIM.floatEditOutlineVY);
+          document.getElementById('floating_icon').setAttribute('x', DIM.floatEditIconVX);
+          document.getElementById('floating_icon').setAttribute('y', DIM.floatEditIconVY);
+          document.getElementById('floating_emoticon').setAttribute('x', DIM.floatEditEmoVX);
+          document.getElementById('floating_emoticon').setAttribute('y', DIM.floatEditEmoVY);
+          document.getElementById('floating_desc').setAttribute('x', DIM.floatEditDescVX);
+          document.getElementById('floating_desc').setAttribute('y', DIM.floatEditDescVY);
+          document.getElementById('empty_icon').setAttribute('x', DIM.floatEmptyIconVX);
+          document.getElementById('empty_icon').setAttribute('y', DIM.floatEmptyIconVY);
+          document.getElementById('empty_emoticon').setAttribute('x', DIM.floatEmptyEmoVX);
+          document.getElementById('empty_emoticon').setAttribute('y', DIM.floatEmptyEmoVY);
+          document.getElementById('floating_back').setAttribute('x', DIM.floatBackVX);
+          document.getElementById('floating_back').setAttribute('y', DIM.floatBackVY);
+          document.getElementById('floating_fwd').setAttribute('x', DIM.floatFwdVX);
+          document.getElementById('floating_fwd').setAttribute('y', DIM.floatFwdVY);
+          document.getElementById('floating_post').setAttribute('x', DIM.floatPostItVX);
+          document.getElementById('floating_post').setAttribute('y', DIM.floatPostItVY);
+        } else if (vrElements.includes(focusElement)) {
+          document.getElementById('floating_editor_outline').setAttribute('width', DIM.floatEditOutlineVRW);
+          document.getElementById('floating_editor_outline').setAttribute('height', DIM.floatEditOutlineVRH);
+          document.getElementById('floating_editor_outline').setAttribute('x', DIM.floatEditOutlineVRX);
+          document.getElementById('floating_editor_outline').setAttribute('y', DIM.floatEditOutlineVRY);
+          document.getElementById('floating_icon').setAttribute('x', DIM.floatEditIconVRX);
+          document.getElementById('floating_icon').setAttribute('y', DIM.floatEditIconVRY);
+          document.getElementById('floating_emoticon').setAttribute('x', DIM.floatEditEmoVRX);
+          document.getElementById('floating_emoticon').setAttribute('y', DIM.floatEditEmoVRY);
+          document.getElementById('floating_desc').setAttribute('x', DIM.floatEditDescVRX);
+          document.getElementById('floating_desc').setAttribute('y', DIM.floatEditDescVRY);
+          document.getElementById('empty_icon').setAttribute('x', DIM.floatEmptyIconVRX);
+          document.getElementById('empty_icon').setAttribute('y', DIM.floatEmptyIconVRY);
+          document.getElementById('empty_emoticon').setAttribute('x', DIM.floatEmptyEmoVRX);
+          document.getElementById('empty_emoticon').setAttribute('y', DIM.floatEmptyEmoVRY);
+          document.getElementById('floating_back').setAttribute('x', DIM.floatBackVRX);
+          document.getElementById('floating_back').setAttribute('y', DIM.floatBackVRY);
+          document.getElementById('floating_fwd').setAttribute('x', DIM.floatFwdVRX);
+          document.getElementById('floating_fwd').setAttribute('y', DIM.floatFwdVRY);
+          document.getElementById('floating_post').setAttribute('x', DIM.floatPostItVRX);
+          document.getElementById('floating_post').setAttribute('y', DIM.floatPostItVRY);
+        } else {
+          document.getElementById('floating_editor_outline').setAttribute('width', DIM.floatEditOutlineW);
+          document.getElementById('floating_editor_outline').setAttribute('height', DIM.floatEditOutlineH);
+          document.getElementById('floating_editor_outline').setAttribute('x', DIM.floatEditOutlineX);
+          document.getElementById('floating_editor_outline').setAttribute('y', DIM.floatEditOutlineY);
+          document.getElementById('floating_icon').setAttribute('x', DIM.floatEditIconX);
+          document.getElementById('floating_icon').setAttribute('y', DIM.floatEditIconY);
+          document.getElementById('floating_emoticon').setAttribute('x', DIM.floatEditEmoX);
+          document.getElementById('floating_emoticon').setAttribute('y', DIM.floatEditEmoY);
+          document.getElementById('floating_desc').setAttribute('x', DIM.floatEditDescX);
+          document.getElementById('floating_desc').setAttribute('y', DIM.floatEditDescY);
+          document.getElementById('empty_icon').setAttribute('x', DIM.floatEmptyIconX);
+          document.getElementById('empty_icon').setAttribute('y', DIM.floatEmptyIconY);
+          document.getElementById('empty_emoticon').setAttribute('x', DIM.floatEmptyEmoX);
+          document.getElementById('empty_emoticon').setAttribute('y', DIM.floatEmptyEmoY);
+          document.getElementById('floating_back').setAttribute('x', DIM.floatBackX);
+          document.getElementById('floating_back').setAttribute('y', DIM.floatBackY);
+          document.getElementById('floating_fwd').setAttribute('x', DIM.floatFwdX);
+          document.getElementById('floating_fwd').setAttribute('y', DIM.floatFwdY);
+          document.getElementById('floating_post').setAttribute('x', DIM.floatPostItX);
+          document.getElementById('floating_post').setAttribute('y', DIM.floatPostItY);
+        }
+      }
+      var iconValue = elements[focusElement].icon;
+      var emoValue = elements[focusElement].emoticon;
+      var emptyIcon = document.getElementById('empty_icon');
+      var emptyEmo = document.getElementById('empty_emoticon');
+      document.getElementById('floating_icon_select').value = iconValue;
+      if (iconValue === 'none') {
+        emptyIcon.setAttribute('fill-opacity', '0.5');
+      } else {
+        emptyIcon.setAttribute('fill-opacity', '0.0');
       }
 
-      document.getElementById('floating_icon_select').value = elements[focusElement].icon;
-      document.getElementById('floating_emoticon_select').value = elements[focusElement].emoticon;
+      document.getElementById('floating_emoticon_select').value = emoValue;
+      if (emoValue === 'none') {
+        emptyEmo.setAttribute('fill-opacity', '0.5');
+      } else {
+        emptyEmo.setAttribute('fill-opacity', '0.0');
+      }
+
       document.getElementById('floating_event_desc').value = elements[focusElement].description;
       document.getElementById('floating_post_it_text').value = elements[focusElement].postit;
       floatEditing = true;
@@ -330,7 +411,7 @@ function editFocus () {
 
 function canvasGotFocus () {
   canvasInFocus = true;
-  changeFocus();
+  // changeFocus();
 }
 
 function canvasLostFocus () {
@@ -339,14 +420,17 @@ function canvasLostFocus () {
 
 function cycleNextFocus () {
   // move to the next focus element, if no more elements, release focus outside of canvas
-  // alert("last focus is " + focusElement);
   if ((elements.length - 1) > focusElement) {
     focusElement++;
+    var focusY = document.getElementById('group' + focusElement).getAttribute('y');
+    window.scrollTo(0, focusY - 200);
     changeFocus();
   } else {
     if (numElements < maxElements) {
       addMoreFocus(true);
       focusElement = -1;
+      var addfocusY = document.getElementById('add_more_card').getAttribute('y');
+      window.scrollTo(0, addfocusY - 200);
       changeFocus();
     }
   }
@@ -355,6 +439,8 @@ function cycleNextFocus () {
 function cyclePrevFocus () {
   if (focusElement > 0) {
     focusElement--;
+    var focusY = document.getElementById('group' + focusElement).getAttribute('y');
+    window.scrollTo(0, focusY - 200);
     changeFocus();
   }
   if (focusOnAddMore) {
@@ -365,8 +451,6 @@ function cyclePrevFocus () {
 }
 
 function updateElement () {
-  // change existing element according to form
-  // alert("changing values of " + document.getElementById('event_desc').value);
   if (UI.getEditor() === 'fixed') {
     elements[focusElement].description = document.getElementById('event_desc').value;
     elements[focusElement].icon = document.getElementById('icon_select').value;
@@ -404,6 +488,7 @@ function moveBackElement () {
     // return focus to the same element as at the start of this process
     focusElement--;
     changeFocus();
+    editFocus();
   }
   updateElements();
 }
@@ -422,6 +507,7 @@ function moveFwdElement () {
     elements[focusElement].eID = swapeIDback;
     focusElement++;
     changeFocus();
+    editFocus();
   }
   updateElements();
 }
