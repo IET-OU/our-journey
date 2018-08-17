@@ -20,7 +20,11 @@ function run () {
     LAYOUT.reflow();
   }
 
-  if (LOC.search.match(/[?&]edit=float/)) {
+  if (LOC.search.match(/[?&]edit=fixed/)) {
+    UI.chooseEditor('fixed');
+  } else if (LOC.search.match(/[?&]edit=float/)) {
+    UI.chooseEditor('float');
+  } else {
     UI.chooseEditor('float');
   }
 
@@ -228,6 +232,7 @@ function elementClick () {
 function setCardColour (colour) {
   cardColour = colour;
   updateElements();
+  document.getElementById('card_colour_select').value = cardColour;
 }
 
 function updateElements () {
@@ -792,11 +797,6 @@ function initialiseEventHandlers () {
     CORE.moveBackElement();
   });
 
-  attachEvent('#float_options', 'submit', function (e) {
-    e.preventDefault();
-    UI.toggleFloatOptions();
-  });
-
   attachEvent('#floating_forwardform', 'submit', function (e) {
     e.preventDefault();
     CORE.moveFwdElement();
@@ -807,17 +807,22 @@ function initialiseEventHandlers () {
     UI.toggleOptions();
   });
 
-  attachEvent('#backgroundform', 'submit', function (e) {
+  attachEvent('#float_optionsform', 'submit', function (e) {
+    e.preventDefault();
+    UI.toggleOptions();
+  });
+
+  attachEvent('#background_select', 'change', function (e) {
     e.preventDefault();
     UI.changeBackground();
   });
 
-  attachEvent('#backgroundelementsform', 'submit', function (e) {
+  attachEvent('#background_elements_select', 'change', function (e) {
     e.preventDefault();
     UI.changeBackgroundElements();
   });
 
-  attachEvent('#cardcolourform', 'submit', function (e) {
+  attachEvent('#card_colour_select', 'change', function (e) {
     e.preventDefault();
     UI.changeCardColour();
   });
@@ -835,16 +840,6 @@ function initialiseEventHandlers () {
   attachEvent('#saveform', 'submit', function (e) {
     e.preventDefault();
     FILE.saveJourney();
-  });
-
-  attachEvent('#float_saveform', 'submit', function (e) {
-    e.preventDefault();
-    FILE.saveJourney();
-  });
-
-  attachEvent('#float_loadform', 'submit', function (e) {
-    e.preventDefault();
-    FILE.loadJourney();
   });
 
   attachEvent('#journey-canvas', 'focusin', function (e) {
@@ -1428,9 +1423,9 @@ var editor = 'fixed';
 function toggleEditor (tog) {
   var editorElement;
   if (editor === 'fixed') {
-    editorElement = document.getElementById('editor');
+    editorElement = document.getElementById('editorbar');
   } else if (editor === 'float') {
-    editorElement = document.getElementById('floating_editor');
+    editorElement = document.getElementById('editorbar');
   }
   if (tog === 1 || tog === 'show') {
     editorElement.style.display = 'block';
@@ -1453,15 +1448,18 @@ function toggleOptions () {
   if (options.style.display === 'none') {
     options.style.display = 'block';
     document.getElementById('optionsButton').value = 'Hide Options';
+    document.getElementById('float_optionsButton').value = 'Hide Menu';
   } else {
     options.style.display = 'none';
     document.getElementById('optionsButton').value = 'Options';
+    document.getElementById('float_optionsButton').value = 'Menu';
   }
 }
 
 function changeBackground (bg) {
   var background = bg || document.getElementById('background_select').value;
   document.body.style.background = background;
+  document.getElementById('background_select').value = background;
 }
 
 function changeBackgroundElements (c) {
@@ -1496,14 +1494,12 @@ function changeCardColour () {
 
 function chooseEditor (newEdit) {
   if (newEdit === 'float') {
-    document.getElementById('editor').style.display = 'none';
+    document.getElementById('formeditor').style.display = 'none';
     document.getElementById('float_bar').style.display = 'inline';
-    document.getElementById('float_saveload').style.display = 'inline';
     editor = newEdit;
   } else if (newEdit === 'fixed') {
     document.getElementById('floating_editor').setAttribute('visibility', 'collapse');
     document.getElementById('float_bar').style.display = 'none';
-    document.getElementById('float_saveload').style.display = 'none';
   }
 }
 

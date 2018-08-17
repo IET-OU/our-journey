@@ -70,14 +70,11 @@ svg#journey-canvas .startcard
 
 .editorbar
     {
-      border: 1px solid #aaa;
-      border-radius: 5px;
       position: fixed;
       top: 0;
-      width: 100%;
       background: ivory;
-      padding: 5px;
       display: inline;
+      width: 100%;
     }
 
 .float_bar
@@ -86,14 +83,8 @@ svg#journey-canvas .startcard
       border-radius: 5px;
       position: fixed;
       top: 0;
-      width: 100%;
       background: ivory;
       padding: 5px;
-      display: none;
-    }
-
-.float_saveload
-    {
       display: none;
     }
 
@@ -114,7 +105,7 @@ svg#journey-canvas .startcard
 }
 
 .main {
-        margin-top: 100px;
+        margin-top: 0px;
         text-align: center;
 }
 

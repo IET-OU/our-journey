@@ -116,6 +116,7 @@ function elementClick () {
 function setCardColour (colour) {
   cardColour = colour;
   updateElements();
+  document.getElementById('card_colour_select').value = cardColour;
 }
 
 function updateElements () {

@@ -21,9 +21,9 @@ var editor = 'fixed';
 function toggleEditor (tog) {
   var editorElement;
   if (editor === 'fixed') {
-    editorElement = document.getElementById('editor');
+    editorElement = document.getElementById('editorbar');
   } else if (editor === 'float') {
-    editorElement = document.getElementById('floating_editor');
+    editorElement = document.getElementById('editorbar');
   }
   if (tog === 1 || tog === 'show') {
     editorElement.style.display = 'block';
@@ -46,15 +46,18 @@ function toggleOptions () {
   if (options.style.display === 'none') {
     options.style.display = 'block';
     document.getElementById('optionsButton').value = 'Hide Options';
+    document.getElementById('float_optionsButton').value = 'Hide Menu';
   } else {
     options.style.display = 'none';
     document.getElementById('optionsButton').value = 'Options';
+    document.getElementById('float_optionsButton').value = 'Menu';
   }
 }
 
 function changeBackground (bg) {
   var background = bg || document.getElementById('background_select').value;
   document.body.style.background = background;
+  document.getElementById('background_select').value = background;
 }
 
 function changeBackgroundElements (c) {
@@ -89,14 +92,12 @@ function changeCardColour () {
 
 function chooseEditor (newEdit) {
   if (newEdit === 'float') {
-    document.getElementById('editor').style.display = 'none';
+    document.getElementById('formeditor').style.display = 'none';
     document.getElementById('float_bar').style.display = 'inline';
-    document.getElementById('float_saveload').style.display = 'inline';
     editor = newEdit;
   } else if (newEdit === 'fixed') {
     document.getElementById('floating_editor').setAttribute('visibility', 'collapse');
     document.getElementById('float_bar').style.display = 'none';
-    document.getElementById('float_saveload').style.display = 'none';
   }
 }
 

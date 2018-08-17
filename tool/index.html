@@ -14,9 +14,10 @@
 
     <link rel="stylesheet" href="style/journeystyle.css" />
 
-    </head>
-    <body>
-        <div class="editorbar" id="editor">
+</head>
+<body>
+    <div class="editorbar" id="editorbar">
+        <div class="formeditor" id="formeditor">
         <h1 id="title">Journey editor: Map your study journey on to the cards</h1>
         <form id="updateform">
                 <select id="icon_select" aria-labelledby="What happened?">
@@ -91,6 +92,13 @@
                 <input type="submit" aria-label="Show or hide other options" value="Options" id="optionsButton">
             </form>
             <a href="https://iet-ou.github.io/our-journey/tool/help.html" target="_blank">Help</a>
+            </div>
+            <div id="float_bar" class="float_bar">
+                <form id="float_optionsform">
+                    <input type="submit" aria-label="Show or hide other options" value="Menu" id="float_optionsButton">
+                </form>
+                <a href="https://iet-ou.github.io/our-journey/tool/help.html" target="_blank">Help</a>
+            </div>
             <div class = "optionsbar" id = "options">
                 <h2>Options:</h2>
                     <h3>File:</h3>
@@ -122,7 +130,6 @@
                                 <option value="LightGray">Grey</option>
                                 <option value="Coral">Orange</option>
                             </select>
-                            <input type="submit" value="Update" id="updateButton">
                     </form>
                     <br>
                     <form id="backgroundelementsform" aria-label="Show or hide background images">
@@ -132,7 +139,6 @@
                             <option value="some">Some images</option>
                             <option value="none">No images</option>
                             </select>
-                            <input type="submit" value="Update" id="updateElButton">
                     </form>
                     <br>
                     <form id="cardcolourform" aria-label="Choose card colour">
@@ -152,7 +158,6 @@
                                 <option value="LightGray">Grey</option>
                                 <option value="Coral">Orange</option>
                             </select>
-                            <input type="submit" value="Update" id="updateCButton">
                     </form>
                     <br>
                     <form id="hideeditorform">
@@ -164,27 +169,7 @@
                     | <a id="oj-share-link" class="oj-share-link" href="?empty" rel="nofollow" title="Base64 encoded!">Share</a>
                     </div>
                 </div>
-
-        <div class='float_bar' id='float_bar'>
-            <h1 id="float_title">Journey editor: Map your study journey onto the cards</h1>
-            <form id="float_options" aria-label="Show or hide load and save options">
-                <input type='submit' value="Load/Save" id='floatOptionsButton'>
-            </form>
-            <div id='float_saveload' class='float_saveload'>
-                <form id="float_saveform" aria-label="Save journey to file">
-                        <label for="float_saveform">Save:</label>
-                        <input type='text' value="journey_file" id="float_filenamearea">
-                        <input type="submit" value="Save" id="float_saveButton" >
-                </form>
-                <form id="float_loadform" aria-label="Load journey from file">
-                    <label for="fileinput">Load:</label>
-                    <input type='file' id='float_fileinput' required aria-required="true">
-                    <input type="submit" id="float_loadButton" value="Load" >
-                </form>
-            </div>
-        </div>
-
-        <div class="main">
+        <div class="main" id="main">
             <svg width="1240" height="1600" id="journey-canvas">
                 <title role="img" id="title" aria-labelledby="desc-space">Journey</title>
 

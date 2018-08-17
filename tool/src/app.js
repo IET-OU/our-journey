@@ -19,7 +19,11 @@ function run () {
     LAYOUT.reflow();
   }
 
-  if (LOC.search.match(/[?&]edit=float/)) {
+  if (LOC.search.match(/[?&]edit=fixed/)) {
+    UI.chooseEditor('fixed');
+  } else if (LOC.search.match(/[?&]edit=float/)) {
+    UI.chooseEditor('float');
+  } else {
     UI.chooseEditor('float');
   }
 
