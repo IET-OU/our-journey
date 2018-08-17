@@ -145,7 +145,7 @@ const LAYOUT = require('./layout');
 
 // Status variables
 var elements = [];
-var focusElement = -1;
+var focusElement = 0;
 var canvasInFocus = false;
 var floatEditing = false;
 var focusOnAddMore = false;
@@ -297,7 +297,6 @@ function updateEmoticon (i) {
     }
   } else {
     eEmo.setAttribute('display', 'none');
-    emptyEmo.setAttribute('fill-opacity', '0.5');
   }
 }
 
@@ -325,7 +324,6 @@ function updateIcon (i) {
     }
   } else {
     eIcon.setAttribute('display', 'none');
-    emptyIcon.setAttribute('fill-opacity', '0.5');
   }
 }
 
