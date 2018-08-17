@@ -926,16 +926,13 @@ function saveJourney () {
 
 function loadJourney () {
   var input, file, fr;
-
   if (typeof FileReader !== 'function') {
     alert("The file API isn't supported on this browser yet.");
     return;
   }
-  if (UI.getEditor() === 'float') {
-    input = document.getElementById('float_fileinput');
-  } else {
-    input = document.getElementById('fileinput');
-  }
+  
+  input = document.getElementById('fileinput');
+  
   if (!input) {
     alert("Couldn't find the fileinput element.");
   } else if (!input.files) {
