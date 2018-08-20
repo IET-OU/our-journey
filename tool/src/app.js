@@ -38,8 +38,8 @@ function run () {
   }
 
   CORE.setFocusElement(0);
-
   CORE.changeFocus();
+  CORE.editFocus();
 
   UI.toggleOptions();
   UI.changeBackground('Wheat');

@@ -289,13 +289,23 @@
 
             <g class="card-holder"> </g>
 
-            <svg id="floating_editor" x=0 y=0 width = "370" height="370" visibility = "collapse">
+            <svg id="floating_editor" x="0" y="0" width = "370" height="370" visibility = "collapse">
                 <rect id="floating_editor_outline" width = "240" height="130" stroke="black" stroke-width="0" fill-opacity="0.0" fill="Ivory"/>
-                <rect id="empty_icon" width = "110" height = "110" x = "10" y = "110" stroke="LightGray" fill="LightGray"/>
-                <rect id="empty_emoticon" x = "125" y = "150" width = "110" height = "75" stroke="LightGray" fill="LightGray"/>
+                <svg id="empty_icon" x = "10" y = "110">
+                    <rect id="empty_icon_rect" width = "110" height = "110"  stroke="LightGray" fill="LightGray"/>
+                    <foreignObject id="empty_icon_text" width = "100" height = "75" x="5" y="10">
+                        <p>What happened?</p>
+                    </foreignObject>
+                </svg>
+                <svg id="empty_emoticon" x = "125" y = "150">
+                    <rect id="empty_emoticon_rect" width = "110" height = "75" stroke="LightGray" fill="LightGray"/>
+                    <foreignObject id="empty_emoticon_text" width = "100" height = "75" x="5" y="0">
+                        <p>How did you feel?</p>
+                    </foreignObject>
+                </svg>
                 <foreignObject id="floating_icon" y=85 x=10>
                             <select class="floating_icon_select" id="floating_icon_select" tabindex="0">
-                                <option value="none">None</option>
+                                <option value="none">Event</option>
                                 <option value="achievement">Achievement</option>
                                 <option value="admin">Administrative tasks</option>
                                 <option value="assessment">Assessment</option>
@@ -334,7 +344,7 @@
                     <foreignObject id="floating_emoticon" y=140 x=125>
                     <form>
                         <select class="floating_emoticon_select" id="floating_emoticon_select" tabindex="0">
-                            <option value="none">None</option>
+                            <option value="none">Feeling</option>
                             <option value="angry">Angry</option>
                             <option value="anxious">Anxious</option>
                             <option value="bored">Bored</option>

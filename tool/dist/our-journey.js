@@ -39,8 +39,8 @@ function run () {
   }
 
   CORE.setFocusElement(0);
-
   CORE.changeFocus();
+  CORE.editFocus();
 
   UI.toggleOptions();
   UI.changeBackground('Wheat');
@@ -278,6 +278,7 @@ function updateDescription (i) {
 function updateEmoticon (i) {
   var eEmo = document.getElementById('emoticon' + i);
   var emptyEmo = document.getElementById('empty_emoticon');
+  var emptyEmoText = document.getElementById('empty_emoticon_text');
   var layout = LAYOUT.getLayout();
   if (getElement(i).emoticon !== 'none') {
     for (var j = 0; j < ASSET.emoticonCount(); j++) {
@@ -298,6 +299,7 @@ function updateEmoticon (i) {
         eEmo.setAttribute('href', ASSET.getEmoticonPath(j));
         eEmo.setAttribute('alt', ASSET.getEmoticonName(j));
         emptyEmo.setAttribute('fill-opacity', '0.0');
+        emptyEmoText.textContent = "";
       }
     }
   } else {
@@ -308,6 +310,7 @@ function updateEmoticon (i) {
 function updateIcon (i) {
   var eIcon = document.getElementById('icon' + i);
   var emptyIcon = document.getElementById('empty_icon');
+  var emptyIconText = document.getElementById('empty_icon_text');
   var layout = LAYOUT.getLayout();
   if (getElement(i).icon !== 'none') {
     for (var j = 0; j < ASSET.iconCount(); j++) {
@@ -325,6 +328,7 @@ function updateIcon (i) {
         eIcon.setAttribute('href', ASSET.getIconPath(j));
         eIcon.setAttribute('alt', ASSET.getIconName(j));
         emptyIcon.setAttribute('fill-opacity', '0.0');
+        emptyIconText.textContent = "";
       }
     }
   } else {
