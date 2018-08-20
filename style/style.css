@@ -17,3 +17,28 @@ body{
     margin-left: auto;
     margin-right: auto;
 }
+
+.footer-copy {
+    color: #333;
+    float: left;
+    font-size: .85rem;
+    margin-top: 65px;
+  }
+  
+  .footer-logos {
+    float: right;
+  }
+  
+  .footer-logos img:focus,
+  .footer-logos img:hover {
+    border-color: #2b6ab7;
+  }
+  
+  img[ src = 'assets/ou-logo.svg' ],
+  img[ src = 'assets/iet-logo.svg' ] {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    height: 68px;
+    margin-right: 16px;
+    padding: 5px;
+  }
