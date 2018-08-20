@@ -294,18 +294,15 @@
                 <svg id="empty_icon" x = "10" y = "110">
                     <rect id="empty_icon_rect" width = "110" height = "110"  stroke="LightGray" fill="LightGray"/>
                     <foreignObject id="empty_icon_text" width = "100" height = "75" x="5" y="10">
-                        <p>What happened?</p>
+                        <p>1. What happened?</p>
                     </foreignObject>
                 </svg>
-                <svg id="empty_emoticon" x = "125" y = "150">
-                    <rect id="empty_emoticon_rect" width = "110" height = "75" stroke="LightGray" fill="LightGray"/>
-                    <foreignObject id="empty_emoticon_text" width = "100" height = "75" x="5" y="0">
-                        <p>How did you feel?</p>
-                    </foreignObject>
-                </svg>
-                <foreignObject id="floating_icon" y=85 x=10>
-                            <select class="floating_icon_select" id="floating_icon_select" tabindex="0">
-                                <option value="none">Event</option>
+                <foreignObject x=125 y=10 id="floating_desc">
+                    <textarea id="floating_event_desc" rows=3 cols=12 tabindex="0" maxlength=38 placeholder="2. Describe the event"></textarea>
+            </foreignObject>
+                <foreignObject id="floating_icon" y=85 x=5>
+                            <select class="floating_icon_select" id="floating_icon_select" aria-label="Describe the event" tabindex="0">
+                                <option value="none">Select</option>
                                 <option value="achievement">Achievement</option>
                                 <option value="admin">Administrative tasks</option>
                                 <option value="assessment">Assessment</option>
@@ -337,14 +334,17 @@
                                 <option value="timelost">Time Lost</option>
                         </select>
                     </form>
+                </foreignObject>
+                <svg id="empty_emoticon" x = "125" y = "150">
+                    <rect id="empty_emoticon_rect" width = "110" height = "75" stroke="LightGray" fill="LightGray"/>
+                    <foreignObject id="empty_emoticon_text" width = "100" height = "75" x="5" y="0">
+                        <p>3. How did you feel?</p>
                     </foreignObject>
-                    <foreignObject x=125 y=10 id="floating_desc">
-                            <textarea id="floating_event_desc" rows=3 cols=12 tabindex="0" maxlength=38></textarea>
-                    </foreignObject>
-                    <foreignObject id="floating_emoticon" y=140 x=125>
+                </svg>
+                    <foreignObject id="floating_emoticon" y=140 x=12>
                     <form>
-                        <select class="floating_emoticon_select" id="floating_emoticon_select" tabindex="0">
-                            <option value="none">Feeling</option>
+                        <select class="floating_emoticon_select" id="floating_emoticon_select" aria-label="How did you feel?" tabindex="0">
+                            <option value="none">Select</option>
                             <option value="angry">Angry</option>
                             <option value="anxious">Anxious</option>
                             <option value="bored">Bored</option>
@@ -367,7 +367,7 @@
                     </form>
                 </foreignObject>
                 <foreignObject x=245 y=10 id="floating_post">
-                        <textarea id="floating_post_it_text" rows=3 cols=9 maxlength=30></textarea>
+                        <textarea id="floating_post_it_text" rows=3 cols=9 maxlength=30 placeholder="4. Add an optional note?"></textarea>
                     </foreignObject>
                 <foreignObject x=245 y=75 id="floating_back">
                     <form id="floating_backform" tabindex="0">

@@ -105,6 +105,7 @@ function demoFill () {
 }
 
 function elementClick () {
+  //need to check whether a new element is click or the same one and only show editor if same
   var e = this.id.substring(5);
   focusElement = parseInt(e);
   changeFocus();
@@ -389,9 +390,12 @@ function editFocus () {
       var emoValue = elements[focusElement].emoticon;
       var emptyIcon = document.getElementById('empty_icon');
       var emptyEmo = document.getElementById('empty_emoticon');
+      var emptyIconText = document.getElementById('empty_icon_text');
+      var emptyEmoText = document.getElementById('empty_emoticon_text');
       document.getElementById('floating_icon_select').value = iconValue;
       if (iconValue === 'none') {
         emptyIcon.setAttribute('fill-opacity', '0.5');
+        emptyIconText.textContent = "1. What happened?";
       } else {
         emptyIcon.setAttribute('fill-opacity', '0.0');
       }
@@ -399,6 +403,7 @@ function editFocus () {
       document.getElementById('floating_emoticon_select').value = emoValue;
       if (emoValue === 'none') {
         emptyEmo.setAttribute('fill-opacity', '0.5');
+        emptyEmoText.textContent = "3. How did you feel?";
       } else {
         emptyEmo.setAttribute('fill-opacity', '0.0');
       }
