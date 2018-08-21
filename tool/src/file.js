@@ -9,7 +9,6 @@ module.exports = {
 
 const CORE = require('./core');
 const LAYOUT = require('./layout');
-const UI = require('./user-interface');
 const alert = window.alert;
 const FileReader = window.FileReader;
 
@@ -30,9 +29,9 @@ function loadJourney () {
     alert("The file API isn't supported on this browser yet.");
     return;
   }
-  
+
   input = document.getElementById('fileinput');
-  
+
   if (!input) {
     alert("Couldn't find the fileinput element.");
   } else if (!input.files) {

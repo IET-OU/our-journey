@@ -27,7 +27,7 @@ function toggleEditor (tog) {
     } else if (tog === 0 || tog === 'hide') {
       editorElement.style.display = 'none';
     }
-  } 
+  }
 }
 
 function toggleFloatOptions () {

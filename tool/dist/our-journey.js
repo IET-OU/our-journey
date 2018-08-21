@@ -221,17 +221,16 @@ function demoFill () {
 }
 
 function elementClick () {
-  //need to check whether a new element is click or the same one and only show editor if same
-  var e = this.id.substring(5);
-  if(e != focusElement) {
-    focusElement = parseInt(e);
+  var e = parseInt(this.id.substring(5));
+  if (e !== focusElement) {
+    focusElement = e;
     changeFocus();
     UI.toggleEditor('show');
     stopFloatingFocus();
   } else {
     editFocus();
   }
-  document.getElementById('journey-canvas').focus(); 
+  document.getElementById('journey-canvas').focus();
 }
 
 function setCardColour (colour) {
@@ -304,7 +303,7 @@ function updateEmoticon (i) {
         eEmo.setAttribute('href', ASSET.getEmoticonPath(j));
         eEmo.setAttribute('alt', ASSET.getEmoticonName(j));
         emptyEmo.setAttribute('fill-opacity', '0.0');
-        emptyEmoText.textContent = "";
+        emptyEmoText.textContent = '';
       }
     }
   } else {
@@ -333,7 +332,7 @@ function updateIcon (i) {
         eIcon.setAttribute('href', ASSET.getIconPath(j));
         eIcon.setAttribute('alt', ASSET.getIconName(j));
         emptyIcon.setAttribute('fill-opacity', '0.0');
-        emptyIconText.textContent = "";
+        emptyIconText.textContent = '';
       }
     }
   } else {
@@ -515,19 +514,19 @@ function editFocus () {
       document.getElementById('floating_icon_select').value = iconValue;
       if (iconValue === 'none') {
         emptyIcon.setAttribute('fill-opacity', '0.5');
-        emptyIconText.textContent = "1. What happened?";
+        emptyIconText.textContent = '1. What happened?';
       } else {
         emptyIcon.setAttribute('fill-opacity', '0.0');
+        emptyIconText.textContent = '';
       }
-
       document.getElementById('floating_emoticon_select').value = emoValue;
       if (emoValue === 'none') {
         emptyEmo.setAttribute('fill-opacity', '0.5');
-        emptyEmoText.textContent = "3. How did you feel?";
+        emptyEmoText.textContent = '3. How did you feel?';
       } else {
         emptyEmo.setAttribute('fill-opacity', '0.0');
+        emptyEmoText.textContent = '';
       }
-
       document.getElementById('floating_event_desc').value = elements[focusElement].description;
       document.getElementById('floating_post_it_text').value = elements[focusElement].postit;
       floatEditing = true;
@@ -922,7 +921,6 @@ module.exports = {
 
 const CORE = require('./core');
 const LAYOUT = require('./layout');
-const UI = require('./user-interface');
 const alert = window.alert;
 const FileReader = window.FileReader;
 
@@ -943,9 +941,9 @@ function loadJourney () {
     alert("The file API isn't supported on this browser yet.");
     return;
   }
-  
+
   input = document.getElementById('fileinput');
-  
+
   if (!input) {
     alert("Couldn't find the fileinput element.");
   } else if (!input.files) {
@@ -977,7 +975,7 @@ function receivedText (ev) {
   CORE.updateElements();
 }
 
-},{"./core":3,"./layout":7,"./user-interface":10}],7:[function(require,module,exports){
+},{"./core":3,"./layout":7}],7:[function(require,module,exports){
 /*!
   Layout the SVG journey cards | © 2018 The Open University (IET-OU).
 */
@@ -1439,7 +1437,7 @@ function toggleEditor (tog) {
     } else if (tog === 0 || tog === 'hide') {
       editorElement.style.display = 'none';
     }
-  } 
+  }
 }
 
 function toggleFloatOptions () {
