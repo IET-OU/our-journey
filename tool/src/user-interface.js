@@ -22,14 +22,12 @@ function toggleEditor (tog) {
   var editorElement;
   if (editor === 'fixed') {
     editorElement = document.getElementById('editorbar');
-  } else if (editor === 'float') {
-    editorElement = document.getElementById('editorbar');
-  }
-  if (tog === 1 || tog === 'show') {
-    editorElement.style.display = 'block';
-  } else if (tog === 0 || tog === 'hide') {
-    editorElement.style.display = 'none';
-  }
+    if (tog === 1 || tog === 'show') {
+      editorElement.style.display = 'block';
+    } else if (tog === 0 || tog === 'hide') {
+      editorElement.style.display = 'none';
+    }
+  } 
 }
 
 function toggleFloatOptions () {

@@ -107,11 +107,15 @@ function demoFill () {
 function elementClick () {
   //need to check whether a new element is click or the same one and only show editor if same
   var e = this.id.substring(5);
-  focusElement = parseInt(e);
-  changeFocus();
-  editFocus();
-  UI.toggleEditor('show');
-  document.getElementById('journey-canvas').focus();
+  if(e != focusElement) {
+    focusElement = parseInt(e);
+    changeFocus();
+    UI.toggleEditor('show');
+    stopFloatingFocus();
+  } else {
+    editFocus();
+  }
+  document.getElementById('journey-canvas').focus(); 
 }
 
 function setCardColour (colour) {

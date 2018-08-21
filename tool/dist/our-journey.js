@@ -221,12 +221,17 @@ function demoFill () {
 }
 
 function elementClick () {
+  //need to check whether a new element is click or the same one and only show editor if same
   var e = this.id.substring(5);
-  focusElement = parseInt(e);
-  changeFocus();
-  editFocus();
-  UI.toggleEditor('show');
-  document.getElementById('journey-canvas').focus();
+  if(e != focusElement) {
+    focusElement = parseInt(e);
+    changeFocus();
+    UI.toggleEditor('show');
+    stopFloatingFocus();
+  } else {
+    editFocus();
+  }
+  document.getElementById('journey-canvas').focus(); 
 }
 
 function setCardColour (colour) {
@@ -1429,14 +1434,12 @@ function toggleEditor (tog) {
   var editorElement;
   if (editor === 'fixed') {
     editorElement = document.getElementById('editorbar');
-  } else if (editor === 'float') {
-    editorElement = document.getElementById('editorbar');
-  }
-  if (tog === 1 || tog === 'show') {
-    editorElement.style.display = 'block';
-  } else if (tog === 0 || tog === 'hide') {
-    editorElement.style.display = 'none';
-  }
+    if (tog === 1 || tog === 'show') {
+      editorElement.style.display = 'block';
+    } else if (tog === 0 || tog === 'hide') {
+      editorElement.style.display = 'none';
+    }
+  } 
 }
 
 function toggleFloatOptions () {
