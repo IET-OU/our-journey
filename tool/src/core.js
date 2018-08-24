@@ -86,12 +86,19 @@ document.addEventListener('keydown', (event) => {
         }
         break;
       case 'Escape':
-      if (floatEditing) {
-        editFocus();
-      }
+        if (floatEditing) {
+          editFocus();
+        }
     }
   }
 }, false);
+
+window.addEventListener('beforeunload', function (e) {
+  UI.toggleOptions(1);
+  var confirmationMessage = 'WARNING: If you leave without saving, you will lose changes to your journey.';
+  (e || window.event).returnValue = confirmationMessage;
+  return confirmationMessage;
+});
 
 function initialiseElements (start) {
   for (var i = start; i < numElements; i++) {

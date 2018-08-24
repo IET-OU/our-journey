@@ -39,9 +39,9 @@ function toggleFloatOptions () {
   }
 }
 
-function toggleOptions () {
+function toggleOptions (tog) {
   var options = document.getElementById('options');
-  if (options.style.display === 'none') {
+  if (options.style.display === 'none' || tog === 1) {
     options.style.display = 'block';
     document.getElementById('optionsButton').value = 'Hide Options';
     document.getElementById('float_optionsButton').value = 'Hide Menu';

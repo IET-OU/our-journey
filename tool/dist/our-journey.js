@@ -207,12 +207,19 @@ document.addEventListener('keydown', (event) => {
         }
         break;
       case 'Escape':
-      if (floatEditing) {
-        editFocus();
-      }
+        if (floatEditing) {
+          editFocus();
+        }
     }
   }
 }, false);
+
+window.addEventListener('beforeunload', function (e) {
+  UI.toggleOptions(1);
+  var confirmationMessage = 'WARNING: If you leave without saving, you will lose changes to your journey.';
+  (e || window.event).returnValue = confirmationMessage;
+  return confirmationMessage;
+});
 
 function initialiseElements (start) {
   for (var i = start; i < numElements; i++) {
@@ -1464,9 +1471,9 @@ function toggleFloatOptions () {
   }
 }
 
-function toggleOptions () {
+function toggleOptions (tog) {
   var options = document.getElementById('options');
-  if (options.style.display === 'none') {
+  if (options.style.display === 'none' || tog === 1) {
     options.style.display = 'block';
     document.getElementById('optionsButton').value = 'Hide Options';
     document.getElementById('float_optionsButton').value = 'Hide Menu';
