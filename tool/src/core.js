@@ -85,6 +85,10 @@ document.addEventListener('keydown', (event) => {
           editFocus();
         }
         break;
+      case 'Escape':
+      if (floatEditing) {
+        editFocus();
+      }
     }
   }
 }, false);
@@ -265,8 +269,14 @@ function updatePostIt (i) {
 
 function updateAltText (i) {
   var ePlace = document.getElementById('group' + i);
-  var alttext = 'Card ' + i + '. Event: ' + elements[i].icon + ' : ' + elements[i].description + '. Feeling ' + elements[i].emoticon + '. ' + elements[i].postit;
-  ePlace.setAttribute('aria-labelledby', alttext);
+  var iconText;
+  for (var j = 0; j < ASSET.iconCount(); j++) {
+    if (ASSET.hasIcon(j, getElement(i))) {
+      iconText = ASSET.getIconAlt(j);
+    }
+  }
+  var alttext = 'Card ' + i + '. Event: ' + iconText + ' : ' + elements[i].description + '. Feeling ' + elements[i].emoticon + '. ' + elements[i].postit;
+  ePlace.setAttribute('aria-label', alttext);
 }
 
 function changeFocus () {
