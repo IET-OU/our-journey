@@ -51,10 +51,13 @@ var vrElements = [ 4, 5, 14, 15, 24, 25, 34, 35, 44, 45, 54, 55, 64 ];
 
 document.addEventListener('keydown', (event) => {
   const keyName = event.key;
+  var focus = document.activeElement.getAttribute('id');
   if (canvasInFocus) {
     switch (keyName) {
       case 'ArrowUp':
-        event.preventDefault();
+        if(!((focus === "floating_icon_select") || (focus === "floating_emoticon_select"))){
+          event.preventDefault();
+        }
         if (!floatEditing) {
           cyclePrevFocus();
         }
@@ -70,16 +73,17 @@ document.addEventListener('keydown', (event) => {
         }
         break;
       case 'ArrowDown':
-        event.preventDefault();
+        if(!((focus === "floating_icon_select") || (focus === "floating_emoticon_select"))){
+          event.preventDefault();
+        }
         if (!floatEditing) {
           cycleNextFocus();
         }
         break;
       case 'Enter':
-        var active = document.activeElement.getAttribute('id');
-        if (active === 'floating_backform') {
+        if (focus === 'floating_backform') {
           moveBackElement();
-        } else if (active === 'floating_forwardform') {
+        } else if (focus === 'floating_forwardform') {
           moveFwdElement();
         } else if (focusOnAddMore) {
           LAYOUT.addElementsToLayout();
