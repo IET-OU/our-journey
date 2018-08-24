@@ -105,7 +105,7 @@
                 <form id="float_optionsform">
                     <input type="submit" aria-label="Show or hide menu options" value="Menu" id="float_optionsButton">
                 </form>
-                <a class="help_link" href="help.html" target="_blank">Help</a>
+                <a class="help_link" href=" help.html" target="_blank">Help</a>
             </div>
             <div class = "optionsbar" id = "options" aria-label="Menu">
                 <h2>Options:</h2>
@@ -303,9 +303,6 @@
                         <p>1. What happened?</p>
                     </foreignObject>
                 </svg>
-                <foreignObject x=125 y=10 id="floating_desc">
-                    <textarea id="floating_event_desc" rows=3 cols=12 tabindex="0" maxlength=40 placeholder="2. Describe the event"></textarea>
-            </foreignObject>
                 <foreignObject id="floating_icon" y=85 x=5>
                             <select class="floating_icon_select" id="floating_icon_select" aria-label="Describe the event" tabindex="0">
                                 <option value="none">What happened?</option>
@@ -350,6 +347,9 @@
                                 </optgroup>
                         </select>
                     </form>
+                    <foreignObject x=125 y=10 id="floating_desc">
+                            <textarea id="floating_event_desc" rows=3 cols=12 tabindex="0" maxlength=40 placeholder="2. Describe the event"></textarea>
+                    </foreignObject>
                 </foreignObject>
                 <svg id="empty_emoticon" x = "125" y = "150">
                     <rect id="empty_emoticon_rect" width = "110" height = "75" stroke="LightGray" fill="LightGray"/>
