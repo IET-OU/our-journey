@@ -54,19 +54,9 @@ h3 {
 
 svg#journey-canvas .in_postit {
     font-family: 'Comic Sans MS', sans-serif;
-    font-size: .92rem;
+    font-size: .90rem;
     text-align: center;
 }
-
-svg#journey-canvas .startcard
-    {
-        font-size: 1.1rem; /* Was: 16pt; */
-    }
-
-.addmore
-    {
-      font-size: 4rem;
-    }
 
 .editorbar
     {
@@ -110,7 +100,7 @@ svg#journey-canvas .startcard
 }
 
 svg#journey-canvas .in_card {
-  font: 0.97rem sans-serif; /* Was: 14pt; */
+  font: 0.9rem sans-serif; /* Was: 14pt; */
 }
 
 svg#journey-canvas .card > rect {
