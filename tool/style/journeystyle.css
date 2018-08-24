@@ -58,6 +58,14 @@ svg#journey-canvas .in_postit {
     text-align: center;
 }
 
+.help_link {
+  vertical-align: -5px;
+  font-size: 1rem;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  padding: 5px;
+}
+
 .editorbar
     {
       position: fixed;
@@ -72,10 +80,10 @@ svg#journey-canvas .in_postit {
       border: 1px solid #aaa;
       border-radius: 5px;
       position: fixed;
-      top: 0;
       background: ivory;
       padding: 5px;
-      display: none;
+      display: block;
+      font-size: 1rem;
     }
 
 .floatingeditor
