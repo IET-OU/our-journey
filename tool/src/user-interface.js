@@ -10,7 +10,8 @@ module.exports = {
   changeCardColour: changeCardColour,
   chooseEditor: chooseEditor,
   getEditor: getEditor,
-  toggleFloatOptions: toggleFloatOptions
+  toggleFloatOptions: toggleFloatOptions,
+  printJourney: printJourney
 };
 
 const ASSET = require('./assets');
@@ -19,15 +20,39 @@ const CORE = require('./core');
 var editor = 'fixed';
 
 function toggleEditor (tog) {
-  var editorElement;
   if (editor === 'fixed') {
-    editorElement = document.getElementById('editorbar');
+    var editorElement = document.getElementById('editorbar');
     if (tog === 1 || tog === 'show') {
       editorElement.style.display = 'block';
     } else if (tog === 0 || tog === 'hide') {
       editorElement.style.display = 'none';
     }
   }
+  else if (editor === 'float') {
+    var floatElement = document.getElementById('float_bar');
+    if (tog === 1 || tog === 'show') {
+      toggleOptions(1);
+      floatElement.style.display = 'block';
+    } else if (tog === 0 || tog === 'hide') {
+      toggleOptions(0);
+      floatElement.style.display = 'none';
+    }
+  }
+}
+
+function printJourney () {
+  if (editor === 'fixed') {
+    var editorElement = document.getElementById('editorbar');
+      editorElement.style.display = 'none';
+  }
+  else if (editor === 'float') {
+    var floatElement = document.getElementById('float_bar');
+    toggleOptions(0);
+    floatElement.style.display = 'none';
+    CORE.stopFloatingFocus();
+    CORE.isPrinting();
+  }
+  window.print();
 }
 
 function toggleFloatOptions () {

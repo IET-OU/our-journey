@@ -144,7 +144,8 @@ module.exports = /* WAS: window.our_journeys */ {
   addElements: addElements,
   getMaxElements: getMaxElements,
   addMoreFocus: addMoreFocus,
-  setCardColour: setCardColour
+  setCardColour: setCardColour,
+  isPrinting: isPrinting
 };
 
 const UI = require('./user-interface');
@@ -158,6 +159,7 @@ var focusElement = 0;
 var canvasInFocus = false;
 var floatEditing = false;
 var focusOnAddMore = false;
+var printed = false;
 var cardColour = 'Ivory';
 
 // Number of card elements presented in page
@@ -241,7 +243,10 @@ function elementClick () {
   if (e !== focusElement) {
     focusElement = e;
     changeFocus();
-    UI.toggleEditor('show');
+    if(printed){
+      UI.toggleEditor('show');
+      printed = false;
+    }
     stopFloatingFocus();
   } else {
     editFocus();
@@ -685,6 +690,10 @@ function getMaxElements () {
   return maxElements;
 }
 
+function isPrinting () {
+  printed = true;
+}
+
 },{"./assets":2,"./dimension.json":4,"./layout":7,"./user-interface":10}],4:[function(require,module,exports){
 module.exports={
   "#": "Sizes & positions of card and Post-it components.",
@@ -861,9 +870,9 @@ function initialiseEventHandlers () {
     UI.changeCardColour();
   });
 
-  attachEvent('#hideeditorform', 'submit', function (e) {
+  attachEvent('#printform', 'submit', function (e) {
     e.preventDefault();
-    UI.toggleEditor('hide');
+    UI.printJourney();
   });
 
   attachEvent('#loadform', 'submit', function (e) {
@@ -1442,7 +1451,8 @@ module.exports = {
   changeCardColour: changeCardColour,
   chooseEditor: chooseEditor,
   getEditor: getEditor,
-  toggleFloatOptions: toggleFloatOptions
+  toggleFloatOptions: toggleFloatOptions,
+  printJourney: printJourney
 };
 
 const ASSET = require('./assets');
@@ -1451,15 +1461,39 @@ const CORE = require('./core');
 var editor = 'fixed';
 
 function toggleEditor (tog) {
-  var editorElement;
   if (editor === 'fixed') {
-    editorElement = document.getElementById('editorbar');
+    var editorElement = document.getElementById('editorbar');
     if (tog === 1 || tog === 'show') {
       editorElement.style.display = 'block';
     } else if (tog === 0 || tog === 'hide') {
       editorElement.style.display = 'none';
     }
   }
+  else if (editor === 'float') {
+    var floatElement = document.getElementById('float_bar');
+    if (tog === 1 || tog === 'show') {
+      toggleOptions(1);
+      floatElement.style.display = 'block';
+    } else if (tog === 0 || tog === 'hide') {
+      toggleOptions(0);
+      floatElement.style.display = 'none';
+    }
+  }
+}
+
+function printJourney () {
+  if (editor === 'fixed') {
+    var editorElement = document.getElementById('editorbar');
+      editorElement.style.display = 'none';
+  }
+  else if (editor === 'float') {
+    var floatElement = document.getElementById('float_bar');
+    toggleOptions(0);
+    floatElement.style.display = 'none';
+    CORE.stopFloatingFocus();
+    CORE.isPrinting();
+  }
+  window.print();
 }
 
 function toggleFloatOptions () {

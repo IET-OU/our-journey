@@ -68,9 +68,9 @@ function initialiseEventHandlers () {
     UI.changeCardColour();
   });
 
-  attachEvent('#hideeditorform', 'submit', function (e) {
+  attachEvent('#printform', 'submit', function (e) {
     e.preventDefault();
-    UI.toggleEditor('hide');
+    UI.printJourney();
   });
 
   attachEvent('#loadform', 'submit', function (e) {

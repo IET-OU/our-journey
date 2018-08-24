@@ -97,7 +97,7 @@
                 <input type="submit" aria-label="Move element forwards" value="Move Fwd" id="fwdButton">
             </form>
             <form id="optionsform">
-                <input type="submit" aria-label="Show or hide other options" value="Options" id="optionsButton">
+                <input type="submit" aria-label="Show or hide other menu options" value="Options" id="optionsButton">
             </form>
             <a href="https://iet-ou.github.io/our-journey/tool/help.html" target="_blank">Help</a>
             </div>
@@ -107,20 +107,25 @@
                 </form>
                 <a href="https://iet-ou.github.io/our-journey/tool/help.html" target="_blank">Help</a>
             </div>
-            <div class = "optionsbar" id = "options">
+            <div class = "optionsbar" id = "options" aria-label="Menu">
                 <h2>Options:</h2>
-                    <h3>File:</h3>
+                    <h3>File: Save, load, or print a journey</h3>
                     <form id="saveform" aria-label="Save journey to file">
                         <label for="filenamearea">Save:</label>
                         <input type='text' value="journey_file" id="filenamearea">
                         <input type="submit" value="Save" id="saveButton" >
                     </form>
+                    <br><br>
                     <form id="loadform" aria-label="Load journey from file">
                         <label for="fileinput">Load:</label>
                         <input type='file' id='fileinput' required aria-required="true">
                         <input type="submit" id="loadButton" value="Load" >
                     </form>
-                    <h3>View:</h3>
+                    <br><br>
+                    <form id="printform">
+                            <input type="submit" aria-label="Print" value="Print" id="printButton">
+                        </form>
+                    <h3>View: Change how it looks</h3>
                     <form id="backgroundform" aria-label="Choose background colour">
                             <label for="background_select">Background Colour:</label>
                             <select id="background_select">
@@ -168,10 +173,6 @@
                             </select>
                     </form>
                     <br>
-                    <form id="hideeditorform">
-                        <input type="submit" aria-label="Hide editor" value="Hide editor" id="hideButton">
-                    </form>
-
                     <p><a href="?demo=1">Demo fill</a> | <a href="?demo=0">Reset &ndash; no fill</a>
 
                     | <a id="oj-share-link" class="oj-share-link" href="?empty" rel="nofollow" title="Base64 encoded!">Share</a>

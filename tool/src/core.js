@@ -23,7 +23,8 @@ module.exports = /* WAS: window.our_journeys */ {
   addElements: addElements,
   getMaxElements: getMaxElements,
   addMoreFocus: addMoreFocus,
-  setCardColour: setCardColour
+  setCardColour: setCardColour,
+  isPrinting: isPrinting
 };
 
 const UI = require('./user-interface');
@@ -37,6 +38,7 @@ var focusElement = 0;
 var canvasInFocus = false;
 var floatEditing = false;
 var focusOnAddMore = false;
+var printed = false;
 var cardColour = 'Ivory';
 
 // Number of card elements presented in page
@@ -120,7 +122,10 @@ function elementClick () {
   if (e !== focusElement) {
     focusElement = e;
     changeFocus();
-    UI.toggleEditor('show');
+    if(printed){
+      UI.toggleEditor('show');
+      printed = false;
+    }
     stopFloatingFocus();
   } else {
     editFocus();
@@ -562,4 +567,8 @@ function addElements (addition) {
 
 function getMaxElements () {
   return maxElements;
+}
+
+function isPrinting () {
+  printed = true;
 }
