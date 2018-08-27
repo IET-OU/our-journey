@@ -46,6 +46,13 @@ function reflow (layout) {
     document.getElementById('add_more_card').setAttribute('y', (CORE.getNumElements() * 130) + 170);
   } else {
     LAYOUTS[ layout ].forEach(function (elem) {
+      if (elem[ '{orient}' ] === 'vert') {
+        elem[ '{w}' ] = 130;
+        elem[ '{h}' ] = 240;
+      } else {
+        elem[ '{w}' ] = 240;
+        elem[ '{h}' ] = 130;
+      }
       cards.push(replaceObj(SVG_TEMPLATE, elem));
     });
     document.getElementById('scol_start_point').setAttribute('visibility', 'collapse');

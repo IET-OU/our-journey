@@ -125,7 +125,7 @@ svg#journey-canvas .card > .focussed {
   stroke-width: 3;
 }
 
-svg#journey-canvas .card.orient-horiz > rect {
+/* svg#journey-canvas .card.orient-horiz > rect {
   height: 130px;
   width: 240px;
 }
@@ -133,7 +133,7 @@ svg#journey-canvas .card.orient-horiz > rect {
 svg#journey-canvas .card.orient-vert > rect {
   height: 240px;
   width: 130px;
-}
+} */
 
 .add_more_card > .focussed {
   stroke: blue;
