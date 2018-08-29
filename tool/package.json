@@ -1,7 +1,7 @@
 {
   "name": "our-journey",
   "description": "Our Journey interactive. | © 2018 The Open University (IET-OU).",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "PROPRIETARY",
   "main": "index.js",
   "browser": "dist/our-journey.js",
