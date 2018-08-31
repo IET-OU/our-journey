@@ -92,6 +92,11 @@ svg#journey-canvas .in_postit {
     flex-direction: row;
   }
 
+ .floating_post
+ {
+    background-color: lightyellow;
+ }
+  
 .floating_icon_select
 {
   width: 110px;
