@@ -176,7 +176,7 @@ document.addEventListener('keydown', (event) => {
   if (canvasInFocus) {
     switch (keyName) {
       case 'ArrowUp':
-        if(!((focus === "floating_icon_select") || (focus === "floating_emoticon_select"))){
+        if (!((focus === 'floating_icon_select') || (focus === 'floating_emoticon_select'))) {
           event.preventDefault();
         }
         if (!floatEditing) {
@@ -194,7 +194,7 @@ document.addEventListener('keydown', (event) => {
         }
         break;
       case 'ArrowDown':
-        if(!((focus === "floating_icon_select") || (focus === "floating_emoticon_select"))){
+        if (!((focus === 'floating_icon_select') || (focus === 'floating_emoticon_select'))) {
           event.preventDefault();
         }
         if (!floatEditing) {
@@ -246,7 +246,7 @@ function elementClick () {
   if (e !== focusElement) {
     focusElement = e;
     changeFocus();
-    if(printed){
+    if (printed) {
       UI.toggleEditor('show');
       printed = false;
     }
@@ -1478,8 +1478,7 @@ function toggleEditor (tog) {
     } else if (tog === 0 || tog === 'hide') {
       editorElement.style.display = 'none';
     }
-  }
-  else if (editor === 'float') {
+  } else if (editor === 'float') {
     var floatElement = document.getElementById('float_bar');
     if (tog === 1 || tog === 'show') {
       toggleOptions(1);
@@ -1494,9 +1493,8 @@ function toggleEditor (tog) {
 function printJourney () {
   if (editor === 'fixed') {
     var editorElement = document.getElementById('editorbar');
-      editorElement.style.display = 'none';
-  }
-  else if (editor === 'float') {
+    editorElement.style.display = 'none';
+  } else if (editor === 'float') {
     var floatElement = document.getElementById('float_bar');
     toggleOptions(0);
     floatElement.style.display = 'none';

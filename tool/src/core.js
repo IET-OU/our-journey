@@ -55,7 +55,7 @@ document.addEventListener('keydown', (event) => {
   if (canvasInFocus) {
     switch (keyName) {
       case 'ArrowUp':
-        if(!((focus === "floating_icon_select") || (focus === "floating_emoticon_select"))){
+        if (!((focus === 'floating_icon_select') || (focus === 'floating_emoticon_select'))) {
           event.preventDefault();
         }
         if (!floatEditing) {
@@ -73,7 +73,7 @@ document.addEventListener('keydown', (event) => {
         }
         break;
       case 'ArrowDown':
-        if(!((focus === "floating_icon_select") || (focus === "floating_emoticon_select"))){
+        if (!((focus === 'floating_icon_select') || (focus === 'floating_emoticon_select'))) {
           event.preventDefault();
         }
         if (!floatEditing) {
@@ -125,7 +125,7 @@ function elementClick () {
   if (e !== focusElement) {
     focusElement = e;
     changeFocus();
-    if(printed){
+    if (printed) {
       UI.toggleEditor('show');
       printed = false;
     }
