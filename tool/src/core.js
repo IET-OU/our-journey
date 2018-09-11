@@ -24,7 +24,9 @@ module.exports = /* WAS: window.our_journeys */ {
   getMaxElements: getMaxElements,
   addMoreFocus: addMoreFocus,
   setCardColour: setCardColour,
-  isPrinting: isPrinting
+  isPrinting: isPrinting,
+  cardFocus: cardFocus,
+  addMoreCardFocus: addMoreCardFocus
 };
 
 const UI = require('./user-interface');
@@ -87,14 +89,16 @@ document.addEventListener('keydown', (event) => {
           moveFwdElement();
         } else if (focusOnAddMore) {
           LAYOUT.addElementsToLayout();
-        } else {
+        } else if (!floatEditing) {
           editFocus();
         }
         break;
       case 'Escape':
         if (floatEditing) {
           editFocus();
+          document.getElementById('group' + focusElement).focus();
         }
+        break;
     }
   }
 }, false);
@@ -124,7 +128,6 @@ function elementClick () {
   var e = parseInt(this.id.substring(5));
   if (e !== focusElement) {
     focusElement = e;
-    changeFocus();
     if (printed) {
       UI.toggleEditor('show');
       printed = false;
@@ -133,7 +136,14 @@ function elementClick () {
   } else {
     editFocus();
   }
-  document.getElementById('journey-canvas').focus();
+}
+
+function cardFocus () {
+  var e = parseInt(this.id.substring(5));
+  if (e !== focusElement) {
+    focusElement = e;
+    changeFocus();
+  }
 }
 
 function setCardColour (colour) {
@@ -144,11 +154,12 @@ function setCardColour (colour) {
 
 function updateElements () {
   for (var i = 0; i < numElements; i++) {
-    var ePlace = document.getElementById('group' + i);
-    ePlace.addEventListener('click', elementClick);
+    var elementGroup = document.getElementById('group' + i);
+    elementGroup.addEventListener('click', elementClick);
+    elementGroup.addEventListener('focus', cardFocus);
     var card = document.getElementById('place' + i);
     card.style.fill = cardColour;
-    if ((LAYOUT.getLayout() === 'default') && vlElements.includes(i)) {
+    if ((LAYOUT.getLayoutStyle() === 'default') && vlElements.includes(i)) {
       card.setAttribute('x', DIM.rectXV);
     } else {
       card.setAttribute('y', DIM.rectY);
@@ -168,7 +179,7 @@ function updateElements () {
 
 function updateDescription (i) {
   var eText = document.getElementById('description' + i);
-  var layout = LAYOUT.getLayout();
+  var layout = LAYOUT.getLayoutStyle();
   eText.textContent = getElement(i).description;
   if ((layout === 'default') && vlElements.includes(i)) {
     eText.setAttribute('x', DIM.textXV);
@@ -186,16 +197,16 @@ function updateEmoticon (i) {
   var eEmo = document.getElementById('emoticon' + i);
   var emptyEmo = document.getElementById('empty_emoticon');
   var emptyEmoText = document.getElementById('empty_emoticon_text');
-  var layout = LAYOUT.getLayout();
+  var layoutStyle = LAYOUT.getLayoutStyle();
   if (getElement(i).emoticon !== 'none') {
     for (var j = 0; j < ASSET.emoticonCount(); j++) {
       if (ASSET.hasEmoticon(j, getElement(i))) {
         eEmo.setAttribute('height', DIM.emoticonHeight);
         eEmo.setAttribute('width', DIM.emoticonWidth);
-        if ((layout === 'default') && (vlElements.includes(i))) {
+        if ((layoutStyle === 'default') && (vlElements.includes(i))) {
           eEmo.setAttribute('x', DIM.emoticonXV);
           eEmo.setAttribute('y', DIM.emoticonYV);
-        } else if ((layout === 'default') && (vrElements.includes(i))) {
+        } else if ((layoutStyle === 'default') && (vrElements.includes(i))) {
           eEmo.setAttribute('x', DIM.emoticonXVR);
           eEmo.setAttribute('y', DIM.emoticonYVR);
         } else {
@@ -218,13 +229,13 @@ function updateIcon (i) {
   var eIcon = document.getElementById('icon' + i);
   var emptyIcon = document.getElementById('empty_icon');
   var emptyIconText = document.getElementById('empty_icon_text');
-  var layout = LAYOUT.getLayout();
+  var layoutStyle = LAYOUT.getLayoutStyle();
   if (getElement(i).icon !== 'none') {
     for (var j = 0; j < ASSET.iconCount(); j++) {
       if (ASSET.hasIcon(j, getElement(i))) {
         eIcon.setAttribute('height', DIM.iconHeight);
         eIcon.setAttribute('width', DIM.iconWidth);
-        if ((layout === 'default') && (vlElements.includes(i))) {
+        if ((layoutStyle === 'default') && (vlElements.includes(i))) {
           eIcon.setAttribute('x', DIM.iconXV);
           eIcon.setAttribute('y', DIM.iconYV);
         } else {
@@ -246,30 +257,30 @@ function updateIcon (i) {
 function updatePostIt (i) {
   var ePostIt = document.getElementById('postit' + i);
   var ePostItText = document.getElementById('postittext' + i);
-  var layout = LAYOUT.getLayout();
+  var layoutStyle = LAYOUT.getLayout();
   if (getElement(i).postit !== '') {
     ePostIt.setAttribute('visibility', 'visible');
     ePostItText.setAttribute('visibility', 'visible');
     ePostItText.setAttribute('width', DIM.postitTextWidth);
     // ePostItText.setAttribute('y', DIM.postitTextY);
 
-    if (((layout === 'default') && vlElements.includes(i))) {
+    if (((layoutStyle === 'default') && vlElements.includes(i))) {
       ePostIt.setAttribute('y', DIM.postitVY);
       ePostIt.setAttribute('x', DIM.postitVX);
       ePostItText.setAttribute('y', DIM.postitTextY + DIM.postitVY);
       ePostItText.setAttribute('x', DIM.postitTextVX);
       ePostItText.setAttribute('y', DIM.postitTextVY);
-    } else if ((layout === 'default') && vrElements.includes(i)) {
+    } else if ((layoutStyle === 'default') && vrElements.includes(i)) {
       ePostIt.setAttribute('x', DIM.postitVRX);
       ePostIt.setAttribute('y', DIM.postitVRY);
       ePostItText.setAttribute('y', DIM.postitTextVRY);
       ePostItText.setAttribute('x', DIM.postitTextVRX);
-    } else if (layout === 'scol') {
+    } else if (layoutStyle === 'scol') {
       ePostIt.setAttribute('x', DIM.postitScolX);
       ePostIt.setAttribute('y', DIM.postitScolY);
       ePostItText.setAttribute('y', DIM.postitTextScolY + DIM.postitScolY);
       ePostItText.setAttribute('x', DIM.postitTextScolX);
-    } else if (layout === 'default') {
+    } else if (layoutStyle === 'default') {
       ePostIt.setAttribute('x', DIM.postitX);
       ePostIt.setAttribute('y', DIM.postitY);
       ePostItText.setAttribute('x', DIM.postitTextX);
@@ -296,12 +307,10 @@ function updateAltText (i) {
 
 function changeFocus () {
   for (var i = 0; i < elements.length; i++) {
-    var element = document.getElementById(elements[i].eID);
-    element.setAttribute('class', 'not-focussed');
+    document.getElementById(elements[i].eID).setAttribute('class', 'not-focussed');
   }
-  var focus = document.getElementById(elements[focusElement].eID);
-  focus.setAttribute('class', 'focussed');
-
+  document.getElementById(elements[focusElement].eID).setAttribute('class', 'focussed');
+  document.getElementById('group' + focusElement).focus();
   if (UI.getEditor() === 'fixed') {
     document.getElementById('event_desc').value = elements[focusElement].description;
     document.getElementById('icon_select').value = elements[focusElement].icon;
@@ -309,14 +318,29 @@ function changeFocus () {
     document.getElementById('post_it_text').value = elements[focusElement].postit;
     document.getElementById('title').innerHTML = 'Journey Editor: Card ' + focusElement;
   } else if (UI.getEditor() === 'float') {
-    // stopFloatingFocus();
+    stopFloatingFocus();
+    addMoreFocus(false);
   }
+  if (focusElement !== -1) {
+    var focusY = document.getElementById('group' + focusElement).getAttribute('y');
+    window.scrollTo(0, focusY - 200);
+  }
+}
+
+function addMoreCardFocus () {
+  addMoreFocus(true);
+  focusElement = -1;
+  changeFocus();
+  var focusY = document.getElementById('add_more_card').getAttribute('y');
+  window.scrollTo(0, focusY);
 }
 
 function addMoreFocus (focusin) {
   if (focusin) {
     document.getElementById('add_more_rect').setAttribute('class', 'focussed');
     focusOnAddMore = true;
+    focusElement = -1;
+    // -causes loop? updateElements();
   } else {
     document.getElementById('add_more_rect').setAttribute('class', 'not-focussed');
     focusOnAddMore = false;
@@ -334,18 +358,16 @@ function editFocus () {
   if (UI.getEditor() === 'float') {
     if (floatEditing) {
       stopFloatingFocus();
-      document.getElementById('journey-canvas').focus();
     } else {
-      if (LAYOUT.getLayout() === 'scol') {
+      if (LAYOUT.getLayoutStyle() === 'scol') {
         newY = (focusElement * 130) + 170;
         document.getElementById('floating_editor').setAttribute('x', '0');
         document.getElementById('floating_editor').setAttribute('y', newY);
         document.getElementById('floating_editor').setAttribute('visibility', 'visible');
-      } else if (LAYOUT.getLayout() === 'default') {
+      } else if (LAYOUT.getLayoutStyle() === 'default') {
         var layoutData = LAYOUT.getLayoutData();
-        newX = layoutData['default'][focusElement]['{x}'];
-        newY = layoutData['default'][focusElement]['{y}'];
-        // newY = newY + DIM.rectY;
+        newX = layoutData[LAYOUT.getLayout()][focusElement]['{x}'];
+        newY = layoutData[LAYOUT.getLayout()][focusElement]['{y}'];
         document.getElementById('floating_editor').setAttribute('x', newX);
         document.getElementById('floating_editor').setAttribute('y', newY);
         document.getElementById('floating_editor').setAttribute('visibility', 'visible');
@@ -439,6 +461,7 @@ function editFocus () {
       document.getElementById('floating_event_desc').value = elements[focusElement].description;
       document.getElementById('floating_post_it_text').value = elements[focusElement].postit;
       floatEditing = true;
+      document.getElementById('floating_icon_select').focus();
     }
   } else if (UI.getEditor() === 'fixed') {
     document.getElementById('event_desc').focus();
@@ -455,18 +478,13 @@ function canvasLostFocus () {
 }
 
 function cycleNextFocus () {
-  // move to the next focus element, if no more elements, release focus outside of canvas
   if ((elements.length - 1) > focusElement) {
     focusElement++;
-    var focusY = document.getElementById('group' + focusElement).getAttribute('y');
-    window.scrollTo(0, focusY - 200);
     changeFocus();
   } else {
     if (numElements < maxElements) {
       addMoreFocus(true);
       focusElement = -1;
-      var addfocusY = document.getElementById('add_more_card').getAttribute('y');
-      window.scrollTo(0, addfocusY - 200);
       changeFocus();
     }
   }
@@ -475,8 +493,6 @@ function cycleNextFocus () {
 function cyclePrevFocus () {
   if (focusElement > 0) {
     focusElement--;
-    var focusY = document.getElementById('group' + focusElement).getAttribute('y');
-    window.scrollTo(0, focusY - 200);
     changeFocus();
   }
   if (focusOnAddMore) {
@@ -499,7 +515,6 @@ function updateElement () {
     elements[focusElement].postit = document.getElementById('floating_post_it_text').value;
   }
   updateElements();
-  // document.getElementById('journey-canvas').focus();
 }
 
 function clearElement () {

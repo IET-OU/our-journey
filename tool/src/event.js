@@ -130,6 +130,10 @@ function initialiseEventHandlers () {
   attachEvent('#add_more_img', 'click', function (e) {
     LAYOUT.addElementsToLayout();
   });
+
+  attachEvent('#add_more_card', 'focus', function (e) {
+    CORE.addMoreCardFocus();
+  });
 }
 
 function attachEvent (selector, eventName, callback) {

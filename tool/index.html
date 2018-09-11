@@ -399,7 +399,7 @@
                 </foreignObject>
             </svg>
 
-            <svg id="add_more_card" class="add_more_card" width="130" height="240" y="1350" x="990">
+            <svg id="add_more_card" class="add_more_card" width="130" height="240" y="1350" x="990" tabindex=0>
                 <rect role="button" fill="crimson" id="add_more_rect" width = "130" height = "240" stroke="black" fill="crimson" stroke-width="1" fill-opacity="1.0"/>
                 <image xlink:href = "assets/add-more.png" x = "4" y = "30" height="176" width="121" id="add_more_img" class="add_more_img"/>
             </svg>
@@ -409,7 +409,7 @@
 
     <script id="oj-svg-card-template" type="text/template">
 
-    <svg x="{x}" y="{y}" id="group{j}" role="listitem" class="card orient-{orient}">
+    <svg x="{x}" y="{y}" id="group{j}" role="listitem" class="card orient-{orient}" tabindex="0">
         <rect width="{w}" height="{h}" id="place{j}"/>
         <image href="" id="icon{j}"/>
         <switch>

@@ -7,7 +7,8 @@ module.exports = {
   getLayout: getLayout,
   getLayoutData: getLayoutData,
   addElementsToLayout: addElementsToLayout,
-  setScol: setScol
+  setScol: setScol,
+  getLayoutStyle
 };
 
 const LAYOUTS = require('./layouts.json');
@@ -16,9 +17,11 @@ const HOLDER = document.querySelector('#journey-canvas .card-holder');
 const CORE = require('./core');
 const UI = require('./user-interface');
 
+var layoutStyle = 'default';
 var setLayout = 'default';
 
 function setScol () {
+  layoutStyle = 'scol';
   setLayout = 'scol';
   document.getElementById('journey-canvas').setAttribute('height', '2400');
   document.getElementById('journey-canvas').setAttribute('width', '500');
@@ -66,8 +69,9 @@ function addElementsToLayout () {
     var newHeight;
     var newAddMoreY;
     CORE.addElements(10);
-    if (setLayout === 'default') {
-      reflow('default' + CORE.getNumElements());
+    if (layoutStyle === 'default') {
+      setLayout = 'default' + CORE.getNumElements();
+      reflow(setLayout);
       newHeight = parseInt(document.getElementById('journey-canvas').getAttribute('height')) + 720;
       if (CORE.getNumElements() < CORE.getMaxElements()) {
         newAddMoreY = parseInt(document.getElementById('add_more_card').getAttribute('y')) + 710;
@@ -75,7 +79,7 @@ function addElementsToLayout () {
       } else {
         document.getElementById('add_more_card').setAttribute('visibility', 'collapse');
       }
-    } else if (setLayout === 'scol') {
+    } else if (layoutStyle === 'scol') {
       reflow('scol');
       newHeight = parseInt(document.getElementById('journey-canvas').getAttribute('height')) + 1400;
       if (CORE.getNumElements() < CORE.getMaxElements()) {
@@ -87,6 +91,8 @@ function addElementsToLayout () {
     }
     document.getElementById('journey-canvas').setAttribute('height', newHeight);
     CORE.initialiseElements(numExistingElements);
+    CORE.setFocusElement(numExistingElements);
+    CORE.changeFocus();
   }
 }
 
@@ -101,6 +107,10 @@ function replaceObj (str, mapObj) {
 
 function getLayout () {
   return setLayout;
+}
+
+function getLayoutStyle () {
+  return layoutStyle;
 }
 
 function getLayoutData () {

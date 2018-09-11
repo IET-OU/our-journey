@@ -39,7 +39,6 @@ function run () {
 
   CORE.setFocusElement(0);
   CORE.changeFocus();
-  CORE.editFocus();
 
   UI.toggleOptions();
   UI.changeBackground('Wheat');
@@ -47,6 +46,7 @@ function run () {
   SHARE.createLink(CORE.getElements());
   SHARE.loadLink(CORE.getElements());
 
-  document.getElementById('journey-canvas').focus();
+  document.getElementById('group0').focus();
+  CORE.editFocus();
   window.scrollTo(0, 0);
 }
