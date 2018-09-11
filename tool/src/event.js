@@ -131,7 +131,7 @@ function initialiseEventHandlers () {
     LAYOUT.addElementsToLayout();
   });
 
-  attachEvent('#add_more_card', 'focus', function (e) {
+  attachEvent('#add_more_card', 'focusin', function (e) {
     CORE.addMoreCardFocus();
   });
 }

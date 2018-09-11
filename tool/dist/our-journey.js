@@ -449,9 +449,11 @@ function changeFocus () {
 }
 
 function addMoreCardFocus () {
-  addMoreFocus(true);
+  // - Needs improvement - tab focus does not remove focus from previous element
+  focusOnAddMore = true;
   focusElement = -1;
-  changeFocus();
+  //addMoreFocus(true);
+  //changeFocus();
   var focusY = document.getElementById('add_more_card').getAttribute('y');
   window.scrollTo(0, focusY);
 }
@@ -459,8 +461,7 @@ function addMoreCardFocus () {
 function addMoreFocus (focusin) {
   if (focusin) {
     document.getElementById('add_more_rect').setAttribute('class', 'focussed');
-    focusOnAddMore = true;
-    focusElement = -1;
+
     // -causes loop? updateElements();
   } else {
     document.getElementById('add_more_rect').setAttribute('class', 'not-focussed');
@@ -951,7 +952,7 @@ function initialiseEventHandlers () {
     LAYOUT.addElementsToLayout();
   });
 
-  attachEvent('#add_more_card', 'focus', function (e) {
+  attachEvent('#add_more_card', 'focusin', function (e) {
     CORE.addMoreCardFocus();
   });
 }
