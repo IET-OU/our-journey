@@ -452,8 +452,8 @@ function addMoreCardFocus () {
   // - Needs improvement - tab focus does not remove focus from previous element
   focusOnAddMore = true;
   focusElement = -1;
-  //addMoreFocus(true);
-  //changeFocus();
+  // addMoreFocus(true);
+  // changeFocus();
   var focusY = document.getElementById('add_more_card').getAttribute('y');
   window.scrollTo(0, focusY);
 }
