@@ -5,14 +5,21 @@
 module.exports.run = run;
 
 const LOC = window.location;
+const CONFIG = require('./config');
 const CORE = require('./core');
 const LAYOUT = require('./layout');
 const EVENTS = require('./event');
 const SHARE = require('./share-link');
 const UI = require('./user-interface');
+const VIEWS = require('./views');
 
-function run () {
-  console.warn('The our-journey API:', require('../index'));
+function run (config) {
+  console.warn('The our-journey API:', require('../index'), 'config:', config);
+
+  CONFIG.set(config);
+
+  VIEWS.setup();
+
   if (LOC.search.match(/[?&]layout=scol/)) {
     LAYOUT.setScol();
   } else {

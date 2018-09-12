@@ -4,6 +4,8 @@
 
 module.exports = {
 
+  version: '__VERSION__',
+
   app: require('./src/app'),
 
   core: require('./src/core'),
@@ -16,5 +18,7 @@ module.exports = {
 
   share: require('./src/share-link'),
 
-  ui: require('./src/user-interface')
+  ui: require('./src/user-interface'),
+
+  views: require('./src/views')
 };

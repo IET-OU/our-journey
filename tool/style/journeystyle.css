@@ -96,7 +96,7 @@ svg#journey-canvas .in_postit {
  {
     background-color: lightyellow;
  }
-  
+
 .floating_icon_select
 {
   width: 110px;
@@ -172,8 +172,8 @@ svg#journey-canvas .card.orient-vert > rect {
   border-color: #2b6ab7;
 }
 
-img[ src = 'assets/ou-logo.svg' ],
-img[ src = 'assets/iet-logo.svg' ] {
+img[ src $= 'assets/ou-logo.svg' ],
+img[ src $= 'assets/iet-logo.svg' ] {
   border: 1px solid transparent;
   border-radius: 3px;
   height: 68px;
