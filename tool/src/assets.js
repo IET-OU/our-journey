@@ -1,5 +1,4 @@
-/*!
-  Get paths to icon and emoji files. | © 2018 The Open University (IET-OU).
+/* Get paths & ALT text for icons & emojis | ©The Open University.
 */
 
 module.exports = {
@@ -15,7 +14,7 @@ module.exports = {
   hasIcon: hasIcon
 };
 
-const CONFIG = require('./config');
+const UTIL = require('./util'); // Was: CONFIG = require('./config');
 
 // Presentation variables
 const iconFiles = [ {name: 'achievement', file: 'Achievement_card.png', alt: 'Achievement'}, {name: 'admin', file: 'Admin_card.png', alt: 'Admin and forms'}, {name: 'assessment', file: 'Assessments_card.png', alt: 'Assessment'}, {name: 'barrier', file: 'Barrier_card.png', alt: 'Barrier'}, {name: 'communication', file: 'Communication_card.png', alt: 'Communication'}, {name: 'confidence', file: 'ConfidenceBoost_card.png', alt: 'Confidence boost'}, {name: 'considerstudy', file: 'ConsiderStudy_card.png', alt: 'Considering study'}, {name: 'duedates', file: 'DueDates_card.png', alt: 'Due dates'}, {name: 'employment', file: 'Employment_card.png', alt: 'Jobs and employment'}, {name: 'finances', file: 'Finances_card.png', alt: 'Finances'}, {name: 'helpneeded', file: 'HelpNeeded_card.png', alt: 'Help needed'}, {name: 'highpressure', file: 'HighPressure_card.png', alt: 'High pressure'}, {name: 'information', file: 'Information_card.png', alt: 'Finding information'}, {name: 'lostdirection', file: 'LostDirection_card.png', alt: 'Lost direction'}, {name: 'lowenergy', file: 'LowEnergy_card.png', alt: 'Low energy'}, {name: 'lowscores', file: 'LowScores_card.png', alt: 'Low scores'}, {name: 'moving', file: 'Moving_card.png', alt: 'Moving home'}, {name: 'nosupport', file: 'NoSupport_card.png', alt: 'No support'}, {name: 'peersupport', file: 'PeerSupport_card.png', alt: 'Peer support'}, {name: 'problem', file: 'Problem_card.png', alt: 'Problem'}, {name: 'register', file: 'Register_card.png', alt: 'Registering'}, {name: 'repetition', file: 'Repetition_card.png', alt: 'Repetition'}, {name: 'studybreak', file: 'StudyBreak_card.png', alt: 'Break from study'}, {name: 'studyexperience', file: 'StudyExperience_card.png', alt: 'Study experience'}, {name: 'studygoal', file: 'StudyGoal_card.png', alt: 'Goal'}, {name: 'studymilestone', file: 'StudyMilestone_card.png', alt: 'Study milestone'}, {name: 'studysuccess', file: 'StudySuccess_card.png', alt: 'Study success'}, {name: 'studysupport', file: 'StudySupport_card.png', alt: 'Study support'}, {name: 'timelost', file: 'TimeLost_card.png', alt: 'Time lost'} ];
@@ -33,7 +32,7 @@ function iconCount () {
 }
 
 function getEmoticonPath (j) {
-  return CONFIG.get('assetUrl') + emojiDir + emoticonFiles[ j ].file;
+  return UTIL.config('assetUrl') + emojiDir + emoticonFiles[ j ].file;
 }
 
 function getEmoticonName (j) {
@@ -41,7 +40,7 @@ function getEmoticonName (j) {
 }
 
 function getIconPath (j) {
-  return CONFIG.get('assetUrl') + cardDir + iconFiles[ j ].file;
+  return UTIL.config('assetUrl') + cardDir + iconFiles[ j ].file;
 }
 
 function getIconName (j) {

@@ -1,24 +1,25 @@
-/*!
-  Default application | © 2018 The Open University (IET-OU).
+/* Default application | ©The Open University.
 */
 
 module.exports.run = run;
 
 const LOC = window.location;
-const CONFIG = require('./config');
 const CORE = require('./core');
 const LAYOUT = require('./layout');
 const EVENTS = require('./event');
 const SHARE = require('./share-link');
 const UI = require('./user-interface');
+const UTIL = require('./util'); // Was: require('./config');
 const VIEWS = require('./views');
 
 function run (config) {
   console.warn('The our-journey API:', require('../index'), 'config:', config);
 
-  CONFIG.set(config);
+  UTIL.putConfig(config);
 
   VIEWS.setup();
+
+  console.warn('qs test:', UTIL.qs('#journey-canvas'));
 
   if (LOC.search.match(/[?&]layout=scol/)) {
     LAYOUT.setScol();

@@ -1,5 +1,5 @@
 /*!
-  Our Journey module | © 2018 The Open University (IET-OU).
+  Our-journey module | © The Open University.
 */
 
 module.exports = {
@@ -19,6 +19,8 @@ module.exports = {
   share: require('./src/share-link'),
 
   ui: require('./src/user-interface'),
+
+  util: require('./src/util'), // Was: config: require('./src/config'),
 
   views: require('./src/views')
 };

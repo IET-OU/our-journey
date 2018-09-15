@@ -2,6 +2,7 @@
 [![js-semistandard-style][semi-icon]][semi]
 [![Browserify][br-icon]][browserify]
 [![Husky Git hooks][hook-icon]][hook]
+[![our-journey - on Npmjs][npm-icon]][npm]
 
 # Our Journeys interactive student journey creator
 
@@ -58,7 +59,28 @@ npm run pa11y-ci
 ```js
 console.log('Inspect:', require('our-journey'));
 
-require('our-journey').app.run();
+require('our-journey').app.run({ assetUrl: '..', containerSelector: 'DOM selector' });
+```
+
+### Example
+
+Via [unpkg][] — [browse][] — production CDN:
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/our-journey@^1/assets/style/journeystyle.css" />
+
+<div id="our-journey-tool">
+  <noscript> Sorry! This tool requires Javascript. </noscript>
+</div>
+
+<script src="https://unpkg.com/our-journey@^1/assets/dist/our-journey.js"></script>
+
+<script>
+  require('our-journey').app.run({
+    assetUrl: 'https://unpkg.com/our-journey@^1/assets',
+    containerSelector: '#our-journey-tool'
+  });
+</script>
 ```
 
 ---
@@ -80,6 +102,8 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
   "Understanding Accessibility as a Process through the Analysis of Feedback from Disabled Students. Tim Coughlan, Thomas Daniel Ullmann, & Kate Lister, 2017."
 [heif]: https://re.ukri.org/knowledge-exchange/the-higher-education-innovation-fund-heif/
   "The Higher Education Innovation Fund (HEIF)"
+[unpkg]: https://unpkg.com/ "unpkg is a fast content delivery network (CDN) for everything on npm"
+[browse]: https://unpkg.com/our-journey@^1/src/ "Browse the most recent version on Unpkg.com"
 [semi]: https://github.com/Flet/semistandard "Javascript coding style — semistandard"
 [semi-icon]: https://nick.freear.org.uk/badge/semi.svg
 [sem-i0]: https://img.shields.io/badge/code_style-semistandard-brightgreen.svg
@@ -88,5 +112,9 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [hook]: https://npmjs.com/package/husky "Git hooks made easy 🐶"
 [hook-icon]: https://img.shields.io/badge/git--hook-husky-ff69b4.svg
 [q-location]: https://github.com/IET-OU/our-journey/search?q=location&type=Code "GitHub search: 'location'"
+[npm]: https://npmjs.com/package/our-journey
+[npm-icon]: https://badge.fury.io/js/our-journey.svg
+[travis]: https://travis-ci.org/IET-OU/our-journey "Build status – Travis-CI (NPM)"
+[travis-icon]: https://api.travis-ci.org/IET-OU/our-journey.svg
 
 [End]: //.

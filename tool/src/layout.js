@@ -1,5 +1,4 @@
-/*!
-  Layout the SVG journey cards | © 2018 The Open University (IET-OU).
+/* Layout the SVG journey cards | ©The Open University.
 */
 
 module.exports = {
@@ -11,14 +10,12 @@ module.exports = {
   getLayoutStyle: getLayoutStyle
 };
 
-const CONFIG = require('./config');
-const VIEWS = require('./views');
 const LAYOUTS = require('./layouts.json');
-const SVG_TEMPLATE = VIEWS.card_template; // document.querySelector('#oj-svg-card-template').innerText;
+const SVG_TEMPLATE = require('./views').cardTemplate; // Was: document.querySelector('#oj-svg-card-template').innerText;
 const HOLDER_SELECTOR = '#journey-canvas .card-holder';
-// const HOLDER = document.querySelector('#journey-canvas .card-holder');
 const CORE = require('./core');
 const UI = require('./user-interface');
+const UTIL = require('./util'); // Was: require('./config');
 
 var layoutStyle = 'default';
 var setLayout = 'default';
@@ -39,7 +36,7 @@ function setScol () {
 
 function reflow (layout) {
   layout = layout || 'default';
-  const HOLDER = document.querySelector(HOLDER_SELECTOR);
+  const HOLDER = UTIL.qs(HOLDER_SELECTOR); // Was: document.querySelector(HOLDER_SELECTOR);
 
   console.warn('layout:', layout, LAYOUTS[ layout ], /* SVG_TEMPLATE, */ HOLDER);
 
@@ -50,9 +47,9 @@ function reflow (layout) {
       scolLayout.push({ '{j}': i, '{x}': 0, '{y}': (i * 130) + 70, '{w}': 240, '{h}': 130, '{orient}': 'horiz' });
     }
     scolLayout.forEach(function (elem) {
-      elem[ '{assets}' ] = CONFIG.get('assetUrl');
+      elem[ '{assets}' ] = UTIL.config('assetUrl'); // Was: CONFIG.get('assetUrl');
 
-      cards.push(VIEWS.replace(SVG_TEMPLATE, elem));
+      cards.push(UTIL.replace(SVG_TEMPLATE, elem)); // Was: VIEWS.replace();
     });
     document.getElementById('add_more_card').setAttribute('y', (CORE.getNumElements() * 130) + 170);
   } else {
@@ -65,9 +62,9 @@ function reflow (layout) {
         elem[ '{h}' ] = 130;
       }
 
-      elem[ '{assets}' ] = CONFIG.get('assetUrl');
+      elem[ '{assets}' ] = UTIL.config('assetUrl');
 
-      cards.push(VIEWS.replace(SVG_TEMPLATE, elem));
+      cards.push(UTIL.replace(SVG_TEMPLATE, elem));
     });
 
     document.getElementById('scol_start_point').setAttribute('visibility', 'collapse');
