@@ -1,0 +1,28 @@
+
+<!-- {{> ../partials/background.svg.hbs }} -->
+
+{editor bar partial}
+
+<div class="main" id="main">
+
+  <svg width="1240" height="1600" id="journey-canvas" aria-label="Journey canvas" role="img">
+    <desc id="start-card">Start of the journey</desc>
+    <desc id="group-0">Card group</desc>
+    <desc id="empty-card">Empty journey card</desc>
+
+    {background partial}
+
+    <g class="card-holder" ></g>
+
+    {floating editor partial}
+
+    <svg id="add_more_card" class="add_more_card" width="130" height="240" y="1350" x="990" tabindex=0>
+        <rect role="button" fill="crimson" id="add_more_rect" width = "130" height = "240" stroke="black" fill="crimson" stroke-width="1" fill-opacity="1.0"/>
+        <image xlink:href = "{assets}/add-more.png" x = "4" y = "30" height="176" width="121" id="add_more_img" class="add_more_img"/>
+    </svg>
+
+  </svg>
+
+</div>
+
+{attribution partial}

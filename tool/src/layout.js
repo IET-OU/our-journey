@@ -1,5 +1,4 @@
-/*!
-  Layout the SVG journey cards | © 2018 The Open University (IET-OU).
+/* Layout the SVG journey cards | ©The Open University.
 */
 
 module.exports = {
@@ -8,14 +7,15 @@ module.exports = {
   getLayoutData: getLayoutData,
   addElementsToLayout: addElementsToLayout,
   setScol: setScol,
-  getLayoutStyle
+  getLayoutStyle: getLayoutStyle
 };
 
 const LAYOUTS = require('./layouts.json');
-const SVG_TEMPLATE = document.querySelector('#oj-svg-card-template').innerText;
-const HOLDER = document.querySelector('#journey-canvas .card-holder');
+const SVG_TEMPLATE = require('./views').cardTemplate; // Was: document.querySelector('#oj-svg-card-template').innerText;
+const HOLDER_SELECTOR = '#journey-canvas .card-holder';
 const CORE = require('./core');
 const UI = require('./user-interface');
+const UTIL = require('./util'); // Was: require('./config');
 
 var layoutStyle = 'default';
 var setLayout = 'default';
@@ -36,7 +36,10 @@ function setScol () {
 
 function reflow (layout) {
   layout = layout || 'default';
+  const HOLDER = UTIL.qs(HOLDER_SELECTOR); // Was: document.querySelector(HOLDER_SELECTOR);
+
   console.warn('layout:', layout, LAYOUTS[ layout ], /* SVG_TEMPLATE, */ HOLDER);
+
   let cards = [];
   if (layout === 'scol') {
     var scolLayout = [];
@@ -44,7 +47,9 @@ function reflow (layout) {
       scolLayout.push({ '{j}': i, '{x}': 0, '{y}': (i * 130) + 70, '{w}': 240, '{h}': 130, '{orient}': 'horiz' });
     }
     scolLayout.forEach(function (elem) {
-      cards.push(replaceObj(SVG_TEMPLATE, elem));
+      elem[ '{assets}' ] = UTIL.config('assetUrl'); // Was: CONFIG.get('assetUrl');
+
+      cards.push(UTIL.replace(SVG_TEMPLATE, elem)); // Was: VIEWS.replace();
     });
     document.getElementById('add_more_card').setAttribute('y', (CORE.getNumElements() * 130) + 170);
   } else {
@@ -56,10 +61,15 @@ function reflow (layout) {
         elem[ '{w}' ] = 240;
         elem[ '{h}' ] = 130;
       }
-      cards.push(replaceObj(SVG_TEMPLATE, elem));
+
+      elem[ '{assets}' ] = UTIL.config('assetUrl');
+
+      cards.push(UTIL.replace(SVG_TEMPLATE, elem));
     });
+
     document.getElementById('scol_start_point').setAttribute('visibility', 'collapse');
   }
+
   HOLDER.innerHTML = cards.join('\n');
 }
 
@@ -69,6 +79,7 @@ function addElementsToLayout () {
     var newHeight;
     var newAddMoreY;
     CORE.addElements(10);
+
     if (layoutStyle === 'default') {
       setLayout = 'default' + CORE.getNumElements();
       reflow(setLayout);
@@ -89,20 +100,13 @@ function addElementsToLayout () {
         document.getElementById('add_more_card').setAttribute('visibility', 'collapse');
       }
     }
+
     document.getElementById('journey-canvas').setAttribute('height', newHeight);
+
     CORE.initialiseElements(numExistingElements);
     CORE.setFocusElement(numExistingElements);
     CORE.changeFocus();
   }
-}
-
-// https://github.com/nfreear/gaad-widget/blob/3.x/src/methods.js#L90-L96
-function replaceObj (str, mapObj) {
-  const RE = new RegExp(Object.keys(mapObj).join('|'), 'g'); // Was: "gi".
-
-  return str.replace(RE, function (matched) {
-    return mapObj[ matched ]; // Was: matched.toLowerCase().
-  });
 }
 
 function getLayout () {
