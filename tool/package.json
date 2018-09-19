@@ -76,8 +76,21 @@
   ],
   "browserify": {
     "transform": [
-      [ "browserify-versionify", { "placeholder": "__VERSION__" } ],
-      [ "stringify", { "extensions": [ ".html", ".svg" ] } ]
+      [
+        "browserify-versionify",
+        {
+          "placeholder": "__VERSION__"
+        }
+      ],
+      [
+        "stringify",
+        {
+          "extensions": [
+            ".html",
+            ".svg"
+          ]
+        }
+      ]
     ]
   },
   "scripts": {

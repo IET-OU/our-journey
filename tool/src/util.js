@@ -9,7 +9,7 @@ module.exports = {
 
   qs: querySelector,
 
-  replace: replaceObj,
+  replace: replaceObj
 };
 
 let CONFIG = {};
