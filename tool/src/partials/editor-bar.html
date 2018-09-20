@@ -93,31 +93,29 @@
   </div>
 
   <div class="optionsbar" id="options" aria-label="Menu">
-
-    <h2>Options:</h2>
-    <h3>File: Save, load, or print a journey</h3>
-
+    <h2>Options</h2>
+    <h2>File:</h2>
+    <h3>Save:</h3>
     <form id="saveform" aria-label="Save journey to file">
-      <label for="filenamearea">Save:</label>
+      <label for="filenamearea">Filename:</label>
       <input type='text' value="journey_file" id="filenamearea">
       <input type='submit' value="Save" id="saveButton" >
     </form>
 
     <br><br>
-
     <form id="loadform" aria-label="Load journey from file">
-      <label for="fileinput">Load:</label>
+      <h3><label for="fileinput">Load:</label></h3>
       <input type='file' id='fileinput' required aria-required="true">
-      <input type='submit' id="loadButton" value="Load" >
+      <input type='submit' id="loadButton" value="Load File" >
     </form>
 
     <br><br>
-
+    <h2>Print:</h2>
     <form id="printform">
-      <input type='submit' aria-label="Print" value="Print" id="printButton">
+      <input type='submit' aria-label="Print using browser" value="Print using browser" id="printButton">
     </form>
-
-    <h3>View: Change how it looks</h3>
+    <hr>
+    <h2>View:</h2>
 
     <form id="backgroundform" aria-label="Choose background colour">
       <label for="background_select">Background Colour:</label>
@@ -171,7 +169,8 @@
     </form>
 
     <br>
-
+    <hr>
+    <h2>Share: (To be completed)</h2>
     <p>
       <a href="?demo=1">Demo fill</a> | <a href="?demo=0">Reset &ndash; no fill</a>
       |

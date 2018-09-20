@@ -26,7 +26,8 @@ module.exports = /* WAS: window.our_journeys */ {
   setCardColour: setCardColour,
   isPrinting: isPrinting,
   cardFocus: cardFocus,
-  addMoreCardFocus: addMoreCardFocus
+  addMoreCardFocus: addMoreCardFocus,
+  clearFocus: clearFocus
 };
 
 const UI = require('./user-interface');
@@ -324,6 +325,13 @@ function changeFocus () {
   if (focusElement !== -1) {
     var focusY = document.getElementById('group' + focusElement).getAttribute('y');
     window.scrollTo(0, focusY - 200);
+  }
+}
+
+function clearFocus () {
+  focusElement = -1;
+  for (var i = 0; i < elements.length; i++) {
+    document.getElementById(elements[i].eID).setAttribute('class', 'not-focussed');
   }
 }
 

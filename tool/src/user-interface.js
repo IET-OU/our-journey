@@ -40,17 +40,21 @@ function toggleEditor (tog) {
 }
 
 function printJourney () {
+  var menuElement;
   if (editor === 'fixed') {
-    var editorElement = document.getElementById('editorbar');
-    editorElement.style.display = 'none';
+    menuElement = document.getElementById('editorbar');
+    menuElement.style.display = 'none';
   } else if (editor === 'float') {
-    var floatElement = document.getElementById('float_bar');
+    menuElement = document.getElementById('float_bar');
     toggleOptions(0);
-    floatElement.style.display = 'none';
+    menuElement.style.display = 'none';
     CORE.stopFloatingFocus();
+    CORE.clearFocus();
     CORE.isPrinting();
   }
+  window.scrollTo(0, 0);
   window.print();
+  menuElement.style.display = 'block';
 }
 
 function toggleFloatOptions () {
