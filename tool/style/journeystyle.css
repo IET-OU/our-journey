@@ -136,6 +136,10 @@ svg#journey-canvas .card > .focussed {
   outline: none;
 }
 
+.journey-canvas {
+  outline: none;
+}
+
 /* svg#journey-canvas .card.orient-horiz > rect {
   height: 130px;
   width: 240px;

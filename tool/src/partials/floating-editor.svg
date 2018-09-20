@@ -15,27 +15,14 @@
       <option value="none">Select</option>
 
       <optgroup label="Figuring things out">
-        <option value="admin">Admin and forms</option>
-        <option value="communication">Communication</option>
         <option value="considerstudy">Considering study</option>
         <option value="information">Finding information</option>
         <option value="register">Registering</option>
+        <option value="admin">Admin and forms</option>
+        <option value="communication">Communication</option>
+        <option value="studygoal">Study goal</option>
       </optgroup>
-      <optgroup label="Positives">
-        <option value="achievement">Achievement</option>
-        <option value="confidence">Confidence boost</option>
-        <option value="studysuccess">Study success</option>
-        <option value="studygoal">Goal</option>
-      </optgroup>
-      <optgroup label="Challenges">
-        <option value="barrier">Barrier</option>
-        <option value="helpneeded">Help needed</option>
-        <option value="highpressure">High pressure</option>
-        <option value="nosupport">No support</option>
-        <option value="problem">Problem</option>
-        <option value="timelost">Time Lost</option>
-      </optgroup>
-      <optgroup label="Studying">
+      <optgroup label="Study">
         <option value="assessment">Assessment</option>
         <option value="duedates">Due dates</option>
         <option value="lowscores">Low scores</option>
@@ -43,14 +30,27 @@
         <option value="studyexperience">Study experience</option>
         <option value="studysupport">Study support</option>
       </optgroup>
+      <optgroup label="Positives">
+        <option value="achievement">Achievement</option>
+        <option value="confidence">Confidence boost</option>
+        <option value="peersupport">Peer support</option>
+        <option value="studysuccess">Study success</option>
+      </optgroup>
+      <optgroup label="Challenges">
+        <option value="barrier">Barrier</option>
+        <option value="helpneeded">Help needed</option>
+        <option value="highpressure">High pressure</option>
+        <option value="lostdirection">Lost direction</option>
+        <option value="nosupport">No support</option>
+        <option value="problem">Problem</option>
+        <option value="timelost">Time lost</option>
+      </optgroup>
       <optgroup label="Life">
         <option value="studybreak">Break from study</option>
         <option value="finances">Finances</option>
         <option value="employment">Jobs and employment</option>
-        <option value="lostdirection">Lost direction</option>
         <option value="lowenergy">Low energy</option>
         <option value="moving">Moving home</option>
-        <option value="peersupport">Peer support</option>
         <option value="repetition">Repetition</option>
       </optgroup>
 

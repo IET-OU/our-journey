@@ -1,3 +1,4 @@
+
 <svg x="270" y="0" id='head_background'>
   <image xlink:href='{assets}/background/head-background.png' role='presentation' x='0' y='0' height="315" width="952" id='headBackgroundImage'/>
 </svg>
@@ -106,3 +107,5 @@
 <svg x="800" y="4100" id='coffee_background_3'>
   <image xlink:href='{assets}/background/coffee.png' x='0' y='0' height="110" width="115" id='coffeeImage' role='presentation'/>
 </svg>
+
+<rect width="1240" height="1600" fill-opacity="0.0" stroke-opacity="0.0" id="journey-background" role="presentation"/>

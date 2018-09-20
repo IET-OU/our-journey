@@ -471,7 +471,6 @@ function editFocus () {
 
 function canvasGotFocus () {
   canvasInFocus = true;
-  // changeFocus();
 }
 
 function canvasLostFocus () {

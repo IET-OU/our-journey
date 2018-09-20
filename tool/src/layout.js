@@ -102,6 +102,7 @@ function addElementsToLayout () {
     }
 
     document.getElementById('journey-canvas').setAttribute('height', newHeight);
+    document.getElementById('journey-background').setAttribute('height', newHeight);
 
     CORE.initialiseElements(numExistingElements);
     CORE.setFocusElement(numExistingElements);

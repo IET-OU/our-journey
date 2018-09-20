@@ -134,6 +134,10 @@ function initialiseEventHandlers () {
   attachEvent('#add_more_card', 'focusin', function (e) {
     CORE.addMoreCardFocus();
   });
+
+  attachEvent('#journey-background', 'click', function (e) {
+    CORE.stopFloatingFocus();
+  });
 }
 
 function attachEvent (selector, eventName, callback) {
