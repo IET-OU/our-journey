@@ -1,12 +1,13 @@
 
+[![Build status — Travis-CI][travis-icon]][travis]
 [![js-semistandard-style][semi-icon]][semi]
 [![Browserify][br-icon]][browserify]
 [![Husky Git hooks][hook-icon]][hook]
 [![our-journey - on Npmjs][npm-icon]][npm]
 
-# Our Journeys interactive student journey creator
+# Our Journey interactive student journey creator
 
-_Our Journeys_ is an interactive online tool to chart the highs and lows of student journeys.
+_Our Journey_ is an interactive online tool to chart the highs and lows of student journeys.
 
 The aim is to produce a simple and accessible structure for students to represent
 the events that occurred in their study and their experience of these.
@@ -67,13 +68,13 @@ require('our-journey').app.run({ assetUrl: '..', containerSelector: 'DOM selecto
 Via [unpkg][] — [browse][] — production CDN:
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/our-journey@^1/assets/style/journeystyle.css" />
+<link rel="stylesheet" href="https://unpkg.com/our-journey@^1/style/journeystyle.css" />
 
 <div id="our-journey-tool">
   <noscript> Sorry! This tool requires Javascript. </noscript>
 </div>
 
-<script src="https://unpkg.com/our-journey@^1/assets/dist/our-journey.js"></script>
+<script src="https://unpkg.com/our-journey@^1/dist/our-journey.js"></script>
 
 <script>
   require('our-journey').app.run({
@@ -82,6 +83,10 @@ Via [unpkg][] — [browse][] — production CDN:
   });
 </script>
 ```
+
+## Contributing
+
+See the [contributing guide][contrib].
 
 ---
 Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of Educational Technology][iet])
@@ -96,9 +101,9 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [Help: Relative Image URL]: https://github.com/mark-anders/relative-image-url
 [img]: https://github.com/nfreear/our-journey/blob/nfreear/demo-fill/assets/screenshot-1.png?raw=true
 [img-rel]: assets/screenshot-1.png "'Our Journeys' screenshot 1 - the editor."
-[oro]: http://oro.open.ac.uk/54760/
+[oro]: https://oro.open.ac.uk/54760/
   "The accessibility of administrative processes: Assessing the impacts on students in higher education. Tim Coughlan, Kate Lister, 2018"
-[oro2]: http://oro.open.ac.uk/48991/
+[oro2]: https://oro.open.ac.uk/48991/
   "Understanding Accessibility as a Process through the Analysis of Feedback from Disabled Students. Tim Coughlan, Thomas Daniel Ullmann, & Kate Lister, 2017."
 [heif]: https://re.ukri.org/knowledge-exchange/the-higher-education-innovation-fund-heif/
   "The Higher Education Innovation Fund (HEIF)"
@@ -116,5 +121,8 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [npm-icon]: https://badge.fury.io/js/our-journey.svg
 [travis]: https://travis-ci.org/IET-OU/our-journey "Build status – Travis-CI (NPM)"
 [travis-icon]: https://api.travis-ci.org/IET-OU/our-journey.svg
+
+[contrib]: docs/CONTRIBUTING.md
+[contrib-x]: https://github.com/IET-OU/our-journey/blob/master/docs/CONTRIBUTING.md
 
 [End]: //.
