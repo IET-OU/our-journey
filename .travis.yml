@@ -1,0 +1,21 @@
+# https://docs.travis-ci.com/user/languages/javascript-with-nodejs/
+
+language: node_js
+
+node_js:
+  - 9
+
+cache:
+  directories:
+    - node_modules
+
+git:
+  depth: 8
+
+# install: npm install
+
+before_script: npm run build
+
+# script: npm test
+
+# End.

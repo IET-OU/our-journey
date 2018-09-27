@@ -1,0 +1,15 @@
+
+.pa11yci*
+
+node_modules/
+package-lock.json
+*BAK*
+*.diff
+*.log
+*.tgz
+/dropbox
+test*.html
+
+src/help.js
+
+# End.
