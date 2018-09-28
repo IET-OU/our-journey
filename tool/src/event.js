@@ -43,6 +43,11 @@ function initialiseEventHandlers () {
     CORE.moveFwdElement();
   });
 
+  attachEvent('#floating_addform', 'submit', function (e) {
+    e.preventDefault();
+    CORE.addCard();
+  });
+
   attachEvent('#optionsform', 'submit', function (e) {
     e.preventDefault();
     UI.toggleOptions();

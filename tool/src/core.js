@@ -26,7 +26,8 @@ module.exports = /* WAS: window.our_journeys */ {
   isPrinting: isPrinting,
   cardFocus: cardFocus,
   addMoreCardFocus: addMoreCardFocus,
-  clearFocus: clearFocus
+  clearFocus: clearFocus,
+  addCard: addCard
 };
 
 const UI = require('./user-interface');
@@ -370,7 +371,7 @@ function editFocus () {
   const FL_BACK = UTIL.qs('#floating_back');
   const FL_FWD = UTIL.qs('#floating_fwd');
   const FL_POST = UTIL.qs('#floating_post');
-
+  const FL_ADD = UTIL.qs('#floating_add');
   const EM_ICON = UTIL.qs('#empty_icon');
   const EM_EMOJI = UTIL.qs('#empty_emoticon');
 
@@ -413,6 +414,8 @@ function editFocus () {
           FL_FWD.setAttribute('y', DIM.floatFwdVY);
           FL_POST.setAttribute('x', DIM.floatPostItVX);
           FL_POST.setAttribute('y', DIM.floatPostItVY);
+          FL_ADD.setAttribute('x', DIM.floatAddButtonVX);
+          FL_ADD.setAttribute('y', DIM.floatAddButtonVY);
         } else if (vrElements.includes(focusElement)) {
           FL_ED_OUTLINE.setAttribute('width', DIM.floatEditOutlineVRW);
           FL_ED_OUTLINE.setAttribute('height', DIM.floatEditOutlineVRH);
@@ -434,6 +437,8 @@ function editFocus () {
           FL_FWD.setAttribute('y', DIM.floatFwdVRY);
           FL_POST.setAttribute('x', DIM.floatPostItVRX);
           FL_POST.setAttribute('y', DIM.floatPostItVRY);
+          FL_ADD.setAttribute('x', DIM.floatAddButtonVRX);
+          FL_ADD.setAttribute('y', DIM.floatAddButtonVRY);
         } else {
           FL_ED_OUTLINE.setAttribute('width', DIM.floatEditOutlineW);
           FL_ED_OUTLINE.setAttribute('height', DIM.floatEditOutlineH);
@@ -455,6 +460,8 @@ function editFocus () {
           FL_FWD.setAttribute('y', DIM.floatFwdY);
           FL_POST.setAttribute('x', DIM.floatPostItX);
           FL_POST.setAttribute('y', DIM.floatPostItY);
+          FL_ADD.setAttribute('x', DIM.floatAddButtonX);
+          FL_ADD.setAttribute('y', DIM.floatAddButtonY);
         }
       }
 
@@ -579,6 +586,29 @@ function moveFwdElement () {
     focusElement++;
     changeFocus();
     editFocus();
+  }
+  updateElements();
+}
+
+function addCard () {
+  // adds in a new card after the one currently in focus
+  if (focusElement < (maxElements - 1)) {
+    // check if last card is used, if so, extend number of cards (if not already at maximum)
+    if ((elements[elements.length - 1].icon !== 'none') || (elements[elements.length - 1].description !== '') || (elements[elements.length - 1].emoticon !== 'none') || (elements[elements.length - 1].postit !== '')) {
+      if (elements.length < maxElements) {
+        LAYOUT.addElementsToLayout();
+      } else {
+        // TODO: alert the user to failure?
+        return;
+      }
+    }
+    // loop through all cards and move them forward one in the list
+    for (var i = elements.length - 2; i > focusElement; i--) {
+      elements[i + 1] = elements[i];
+      elements[i + 1].eID = 'place' + (i + 1);
+    }
+    // add the new card into place
+    elements[focusElement + 1] = { eID: 'place' + (focusElement + 1), description: '', emoticon: 'none', icon: 'none', postit: '' };
   }
   updateElements();
 }
