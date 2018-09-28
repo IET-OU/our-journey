@@ -88,12 +88,19 @@ Via [unpkg][] — [browse][] — production CDN:
 
 See the [contributing guide][contrib].
 
----
-Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of Educational Technology][iet])
 
+### License
+ Distributed under the [GNU General Public License, version 3 or later][gpl].
+ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of Educational Technology][iet])
+ [gpl]: https://github.com/IET-OU/our-journey/blob/master/LICENSE.txt
+  "GNU General Public License, version 3 or later [GPL-3.0+]"
+
+---
+
+[gpl-orig]: https://gnu.org/licenses/gpl-3.0.txt
 [iet]: https://iet.open.ac.uk/
 [ou]: http://www.open.ac.uk/
-[web]: https://iet-ou.github.io/our-journey/?demo=1
+[web]: https://iet-ou.github.io/our-journey/
 [gh]: https://github.com/IET-OU/learningdesign
 [tim]: https://iet.open.ac.uk/profiles/tim.coughlan
 [kate]: http://www.open.ac.uk/people/kml322

@@ -1,5 +1,5 @@
 /*!
-  Our-journey module | © The Open University.
+  Our Journey module | © 2018 The Open University (IET-OU) | License: GPL-3.0+
 */
 
 module.exports = {
