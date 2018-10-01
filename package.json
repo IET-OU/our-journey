@@ -69,8 +69,6 @@
   },
   "files": [
     "index.html",
-    "help.html",
-    "LICENCE.txt",
     "assets/",
     "dist/",
     "src/",
