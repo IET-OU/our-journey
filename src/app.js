@@ -3,6 +3,8 @@
 
 module.exports.run = run;
 
+const IS_COMPAT = require('./compat').check();
+
 const LOC = window.location;
 const CORE = require('./core');
 const LAYOUT = require('./layout');
@@ -13,6 +15,10 @@ const UTIL = require('./util'); // Was: require('./config');
 const VIEWS = require('./views');
 
 function run (config) {
+  if (!IS_COMPAT) {
+    return;
+  }
+
   console.warn('The our-journey API:', require('../index'), 'config:', config);
 
   UTIL.putConfig(config);
