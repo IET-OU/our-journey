@@ -259,13 +259,11 @@ function updateIcon (i) {
 function updatePostIt (i) {
   var ePostIt = document.getElementById('postit' + i);
   var ePostItText = document.getElementById('postittext' + i);
-  var layoutStyle = LAYOUT.getLayout();
+  var layoutStyle = LAYOUT.getLayoutStyle();
   if (getElement(i).postit !== '') {
     ePostIt.setAttribute('visibility', 'visible');
     ePostItText.setAttribute('visibility', 'visible');
     ePostItText.setAttribute('width', DIM.postitTextWidth);
-    // ePostItText.setAttribute('y', DIM.postitTextY);
-
     if (((layoutStyle === 'default') && vlElements.includes(i))) {
       ePostIt.setAttribute('y', DIM.postitVY);
       ePostIt.setAttribute('x', DIM.postitVX);
