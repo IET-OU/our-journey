@@ -8,19 +8,25 @@ module.exports = {
 };
 
 const CORE = require('./core');
+const UTIL = require('./util');
 
 function createShareLink (elements) {
-  var share = document.getElementById('oj-share-link');
+  elements = elements || CORE.getElements();
 
-  share.setAttribute('href', '?j=base64:' + encodeURIComponent(b64EncodeUnicode(JSON.stringify(elements))) + '&z');
+  const shareLink = document.getElementById('oj-share-link');
 
-  console.warn('createShareLink');
+  shareLink.setAttribute('href', '?j=base64:' + encodeURIComponent(b64EncodeUnicode(JSON.stringify(elements))) + '&z');
+
+  const event = new window.CustomEvent('updatesharelink.ourjourney', { detail: { link: shareLink, journey: elements } });
+  UTIL.container().dispatchEvent(event);
+
+  UTIL.config('onUpdateShareLink')(shareLink, elements); // Was: UTIL.config('onRecreate')(shareLink, elements);
 }
 
 function loadShareLink (elements) {
   console.warn('loadShareLink - start');
 
-  var qm = window.location.search.match(/\?j=base64:(.+(%3D%3D|==))/);
+  var qm = window.location.search.match(/\?j=base64:(.+(%3D|=)*)/);
   if (qm) {
     var decoded;
     try {

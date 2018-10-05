@@ -38,9 +38,11 @@
 
     <script>
         require('our-journey').app.run({
-          assetUrl: 'https://unpkg.com/our-journey@^1/assets',
           containerSelector: '#our-journey-tool'
-        });
+        })
+        .then(function (value) {
+          console.warn('Loading complete:', value);
+        })
     </script>
 
     </body>

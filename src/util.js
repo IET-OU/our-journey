@@ -7,6 +7,10 @@ module.exports = {
 
   config: getConfig,
 
+  container: container,
+
+  param: urlParam,
+
   qs: querySelector,
 
   replace: replaceObj
@@ -16,16 +20,22 @@ let CONFIG = {};
 
 /** Set (all) configuration options.
  */
-function putConfig (config) {
-  module.exports.CFG = CONFIG = config;
+function putConfig (options) {
+  module.exports.CFG = CONFIG = extend(require('./config').DEFAULTS, options);
 
   CONFIG.container = document.querySelector(CONFIG.containerSelector);
+
+  return CONFIG;
 }
 
 /** Get one or all configuration options.
  */
 function getConfig (key) {
   return key ? CONFIG[ key ] : CONFIG;
+}
+
+function container () {
+  return CONFIG.container;
 }
 
 /** qs: Select a HTML or SVG element, from within the Our-journey container element.
@@ -42,4 +52,28 @@ function replaceObj (str, mapObj) {
   return str.replace(RE, function (matched) {
     return mapObj[ matched ]; // Was: matched.toLowerCase().
   });
+}
+
+// https://gist.github.com/pbojinov/8f3765b672efec122f66
+function extend (defaults, options) {
+  var extended = {};
+  var prop;
+  for (prop in defaults) {
+    if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
+      extended[prop] = defaults[prop];
+    }
+  }
+  for (prop in options) {
+    if (Object.prototype.hasOwnProperty.call(options, prop)) {
+      extended[prop] = options[prop];
+    }
+  }
+  return extended;
+}
+
+function urlParam (regex, aDefault) {
+  aDefault = aDefault || null;
+
+  const M_URL = window.location.search.match(regex);
+  return M_URL ? M_URL[ 1 ] : aDefault;
 }

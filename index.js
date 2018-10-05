@@ -8,6 +8,8 @@ module.exports = {
 
   app: require('./src/app'),
 
+  config: require('./src/config'),
+
   core: require('./src/core'),
 
   layout: require('./src/layout'),

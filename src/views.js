@@ -18,6 +18,7 @@ function setup () {
 
   CONTAINER.innerHTML = UTIL.replace(require('./views/default-tool.html'), {
     '{assets}': UTIL.config('assetUrl'),
+    // '{helpUrl}': UTIL.config('helpUrl'),
     '{attribution partial}': partial(require('./partials/attribute.html')),
     '{background partial}': partial(require('./partials/background.svg')),
     '{editor bar partial}': partial(require('./partials/editor-bar.html')),
@@ -28,7 +29,10 @@ function setup () {
 }
 
 function partial (partialContent) {
-  return partialContent.replace(/\{assets\}/g, UTIL.config('assetUrl'));
+  // return partialContent.replace(/\{assets\}/g, UTIL.config('assetUrl'));
 
-  // return replaceObj(partialContent, { '{assets}': UTIL.config('assetUrl') });
+  return UTIL.replace(partialContent, {
+    '{assets}': UTIL.config('assetUrl'),
+    '{helpUrl}': UTIL.config('helpUrl')
+  });
 }

@@ -65,7 +65,7 @@ npm run fix
 ```js
 console.log('Inspect:', require('our-journey'));
 
-require('our-journey').app.run({ assetUrl: '..', containerSelector: 'DOM selector' });
+require('our-journey').app.run({ assetUrl: '..' /* ... */ });
 ```
 
 ### Example
@@ -83,11 +83,17 @@ Via [unpkg][] — [browse][] — production CDN:
 
 <script>
   require('our-journey').app.run({
-    assetUrl: 'https://unpkg.com/our-journey@^1/assets',
     containerSelector: '#our-journey-tool'
+    // Other options ...
+  })
+  // Returns a Promise.
+  .then(function (value) {
+    console.warn('Loaded', value);
   });
 </script>
 ```
+
+See the [configuration options][config].
 
 ## Changelog
 
@@ -138,6 +144,7 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [travis]: https://travis-ci.org/IET-OU/our-journey "Build status – Travis-CI (NPM)"
 [travis-icon]: https://api.travis-ci.org/IET-OU/our-journey.svg
 
+[config]: src/config.js "Configuration options and defaults."
 [changelog]: docs/CHANGELOG.md
 [contrib]: docs/CONTRIBUTING.md
 [contrib-x]: https://github.com/IET-OU/our-journey/blob/master/docs/CONTRIBUTING.md
