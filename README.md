@@ -89,6 +89,10 @@ Via [unpkg][] — [browse][] — production CDN:
 </script>
 ```
 
+## Changelog
+
+See the release notes in the [changelog][].
+
 ## Contributing
 
 See the [contributing guide][contrib].
@@ -134,6 +138,7 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [travis]: https://travis-ci.org/IET-OU/our-journey "Build status – Travis-CI (NPM)"
 [travis-icon]: https://api.travis-ci.org/IET-OU/our-journey.svg
 
+[changelog]: docs/CHANGELOG.md
 [contrib]: docs/CONTRIBUTING.md
 [contrib-x]: https://github.com/IET-OU/our-journey/blob/master/docs/CONTRIBUTING.md
 
