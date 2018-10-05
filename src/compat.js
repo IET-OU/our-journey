@@ -7,7 +7,6 @@ const UA = window.navigator.userAgent;
 const DOC = window.document;
 const LOC = window.location;
 const NO_COMPAT_MSG = [
-  // '<style> .ojs-error { color: #a00; } </style>',
   '<div class="X-ojs-error alert alert-danger" role="alert">',
   '  <p>Sorry! <i>our-journey</i> does not work on Internet Explorer.</p>',
   '  <p><a href="https://browsehappy.com">Try a different browser — Browse Happy</a></p>',
@@ -22,8 +21,6 @@ function checkAndHandle () {
   if (IS_COMPAT) {
     console.warn('our-journey. Browser is compatible');
   } else {
-    // console.error('our-journey. Browser NOT compatible (MSIE ?)');
-
     notCompatibleMessage();
 
     tryHideContainer();
@@ -37,13 +34,12 @@ function checkAndHandle () {
 }
 
 function notCompatibleMessage () {
-  // const CTR = UTIL.config('container');
   const DIV = DOC.createElement('div');
 
   DIV.innerHTML = NO_COMPAT_MSG.join('\n');
   DIV.className = 'our-journey-js ojs-error ojs-no-compat ojs-msie';
 
-  DOC.body.insertBefore(DIV, DOC.body.firstChild); // Was: DOC.body.appendChild(CTR);
+  DOC.body.insertBefore(DIV, DOC.body.firstChild);
 }
 
 function tryHideContainer () {

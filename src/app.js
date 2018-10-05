@@ -3,6 +3,7 @@
 
 module.exports.run = run;
 
+// Run 'check' when Javascript is included, not on 'run()'!
 const IS_COMPAT = require('./compat').check();
 
 const CORE = require('./core');
@@ -10,7 +11,7 @@ const LAYOUT = require('./layout');
 const EVENTS = require('./event');
 const SHARE = require('./share-link');
 const UI = require('./user-interface');
-const UTIL = require('./util'); // Was: require('./config');
+const UTIL = require('./util');
 const VIEWS = require('./views');
 
 function run (config) {
@@ -30,17 +31,14 @@ function run (config) {
 
     console.warn('qs test:', UTIL.qs('#journey-canvas'));
 
-    if (CFG.layout === 'scol') { // Was: LOC.search.match(/[?&]layout=scol/)) {
+    if (CFG.layout === 'scol') {
       LAYOUT.setScol();
     } else {
       LAYOUT.reflow();
     }
 
-    if (CFG.editor === 'fixed') { // Was: LOC.search.match(/[?&]edit=fixed/)) {
+    if (CFG.editor === 'fixed') {
       UI.chooseEditor('fixed');
-    /* else if (LOC.search.match(/[?&]edit=float/)) {
-      UI.chooseEditor('float');
-    } */
     } else {
       UI.chooseEditor('float');
     }
@@ -49,7 +47,7 @@ function run (config) {
 
     EVENTS.initialise();
 
-    if (CFG.demo) { // Was: LOC.search.match(/[?&]demo=1/)) {
+    if (CFG.demo) {
       CORE.demoFill();
 
       UTIL.container().className += ' demo-fill';
@@ -70,5 +68,6 @@ function run (config) {
 
     resolve('our-journey: OK');
   });
+
   return promise;
 }

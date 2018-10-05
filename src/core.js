@@ -1,7 +1,7 @@
 /* Core API | ©The Open University.
 */
 
-module.exports = /* WAS: window.our_journeys */ {
+module.exports = {
   // Functions.
   initialiseElements: initialiseElements,
   updateElements: updateElements,

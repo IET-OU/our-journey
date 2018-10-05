@@ -8,8 +8,10 @@ package-lock.json
 *.log
 *.tgz
 /dropbox
-test*.html
+*.html
+!index.html
 
-src/help.js
+.DS_Store
+.gitattributes
 
 # End.

@@ -7,7 +7,7 @@ module.exports = {
 
   config: getConfig,
 
-  container: container,
+  container: getContainer,
 
   param: urlParam,
 
@@ -34,7 +34,7 @@ function getConfig (key) {
   return key ? CONFIG[ key ] : CONFIG;
 }
 
-function container () {
+function getContainer () {
   return CONFIG.container;
 }
 

@@ -208,6 +208,7 @@ img[ src $= 'assets/iet-logo.svg' ] {
   padding: 5px;
 }
 
-.ojs-error {
+.ojs-error,
+.no-js {
   colour: #a00;
 }
