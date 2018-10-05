@@ -1,0 +1,51 @@
+<!doctype html> <title> our-journey QR test </title>
+
+<link rel="stylesheet" href="../style/journeystyle.css" />
+
+<h1> QR demo </h1>
+
+
+<div id="our-journey-tool">
+  <p class="no-js"> Sorry! This tool requires Javascript. </p>
+</div>
+
+<div id="qr-code"></div>
+
+<!--<script src="https://unpkg.com/our-journey@^1/dist/our-journey.js"></script>-->
+<script src="../dist/our-journey.js"></script>
+
+<script src="https://unpkg.com/qrcode-generator@1.4.1/qrcode.js"></script>
+
+<script>
+  require('our-journey').app.run({
+    // helpUrl: './local/help.html',
+    onUpdateShareLink: function (shareLink, journeyArray) {
+      const M = shareLink.getAttribute('href').match(/(j=base64:.+)(&|$)/);
+      const URL = 'https://unpkg.com/our-journey/index.html?' + M[ 1 ];
+
+      var typeNumber = 40; // Was: 4;
+      var errorCorrectionLevel = 'L';
+      var qr = qrcode(typeNumber, errorCorrectionLevel);
+
+      qr.addData(URL);
+      qr.make();
+
+      document.getElementById('qr-code').innerHTML = qr.createImgTag(3); // was: 8, 16, 'ALT text' );
+
+      console.warn('onUpdateShareLink:', shareLink, journeyArray);
+    }
+  })
+  // Returns a Promise.
+  .then(function (value) {
+    console.warn('Loading complete:', value);
+  })
+  .catch(function (error) {
+    console.error('Error:', error);
+  });
+
+  // See: https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
+  // document.querySelector('#our-journey-tool')...
+  require('our-journey').util.container().addEventListener('updatesharelink.ourjourney', function (ev) {
+    console.warn('Event: ', ev);
+  });
+</script>
