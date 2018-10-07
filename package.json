@@ -33,14 +33,12 @@
   "engines": {
     "node": ">= 6"
   },
-  "dependencies": {
-    "lint": "^1.1.2"
-  },
   "devDependencies": {
     "bannerize": "^1.1.3",
     "browserify": "^16.2.2",
     "browserify-versionify": "^1.0.6",
     "husky": "^1.0.0-rc.14",
+    "lint": "^1.1.2",
     "live-server": "^1.2.0",
     "pa11y-ci": "^1.3.1",
     "pa11y-config": "git+https://github.com/nfreear/pa11y-config.git",
