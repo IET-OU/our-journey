@@ -18,56 +18,57 @@ git push --tags
 
 See [spreadsheet][gdoc].
 
-## v[1.3.5][]
+## v[1.4.0][]
 
  * _~~ mid-October 2018_;
- * Add browser compatibility-checking Javascript _(error message in Internet Explorer)_;
+ * Add browser compatibility-checking Javascript _(error message in Internet Explorer)_, #7;
+ * Add default configuration; extend configuration options, including callbacks, #43;
  * _... Anything else ...?_
- * Added CHANGELOG;
+ * Added CHANGELOG, #45;
 
 ## v[1.3.4][]
 
- * 2 October 2018;
+ * _2 October 2018;_
  * Fixed post-it display bug;
  * _What else changed ...?_
 
 ## v[1.3.3][]
 
- * 28 September 2018;
- * Public release / open sourced;
- * Portable code — HTML templates built with [stringify][];
+ * _28 September 2018;_
+ * Public release / open sourced, #15;
+ * Portable code — HTML templates built with [stringify][], #24;
  * Floating editor fixes;
  * Further Firefox browser fix;
- * Initial contributing guide;
+ * Initial contributing guide, #37;
  * Travis-CI build/test operational;
- * Files re-arranged; GitHub pages site put in `/docs/` folder;
+ * Files re-arranged; GitHub pages site put in `/docs/` folder, #38;
 
 ## v[1.2.0][]
 
- * 24 August 2018;
+ * _24 August 2018;_
  * Single-column layout;
  * Initial floating editor;
  * First Firefox browser fix;
 
 ## v[1.1.1][]
 
- * 31 July 2018;
+ * _31 July 2018;_
  * First version published to [Npmjs.com][] _(technically, '1.1.0')_
- * Javascript built with Npm and [Browserify][];
- * Reduce JS global variables; initial separation of our-journey _API_;
- * Test / linting with `semistandard`;
- * First GitHub Pages demo;
+ * Javascript built with Npm and [Browserify][], #6;
+ * Reduce JS global variables; initial separation of our-journey _API_, #1;
+ * Test / linting with `semistandard`, #1;
+ * First GitHub Pages demo, #22;
  * Initial '_link-sharing_' functionality (Base64 encoded journey JSON in URL)
 
 ## v[0.8.0][]
 
- * Pre-release. 20 June 2018.
+ * Pre-release. _20 June 2018;_
  * "_1st upload: proof of concept_"
  * > index.html contains js and html. journeystyle.css contains styles other files are graphics
 
 ---
 
-←[README][]
+← [README][]
 
 [gdoc]: https://docs.google.com/spreadsheets/d/13pR4eFvzttsrsqdf4FEPa0hCbMNuTYNrJJl46pxyumw/#gid=0 "Spreadsheet — 'our-journey npm-view git-tag'"
 

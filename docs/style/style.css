@@ -1,16 +1,19 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    color: #222;
+    font: 1rem Arial, Helvetica, sans-serif;
+    line-height: 1.6rem;
     max-width: 1000px;
     margin: auto;
     padding: 20px;
 }
 
 h1 {
-    font-size: 1.2em;
+    font-size: 1.3rem;
 }
 
 h2{
-    font-size: 1em;
+    font-size: 1.1rem;
 }
 
 .centre {
@@ -18,8 +21,9 @@ h2{
     margin-left: auto;
     margin-right: auto;
 }
+
 .bodylist {
-    line-height: 1.8rem;
+    line-height: 1.9rem;
 }
 
 .footer-copy {
@@ -50,6 +54,7 @@ img[ src = 'assets/iet-logo.svg' ] {
 .navlist {
     list-style-type: none;
     border-width: 1px 1px;
+    line-height: 1.1rem;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -73,4 +78,8 @@ img[ src = 'assets/iet-logo.svg' ] {
 .navlist a:hover,
 .navlist .active {
     background-color: lightgray;
+}
+
+.navlist a:focus {
+  text-decoration: underline;
 }
