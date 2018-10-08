@@ -18,6 +18,8 @@ module.exports.DEFAULTS = {
   journey: UTIL.param(/[?&]j=(base64:[\w=]+)/),
   // Use a single-column or default layout (Default: 'default')
   layout: UTIL.param(/[?&]layout=(scol|default)/, 'default'),
+  // @prop {integer} zoom Set the zoom-level for embeds (50 ... 95) (Default: 100).
+  zoom: UTIL.param(/[?&]zoom=([5-9][05])/, 100),
   // Experimental! Custom events (asynchronous) or callbacks (synchronous) ?
   events: [
     // Asynchronous custom event fired after each time the share link is re-generated.

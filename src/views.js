@@ -18,6 +18,7 @@ function setup () {
 
   CONTAINER.innerHTML = UTIL.replace(require('./views/default-tool.html'), {
     '{assets}': UTIL.config('assetUrl'),
+    '{zoom}': UTIL.config('zoom'),
     // '{helpUrl}': UTIL.config('helpUrl'),
     '{attribution partial}': partial(require('./partials/attribute.html')),
     '{background partial}': partial(require('./partials/background.svg')),
