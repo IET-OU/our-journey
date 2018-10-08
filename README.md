@@ -2,7 +2,7 @@
 [![Build status — Travis-CI][travis-icon]][travis]
 [![js-semistandard-style][semi-icon]][semi]
 [![Browserify][br-icon]][browserify]
-[![Husky Git hooks][hook-icon]][hook]
+<!--[![Husky Git hooks][hook-icon]][hook]-->
 [![our-journey - on Npmjs][npm-icon]][npm]
 
 # Our Journey interactive student journey creator

@@ -173,6 +173,10 @@ svg#journey-canvas .card.orient-vert > rect {
   width: 130px;
 } */
 
+.add_more_card {
+  cursor: pointer;
+}
+
 .add_more_card > .focussed {
   stroke: blue;
   stroke-width: 3;

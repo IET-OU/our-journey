@@ -23,8 +23,10 @@ See [spreadsheet][gdoc].
  * _~~ mid-October 2018_;
  * Add browser compatibility-checking Javascript _(error message in Internet Explorer)_, #7;
  * Add default configuration; extend configuration options, including callbacks, #43;
+ * Add compress/minified version of Javascript _(94 → 66 kB)_, #41;
+ * Fix — identify the '_Add more cards_' arrow button as a button, #47;
  * _... Anything else ...?_
- * Added CHANGELOG, #45;
+ * Added `CHANGELOG`, #45;
 
 ## v[1.3.4][]
 
