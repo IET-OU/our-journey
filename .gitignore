@@ -2,7 +2,7 @@
 .pa11yci*
 
 node_modules/
-package-lock.json
+# package-lock.json
 *BAK*
 *.diff
 *.log
@@ -10,6 +10,7 @@ package-lock.json
 /dropbox
 *.html
 !index.html
+*.min.js
 
 .DS_Store
 .gitattributes
