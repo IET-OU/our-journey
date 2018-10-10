@@ -11,11 +11,11 @@ module.exports = {
 };
 
 const LAYOUTS = require('./layouts.json');
-const SVG_TEMPLATE = require('./views').cardTemplate; // Was: document.querySelector('#oj-svg-card-template').innerText;
+const SVG_TEMPLATE = require('./views').cardTemplate;
 const HOLDER_SELECTOR = '#journey-canvas .card-holder';
 const CORE = require('./core');
 const UI = require('./user-interface');
-const UTIL = require('./util'); // Was: require('./config');
+const UTIL = require('./util');
 
 var layoutStyle = 'default';
 var setLayout = 'default';
@@ -36,7 +36,7 @@ function setScol () {
 
 function reflow (layout) {
   layout = layout || 'default';
-  const HOLDER = UTIL.qs(HOLDER_SELECTOR); // Was: document.querySelector(HOLDER_SELECTOR);
+  const HOLDER = UTIL.qs(HOLDER_SELECTOR);
 
   console.warn('layout:', layout, LAYOUTS[ layout ], /* SVG_TEMPLATE, */ HOLDER);
 
@@ -47,9 +47,9 @@ function reflow (layout) {
       scolLayout.push({ '{j}': i, '{x}': 0, '{y}': (i * 130) + 70, '{w}': 240, '{h}': 130, '{orient}': 'horiz' });
     }
     scolLayout.forEach(function (elem) {
-      elem[ '{assets}' ] = UTIL.config('assetUrl'); // Was: CONFIG.get('assetUrl');
+      elem[ '{assets}' ] = UTIL.config('assetUrl');
 
-      cards.push(UTIL.replace(SVG_TEMPLATE, elem)); // Was: VIEWS.replace();
+      cards.push(UTIL.replace(SVG_TEMPLATE, elem));
     });
     document.getElementById('add_more_card').setAttribute('y', (CORE.getNumElements() * 130) + 170);
   } else {

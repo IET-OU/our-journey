@@ -1,19 +1,19 @@
-h1{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2em;
-}
-
-h2{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1em;
-}
-
-body{
-    font-family: Arial, Helvetica, sans-serif;
+body {
+    background: #fff;
+    color: #222;
+    font: 1rem Arial, Helvetica, sans-serif;
+    line-height: 1.6rem;
     max-width: 1000px;
     margin: auto;
     padding: 20px;
-    
+}
+
+h1 {
+    font-size: 1.3rem;
+}
+
+h2{
+    font-size: 1.1rem;
 }
 
 .centre {
@@ -22,22 +22,26 @@ body{
     margin-right: auto;
 }
 
+.bodylist {
+    line-height: 1.9rem;
+}
+
 .footer-copy {
     color: #333;
     float: left;
     font-size: .85rem;
     margin-top: 65px;
   }
-  
+
 .footer-logos {
     float: right;
   }
-  
+
 .footer-logos img:focus,
 .footer-logos img:hover {
     border-color: #2b6ab7;
   }
-  
+
 img[ src = 'assets/ou-logo.svg' ],
 img[ src = 'assets/iet-logo.svg' ] {
     border: 1px solid transparent;
@@ -49,33 +53,33 @@ img[ src = 'assets/iet-logo.svg' ] {
 
 .navlist {
     list-style-type: none;
-    border-width:1px 1px;
-    list-style:none;
-    margin:0;
-    padding:0;
-    text-align:center;
-
+    border-width: 1px 1px;
+    line-height: 1.1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
 }
 
-.navli {
+.navlist li /* .navli */ {
     display: inline;
 }
 
-.navli a {
+.navlist a {
     display: inline-block;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    border:1px solid #ccc;
-    border-width:1px 1px;
+    border: 1px solid #ccc;
+    border-width: 1px 1px;
     border-radius: 10px;
 }
 
-.navli a:hover {
+.navlist a:hover,
+.navlist .active {
     background-color: lightgray;
 }
 
-.active{
-    background-color: lightgray;
+.navlist a:focus {
+  text-decoration: underline;
 }
-

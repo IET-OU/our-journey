@@ -1,7 +1,7 @@
 /* Core API | ©The Open University.
 */
 
-module.exports = /* WAS: window.our_journeys */ {
+module.exports = {
   // Functions.
   initialiseElements: initialiseElements,
   updateElements: updateElements,
@@ -53,7 +53,7 @@ var maxElements = 64;
 var vlElements = [ 0, 9, 10, 19, 20, 29, 30, 39, 40, 49, 50, 59, 60 ];
 var vrElements = [ 4, 5, 14, 15, 24, 25, 34, 35, 44, 45, 54, 55, 64 ];
 
-document.addEventListener('keydown', (event) => {
+document.addEventListener('keydown', function (event) { // Was: , (event) => {
   const keyName = event.key;
   var focus = document.activeElement.getAttribute('id');
   if (canvasInFocus) {

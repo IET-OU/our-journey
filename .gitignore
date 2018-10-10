@@ -2,14 +2,17 @@
 .pa11yci*
 
 node_modules/
-package-lock.json
+# package-lock.json
 *BAK*
 *.diff
 *.log
 *.tgz
 /dropbox
-test*.html
+*.html
+!index.html
+*.min.js
 
-src/help.js
+.DS_Store
+.gitattributes
 
 # End.

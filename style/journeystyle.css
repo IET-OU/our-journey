@@ -173,6 +173,10 @@ svg#journey-canvas .card.orient-vert > rect {
   width: 130px;
 } */
 
+.add_more_card {
+  cursor: pointer;
+}
+
 .add_more_card > .focussed {
   stroke: blue;
   stroke-width: 3;
@@ -206,4 +210,9 @@ img[ src $= 'assets/iet-logo.svg' ] {
   height: 68px;
   margin-right: 16px;
   padding: 5px;
+}
+
+.ojs-error,
+.no-js {
+  colour: #a00;
 }

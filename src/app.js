@@ -3,58 +3,71 @@
 
 module.exports.run = run;
 
-const LOC = window.location;
+// Run 'check' when Javascript is included, not on 'run()'!
+const IS_COMPAT = require('./compat').check();
+
 const CORE = require('./core');
 const LAYOUT = require('./layout');
 const EVENTS = require('./event');
 const SHARE = require('./share-link');
 const UI = require('./user-interface');
-const UTIL = require('./util'); // Was: require('./config');
+const UTIL = require('./util');
 const VIEWS = require('./views');
 
 function run (config) {
-  console.warn('The our-journey API:', require('../index'), 'config:', config);
+  const promise = new Promise(function (resolve, reject) {
+    if (!IS_COMPAT) {
+      // This should never be reached!
+      reject(new Error('our-journey. Browser compatibility error'));
 
-  UTIL.putConfig(config);
+      return;
+    }
 
-  VIEWS.setup();
+    const CFG = UTIL.putConfig(config);
 
-  console.warn('qs test:', UTIL.qs('#journey-canvas'));
+    console.warn('The our-journey API:', require('../index'), 'config:', CFG);
 
-  if (LOC.search.match(/[?&]layout=scol/)) {
-    LAYOUT.setScol();
-  } else {
-    LAYOUT.reflow();
-  }
+    VIEWS.setup();
 
-  if (LOC.search.match(/[?&]edit=fixed/)) {
-    UI.chooseEditor('fixed');
-  } else if (LOC.search.match(/[?&]edit=float/)) {
-    UI.chooseEditor('float');
-  } else {
-    UI.chooseEditor('float');
-  }
+    console.warn('qs test:', UTIL.qs('#journey-canvas'));
 
-  CORE.initialiseElements(0);
+    if (CFG.layout === 'scol') {
+      LAYOUT.setScol();
+    } else {
+      LAYOUT.reflow();
+    }
 
-  EVENTS.initialise();
+    if (CFG.editor === 'fixed') {
+      UI.chooseEditor('fixed');
+    } else {
+      UI.chooseEditor('float');
+    }
 
-  if (LOC.search.match(/[?&]demo=1/)) {
-    CORE.demoFill();
+    CORE.initialiseElements(0);
 
-    document.body.className += ' demo-fill';
-  }
+    EVENTS.initialise();
 
-  CORE.setFocusElement(0);
-  CORE.changeFocus();
+    if (CFG.demo) {
+      CORE.demoFill();
 
-  UI.toggleOptions();
-  UI.changeBackground('Wheat');
+      UTIL.container().className += ' demo-fill';
+    }
 
-  SHARE.createLink(CORE.getElements());
-  SHARE.loadLink(CORE.getElements());
+    CORE.setFocusElement(0);
+    CORE.changeFocus();
 
-  document.getElementById('group0').focus();
-  CORE.editFocus();
-  window.scrollTo(0, 0);
+    UI.toggleOptions();
+    UI.changeBackground('Wheat');
+
+    SHARE.createLink(CORE.getElements());
+    SHARE.loadLink(CORE.getElements());
+
+    document.getElementById('group0').focus();
+    CORE.editFocus();
+    window.scrollTo(0, 0);
+
+    resolve('our-journey: OK');
+  });
+
+  return promise;
 }

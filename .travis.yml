@@ -1,4 +1,4 @@
-# https://docs.travis-ci.com/user/languages/javascript-with-nodejs/
+# Travis-CI ~ https://docs.travis-ci.com/user/languages/javascript-with-nodejs/
 
 language: node_js
 
@@ -17,5 +17,9 @@ git:
 before_script: npm run build
 
 # script: npm test
+
+after_script:
+  - ls -al dist/
+  - git status
 
 # End.

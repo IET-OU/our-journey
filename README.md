@@ -2,7 +2,7 @@
 [![Build status — Travis-CI][travis-icon]][travis]
 [![js-semistandard-style][semi-icon]][semi]
 [![Browserify][br-icon]][browserify]
-[![Husky Git hooks][hook-icon]][hook]
+<!--[![Husky Git hooks][hook-icon]][hook]-->
 [![our-journey - on Npmjs][npm-icon]][npm]
 
 # Our Journey interactive student journey creator
@@ -34,14 +34,19 @@ Author: [Tim Coughlan][tim], IET.
 Use [Node][] and npm to aid development:
 
 ```sh
-rm .git/hooks/pre-commit ## Remove previous Git hook!
-
 npm install
 npm run build
-npm start
 npm test
-npm run fix
+```
+
+Other commands:
+
+```sh
+npm run     # List lifecycle and other scripts.
+
+npm start
 npm run pa11y-ci
+npm run fix
 ```
 
 ## API
@@ -60,7 +65,7 @@ npm run pa11y-ci
 ```js
 console.log('Inspect:', require('our-journey'));
 
-require('our-journey').app.run({ assetUrl: '..', containerSelector: 'DOM selector' });
+require('our-journey').app.run({ assetUrl: '..' /* ... */ });
 ```
 
 ### Example
@@ -71,39 +76,49 @@ Via [unpkg][] — [browse][] — production CDN:
 <link rel="stylesheet" href="https://unpkg.com/our-journey@^1/style/journeystyle.css" />
 
 <div id="our-journey-tool">
-  <noscript> Sorry! This tool requires Javascript. </noscript>
+  <p class="no-js"> Sorry! This tool requires Javascript. </p>
 </div>
 
 <script src="https://unpkg.com/our-journey@^1/dist/our-journey.js"></script>
 
 <script>
   require('our-journey').app.run({
-    assetUrl: 'https://unpkg.com/our-journey@^1/assets',
     containerSelector: '#our-journey-tool'
+    // Other options ...
+  })
+  // Returns a Promise.
+  .then(function (value) {
+    console.warn('Loaded', value);
   });
 </script>
 ```
+
+See the [configuration options][config].
+
+## Changelog
+
+See the release notes in the [changelog][].
 
 ## Contributing
 
 See the [contributing guide][contrib].
 
+## License
 
-### License
- Distributed under the [GNU General Public License, version 3 or later][gpl].
- Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of Educational Technology][iet])
- [gpl]: https://github.com/IET-OU/our-journey/blob/master/LICENSE.txt
+Distributed under the [GNU General Public License, version 3 or later][gpl].
+
+Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of Educational Technology][iet])
+
+[gpl]: https://github.com/IET-OU/our-journey/blob/master/LICENSE.txt
   "GNU General Public License, version 3 or later [GPL-3.0+]"
-
----
-
 [gpl-orig]: https://gnu.org/licenses/gpl-3.0.txt
+
 [iet]: https://iet.open.ac.uk/
 [ou]: http://www.open.ac.uk/
 [web]: https://iet-ou.github.io/our-journey/
 [gh]: https://github.com/IET-OU/learningdesign
 [tim]: https://iet.open.ac.uk/profiles/tim.coughlan
-[kate]: http://www.open.ac.uk/people/kml322
+[kate]: http://www.open.ac.uk/people/kml322 "Kate Lister"
 [node]: https://nodejs.org/en/
 [Help: Relative Image URL]: https://github.com/mark-anders/relative-image-url
 [img]: https://github.com/nfreear/our-journey/blob/nfreear/demo-fill/assets/screenshot-1.png?raw=true
@@ -129,6 +144,8 @@ See the [contributing guide][contrib].
 [travis]: https://travis-ci.org/IET-OU/our-journey "Build status – Travis-CI (NPM)"
 [travis-icon]: https://api.travis-ci.org/IET-OU/our-journey.svg
 
+[config]: src/config.js "Configuration options and defaults."
+[changelog]: docs/CHANGELOG.md
 [contrib]: docs/CONTRIBUTING.md
 [contrib-x]: https://github.com/IET-OU/our-journey/blob/master/docs/CONTRIBUTING.md
 

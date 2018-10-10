@@ -10,6 +10,7 @@ const CORE = require('./core');
 const FILE = require('./file');
 const UI = require('./user-interface');
 const LAYOUT = require('./layout');
+const SHARE = require('./share-link');
 
 // Initialises the event handlers for form submit buttons.
 function initialiseEventHandlers () {
@@ -51,11 +52,15 @@ function initialiseEventHandlers () {
   attachEvent('#optionsform', 'submit', function (e) {
     e.preventDefault();
     UI.toggleOptions();
+
+    // SHARE.createLink();
   });
 
   attachEvent('#float_optionsform', 'submit', function (e) {
     e.preventDefault();
     UI.toggleOptions();
+
+    SHARE.createLink();
   });
 
   attachEvent('#background_select', 'change', function (e) {
