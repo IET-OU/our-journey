@@ -15,11 +15,16 @@ module.exports.DEFAULTS = {
   // Use the floating or fixed editor (Default: floating)
   editor: UTIL.param(/[?&]edit=(fixed|float)/, 'float'),
   // Load a journey. A null (default), base-64 encoded JSON, or an array of journey objects.
-  journey: UTIL.param(/[?&]j=(base64:[\w=]+)/),
+  journey: UTIL.param(/[?&]j=(base64:[\w%=]+)/),
   // Use a single-column or default layout (Default: 'default')
   layout: UTIL.param(/[?&]layout=(scol|default)/, 'default'),
-  // @prop {integer} zoom Set the zoom-level for embeds (50 ... 95) (Default: 100).
+  // @prop {string} background  Set the background colour-name (Default: 'wheat')
+  // @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/color_value}
+  background: UTIL.param(/[?&]bg=([a-z]+)/, 'wheat'),
+  // @prop {integer} zoom Set the zoom-level for embeds (50 ... 95)% (Default: 100).
   zoom: UTIL.param(/[?&]zoom=([5-9][05])/, 100),
+  // @prop {boolean} wholePage  Does the our-journey tool occupy the whole page? (Default: true)
+  wholePage: true,
   // Experimental! Custom events (asynchronous) or callbacks (synchronous) ?
   events: [
     // Asynchronous custom event fired after each time the share link is re-generated.

@@ -53,11 +53,15 @@ function run (config) {
       UTIL.container().className += ' demo-fill';
     }
 
+    if (CFG.wholePage) {
+      document.body.className += ' our-journey-whole-page';
+    }
+
     CORE.setFocusElement(0);
     CORE.changeFocus();
 
     UI.toggleOptions();
-    UI.changeBackground('Wheat');
+    UI.changeBackground(CFG.background); // Was: 'Wheat'
 
     SHARE.createLink(CORE.getElements());
     SHARE.loadLink(CORE.getElements());

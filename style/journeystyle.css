@@ -1,14 +1,26 @@
 /*!
-  Our Journeys | © 2018 The Open University (IET-OU).
+  Our Journey styles | ©The Open University.
 */
 
-body,
+body.our-journey-whole-page {
+  margin: 0;
+  padding: 0 10px;
+}
+
+.our-journey-js,
 input,
 textarea,
 select {
   background: #fff;
   color: #111;
   font: .93rem Arial, Helvetica, sans-serif; /* Was: font-size: 11pt; */
+}
+
+.our-journey-whole-page .our-journey-js {
+  background: transparent;
+  /* padding: 0 8px;
+  position: absolute;
+  top: 0; */
 }
 
 input[ type = file ],
@@ -105,7 +117,8 @@ svg#journey-canvas .in_postit {
 .our-journey-js .fork-me-btn {
   clear: both;
 }
- .our-journey-js .fork-me-btn a {
+
+.our-journey-js .fork-me-btn a {
   background-color: #eff3f6;
   background-image: -webkit-linear-gradient(top, #fafbfc, #e4ebf0);
   background-image: -moz-linear-gradient(top, #fafbfc, #e4ebf0);
@@ -215,4 +228,9 @@ img[ src $= 'assets/iet-logo.svg' ] {
 .ojs-error,
 .no-js {
   colour: #a00;
+}
+
+.XX-our-journey-whole-page #qr-code {
+  clear: both;
+  position: absolute;
 }

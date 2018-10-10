@@ -1,5 +1,4 @@
-/*!
-  User interface. | © 2018 The Open University (IET-OU).
+/* User interface | ©The Open University.
 */
 
 module.exports = {
@@ -16,6 +15,7 @@ module.exports = {
 
 const ASSET = require('./assets');
 const CORE = require('./core');
+const UTIL = require('./util');
 
 var editor = 'fixed';
 
@@ -80,9 +80,11 @@ function toggleOptions (tog) {
 }
 
 function changeBackground (bg) {
-  var background = bg || document.getElementById('background_select').value;
-  document.body.style.background = background;
-  document.getElementById('background_select').value = background;
+  const ELEM = UTIL.config('wholePage') ? document.body : UTIL.container();
+  const background = bg || UTIL.qs('#background_select').value;
+
+  ELEM.style.background = background; // Was: document.body.style.background = background;
+  UTIL.qs('#background_select').value = background;
 }
 
 function changeBackgroundElements (c) {
