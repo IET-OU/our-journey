@@ -12,6 +12,10 @@ node_modules/
 !index.html
 *.min.js
 
+# docs/conf.json
+jsdoc/
+out/
+
 .DS_Store
 .gitattributes
 

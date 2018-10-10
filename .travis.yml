@@ -20,6 +20,7 @@ before_script: npm run build
 
 after_script:
   - ls -al dist/
+  - ls -alh jsdoc/
   - git status
 
 # End.
