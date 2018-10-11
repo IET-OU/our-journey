@@ -3,6 +3,7 @@
 */
 
 module.exports = {
+  createUrl: createShareUrl,
   createLink: createShareLink,
   loadLink: loadShareLink
 };
@@ -10,12 +11,16 @@ module.exports = {
 const CORE = require('./core');
 const UTIL = require('./util');
 
-function createShareLink (elements) {
+function createShareUrl (elements) {
   elements = elements || CORE.getElements();
 
+  return 'j=base64:' + encodeURIComponent(b64EncodeUnicode(JSON.stringify(elements))) + '&zz';
+}
+
+function createShareLink (elements) {
   const shareLink = document.getElementById('oj-share-link');
 
-  shareLink.setAttribute('href', '?j=base64:' + encodeURIComponent(b64EncodeUnicode(JSON.stringify(elements))) + '&z');
+  shareLink.setAttribute('href', '?' + createShareUrl(elements));
 
   const event = new window.CustomEvent('updatesharelink.ourjourney', { detail: { link: shareLink, journey: elements } });
   UTIL.container().dispatchEvent(event);
@@ -26,13 +31,14 @@ function createShareLink (elements) {
 function loadShareLink (elements) {
   console.warn('loadShareLink - start');
 
-  var qm = window.location.search.match(/\?j=base64:(.+(%3D|=)*)/);
+  var qm = window.location.search.match(/[?&]j=base64:(\w+(%3D|=)*)/);
   if (qm) {
     var decoded;
     try {
       decoded = JSON.parse(b64DecodeUnicode(decodeURIComponent(qm[ 1 ])));
     } catch (ex) {
       console.error('---- ! ERROR in "loadShareLink()" function ! ----');
+      console.error(qm);
       console.error(ex);
       window.alert('Sorry, the URL parameter "j" was wrongly encoded. I failed to load your Journey :(');
       return;

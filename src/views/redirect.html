@@ -1,0 +1,32 @@
+<!--
+  Instructions ~~ open this file in your preferred browser, to load the jouney!
+-->
+<!doctype html>
+<html lang='en'>
+
+  <meta charset='utf-8'/>
+  <!--<meta http-equiv='refresh' content='1; url=..'/>-->
+  <style> body { font: 1em sans-serif; margin: 1em auto; max-width: 32em; } </style>
+
+  <title>Our Journey: saved journey</title> <h1>Our Journey: saved journey</h1>
+
+
+  <p>If you are not automatically redirected, <a id='redirect-link' href=
+'{redirectUrl}'
+  >Go to the saved journey</a>.</p>
+
+  <p>File date: <time>{timestamp}</time>.</p>
+
+  <hr/>
+
+  <p role='contentinfo'><a href='https://iet-ou.github.io/our-journey/'>our-journey</a> v<em>{version}</em></p>
+
+  <script>
+    window.location.href = document.querySelector('#redirect-link').getAttribute('href');
+  </script>
+
+
+  <script type='application/json'>{json}</script>
+
+  <!-- {debug} -->
+</html>

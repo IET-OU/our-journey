@@ -4,8 +4,6 @@
 
 module.exports = {
 
-  version: '__VERSION__',
-
   app: require('./src/app'),
 
   config: require('./src/config'),

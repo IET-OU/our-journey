@@ -4,15 +4,20 @@
 module.exports = {
   cardTemplate: require('./partials/card-template.svg'),
 
-  // Was: replace: replaceObj,
+  getRedirectHtml: getRedirectHtml,
 
   setup: setup
 };
 
-const UTIL = require('./util'); // Was: CONFIG = require('./config');
+const CORE = require('./core');
+const SHARE = require('./share-link');
+const UTIL = require('./util');
+
+const LOC = window.location.href;
+const UA = window.navigator.userAgent;
 
 function setup () {
-  const CONTAINER = UTIL.config('container'); // document.querySelector(CONFIG.get('containerSelector'));
+  const CONTAINER = UTIL.config('container');
 
   // We're using stringify.
 
@@ -30,10 +35,22 @@ function setup () {
 }
 
 function partial (partialContent) {
-  // return partialContent.replace(/\{assets\}/g, UTIL.config('assetUrl'));
-
   return UTIL.replace(partialContent, {
     '{assets}': UTIL.config('assetUrl'),
     '{helpUrl}': UTIL.config('helpUrl')
   });
+}
+
+function getRedirectHtml () {
+  const REDIRECT_URL = LOC.replace(/\?.+/, '') + '?utm_source=save&utm_medium=redirect&';
+
+  const HTML = UTIL.replace(require('./views/redirect.html'), {
+    '{debug}': 'UA: ' + UA,
+    '{json}': JSON.stringify(CORE.getElements(), null, 2),
+    '{redirectUrl}': REDIRECT_URL + SHARE.createUrl(),
+    '{version}': UTIL.config('version'),
+    '{timestamp}': (new Date()).toISOString()
+  });
+
+  return HTML;
 }

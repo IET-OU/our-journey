@@ -25,6 +25,8 @@ module.exports.DEFAULTS = {
   zoom: UTIL.param(/[?&]zoom=([5-9][05])/, 100),
   // @prop {boolean} wholePage  Does the our-journey tool occupy the whole page? (Default: true)
   wholePage: true,
+  // @readonly {string} version  Version.
+  version: '__VERSION__',
   // Experimental! Custom events (asynchronous) or callbacks (synchronous) ?
   events: [
     // Asynchronous custom event fired after each time the share link is re-generated.
