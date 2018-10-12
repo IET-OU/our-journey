@@ -24,8 +24,8 @@ out/
 ##
 ## .gitattributes file
 ##
-
-dist/*.js          -diff
-package-lock.json  -diff
+#
+# dist/*.js          -diff
+# package-lock.json  -diff
 
 # End.
