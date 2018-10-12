@@ -11,7 +11,7 @@
   <title>Our Journey: saved journey</title> <h1>Our Journey: saved journey</h1>
 
 
-  <p>If you are not automatically redirected, <a id='redirect-link' href=
+  <p>If you are not automatically redirected, <a id='journey-link' href=
 '{redirectUrl}'
   >Go to the saved journey</a>.</p>
 
@@ -22,7 +22,7 @@
   <p role='contentinfo'><a href='https://iet-ou.github.io/our-journey/'>our-journey</a> v<em>{version}</em></p>
 
   <script>
-    window.location.href = document.querySelector('#redirect-link').getAttribute('href');
+    location.href = document.querySelector('#journey-link').getAttribute('href');
   </script>
 
 

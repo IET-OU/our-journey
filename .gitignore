@@ -4,6 +4,7 @@
 node_modules/
 # package-lock.json
 *BAK*
+*copy*
 *.diff
 *.log
 *.tgz
@@ -16,7 +17,15 @@ node_modules/
 jsdoc/
 out/
 
+*help*
 .DS_Store
 .gitattributes
+
+##
+## .gitattributes file
+##
+
+dist/*.js          -diff
+package-lock.json  -diff
 
 # End.

@@ -43,13 +43,17 @@ function partial (partialContent) {
 
 function getRedirectHtml () {
   const REDIRECT_URL = LOC.replace(/\?.+/, '') + '?utm_source=save&utm_medium=redirect&';
-
+  const JOURNEY_DATA = {
+    created: (new Date()).toISOString(),
+    generator: 'our-journey/' + UTIL.config('version'),
+    journey: CORE.getElements()
+  };
   const HTML = UTIL.replace(require('./views/redirect.html'), {
     '{debug}': 'UA: ' + UA,
-    '{json}': JSON.stringify(CORE.getElements(), null, 2),
+    '{json}': JSON.stringify(JOURNEY, null, 2),
     '{redirectUrl}': REDIRECT_URL + SHARE.createUrl(),
     '{version}': UTIL.config('version'),
-    '{timestamp}': (new Date()).toISOString()
+    '{timestamp}': JOURNEY_DATA.created
   });
 
   return HTML;

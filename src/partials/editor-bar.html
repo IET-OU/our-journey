@@ -98,14 +98,14 @@
     <h3>Save:</h3>
     <form id="saveform" aria-label="Save journey to file">
       <label for="filenamearea">Filename:</label>
-      <input type='text' value="journey_file" id="filenamearea">
+      <input type='text' value="journey-file" id="filenamearea">
       <input type='submit' value="Save" id="saveButton" >
     </form>
 
     <br><br>
     <form id="loadform" aria-label="Load journey from file">
       <h3><label for="fileinput">Load:</label></h3>
-      <input type='file' id='fileinput' required aria-required="true">
+      <input type='file' accept='application/json, text/html' id='fileinput' required aria-required="true">
       <input type='submit' id="loadButton" value="Load File" >
     </form>
 
