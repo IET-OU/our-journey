@@ -9,7 +9,7 @@ node_modules/
 *.log
 *.tgz
 /dropbox
-*.html
+/*.html
 !index.html
 *.min.js
 
