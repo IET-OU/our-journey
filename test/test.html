@@ -1,37 +1,20 @@
-<!doctype html><html lang="en"><title> our-journey QR test </title>
+<!doctype html><html lang="en"><title> our-journey — test </title>
 
 <link rel="stylesheet" href="../style/journeystyle.css" />
-
-<!-- <h1> QR demo </h1> -->
 
 
 <div id="our-journey-tool">
   <p class="no-js"> Sorry! This tool requires Javascript. </p>
 </div>
 
-<div id="qr-code"></div>
 
-<!--<script src="https://unpkg.com/our-journey@^1/dist/our-journey.js"></script>-->
 <script src="../dist/our-journey.js"></script>
-
-<script src="https://unpkg.com/qrcode-generator@1.4.1/qrcode.js"></script>
 
 <script>
   require('our-journey').app.run({
+    // privacyUrl: './local/privacy.html',
     // helpUrl: './local/help.html',
     onUpdateShareLink: function (shareLink, journeyArray) {
-      const M = shareLink.getAttribute('href').match(/(j=base64:.+)(&|$)/);
-      const URL = 'https://unpkg.com/our-journey/index.html?' + M[ 1 ];
-
-      var typeNumber = 40; // Was: 4;
-      var errorCorrectionLevel = 'L';
-      var qr = qrcode(typeNumber, errorCorrectionLevel);
-
-      qr.addData(URL);
-      qr.make();
-
-      document.getElementById('qr-code').innerHTML = qr.createImgTag(3); // was: 8, 16, 'ALT text' );
-
       console.warn('onUpdateShareLink:', shareLink, journeyArray);
     }
   })

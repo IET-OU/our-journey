@@ -21,8 +21,8 @@
       "url": "https://iet.open.ac.uk"
     }
   ],
-  "homepage": "https://iet-ou.github.io/our-journey/",
-  "repository": "https://github.com/IET-OU/our-journey.git",
+  "homepage": "https://iet-ou.github.io/our-journey/?utm_source=npm",
+  "repository": "https://github.com/IET-OU/our-journey",
   "bugs": "https://github.com/IET-OU/our-journey/issues",
   "keywords": [
     "accessibility",
@@ -79,18 +79,14 @@
   "eslintIgnore": [
     "dist/"
   ],
-  "browserslist": [
-    "last 1 version",
-    "> 1%",
-    "not ie < 12"
-  ],
+  "browserslist": "last 1 version, > 1%, not dead, not ie < 99",
   "pa11yCiConfig": {
     "defaults": {
       "standard": "WCAG2AA",
       "timeout": 5000
     },
     "urls": [
-      "http://127.0.0.1:9000/index.html?demo=1&_ua=pa11y-ci"
+      "http://127.0.0.1:9001/test/test.html?demo=1&_ua=pa11y-ci"
     ]
   },
   "files": [
@@ -124,7 +120,7 @@
     "uglify": "uglifyjs dist/*y.js -mco dist/our-journey.min.js && bannerize dist/* -b src/banner.ejs",
     "x-pa11yci-2x-preinstall": "export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1 # A hack!",
     "jsdoc": "jsdoc -c docs/conf.json",
-    "start": "live-server --port=9000",
+    "start": "live-server --port=9001",
     "fix": "semistandard --fix",
     "pa11y-ci": "pa11y-config --pkg && pa11y-ci",
     "test": "semistandard && npm run jsdoc"
