@@ -37,6 +37,7 @@ function setup () {
 function partial (partialContent) {
   return UTIL.replace(partialContent, {
     '{assets}': UTIL.config('assetUrl'),
+    '{privacyUrl}': UTIL.config('privacyUrl') || '',
     '{helpUrl}': UTIL.config('helpUrl')
   });
 }

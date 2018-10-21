@@ -207,6 +207,18 @@ svg#journey-canvas .card.orient-vert > rect {
   margin-top: 65px;
 }
 
+.footer-copy .p:before,
+.footer-copy [ rel = license ]:before {
+  color: #000;
+  content: '|';
+  margin: 0 .25rem;
+  text-decoration: none;
+}
+
+.footer-copy .p[ href = '' ] {
+  display: none;
+}
+
 .footer-logos {
   float: right;
 }

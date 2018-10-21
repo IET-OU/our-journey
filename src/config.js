@@ -10,6 +10,8 @@ module.exports.DEFAULTS = {
   assetUrl: 'https://unpkg.com/our-journey@^1/assets',
   // URL of the help page, to use in HTML links.
   helpUrl: 'https://iet-ou.github.io/our-journey/help.html',
+  // @prop {string} privacyUrl Link to a privacy policy, and terms.
+  privacyUrl: null, // 'https://iet-ou.github.io/our-journey/privacy.html' or 'https://www.open.ac.uk/privacy',
   // Load a demonstration journey (Default: false)
   demo: UTIL.param(/[?&]demo=(1)/, false),
   // Use the floating or fixed editor (Default: floating)

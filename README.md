@@ -48,6 +48,7 @@ npm start
 npm run pa11y-ci
 npm run fix
 npm run jsdoc  # Generate documentation in /jsdoc/ directory.
+npx eslint src # browserslist-based test.
 ```
 
 ## API
