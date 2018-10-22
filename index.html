@@ -6,13 +6,23 @@
 <meta name="robots" content="noindex">
 <meta name="copyright" content="© 2018 The Open University (IET).">
 
-<title>Our Journey: Redirect</title>
+<title>Our Journey: Journey creator</title>
 
-The Our Journey tool has moved.
-If you are not automatically redirected, <a id="redirect-link" href="https://iet-ou.github.io/our-journey/?utm_source=index&utm_medium=redirect">visit the tool</a>.
+<link rel="stylesheet" href="style/journeystyle.css" />
+
+
+<div id="our-journey-tool">
+  <p class="no-js"> Sorry! This tool requires Javascript. </p>
+</div>
+
+
+<script src="dist/our-journey.js"></script>
 
 <script>
-  location.href = document.querySelector('#redirect-link').getAttribute('href');
+  require('our-journey').app.run({
+    // privacyUrl: './local/privacy.html',
+    // helpUrl: './local/help.html',
+  });
 </script>
 
 </html>
