@@ -1,0 +1,22 @@
+<!doctype html> <title> our-journey — Unpkg CDN demo </title>
+
+<link href="https://unpkg.com/our-journey@^1/style/journeystyle.css" rel="stylesheet" />
+
+<div id="our-journey-tool">
+  <p class="no-js"> Sorry! This tool requires Javascript. </p>
+</div>
+
+<script src="https://unpkg.com/our-journey@^1/dist/our-journey.js"></script>
+
+<script>
+  require('our-journey').app.run({
+    containerSelector: '#our-journey-tool',
+    assetUrl: 'https://unpkg.com/our-journey@^1/assets'
+
+    // Other options ...
+  });
+  // Returns a Promise.
+  /* .then(function (value) {
+    console.warn('Loaded', value);
+  }); */
+</script>

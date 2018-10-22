@@ -4,15 +4,28 @@
 node_modules/
 # package-lock.json
 *BAK*
+*copy*
 *.diff
 *.log
 *.tgz
 /dropbox
-*.html
+/*.html
 !index.html
 *.min.js
 
+# docs/conf.json
+jsdoc/
+out/
+
+*help*
 .DS_Store
 .gitattributes
+
+##
+## .gitattributes file
+##
+#
+# dist/*.js          -diff
+# package-lock.json  -diff
 
 # End.

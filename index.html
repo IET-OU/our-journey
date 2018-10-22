@@ -1,49 +1,18 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3845152-24"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'UA-3845152-24');  // Was: 'UA-124577463-1'
-        </script>
 
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=0.9" />
-        <meta name="robots" content="noindex,nofollow" />
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="1; url=https://iet-ou.github.io/our-journey/">
+<meta name="robots" content="noindex">
+<meta name="copyright" content="© 2018 The Open University (IET).">
 
-        <title>Our Journey: Journey creator</title>
+<title>Our Journey: Redirect</title>
 
-        <meta name="description" content=
-        "'Our Journeys' is an interactive activity to chart the highs and lows of your student learning journey. Developed in the Institute of Educational Technology (IET), at The Open University." />
-        <meta name="copyright" content="© 2018 The Open University (IET)." />
+The Our Journey tool has moved.
+If you are not automatically redirected, <a id="redirect-link" href="https://iet-ou.github.io/our-journey/?utm_source=index&utm_medium=redirect">visit the tool</a>.
 
-        <link rel="stylesheet" href="style/journeystyle.css" />
-    </head>
-<body>
+<script>
+  location.href = document.querySelector('#redirect-link').getAttribute('href');
+</script>
 
-    <div id="our-journey-tool">
-      <p class="no-js">
-        Sorry!
-        This tool requires Javascript.
-        Either your browser doesn't have Javascript enabled, or something has gone badly wrong.
-      </p>
-      <noscript>(Javascript disabled)</noscript>
-    </div>
-
-    <script src="dist/our-journey.js"></script>
-
-    <script>
-        require('our-journey').app.run({
-          containerSelector: '#our-journey-tool'
-        })
-        .then(function (value) {
-          console.warn('Loading complete:', value);
-        })
-    </script>
-
-    </body>
 </html>

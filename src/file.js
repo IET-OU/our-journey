@@ -3,16 +3,30 @@
 */
 
 module.exports = {
-  saveJourney: saveJourney,
+  saveJourneyJson: saveJourneyJson, // Was: saveJourney()
+  saveJourney: saveJourneyHtml,
   loadJourney: loadJourney
 };
 
 const CORE = require('./core');
 const LAYOUT = require('./layout');
+const VIEW = require('./views');
+
 const alert = window.alert;
 const FileReader = window.FileReader;
 
-function saveJourney () {
+function saveJourneyHtml () {
+  const FILE_NAME = document.getElementById('filenamearea').value + '.html';
+  const DATA = VIEW.getRedirectHtml();
+
+  let anchor = document.createElement('a');
+
+  anchor.setAttribute('href', 'data:text/html;charset=utf-u,' + encodeURIComponent(DATA));
+  anchor.setAttribute('download', FILE_NAME);
+  anchor.click();
+}
+
+function saveJourneyJson () {
   var filename = document.getElementById('filenamearea').value + '.json';
   // Pretty print JSON.
   var data = JSON.stringify(CORE.getElements(), null, 2);
@@ -51,6 +65,7 @@ function receivedText (ev) {
   const newArr = JSON.parse(lines);
   var elements = CORE.getElements();
   var additionalElements = newArr.length - CORE.getNumElements();
+
   if (additionalElements > 0) {
     var addIterations = additionalElements / 10;
     for (var j = 0; j < addIterations; j++) {

@@ -1,7 +1,7 @@
 
 # our-journey release notes
 
-←[README][]
+← [README][]
 
 _A work-in-progress!_
 
@@ -20,19 +20,27 @@ See [spreadsheet][gdoc].
 
 ## v[1.4.0][]
 
- * _~~ mid-October 2018_;
+ * _approx. October 2018_;
  * Add browser compatibility-checking Javascript _(error message in Internet Explorer)_, #7;
  * Add default configuration; extend configuration options, including callbacks, #43;
- * Add compress/minified version of Javascript _(94 → 66 kB)_, #41;
+ * Switch the file-save function to create a redirecting HTML file, #42;
+ * Add compress/minified version of Javascript _(100 → 70 kB)_, #41;
  * Fix — identify the '_Add more cards_' arrow button as a button, #47;
- * _... Anything else ...?_
+ * Add `?zoom=75` URL parameter to aid embedding, #17;
+ * Add `?bg=wheat` URL parameter (`background-color`);
+ * Swap the '_tool_' page back to GitHub Pages, #48;
+ * Configurable privacy policy link, #51;
+ * Start [JSDoc][] documentation, #49;
+ * Add [browserslist][] / eslint test, #7;
+ * Favicon, #52;
  * Added `CHANGELOG`, #45;
+ * _.. Anything else ..?_
 
 ## v[1.3.4][]
 
  * _2 October 2018;_
  * Fixed post-it display bug;
- * _What else changed ...?_
+ * _.. Anything else ..?_
 
 ## v[1.3.3][]
 
@@ -42,7 +50,7 @@ See [spreadsheet][gdoc].
  * Floating editor fixes;
  * Further Firefox browser fix;
  * Initial contributing guide, #37;
- * Travis-CI build/test operational;
+ * [Travis-CI][] build/test operational;
  * Files re-arranged; GitHub pages site put in `/docs/` folder, #38;
 
 ## v[1.2.0][]
@@ -81,7 +89,7 @@ See [spreadsheet][gdoc].
 [1.2.0]:  https://github.com/IET-OU/our-journey/commit/c753c3070207965b "2018-08-24"
 [1.3.3]:  https://github.com/IET-OU/our-journey/commit/9fa2575bc13158dd "Open sourced. 2018-09-28."
 [1.3.4]: https://github.com/IET-OU/our-journey/commit/a64ab7340b733f755b06 "2018-10-02"
-[1.3.5]: https://github.com/IET-OU/our-journey/commits "(URL incomplete)"
+[1.4.0]: https://github.com/IET-OU/our-journey/commits "(URL incomplete)"
 
 [changelog]: https://github.com/IET-OU/our-journey/blob/master/docs/CHANGELOG.md
 [readme]: https://github.com/IET-OU/our-journey#readme
@@ -92,5 +100,9 @@ See [spreadsheet][gdoc].
   "Browserify lets you require('modules') in the browser by bundling up all of your dependencies."
 [stringify]: https://npmjs.com/package/stringify
   "Browserify plugin to require() text / HTML files ... inside your client-side JavaScript."
+[browserslist]: https://browsersl.ist/?q=last+1+version%2C+%3E+1%25%2C+not+dead%2C+not+ie+%3C+99
+  "A page to display compatible browsers from a browserslist string."
+[travis-ci]: https://travis-ci.org/IET-OU/our-journey
+[jsdoc]: http://usejsdoc.org/
 
 [End]: //.

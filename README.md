@@ -2,8 +2,8 @@
 [![Build status — Travis-CI][travis-icon]][travis]
 [![js-semistandard-style][semi-icon]][semi]
 [![Browserify][br-icon]][browserify]
-<!--[![Husky Git hooks][hook-icon]][hook]-->
 [![our-journey - on Npmjs][npm-icon]][npm]
+<!--[![Husky Git hooks][hook-icon]][hook]-->
 
 # Our Journey interactive student journey creator
 
@@ -14,11 +14,11 @@ the events that occurred in their study and their experience of these.
 It is being developed for use by all students and different institutions.
 The design is informed by research conducted to understand the challenges faced
 by disabled students at the Open University (see [Coughlan & Lister, 2018][ORO]
-and [Coughlan, Ullmann & Lister, 2017)][ORO2]).
+and [Coughlan, Ullmann & Lister, 2017][ORO2]).
 
  * [iet-ou.github.io/our-journey][web]
 
-![Screenshot 1 - the editor.][img-rel]
+[![Screenshot 1 - the editor.][img-rel]][web]
 
 A physical version of the tool has been developed by [Tim Coughlan][tim] and
 [Kate Lister][kate] of the Institute of Educational Technology (IET)
@@ -29,7 +29,7 @@ Institute of Educational Technology (IET), at The Open University.
 
 Author: [Tim Coughlan][tim], IET.
 
-## Install .. serve .. test .. fix
+## Install .. build .. test
 
 Use [Node][] and npm to aid development:
 
@@ -39,14 +39,16 @@ npm run build
 npm test
 ```
 
-Other commands:
+Other commands to serve and fix the code etc.:
 
 ```sh
-npm run     # List lifecycle and other scripts.
+npm run        # List lifecycle and other scripts.
 
 npm start
 npm run pa11y-ci
 npm run fix
+npm run jsdoc  # Generate documentation in /jsdoc/ directory.
+npx eslint src # browserslist-based test.
 ```
 
 ## API
@@ -57,6 +59,7 @@ npm run fix
  * `. .?layout=scol` — Display with a single-column layout;
  * `. . ?edit=float` — Use a _floating_ editor;
  * `. ?j=base64:...` — Load a journey represented in the URL parameter as Base64-encoded JSON;
+ * `. . . .?zoom=75` — Zoom the display of the whole tool (_50 .. 95%_);
 
 ([Search][q-location].)
 
@@ -73,7 +76,7 @@ require('our-journey').app.run({ assetUrl: '..' /* ... */ });
 Via [unpkg][] — [browse][] — production CDN:
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/our-journey@^1/style/journeystyle.css" />
+<link href="https://unpkg.com/our-journey@^1/style/journeystyle.css" rel="stylesheet" />
 
 <div id="our-journey-tool">
   <p class="no-js"> Sorry! This tool requires Javascript. </p>
@@ -84,6 +87,7 @@ Via [unpkg][] — [browse][] — production CDN:
 <script>
   require('our-journey').app.run({
     containerSelector: '#our-journey-tool'
+
     // Other options ...
   })
   // Returns a Promise.
@@ -144,7 +148,7 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [travis]: https://travis-ci.org/IET-OU/our-journey "Build status – Travis-CI (NPM)"
 [travis-icon]: https://api.travis-ci.org/IET-OU/our-journey.svg
 
-[config]: src/config.js "Configuration options and defaults."
+[config]: src/config.js#L6 "Configuration options and defaults [config.JS]"
 [changelog]: docs/CHANGELOG.md
 [contrib]: docs/CONTRIBUTING.md
 [contrib-x]: https://github.com/IET-OU/our-journey/blob/master/docs/CONTRIBUTING.md
