@@ -1,15 +1,15 @@
 <!--
-  Instructions ~~ open this file in your preferred browser, to load the jouney!
+  Instructions: Open this file in your preferred browser, to load the journey!
 -->
-<!doctype html>
-<html lang='en'>
+<!doctype html><html lang='en'>
 
   <meta charset='utf-8'/>
-  <!--<meta http-equiv='refresh' content='1; url=..'/>-->
-  <style> body { font: 1em sans-serif; margin: 1em auto; max-width: 32em; } </style>
+  <style>
+    body {font:1em sans-serif; margin:1em auto; max-width:32em}
+    [type] {display:none}
+  </style>
 
   <title>Our Journey: saved journey</title> <h1>Our Journey: saved journey</h1>
-
 
   <p>If you are not automatically redirected, <a id='journey-link' href=
 '{redirectUrl}'
@@ -19,14 +19,13 @@
 
   <hr/>
 
-  <p role='contentinfo'><a href='https://iet-ou.github.io/our-journey/'>our-journey</a> v<em>{version}</em></p>
+  <p role='contentinfo'><a href='https://iet-ou.github.io/our-journey/'>our-journey</a> v<i>{version}</i></p>
 
   <script>
     location.href = document.querySelector('#journey-link').getAttribute('href');
   </script>
 
-
-  <script type='application/json'>{json}</script>
+  <i type='application/json'>{json}</i>
 
   <!-- {debug} -->
 </html>

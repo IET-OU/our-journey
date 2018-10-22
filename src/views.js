@@ -51,7 +51,7 @@ function getRedirectHtml () {
   };
   const HTML = UTIL.replace(require('./views/redirect.html'), {
     '{debug}': 'UA: ' + UA,
-    '{json}': JSON.stringify(JOURNEY, null, 2),
+    '{json}': JSON.stringify(JOURNEY_DATA, null, 2),
     '{redirectUrl}': REDIRECT_URL + SHARE.createUrl(),
     '{version}': UTIL.config('version'),
     '{timestamp}': JOURNEY_DATA.created

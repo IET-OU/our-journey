@@ -31,7 +31,7 @@ function createShareLink (elements) {
 function loadShareLink (elements) {
   console.warn('loadShareLink - start');
 
-  var qm = window.location.search.match(/[?&]j=base64:(\w+(%3D|=)*)/);
+  var qm = window.location.search.match(/[?&]j=base64:([\w%]+(%3D|=)*)/);
   if (qm) {
     var decoded;
     try {
