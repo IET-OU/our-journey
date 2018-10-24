@@ -242,6 +242,10 @@ img[ src $= 'assets/iet-logo.svg' ] {
   colour: #a00;
 }
 
+.our-journey-whole-page h1 {
+  display: none;
+}
+
 .XX-our-journey-whole-page #qr-code {
   clear: both;
   position: absolute;
