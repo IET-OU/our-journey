@@ -6,7 +6,8 @@
 
 <div class="main" id="main">
 
-  <svg width="1240" height="1600" class="journey-canvas" id="journey-canvas" aria-label="Journey canvas" role="img">
+  <svg width="1240" height="1600" class="journey-canvas" id="journey-canvas" aria-label="Journey canvas" role="img"
+      onload="ourJourneySvgLoad(typeof event=='undefined'?{time:Date.now()}:event) /* Directly attached */">
     <desc id="start-card">Start of the journey</desc>
     <desc id="group-0">Card group</desc>
     <desc id="empty-card">Empty journey card</desc>

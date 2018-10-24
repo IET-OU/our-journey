@@ -5,6 +5,13 @@
 
 ---
 
+## [Latest][]
+
+ * Updated help page;
+ * Add timing functionality, #54;
+ * Updated URLs in `test/example` HTML;
+ * `CHANGELOG` now points to tagged releases, #45;
+
 ## v[1.4.2][]
 
  * _22 October 2018_;
@@ -85,6 +92,7 @@ See [spreadsheet][gdoc].
 [1.4.0]: https://github.com/IET-OU/our-journey/releases/tag/1.4.0 "22nd October 2018 (eba90c1)"
 [1.4.2]: https://github.com/IET-OU/our-journey/releases/tag/1.4.2 "22nd October (4a48769)"
 
+[latest]: https://github.com/IET-OU/our-journey/commits "Currently unreleased commits"
 [changelog]: https://github.com/IET-OU/our-journey/blob/master/docs/CHANGELOG.md
 [readme]: https://github.com/IET-OU/our-journey#readme
 [gh]: https://iet-ou.github.io/our-journey/

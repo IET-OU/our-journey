@@ -15,6 +15,17 @@ const UTIL = require('./util');
 const VIEWS = require('./views');
 
 function run (config) {
+  const T_START = Date.now();
+  console.time('our-journey int');
+
+  window.ourJourneySvgLoad = function (ev) {
+    const T_END = Date.now();
+    UTIL.config().times = { start: T_START, end: T_END };
+
+    console.warn('Svg load:', T_END - T_START, ev);
+    console.timeLog && console.timeLog('our-journey int');
+  };
+
   const promise = new Promise(function (resolve, reject) {
     if (!IS_COMPAT) {
       // This should never be reached!
