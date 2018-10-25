@@ -60,7 +60,7 @@ function run (config) {
     CORE.setFocusElement(0);
     CORE.changeFocus();
 
-    UI.toggleOptions();
+    UI.toggleOptions(0);
     UI.changeBackground(CFG.background); // Was: 'Wheat'
 
     SHARE.createLink(CORE.getElements());
