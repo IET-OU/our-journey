@@ -346,7 +346,7 @@ function changeFocus () {
   }
   if (focusElement !== -1) {
     var focusY = document.getElementById('group' + focusElement).getAttribute('y');
-    window.scrollTo(0, focusY - 200);
+    window.scrollTo(window.scrollX, focusY - 200);
   }
 }
 
