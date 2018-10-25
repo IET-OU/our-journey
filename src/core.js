@@ -104,23 +104,22 @@ document.addEventListener('keydown', function (event) { // Was: , (event) => {
         break;
       case 'Tab':
         if (floatEditing) {
-          if(focus === 'floating_move_menu') {
-            if(event.shiftKey === false) {
+          if (focus === 'floating_move_menu') {
+            if (event.shiftKey === false) {
               editFocus();
               document.getElementById('group' + focusElement).focus();
             }
           }
-          if(focus === 'floating_icon_select') {
-            if(event.shiftKey === true) {
-              if(focusElement === 0){
+          if (focus === 'floating_icon_select') {
+            if (event.shiftKey === true) {
+              if (focusElement === 0) {
                 event.preventDefault();
                 editFocus();
                 document.getElementById('help_link').focus();
-              }
-              else {
+              } else {
                 editFocus();
                 document.getElementById('group' + focusElement).focus();
-              } 
+              }
             }
           }
         }
@@ -396,7 +395,7 @@ function editFocus () {
   const FL_ADD = UTIL.qs('#floating_add');
   const EM_ICON = UTIL.qs('#empty_icon');
   const EM_EMOJI = UTIL.qs('#empty_emoticon');
-  const FL_MOVE = UTIL.qs('#floating_move')
+  const FL_MOVE = UTIL.qs('#floating_move');
 
   const FOCUS_EL = LAYOUT.getLayoutData()[ LAYOUT.getLayout() ][ focusElement ];
 
@@ -496,7 +495,7 @@ function editFocus () {
 
       const ICON_VALUE = elements[focusElement].icon;
       const EMO_VALUE = elements[focusElement].emoticon;
-      const emptyIconText = UTIL.qs('#empty_icon_text');  
+      const emptyIconText = UTIL.qs('#empty_icon_text');
       const emptyEmoText = UTIL.qs('#empty_emoticon_text');
 
       UTIL.qs('#floating_icon_select').value = ICON_VALUE;
@@ -580,16 +579,16 @@ function clearElement () {
   changeFocus();
 }
 
-function moveMenuChanged() {
+function moveMenuChanged () {
   var itemSelected = UTIL.qs('#floating_move_menu');
-  if (itemSelected.value === "SwapBack") {
+  if (itemSelected.value === 'SwapBack') {
     moveBackElement();
-  } else if (itemSelected.value === "SwapFwd") {
+  } else if (itemSelected.value === 'SwapFwd') {
     moveFwdElement();
-  } else if (itemSelected.value === "AddNew") {
+  } else if (itemSelected.value === 'AddNew') {
     addCard();
   }
-  itemSelected.value = "Move";
+  itemSelected.value = 'Move';
 }
 
 function moveBackElement () {

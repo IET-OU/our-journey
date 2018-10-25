@@ -30,10 +30,10 @@ function toggleEditor (tog) {
   } else if (editor === 'float') {
     var floatElement = document.getElementById('float_bar');
     if (tog === 1 || tog === 'show') {
-      //toggleOptions(1);
+      // toggleOptions(1);
       floatElement.style.display = 'block';
     } else if (tog === 0 || tog === 'hide') {
-      //toggleOptions(0);
+      // toggleOptions(0);
       floatElement.style.display = 'none';
     }
   }
