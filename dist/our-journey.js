@@ -1,7 +1,7 @@
 /*!
   our-journey | 1.4.2
   © 2018 The Open University (IET) | Tim Coughlan {lead}, Glen Darby, Nick Freear | GPL-3.0+.
-  Build: 2018-10-22T16:32Z
+  Build: 2018-10-25T09:59Z
   https://github.com/IET-OU/our-journey
 
 */
@@ -218,7 +218,7 @@ module.exports.DEFAULTS = {
   // URL of the help page, to use in HTML links.
   helpUrl: 'https://iet-ou.github.io/our-journey/help.html',
   // @prop {string} privacyUrl Link to a privacy policy, and terms.
-  privacyUrl: null, // 'https://iet-ou.github.io/our-journey/privacy.html' or 'https://www.open.ac.uk/privacy',
+  privacyUrl: 'https://iet-ou.github.io/our-journey/privacy-ou-generic.html',
   // Load a demonstration journey (Default: false)
   demo: UTIL.param(/[?&]demo=(1)/, false),
   // Use the floating or fixed editor (Default: floating)
