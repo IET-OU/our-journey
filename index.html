@@ -18,7 +18,9 @@
 <script src="dist/our-journey.js"></script>
 
 <script>
-  require('our-journey').app.run();
+  require('our-journey').app.run({
+    assetUrl: './assets' // Important: relative URL.
+  });
 </script>
 
 </html>

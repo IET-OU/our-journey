@@ -22,7 +22,7 @@ function run (config) {
     const T_END = Date.now();
     UTIL.config().times = { start: T_START, end: T_END };
 
-    console.warn('Svg load:', T_END - T_START, ev);
+    console.warn('Svg load, ms:', T_END - T_START, ev);
     console.timeLog && console.timeLog('our-journey int');
   };
 
