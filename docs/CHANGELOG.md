@@ -13,10 +13,11 @@
 
 ## v[1.4.10][]
 
- * Fixed menu and editor keyboard accessibility issues, #44;
- * Fixed scrolling to adapt (_accessibility?_);
+ * _25 October 2018_;
+ * Fixed menu and editor keyboard accessibility, #44;
+ * Fixed scrolling to adapt to user's … (_accessibility?_), #44,
  * Updated help page;
- * Privacy policy;
+ * Added privacy policy, #51;
 
 ## v[1.4.2][]
 
@@ -98,7 +99,7 @@ See [spreadsheet][gdoc].
 [1.4.0]: https://github.com/IET-OU/our-journey/releases/tag/1.4.0 "22nd October 2018 (eba90c1)"
 [1.4.2]: https://github.com/IET-OU/our-journey/releases/tag/1.4.2 "22 October (4a48769)"
 [1.4.7]:  https://github.com/IET-OU/our-journey/commit/97f197a37884408fb "25 October (97f197a)"
-[1.4.10]: https://github.com/IET-OU/our-journey/commit/6b32aeebdd8f3ce3a "25 October (6b32aee)"
+[1.4.10]: https://github.com/IET-OU/our-journey/releases/tag/1.4.10 "25 October (6b32aee)"
 
 [latest]: https://github.com/IET-OU/our-journey/commits "Currently unreleased commits"
 [changelog]: https://github.com/IET-OU/our-journey/blob/master/docs/CHANGELOG.md
