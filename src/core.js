@@ -27,7 +27,8 @@ module.exports = {
   cardFocus: cardFocus,
   addMoreCardFocus: addMoreCardFocus,
   clearFocus: clearFocus,
-  addCard: addCard
+  addCard: addCard,
+  moveMenuChanged: moveMenuChanged
 };
 
 const UI = require('./user-interface');
@@ -101,6 +102,27 @@ document.addEventListener('keydown', function (event) { // Was: , (event) => {
           document.getElementById('group' + focusElement).focus();
         }
         break;
+      case 'Tab':
+        if (floatEditing) {
+          if (focus === 'floating_move_menu') {
+            if (event.shiftKey === false) {
+              editFocus();
+              document.getElementById('group' + focusElement).focus();
+            }
+          }
+          if (focus === 'floating_icon_select') {
+            if (event.shiftKey === true) {
+              if (focusElement === 0) {
+                event.preventDefault();
+                editFocus();
+                document.getElementById('help_link').focus();
+              } else {
+                editFocus();
+                document.getElementById('group' + focusElement).focus();
+              }
+            }
+          }
+        }
     }
   }
 }, false);
@@ -306,6 +328,7 @@ function updateAltText (i) {
 }
 
 function changeFocus () {
+  UI.toggleOptions(0);
   for (var i = 0; i < elements.length; i++) {
     document.getElementById(elements[i].eID).setAttribute('class', 'not-focussed');
   }
@@ -323,7 +346,7 @@ function changeFocus () {
   }
   if (focusElement !== -1) {
     var focusY = document.getElementById('group' + focusElement).getAttribute('y');
-    window.scrollTo(0, focusY - 200);
+    window.scrollTo(window.scrollX, focusY - 200);
   }
 }
 
@@ -372,6 +395,7 @@ function editFocus () {
   const FL_ADD = UTIL.qs('#floating_add');
   const EM_ICON = UTIL.qs('#empty_icon');
   const EM_EMOJI = UTIL.qs('#empty_emoticon');
+  const FL_MOVE = UTIL.qs('#floating_move');
 
   const FOCUS_EL = LAYOUT.getLayoutData()[ LAYOUT.getLayout() ][ focusElement ];
 
@@ -414,6 +438,8 @@ function editFocus () {
           FL_POST.setAttribute('y', DIM.floatPostItVY);
           FL_ADD.setAttribute('x', DIM.floatAddButtonVX);
           FL_ADD.setAttribute('y', DIM.floatAddButtonVY);
+          FL_MOVE.setAttribute('x', DIM.floatMoveMenuVX);
+          FL_MOVE.setAttribute('y', DIM.floatMoveMenuVY);
         } else if (vrElements.includes(focusElement)) {
           FL_ED_OUTLINE.setAttribute('width', DIM.floatEditOutlineVRW);
           FL_ED_OUTLINE.setAttribute('height', DIM.floatEditOutlineVRH);
@@ -437,6 +463,8 @@ function editFocus () {
           FL_POST.setAttribute('y', DIM.floatPostItVRY);
           FL_ADD.setAttribute('x', DIM.floatAddButtonVRX);
           FL_ADD.setAttribute('y', DIM.floatAddButtonVRY);
+          FL_MOVE.setAttribute('x', DIM.floatMoveMenuVRX);
+          FL_MOVE.setAttribute('y', DIM.floatMoveMenuVRY);
         } else {
           FL_ED_OUTLINE.setAttribute('width', DIM.floatEditOutlineW);
           FL_ED_OUTLINE.setAttribute('height', DIM.floatEditOutlineH);
@@ -460,6 +488,8 @@ function editFocus () {
           FL_POST.setAttribute('y', DIM.floatPostItY);
           FL_ADD.setAttribute('x', DIM.floatAddButtonX);
           FL_ADD.setAttribute('y', DIM.floatAddButtonY);
+          FL_MOVE.setAttribute('x', DIM.floatMoveMenuX);
+          FL_MOVE.setAttribute('y', DIM.floatMoveMenuY);
         }
       }
 
@@ -547,6 +577,18 @@ function clearElement () {
   elements[focusElement] = { eID: 'place' + focusElement, description: '', emoticon: 'none', icon: 'none', postit: '' };
   updateElements();
   changeFocus();
+}
+
+function moveMenuChanged () {
+  var itemSelected = UTIL.qs('#floating_move_menu');
+  if (itemSelected.value === 'SwapBack') {
+    moveBackElement();
+  } else if (itemSelected.value === 'SwapFwd') {
+    moveFwdElement();
+  } else if (itemSelected.value === 'AddNew') {
+    addCard();
+  }
+  itemSelected.value = 'Move';
 }
 
 function moveBackElement () {

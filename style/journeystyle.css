@@ -143,6 +143,12 @@ svg#journey-canvas .in_postit {
   width: 110px;
 }
 
+.floating_move_menu
+{
+  width: 70px;
+  background: ivory;
+}
+
 .main {
         margin-top: 0px;
         text-align: center;

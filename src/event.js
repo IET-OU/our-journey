@@ -49,6 +49,11 @@ function initialiseEventHandlers () {
     CORE.addCard();
   });
 
+  attachEvent('#floating_move_menu', 'change', function (e) {
+    e.preventDefault();
+    CORE.moveMenuChanged();
+  });
+
   attachEvent('#optionsform', 'submit', function (e) {
     e.preventDefault();
     UI.toggleOptions();
@@ -146,6 +151,7 @@ function initialiseEventHandlers () {
   });
 
   attachEvent('#journey-background', 'click', function (e) {
+    UI.toggleOptions(0);
     CORE.stopFloatingFocus();
   });
 }

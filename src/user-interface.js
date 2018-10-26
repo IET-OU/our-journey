@@ -30,10 +30,10 @@ function toggleEditor (tog) {
   } else if (editor === 'float') {
     var floatElement = document.getElementById('float_bar');
     if (tog === 1 || tog === 'show') {
-      toggleOptions(1);
+      // toggleOptions(1);
       floatElement.style.display = 'block';
     } else if (tog === 0 || tog === 'hide') {
-      toggleOptions(0);
+      // toggleOptions(0);
       floatElement.style.display = 'none';
     }
   }
@@ -68,7 +68,11 @@ function toggleFloatOptions () {
 
 function toggleOptions (tog) {
   var options = document.getElementById('options');
-  if (options.style.display === 'none' || tog === 1) {
+  if (tog === 0) {
+    options.style.display = 'none';
+    document.getElementById('optionsButton').value = 'Options';
+    document.getElementById('float_optionsButton').value = 'Menu';
+  } else if (options.style.display === 'none' || tog === 1) {
     options.style.display = 'block';
     document.getElementById('optionsButton').value = 'Hide Options';
     document.getElementById('float_optionsButton').value = 'Hide Menu';
