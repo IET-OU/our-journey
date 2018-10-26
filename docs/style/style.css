@@ -16,13 +16,15 @@ h2{
     font-size: 1.1rem;
 }
 
+header img,
 .centre {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-.bodylist {
+[ role = main ] li,
+.bodylist li {
     line-height: 1.9rem;
 }
 

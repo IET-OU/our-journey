@@ -7,10 +7,16 @@
 
 ## [Latest][]
 
- * Updated help page;
- * Add timing functionality, #54;
+ * Add timing functionality (performance), #54;
  * Updated URLs in `test/example` HTML;
  * `CHANGELOG` now points to tagged releases, #45;
+
+## v[1.4.10][]
+
+ * Fixed menu and editor keyboard accessibility issues, #44;
+ * Fixed scrolling to adapt (_accessibility?_);
+ * Updated help page;
+ * Privacy policy;
 
 ## v[1.4.2][]
 
@@ -90,7 +96,9 @@ See [spreadsheet][gdoc].
 [1.3.3]: https://github.com/IET-OU/our-journey/releases/tag/1.3.3 "Open sourced. 2018-09-28 (9fa2575)"
 [1.3.4]: https://github.com/IET-OU/our-journey/releases/tag/1.3.4 "2018-10-02 (a64ab73)"
 [1.4.0]: https://github.com/IET-OU/our-journey/releases/tag/1.4.0 "22nd October 2018 (eba90c1)"
-[1.4.2]: https://github.com/IET-OU/our-journey/releases/tag/1.4.2 "22nd October (4a48769)"
+[1.4.2]: https://github.com/IET-OU/our-journey/releases/tag/1.4.2 "22 October (4a48769)"
+[1.4.7]:  https://github.com/IET-OU/our-journey/commit/97f197a37884408fb "25 October (97f197a)"
+[1.4.10]: https://github.com/IET-OU/our-journey/commit/6b32aeebdd8f3ce3a "25 October (6b32aee)"
 
 [latest]: https://github.com/IET-OU/our-journey/commits "Currently unreleased commits"
 [changelog]: https://github.com/IET-OU/our-journey/blob/master/docs/CHANGELOG.md
