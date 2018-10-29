@@ -9,6 +9,7 @@
 
  * Add timing functionality (performance), #54;
  * Updated URLs in `test/example` HTML;
+ * Site Javascript to link to privacy policy in footer, #51;
  * `CHANGELOG` now points to tagged releases, #45;
 
 ## v[1.4.10][]
