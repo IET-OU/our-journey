@@ -1,6 +1,8 @@
-<!doctype html><html lang="en"><title> our-journey — test </title>
+<!doctype html><html lang="en"><meta charset="utf-8"><title> our-journey — test </title>
 
 <link rel="stylesheet" href="../style/journeystyle.css" />
+
+<h1> Test </h1>
 
 
 <div id="our-journey-tool">
@@ -12,7 +14,7 @@
 
 <script>
   require('our-journey').app.run({
-    // privacyUrl: './local/privacy.html',
+    assetUrl: './../assets',
     // helpUrl: './local/help.html',
     onUpdateShareLink: function (shareLink, journeyArray) {
       console.warn('onUpdateShareLink:', shareLink, journeyArray);

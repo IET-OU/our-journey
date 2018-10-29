@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="../../style/journeystyle.css" />
 
-<!-- <h1> QR demo </h1> -->
+<h1> QR demo </h1>
 
 
 <div id="our-journey-tool">
@@ -21,7 +21,7 @@
     // helpUrl: './local/help.html',
     onUpdateShareLink: function (shareLink, journeyArray) {
       const M = shareLink.getAttribute('href').match(/(j=base64:.+)(&|$)/);
-      const URL = 'https://unpkg.com/our-journey/index.html?' + M[ 1 ];
+      const URL = 'https://iet-ou.github.io/our-journey/tool/?' + M[ 1 ];
 
       var typeNumber = 40; // Was: 4;
       var errorCorrectionLevel = 'L';

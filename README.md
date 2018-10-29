@@ -3,6 +3,7 @@
 [![js-semistandard-style][semi-icon]][semi]
 [![Browserify][br-icon]][browserify]
 [![our-journey - on Npmjs][npm-icon]][npm]
+[![License: GPL-3.+][lic-icon]][gpl]
 <!--[![Husky Git hooks][hook-icon]][hook]-->
 
 # Our Journey interactive student journey creator
@@ -28,6 +29,14 @@ This prototype online version is being developed in the
 Institute of Educational Technology (IET), at The Open University.
 
 Author: [Tim Coughlan][tim], IET.
+
+## Use
+
+To integrate or extend `our-journey`:
+
+```sh
+npm i our-journey
+```
 
 ## Install .. build .. test
 
@@ -60,8 +69,7 @@ npx eslint src # browserslist-based test.
  * `. . ?edit=float` — Use a _floating_ editor;
  * `. ?j=base64:...` — Load a journey represented in the URL parameter as Base64-encoded JSON;
  * `. . . .?zoom=75` — Zoom the display of the whole tool (_50 .. 95%_);
-
-([Search][q-location].)
+ * `. . . ?bg=wheat` — Set the background colour;
 
 ### Javascript
 
@@ -147,6 +155,9 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [npm-icon]: https://badge.fury.io/js/our-journey.svg
 [travis]: https://travis-ci.org/IET-OU/our-journey "Build status – Travis-CI (NPM)"
 [travis-icon]: https://api.travis-ci.org/IET-OU/our-journey.svg
+[downl-icon]: https://img.shields.io/npm/dt/our-journey.svg "Count of total downloads ~ NPM"
+[lic-icon]: https://img.shields.io/badge/license-GPL--3.0%2B-yellowgreen.svg
+[lic0-icon]: https://img.shields.io/npm/l/our-journey.svg
 
 [config]: src/config.js#L6 "Configuration options and defaults [config.JS]"
 [changelog]: docs/CHANGELOG.md

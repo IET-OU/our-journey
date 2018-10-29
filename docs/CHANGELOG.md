@@ -3,24 +3,31 @@
 
 ← [README][]
 
-_A work-in-progress!_
+---
 
-We need to convert version URLs using [`git tag -a`](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
+## [Latest][]
 
-E.g.
-```
-git tag -a 1.1.1  5a258618728f5b97
-  ...
-git tag    # List tags
-  ...
-git push --tags
-```
+ * Add timing functionality (performance), #54;
+ * Updated URLs in `test/example` HTML;
+ * Site Javascript to link to privacy policy in footer, #51;
+ * `CHANGELOG` now points to tagged releases, #45;
 
-See [spreadsheet][gdoc].
+## v[1.4.10][]
+
+ * _25 October 2018_;
+ * Fixed menu and editor keyboard accessibility, #44;
+ * Fixed scrolling to adapt to user's … (_accessibility?_), #44,
+ * Updated help page;
+ * Added privacy policy, #51;
+
+## v[1.4.2][]
+
+ * _22 October 2018_;
+ * "_temporary fix to web pages_" — tool pages.
 
 ## v[1.4.0][]
 
- * _approx. October 2018_;
+ * _22 October 2018_;
  * Add browser compatibility-checking Javascript _(error message in Internet Explorer)_, #7;
  * Add default configuration; extend configuration options, including callbacks, #43;
  * Switch the file-save function to create a redirecting HTML file, #42;
@@ -31,10 +38,9 @@ See [spreadsheet][gdoc].
  * Swap the '_tool_' page back to GitHub Pages, #48;
  * Configurable privacy policy link, #51;
  * Start [JSDoc][] documentation, #49;
- * Add [browserslist][] / eslint test, #7;
+ * Add [browserslist][] / eslint test, #7 _(temp. disabled)_;
  * Favicon, #52;
  * Added `CHANGELOG`, #45;
- * _.. Anything else ..?_
 
 ## v[1.3.4][]
 
@@ -78,19 +84,25 @@ See [spreadsheet][gdoc].
 
 ---
 
+See [spreadsheet][gdoc].
+
 ← [README][]
 
 [gdoc]: https://docs.google.com/spreadsheets/d/13pR4eFvzttsrsqdf4FEPa0hCbMNuTYNrJJl46pxyumw/#gid=0 "Spreadsheet — 'our-journey npm-view git-tag'"
 
-[0.8.0]:  https://github.com/IET-OU/our-journey/commit/78bc695de6ec8cb573 "1st upload: proof of concept. 20-Jun-2018"
+[0.8.0]: https://github.com/IET-OU/our-journey/releases/tag/0.8.0 "1st upload. 2018-06-20 (78bc695)"
 [1.1.0]:  https://github.com/IET-OU/our-journey/commits "(URL incomplete) 1st published to Npmjs.com. 2018-07-31"
-[1.1.1]:  https://github.com/IET-OU/our-journey/commit/5a258618728f5b97 "2018-07-31"
-[1.1.11]: https://github.com/IET-OU/our-journey/commit/1e87e7493469122e "2018-08-17"
-[1.2.0]:  https://github.com/IET-OU/our-journey/commit/c753c3070207965b "2018-08-24"
-[1.3.3]:  https://github.com/IET-OU/our-journey/commit/9fa2575bc13158dd "Open sourced. 2018-09-28."
-[1.3.4]: https://github.com/IET-OU/our-journey/commit/a64ab7340b733f755b06 "2018-10-02"
-[1.4.0]: https://github.com/IET-OU/our-journey/commits "(URL incomplete)"
+[1.1.1]: https://github.com/IET-OU/our-journey/releases/tag/1.1.1 "2018-07-31 (5a25861)"
+[1.1.11]: https://github.com/IET-OU/our-journey/commit/1e87e7493469122e "2018-08-17 (1e87e74)"
+[1.2.0]: https://github.com/IET-OU/our-journey/releases/tag/1.2.0 "2018-08-24 (c753c30)"
+[1.3.3]: https://github.com/IET-OU/our-journey/releases/tag/1.3.3 "Open sourced. 2018-09-28 (9fa2575)"
+[1.3.4]: https://github.com/IET-OU/our-journey/releases/tag/1.3.4 "2018-10-02 (a64ab73)"
+[1.4.0]: https://github.com/IET-OU/our-journey/releases/tag/1.4.0 "22nd October 2018 (eba90c1)"
+[1.4.2]: https://github.com/IET-OU/our-journey/releases/tag/1.4.2 "22 October (4a48769)"
+[1.4.7]:  https://github.com/IET-OU/our-journey/commit/97f197a37884408fb "25 October (97f197a)"
+[1.4.10]: https://github.com/IET-OU/our-journey/releases/tag/1.4.10 "25 October (6b32aee)"
 
+[latest]: https://github.com/IET-OU/our-journey/commits "Currently unreleased commits"
 [changelog]: https://github.com/IET-OU/our-journey/blob/master/docs/CHANGELOG.md
 [readme]: https://github.com/IET-OU/our-journey#readme
 [gh]: https://iet-ou.github.io/our-journey/

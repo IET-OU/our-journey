@@ -6,7 +6,8 @@
 
 <div class="main" id="main">
 
-  <svg width="1240" height="1600" class="journey-canvas" id="journey-canvas" aria-label="Journey canvas" tabindex="-1">
+  <svg width="1240" height="1600" class="journey-canvas" id="journey-canvas" aria-label="Journey canvas" tabindex="-1"
+    onload="ourJourneySvgLoad(typeof event=='undefined'?{time:Date.now()}:event) /* Directly attached */">
 
     {background partial}
 
