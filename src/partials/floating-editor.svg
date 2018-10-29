@@ -96,7 +96,7 @@
   </foreignObject>
 
   <foreignObject x='245' y='10' id="floating_post" width='95' height='100'>
-    <textarea class="floating_post" id="floating_post_it_text" rows=3 cols=9 maxlength=40 placeholder="4. Add an optional note?"></textarea>
+    <textarea class="floating_post" id="floating_post_it_text" rows=3 cols=9 maxlength=40 placeholder="4. Add an optional note"></textarea>
   </foreignObject>
 
   <foreignObject x='245' y='75' id="floating_back" width='30' height='30'>
