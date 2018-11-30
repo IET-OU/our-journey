@@ -75,13 +75,22 @@ function run (config) {
     UI.changeBackground(CFG.background); // Was: 'Wheat'
 
     SHARE.createLink(CORE.getElements());
-    var loadedJourney = SHARE.loadLink(CORE.getElements());
+    var loadedJourneyLength = SHARE.loadLink(CORE.getElements());
 
-    if (!loadedJourney) {
-      document.getElementById('group0').focus();
+    document.getElementById('group0').focus();
+
+    if (loadedJourneyLength > 0) {
+      // increase length of loaded journey if needed
+      if (loadedJourneyLength > CORE.getNumElements()) {
+        var add10s = (loadedJourneyLength - CORE.getNumElements()) / 10;
+        for (var i = 0; i < add10s; i++) {
+          LAYOUT.addElementsToLayout();
+        }
+      }
+    } else {
       CORE.editFocus();
-      window.scrollTo(0, 0);
     }
+    window.scrollTo(0, 0);
     resolve('our-journey: OK');
   });
 

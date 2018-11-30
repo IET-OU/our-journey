@@ -30,10 +30,9 @@ function createShareLink (elements) {
 
 function loadShareLink (elements) {
   console.warn('loadShareLink - start');
-  var loadedJourney = false;
+  var loadedJourneyLength = 0;
   var qm = window.location.search.match(/[?&]j=base64:([\w%]+(%3D|=)*)/);
   if (qm) {
-    loadedJourney = true;
     var decoded;
     try {
       decoded = JSON.parse(b64DecodeUnicode(decodeURIComponent(qm[ 1 ])));
@@ -50,9 +49,9 @@ function loadShareLink (elements) {
     }
 
     CORE.updateElements();
-
+    loadedJourneyLength = decoded.length;
     console.warn('loadShareLink - load COMPLETE ;) !');
-    return loadedJourney;
+    return loadedJourneyLength;
   }
 }
 

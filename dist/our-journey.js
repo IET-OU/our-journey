@@ -1,7 +1,7 @@
 /*!
   our-journey | 1.4.11
   © 2018 The Open University (IET) | Tim Coughlan {lead}, Glen Darby, Nick Freear | GPL-3.0+.
-  Build: 2018-11-30T09:23Z
+  Build: 2018-11-30T10:01Z
   https://github.com/IET-OU/our-journey
 
 */
@@ -83,13 +83,22 @@ function run (config) {
     UI.changeBackground(CFG.background); // Was: 'Wheat'
 
     SHARE.createLink(CORE.getElements());
-    var loadedJourney = SHARE.loadLink(CORE.getElements());
+    var loadedJourneyLength = SHARE.loadLink(CORE.getElements());
 
-    if (!loadedJourney) {
-      document.getElementById('group0').focus();
+    document.getElementById('group0').focus();
+
+    if (loadedJourneyLength > 0) {
+      // increase length of loaded journey if needed
+      if (loadedJourneyLength > CORE.getNumElements()) {
+        var add10s = (loadedJourneyLength - CORE.getNumElements()) / 10;
+        for (var i = 0; i < add10s; i++) {
+          LAYOUT.addElementsToLayout();
+        }
+      }
+    } else {
       CORE.editFocus();
-      window.scrollTo(0, 0);
     }
+    window.scrollTo(0, 0);
     resolve('our-journey: OK');
   });
 
@@ -1740,10 +1749,9 @@ function createShareLink (elements) {
 
 function loadShareLink (elements) {
   console.warn('loadShareLink - start');
-  var loadedJourney = false;
+  var loadedJourneyLength = 0;
   var qm = window.location.search.match(/[?&]j=base64:([\w%]+(%3D|=)*)/);
   if (qm) {
-    loadedJourney = true;
     var decoded;
     try {
       decoded = JSON.parse(b64DecodeUnicode(decodeURIComponent(qm[ 1 ])));
@@ -1760,9 +1768,9 @@ function loadShareLink (elements) {
     }
 
     CORE.updateElements();
-
+    loadedJourneyLength = decoded.length;
     console.warn('loadShareLink - load COMPLETE ;) !');
-    return loadedJourney;
+    return loadedJourneyLength;
   }
 }
 
