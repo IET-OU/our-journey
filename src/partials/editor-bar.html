@@ -85,8 +85,11 @@
   </div>
 
   <div id="float_bar" class="float_bar">
+    <form id="float_simplesaveform">
+      <input type='submit' aria-label="Save journey to file" value="Save" id="float_simplesavebutton">
+    </form>
     <form id="float_optionsform">
-      <input type='submit' aria-label="Show or hide menu options" value="Menu" id="float_optionsButton">
+      <input type='submit' aria-label="Show or hide menu options" value="Options" id="float_optionsButton">
     </form>
 
     <a class="help_link" id="help_link" href="{helpUrl}" target="_blank">Help</a>
@@ -95,24 +98,24 @@
   <div class="optionsbar" id="options" aria-label="Menu">
     <h2>Options</h2>
     <h2>File:</h2>
-    <h3>Save:</h3>
-    <form id="saveform" aria-label="Save journey to file">
+    <h3>Save As:</h3>
+    <form id="saveform" aria-label="Save journey to file name">
       <label for="filenamearea">Choose a filename:</label>
       <input type='text' value="journey-file" id="filenamearea">
       <input type='submit' value="Save" id="saveButton" >
     </form>
 
-    <br><br>
+    <br>
     <form id="loadform" aria-label="Load journey from file" hidden>
       <h3 hidden><label for="fileinput">Load:</label></h3>
       <input type='file' accept='application/json, text/html' id='fileinput' required aria-required="true" hidden>
       <input type='submit' id="loadButton" value="Load File" hidden>
     </form>
     <h3>Load:</h3>
-    You can load your saved journey file by opening it in a browser. Opening the saved file (for example by double clicking on it) should load it in your default browser.
+    You can load your saved journey by opening the file in a browser. Opening the saved file (for example by double clicking on it) should load it in your default browser.
     
-    <br><br>
-    <h2>Print:</h2>
+    <br>
+    <h3>Print:</h3>
     <form id="printform">
       <input type='submit' aria-label="Print using browser" value="Print using browser" id="printButton">
     </form>
@@ -172,11 +175,9 @@
 
     <br>
     <hr>
-    <h2>Share: (To be completed)</h2>
+    <h2>Share:</h2>
     <p>
-      <a href="?demo=1">Demo fill</a> | <a href="?demo=0">Reset &ndash; no fill</a>
-      |
-      <a id="oj-share-link" class="oj-share-link" href="?empty" rel="nofollow" title="Base64 encoded!">Share</a>
+      <a id="oj-share-link" class="oj-share-link" href="?empty" rel="nofollow" title="Base64 encoded!">Go to shareable URL</a>
     </p>
   </div>
 </div>

@@ -68,6 +68,8 @@ svg#journey-canvas .in_postit {
     font-family: 'Comic Sans MS', sans-serif;
     font-size: .90rem;
     text-align: center;
+    word-wrap: break-word;
+    max-lines: 4;
 }
 
 .help_link {
@@ -83,8 +85,10 @@ svg#journey-canvas .in_postit {
       position: fixed;
       top: 0;
       background: ivory;
-      display: inline;
-      width: 100%;
+      display: block;
+      width: 40%;
+      min-width: 300px;
+      border: 1px solid #aaa;
     }
 
 .float_bar

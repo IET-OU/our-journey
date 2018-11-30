@@ -93,6 +93,11 @@ function initialiseEventHandlers () {
     FILE.loadJourney();
   });
 
+  attachEvent('#float_simplesaveform', 'submit', function (e) {
+    e.preventDefault();
+    FILE.saveJourney();
+  });
+
   attachEvent('#saveform', 'submit', function (e) {
     e.preventDefault();
     FILE.saveJourney();
