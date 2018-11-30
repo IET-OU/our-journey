@@ -1,7 +1,7 @@
 /*!
   our-journey | 1.4.11
   © 2018 The Open University (IET) | Tim Coughlan {lead}, Glen Darby, Nick Freear | GPL-3.0+.
-  Build: 2018-11-30T10:01Z
+  Build: 2018-11-30T10:31Z
   https://github.com/IET-OU/our-journey
 
 */
@@ -90,8 +90,9 @@ function run (config) {
     if (loadedJourneyLength > 0) {
       // increase length of loaded journey if needed
       if (loadedJourneyLength > CORE.getNumElements()) {
-        var add10s = (loadedJourneyLength - CORE.getNumElements()) / 10;
-        for (var i = 0; i < add10s; i++) {
+        var adds = (loadedJourneyLength - CORE.getNumElements()) / 10;
+        var i;
+        for (i = 0; i < adds; i++) {
           LAYOUT.addElementsToLayout();
         }
       }
@@ -1419,10 +1420,7 @@ function addElementsToLayout () {
 
     document.getElementById('journey-canvas').setAttribute('height', newHeight);
     document.getElementById('journey-background').setAttribute('height', newHeight);
-
     CORE.initialiseElements(numExistingElements);
-    CORE.setFocusElement(numExistingElements);
-    CORE.changeFocus();
   }
 }
 

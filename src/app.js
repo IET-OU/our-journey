@@ -82,8 +82,9 @@ function run (config) {
     if (loadedJourneyLength > 0) {
       // increase length of loaded journey if needed
       if (loadedJourneyLength > CORE.getNumElements()) {
-        var add10s = (loadedJourneyLength - CORE.getNumElements()) / 10;
-        for (var i = 0; i < add10s; i++) {
+        var adds = (loadedJourneyLength - CORE.getNumElements()) / 10;
+        var i;
+        for (i = 0; i < adds; i++) {
           LAYOUT.addElementsToLayout();
         }
       }
