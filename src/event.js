@@ -34,21 +34,6 @@ function initialiseEventHandlers () {
     CORE.moveFwdElement();
   });
 
-  attachEvent('#floating_backform', 'submit', function (e) {
-    e.preventDefault();
-    CORE.moveBackElement();
-  });
-
-  attachEvent('#floating_forwardform', 'submit', function (e) {
-    e.preventDefault();
-    CORE.moveFwdElement();
-  });
-
-  attachEvent('#floating_addform', 'submit', function (e) {
-    e.preventDefault();
-    CORE.addCard();
-  });
-
   attachEvent('#floating_move_menu', 'change', function (e) {
     e.preventDefault();
     CORE.moveMenuChanged();

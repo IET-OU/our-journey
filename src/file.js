@@ -17,7 +17,7 @@ const FileReader = window.FileReader;
 
 function saveJourneyHtml () {
   var savebutton = document.getElementById('float_simplesavebutton');
-  savebutton.value = "Saving...";
+  savebutton.value = 'Saving...';
   const FILE_NAME = document.getElementById('filenamearea').value + '.html';
   const DATA = VIEW.getRedirectHtml();
 
@@ -26,7 +26,7 @@ function saveJourneyHtml () {
   anchor.setAttribute('href', 'data:text/html;charset=utf-u,' + encodeURIComponent(DATA));
   anchor.setAttribute('download', FILE_NAME);
   anchor.click();
-  savebutton.value = "Save";
+  savebutton.value = 'Save';
 }
 
 function saveJourneyJson () {

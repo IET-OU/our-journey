@@ -99,27 +99,9 @@
     <textarea class="floating_post" id="floating_post_it_text" rows=3 cols=9 maxlength=36 placeholder="4. Add an optional note"></textarea>
   </foreignObject>
 
-  <foreignObject x='245' y='75' id="floating_back" width='30' height='30'>
-    <form id="floating_backform">
-      <input type='submit' aria-label="Move element backwards" value="<" id="floating_backButton" hidden>
-    </form>
-  </foreignObject>
-
-  <foreignObject x='245' y='105' id="floating_fwd" width='30' height='30'>
-    <form id="floating_forwardform">
-      <input type='submit' aria-label="Move element forwards" value=">" id="floating_fwdButton" hidden>
-    </form>
-  </foreignObject>
-
-  <foreignObject x='245' y='130' id="floating_add" width='30' height='30'>
-    <form id="floating_addform">
-      <input type='submit' aria-label="Add a new card after this one" value="+" id="floating_addButton" hidden>
-    </form>
-  </foreignObject>
-
   <foreignObject x='0' y='220' id="floating_move" width='70' height='30'>
     <form>
-      <select id="floating_move_menu" class="floating_move_menu" width="80" tabindex="0">
+      <select id="floating_move_menu" class="floating_move_menu" width="80" tabindex="0" aria-label="Move card menu">
         <option value="Move">Move</option>
         <option value="SwapBack">Swap card backwards</option>
         <option value="SwapFwd">Swap card forwards</option>

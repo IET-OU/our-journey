@@ -59,38 +59,8 @@ document.addEventListener('keydown', function (event) { // Was: , (event) => {
   var focus = document.activeElement.getAttribute('id');
   if (canvasInFocus) {
     switch (keyName) {
-      case 'ArrowUp':
-        if (!((focus === 'floating_icon_select') || (focus === 'floating_emoticon_select'))) {
-          event.preventDefault();
-        }
-        if (!floatEditing) {
-          cyclePrevFocus();
-        }
-        break;
-      case 'ArrowLeft':
-        if (!floatEditing) {
-          cyclePrevFocus();
-        }
-        break;
-      case 'ArrowRight':
-        if (!floatEditing) {
-          cycleNextFocus();
-        }
-        break;
-      case 'ArrowDown':
-        if (!((focus === 'floating_icon_select') || (focus === 'floating_emoticon_select'))) {
-          event.preventDefault();
-        }
-        if (!floatEditing) {
-          cycleNextFocus();
-        }
-        break;
       case 'Enter':
-        if (focus === 'floating_backform') {
-          moveBackElement();
-        } else if (focus === 'floating_forwardform') {
-          moveFwdElement();
-        } else if (focusOnAddMore) {
+        if (focusOnAddMore) {
           LAYOUT.addElementsToLayout();
         } else if (!floatEditing) {
           editFocus();
@@ -389,10 +359,7 @@ function editFocus () {
   const FL_ICON = UTIL.qs('#floating_icon');
   const FL_EMOJI = UTIL.qs('#floating_emoticon');
   const FL_DESC = UTIL.qs('#floating_desc');
-  const FL_BACK = UTIL.qs('#floating_back');
-  const FL_FWD = UTIL.qs('#floating_fwd');
   const FL_POST = UTIL.qs('#floating_post');
-  const FL_ADD = UTIL.qs('#floating_add');
   const EM_ICON = UTIL.qs('#empty_icon');
   const EM_EMOJI = UTIL.qs('#empty_emoticon');
   const FL_MOVE = UTIL.qs('#floating_move');
@@ -430,14 +397,8 @@ function editFocus () {
           EM_ICON.setAttribute('y', DIM.floatEmptyIconVY);
           EM_EMOJI.setAttribute('x', DIM.floatEmptyEmoVX);
           EM_EMOJI.setAttribute('y', DIM.floatEmptyEmoVY);
-          FL_BACK.setAttribute('x', DIM.floatBackVX);
-          FL_BACK.setAttribute('y', DIM.floatBackVY);
-          FL_FWD.setAttribute('x', DIM.floatFwdVX);
-          FL_FWD.setAttribute('y', DIM.floatFwdVY);
           FL_POST.setAttribute('x', DIM.floatPostItVX);
           FL_POST.setAttribute('y', DIM.floatPostItVY);
-          FL_ADD.setAttribute('x', DIM.floatAddButtonVX);
-          FL_ADD.setAttribute('y', DIM.floatAddButtonVY);
           FL_MOVE.setAttribute('x', DIM.floatMoveMenuVX);
           FL_MOVE.setAttribute('y', DIM.floatMoveMenuVY);
         } else if (vrElements.includes(focusElement)) {
@@ -455,14 +416,8 @@ function editFocus () {
           EM_ICON.setAttribute('y', DIM.floatEmptyIconVRY);
           EM_EMOJI.setAttribute('x', DIM.floatEmptyEmoVRX);
           EM_EMOJI.setAttribute('y', DIM.floatEmptyEmoVRY);
-          FL_BACK.setAttribute('x', DIM.floatBackVRX);
-          FL_BACK.setAttribute('y', DIM.floatBackVRY);
-          FL_FWD.setAttribute('x', DIM.floatFwdVRX);
-          FL_FWD.setAttribute('y', DIM.floatFwdVRY);
           FL_POST.setAttribute('x', DIM.floatPostItVRX);
           FL_POST.setAttribute('y', DIM.floatPostItVRY);
-          FL_ADD.setAttribute('x', DIM.floatAddButtonVRX);
-          FL_ADD.setAttribute('y', DIM.floatAddButtonVRY);
           FL_MOVE.setAttribute('x', DIM.floatMoveMenuVRX);
           FL_MOVE.setAttribute('y', DIM.floatMoveMenuVRY);
         } else {
@@ -480,14 +435,8 @@ function editFocus () {
           EM_ICON.setAttribute('y', DIM.floatEmptyIconY);
           EM_EMOJI.setAttribute('x', DIM.floatEmptyEmoX);
           EM_EMOJI.setAttribute('y', DIM.floatEmptyEmoY);
-          FL_BACK.setAttribute('x', DIM.floatBackX);
-          FL_BACK.setAttribute('y', DIM.floatBackY);
-          FL_FWD.setAttribute('x', DIM.floatFwdX);
-          FL_FWD.setAttribute('y', DIM.floatFwdY);
           FL_POST.setAttribute('x', DIM.floatPostItX);
           FL_POST.setAttribute('y', DIM.floatPostItY);
-          FL_ADD.setAttribute('x', DIM.floatAddButtonX);
-          FL_ADD.setAttribute('y', DIM.floatAddButtonY);
           FL_MOVE.setAttribute('x', DIM.floatMoveMenuX);
           FL_MOVE.setAttribute('y', DIM.floatMoveMenuY);
         }
@@ -530,31 +479,6 @@ function canvasGotFocus () {
 
 function canvasLostFocus () {
   canvasInFocus = false;
-}
-
-function cycleNextFocus () {
-  if ((elements.length - 1) > focusElement) {
-    focusElement++;
-    changeFocus();
-  } else {
-    if (numElements < maxElements) {
-      addMoreFocus(true);
-      focusElement = -1;
-      changeFocus();
-    }
-  }
-}
-
-function cyclePrevFocus () {
-  if (focusElement > 0) {
-    focusElement--;
-    changeFocus();
-  }
-  if (focusOnAddMore) {
-    addMoreFocus(false);
-    focusElement = numElements - 1;
-    changeFocus();
-  }
 }
 
 function updateElement () {
