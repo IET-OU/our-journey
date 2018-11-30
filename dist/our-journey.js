@@ -1,7 +1,7 @@
 /*!
   our-journey | 1.4.11
   © 2018 The Open University (IET) | Tim Coughlan {lead}, Glen Darby, Nick Freear | GPL-3.0+.
-  Build: 2018-10-29T15:53Z
+  Build: 2018-11-30T09:23Z
   https://github.com/IET-OU/our-journey
 
 */
@@ -83,12 +83,13 @@ function run (config) {
     UI.changeBackground(CFG.background); // Was: 'Wheat'
 
     SHARE.createLink(CORE.getElements());
-    SHARE.loadLink(CORE.getElements());
+    var loadedJourney = SHARE.loadLink(CORE.getElements());
 
-    document.getElementById('group0').focus();
-    CORE.editFocus();
-    window.scrollTo(0, 0);
-
+    if (!loadedJourney) {
+      document.getElementById('group0').focus();
+      CORE.editFocus();
+      window.scrollTo(0, 0);
+    }
     resolve('our-journey: OK');
   });
 
@@ -1739,9 +1740,10 @@ function createShareLink (elements) {
 
 function loadShareLink (elements) {
   console.warn('loadShareLink - start');
-
+  var loadedJourney = false;
   var qm = window.location.search.match(/[?&]j=base64:([\w%]+(%3D|=)*)/);
   if (qm) {
+    loadedJourney = true;
     var decoded;
     try {
       decoded = JSON.parse(b64DecodeUnicode(decodeURIComponent(qm[ 1 ])));
@@ -1760,6 +1762,7 @@ function loadShareLink (elements) {
     CORE.updateElements();
 
     console.warn('loadShareLink - load COMPLETE ;) !');
+    return loadedJourney;
   }
 }
 

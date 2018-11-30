@@ -75,12 +75,13 @@ function run (config) {
     UI.changeBackground(CFG.background); // Was: 'Wheat'
 
     SHARE.createLink(CORE.getElements());
-    SHARE.loadLink(CORE.getElements());
+    var loadedJourney = SHARE.loadLink(CORE.getElements());
 
-    document.getElementById('group0').focus();
-    CORE.editFocus();
-    window.scrollTo(0, 0);
-
+    if (!loadedJourney) {
+      document.getElementById('group0').focus();
+      CORE.editFocus();
+      window.scrollTo(0, 0);
+    }
     resolve('our-journey: OK');
   });
 
