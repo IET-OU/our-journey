@@ -7,6 +7,15 @@
 
 ## [Latest][]
 
+ * Embed demo video with _VTT_ captions on video page, #56;
+
+## v[1.5.0][]
+
+ * _30 November 2018_;
+ * Added demonstration video (_MPEG-4_), with transcript, #56;
+ * keyboard nav fixes / floating editor code simplification
+ * easy save button and post it char limit tweak
+ * On load file display fixes; on load journey extends to correct length;
  * Add timing functionality (performance), #54;
  * Updated URLs in `test/example` HTML;
  * Site Javascript to link to privacy policy in footer, #51;
@@ -18,7 +27,7 @@
  * Fixed menu and editor keyboard accessibility, #44;
  * Fixed scrolling to adapt to user's … (_accessibility?_), #44,
  * Updated help page;
- * Added privacy policy, #51;
+ * Added privacy policy (_GDPR_), #51;
 
 ## v[1.4.2][]
 
@@ -101,6 +110,7 @@ See [spreadsheet][gdoc].
 [1.4.2]: https://github.com/IET-OU/our-journey/releases/tag/1.4.2 "22 October (4a48769)"
 [1.4.7]:  https://github.com/IET-OU/our-journey/commit/97f197a37884408fb "25 October (97f197a)"
 [1.4.10]: https://github.com/IET-OU/our-journey/releases/tag/1.4.10 "25 October (6b32aee)"
+[1.5.0]: https://github.com/IET-OU/our-journey/commit/c280beeeb31f4486a#!-1.5.0 "30 November (c280bee)"
 
 [latest]: https://github.com/IET-OU/our-journey/commits "Currently unreleased commits"
 [changelog]: https://github.com/IET-OU/our-journey/blob/master/docs/CHANGELOG.md

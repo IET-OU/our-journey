@@ -8,6 +8,7 @@ node_modules/
 *.diff
 *.log
 *.tgz
+*.xml
 /dropbox
 /*.html
 !index.html
