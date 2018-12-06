@@ -39,6 +39,10 @@ header img,
     line-height: 1.9rem;
 }
 
+.bodylist .yt {
+    display: none;
+}
+
 .footer-copy {
     color: #333;
     float: left;
