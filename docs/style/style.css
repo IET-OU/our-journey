@@ -21,6 +21,7 @@ h2{
     font-size: 1.1rem;
 }
 
+time[ datetime ],
 abbr[ title ] {
     border-bottom: 1px dotted grey;
     cursor: help;
@@ -57,6 +58,7 @@ header img,
 .footer-logos img:focus,
 .footer-logos img:hover {
     border-color: #2b6ab7;
+    transition: all 1s;
   }
 
 img[ src = 'assets/ou-logo.svg' ],
