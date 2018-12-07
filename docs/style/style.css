@@ -14,12 +14,14 @@ body {
 
 h1 {
     font-size: 1.3rem;
+    margin-top: 2rem;
 }
 
 h2{
     font-size: 1.1rem;
 }
 
+time[ datetime ],
 abbr[ title ] {
     border-bottom: 1px dotted grey;
     cursor: help;
@@ -38,6 +40,10 @@ header img,
     line-height: 1.9rem;
 }
 
+.bodylist .yt {
+    display: none;
+}
+
 .footer-copy {
     color: #333;
     float: left;
@@ -52,6 +58,7 @@ header img,
 .footer-logos img:focus,
 .footer-logos img:hover {
     border-color: #2b6ab7;
+    transition: all 1s;
   }
 
 img[ src = 'assets/ou-logo.svg' ],
@@ -90,8 +97,47 @@ img[ src = 'assets/iet-logo.svg' ] {
 .navlist a:hover,
 .navlist .active {
     background-color: lightgray;
+    transition: all 1s;
 }
 
 .navlist a:focus {
   text-decoration: underline;
+}
+
+.video-page {
+  display: block;
+  margin: 0 auto;
+  width: 640px;
+}
+
+video,
+iframe[ src *= transcript ] {
+  background: #ccc;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  height: 360px;
+  width: 100%;
+  padding: 2px;
+}
+
+iframe[ src *= transcript ] {
+  background: #fafafa;
+  height: 14rem;
+  x-zoom: 200%;
+}
+
+iframe:hover {
+  border-color: darkorange;
+  transition: all 1s;
+}
+
+#transcript h2 {
+  margin: .1rem 0;
+}
+
+/* https://w3c.github.io/webvtt/#css-extensions */
+video::cue {
+  font-size: 1.2rem;
+  /* color: yellow;
+  padding: 1rem; */
 }

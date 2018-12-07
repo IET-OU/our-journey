@@ -115,6 +115,10 @@ See the release notes in the [changelog][].
 
 See the [contributing guide][contrib].
 
+## GDPR
+
+Details of GDPR / privacy actions can be found in [Bug #51][].
+
 ## License
 
 Distributed under the [GNU General Public License, version 3 or later][gpl].
@@ -163,5 +167,7 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [changelog]: docs/CHANGELOG.md
 [contrib]: docs/CONTRIBUTING.md
 [contrib-x]: https://github.com/IET-OU/our-journey/blob/master/docs/CONTRIBUTING.md
+
+[Bug #51]: https://github.com/IET-OU/our-journey/issues/51 "GDPR/privacy"
 
 [End]: //.
