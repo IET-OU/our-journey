@@ -6,8 +6,8 @@ const UTIL = require('./util');
 module.exports.DEFAULTS = {
   // CSS-style selector for the containing HTML element.
   containerSelector: '#our-journey-tool',
-  // URL to load icons and emoticons from (Default: Unpkg CDN).
-  assetUrl: 'https://unpkg.com/our-journey@^1/assets',
+  // URL to load icons and emoticons from (Default: Unpkg CDN https://unpkg.com/our-journey@^1/assets).
+  assetUrl: 'https://iet-ou.github.io/our-journey/tool-assets',
   // URL of the help page, to use in HTML links.
   helpUrl: 'https://iet-ou.github.io/our-journey/help.html',
   // @prop {string} privacyUrl Link to a privacy policy, and terms.
