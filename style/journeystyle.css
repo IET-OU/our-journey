@@ -13,7 +13,7 @@ textarea,
 select {
   background: #fff;
   color: #111;
-  font: .93rem Arial, Helvetica, sans-serif; /* Was: font-size: 11pt; */
+  font: .93rem Arial, Helvetica, sans-serif; 
 }
 
 .our-journey-whole-page .our-journey-js {
@@ -159,7 +159,7 @@ svg#journey-canvas .in_postit {
 }
 
 svg#journey-canvas .in_card {
-  font: 0.9rem sans-serif; /* Was: 14pt; */
+  font: 0.9rem sans-serif;
 }
 
 svg#journey-canvas .card > rect {
@@ -171,7 +171,7 @@ svg#journey-canvas .card > rect {
 
 svg#journey-canvas .card > .focussed {
   stroke: blue;
-  stroke-width: 3;
+  stroke-width: 2.5;
 }
 
 .card.orient-horiz {
@@ -202,7 +202,7 @@ svg#journey-canvas .card.orient-vert > rect {
 
 .add_more_card > .focussed {
   stroke: blue;
-  stroke-width: 3;
+  stroke-width: 2.5;
 }
 
 .add_more_card > .not-focussed {

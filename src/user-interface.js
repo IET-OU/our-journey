@@ -7,6 +7,7 @@ module.exports = {
   changeBackground: changeBackground,
   changeBackgroundElements: changeBackgroundElements,
   changeCardColour: changeCardColour,
+  changeEmoticonColour: changeEmoticonColour,
   chooseEditor: chooseEditor,
   getEditor: getEditor,
   toggleFloatOptions: toggleFloatOptions,
@@ -86,7 +87,6 @@ function toggleOptions (tog) {
 function changeBackground (bg) {
   const ELEM = UTIL.config('wholePage') ? document.body : UTIL.container();
   const background = bg || UTIL.qs('#background_select').value;
-
   ELEM.style.background = background; // Was: document.body.style.background = background;
   UTIL.qs('#background_select').value = background;
 }
@@ -119,6 +119,11 @@ function changeBackgroundElements (c) {
 function changeCardColour () {
   var colour = document.getElementById('card_colour_select').value;
   CORE.setCardColour(colour);
+}
+
+function changeEmoticonColour () {
+  var colour = document.getElementById('emoticon_colour_select').value;
+  CORE.setEmoticonColour(colour);
 }
 
 function chooseEditor (newEdit) {

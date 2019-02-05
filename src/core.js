@@ -23,6 +23,7 @@ module.exports = {
   getMaxElements: getMaxElements,
   addMoreFocus: addMoreFocus,
   setCardColour: setCardColour,
+  setEmoticonColour: setEmoticonColour,
   isPrinting: isPrinting,
   cardFocus: cardFocus,
   addMoreCardFocus: addMoreCardFocus,
@@ -45,6 +46,7 @@ var floatEditing = false;
 var focusOnAddMore = false;
 var printed = false;
 var cardColour = 'Ivory';
+var emoColour = 'White';
 
 // Number of card elements presented in page
 var numElements = 15;
@@ -146,13 +148,21 @@ function setCardColour (colour) {
   document.getElementById('card_colour_select').value = cardColour;
 }
 
+function setEmoticonColour (colour) {
+  emoColour = colour;
+  updateElements();
+  document.getElementById('emoticon_colour_select').value = emoColour;
+}
+
 function updateElements () {
   for (var i = 0; i < numElements; i++) {
     var elementGroup = document.getElementById('group' + i);
     elementGroup.addEventListener('click', elementClick);
     elementGroup.addEventListener('focus', cardFocus);
     var card = document.getElementById('place' + i);
+    var emoticonback = document.getElementById('emoticonback' + i);
     card.style.fill = cardColour;
+    emoticonback.style.fill = emoColour;
     if ((LAYOUT.getLayoutStyle() === 'default') && vlElements.includes(i)) {
       card.setAttribute('x', DIM.rectXV);
     } else {
@@ -191,19 +201,27 @@ function updateEmoticon (i) {
   var eEmo = document.getElementById('emoticon' + i);
   var emptyEmo = document.getElementById('empty_emoticon');
   var emptyEmoText = document.getElementById('empty_emoticon_text');
+  var backEmo = document.getElementById('emoticonback' + i);
   var layoutStyle = LAYOUT.getLayoutStyle();
   if (getElement(i).emoticon !== 'none') {
     for (var j = 0; j < ASSET.emoticonCount(); j++) {
       if (ASSET.hasEmoticon(j, getElement(i))) {
+        backEmo.setAttribute('visibility', 'visible');
         eEmo.setAttribute('height', DIM.emoticonHeight);
         eEmo.setAttribute('width', DIM.emoticonWidth);
         if ((layoutStyle === 'default') && (vlElements.includes(i))) {
+          backEmo.setAttribute('cx', DIM.emoticonXV + 36);
+          backEmo.setAttribute('cy', DIM.emoticonYV + 36);
           eEmo.setAttribute('x', DIM.emoticonXV);
           eEmo.setAttribute('y', DIM.emoticonYV);
         } else if ((layoutStyle === 'default') && (vrElements.includes(i))) {
+          backEmo.setAttribute('cx', DIM.emoticonXVR + 36);
+          backEmo.setAttribute('cy', DIM.emoticonYVR + 36);
           eEmo.setAttribute('x', DIM.emoticonXVR);
           eEmo.setAttribute('y', DIM.emoticonYVR);
         } else {
+          backEmo.setAttribute('cx', DIM.emoticonX + 36);
+          backEmo.setAttribute('cy', DIM.emoticonY + 36);
           eEmo.setAttribute('x', DIM.emoticonX);
           eEmo.setAttribute('y', DIM.emoticonY);
         }
@@ -216,6 +234,7 @@ function updateEmoticon (i) {
     }
   } else {
     eEmo.setAttribute('display', 'none');
+    backEmo.setAttribute('visibility', 'collapse');
   }
 }
 
@@ -449,7 +468,7 @@ function editFocus () {
 
       UTIL.qs('#floating_icon_select').value = ICON_VALUE;
       if (ICON_VALUE === 'none') {
-        EM_ICON.setAttribute('fill-opacity', '0.5');
+        EM_ICON.setAttribute('fill-opacity', '0.9');
         emptyIconText.textContent = '1. What happened?';
       } else {
         EM_ICON.setAttribute('fill-opacity', '0.0');
@@ -457,7 +476,7 @@ function editFocus () {
       }
       UTIL.qs('#floating_emoticon_select').value = EMO_VALUE;
       if (EMO_VALUE === 'none') {
-        EM_EMOJI.setAttribute('fill-opacity', '0.5');
+        EM_EMOJI.setAttribute('fill-opacity', '0.9');
         emptyEmoText.textContent = '3. How did you feel?';
       } else {
         EM_EMOJI.setAttribute('fill-opacity', '0.0');

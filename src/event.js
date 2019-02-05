@@ -68,6 +68,11 @@ function initialiseEventHandlers () {
     UI.changeCardColour();
   });
 
+  attachEvent('#emoticon_colour_select', 'change', function (e) {
+    e.preventDefault();
+    UI.changeEmoticonColour();
+  });
+
   attachEvent('#printform', 'submit', function (e) {
     e.preventDefault();
     UI.printJourney();

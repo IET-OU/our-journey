@@ -1,7 +1,7 @@
 /*!
   our-journey | 1.5.1
   © 2019 The Open University (IET) | Tim Coughlan {lead}, Glen Darby, Nick Freear | GPL-3.0+.
-  Build: 2019-01-22T12:05Z
+  Build: 2019-02-05T14:32Z
   https://github.com/IET-OU/our-journey
 
 */
@@ -251,7 +251,7 @@ module.exports.DEFAULTS = {
   layout: UTIL.param(/[?&]layout=(scol|default)/, 'default'),
   // @prop {string} background  Set the background colour-name (Default: 'wheat')
   // @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/color_value}
-  background: UTIL.param(/[?&]bg=([a-z]+)/, 'wheat'),
+  background: UTIL.param(/[?&]bg=([a-z]+)/, 'Wheat'),
   // @prop {integer} zoom Set the zoom-level for embeds (50 ... 95)% (Default: 100).
   zoom: UTIL.param(/[?&]zoom=([5-9][05])/, 100),
   // @prop {boolean} wholePage  Does the our-journey tool occupy the whole page? (Default: true)
@@ -293,6 +293,7 @@ module.exports = {
   getMaxElements: getMaxElements,
   addMoreFocus: addMoreFocus,
   setCardColour: setCardColour,
+  setEmoticonColour: setEmoticonColour,
   isPrinting: isPrinting,
   cardFocus: cardFocus,
   addMoreCardFocus: addMoreCardFocus,
@@ -315,6 +316,7 @@ var floatEditing = false;
 var focusOnAddMore = false;
 var printed = false;
 var cardColour = 'Ivory';
+var emoColour = 'White';
 
 // Number of card elements presented in page
 var numElements = 15;
@@ -416,13 +418,21 @@ function setCardColour (colour) {
   document.getElementById('card_colour_select').value = cardColour;
 }
 
+function setEmoticonColour (colour) {
+  emoColour = colour;
+  updateElements();
+  document.getElementById('emoticon_colour_select').value = emoColour;
+}
+
 function updateElements () {
   for (var i = 0; i < numElements; i++) {
     var elementGroup = document.getElementById('group' + i);
     elementGroup.addEventListener('click', elementClick);
     elementGroup.addEventListener('focus', cardFocus);
     var card = document.getElementById('place' + i);
+    var emoticonback = document.getElementById('emoticonback' + i);
     card.style.fill = cardColour;
+    emoticonback.style.fill = emoColour;
     if ((LAYOUT.getLayoutStyle() === 'default') && vlElements.includes(i)) {
       card.setAttribute('x', DIM.rectXV);
     } else {
@@ -461,19 +471,27 @@ function updateEmoticon (i) {
   var eEmo = document.getElementById('emoticon' + i);
   var emptyEmo = document.getElementById('empty_emoticon');
   var emptyEmoText = document.getElementById('empty_emoticon_text');
+  var backEmo = document.getElementById('emoticonback' + i);
   var layoutStyle = LAYOUT.getLayoutStyle();
   if (getElement(i).emoticon !== 'none') {
     for (var j = 0; j < ASSET.emoticonCount(); j++) {
       if (ASSET.hasEmoticon(j, getElement(i))) {
+        backEmo.setAttribute('visibility', 'visible');
         eEmo.setAttribute('height', DIM.emoticonHeight);
         eEmo.setAttribute('width', DIM.emoticonWidth);
         if ((layoutStyle === 'default') && (vlElements.includes(i))) {
+          backEmo.setAttribute('cx', DIM.emoticonXV + 36);
+          backEmo.setAttribute('cy', DIM.emoticonYV + 36);
           eEmo.setAttribute('x', DIM.emoticonXV);
           eEmo.setAttribute('y', DIM.emoticonYV);
         } else if ((layoutStyle === 'default') && (vrElements.includes(i))) {
+          backEmo.setAttribute('cx', DIM.emoticonXVR + 36);
+          backEmo.setAttribute('cy', DIM.emoticonYVR + 36);
           eEmo.setAttribute('x', DIM.emoticonXVR);
           eEmo.setAttribute('y', DIM.emoticonYVR);
         } else {
+          backEmo.setAttribute('cx', DIM.emoticonX + 36);
+          backEmo.setAttribute('cy', DIM.emoticonY + 36);
           eEmo.setAttribute('x', DIM.emoticonX);
           eEmo.setAttribute('y', DIM.emoticonY);
         }
@@ -486,6 +504,7 @@ function updateEmoticon (i) {
     }
   } else {
     eEmo.setAttribute('display', 'none');
+    backEmo.setAttribute('visibility', 'collapse');
   }
 }
 
@@ -719,7 +738,7 @@ function editFocus () {
 
       UTIL.qs('#floating_icon_select').value = ICON_VALUE;
       if (ICON_VALUE === 'none') {
-        EM_ICON.setAttribute('fill-opacity', '0.5');
+        EM_ICON.setAttribute('fill-opacity', '0.9');
         emptyIconText.textContent = '1. What happened?';
       } else {
         EM_ICON.setAttribute('fill-opacity', '0.0');
@@ -727,7 +746,7 @@ function editFocus () {
       }
       UTIL.qs('#floating_emoticon_select').value = EMO_VALUE;
       if (EMO_VALUE === 'none') {
-        EM_EMOJI.setAttribute('fill-opacity', '0.5');
+        EM_EMOJI.setAttribute('fill-opacity', '0.9');
         emptyEmoText.textContent = '3. How did you feel?';
       } else {
         EM_EMOJI.setAttribute('fill-opacity', '0.0');
@@ -887,32 +906,32 @@ module.exports={
   "iconY": 110,
   "emoticonWidth": 72,
   "emoticonHeight": 72,
-  "emoticonXV": 130,
-  "emoticonYV": 170,
-  "emoticonXVR": 30,
-  "emoticonYVR": 273,
-  "emoticonX": 140,
-  "emoticonY": 160,
-  "textXV": 110,
+  "emoticonXV": 30,
+  "emoticonYV": 160,
+  "emoticonXVR": 130,
+  "emoticonYVR": 262,
+  "emoticonX": 145,
+  "emoticonY": 220,
+  "textXV": 108,
   "textYV": 120,
-  "textXVR": 10,
+  "textXVR": 8,
   "textYVR": 225,
-  "textX": 125,
-  "textY": 110,
+  "textX": 122,
+  "textY": 108,
   "rectY": 100,
   "rectXV": 100,
   "postitX": 72,
   "postitY": 12,
-  "postitVX": 5,
-  "postitVY": 70,
-  "postitVRY": 160,
+  "postitVX": 7,
+  "postitVY": 40,
+  "postitVRY": 150,
   "postitVRX": 125,
   "postitTextX": 78,
   "postitTextVX": 12,
   "postitTextVRX": 130,
   "postitTextY": 27,
-  "postitTextVY": 87,
-  "postitTextVRY": 177,
+  "postitTextVY": 57,
+  "postitTextVRY": 167,
   "postitTextWidth": 85,
   "postitScolX": 245,
   "postitTextScolX": 250,
@@ -930,10 +949,10 @@ module.exports={
   "floatEditIconVY": 90,
   "floatEditIconX": 10,
   "floatEditIconY": 195,
-  "floatEditEmoVX": 110,
-  "floatEditEmoVY": 238,
+  "floatEditEmoVX": 10,
+  "floatEditEmoVY": 240,
   "floatEditEmoX": 125,
-  "floatEditEmoY": 228,
+  "floatEditEmoY": 300,
   "floatEditDescX": 125,
   "floatEditDescY": 105,
   "floatEditDescVX": 110,
@@ -942,10 +961,10 @@ module.exports={
   "floatEmptyIconVY": 5,
   "floatEmptyIconX": 10,
   "floatEmptyIconY": 105,
-  "floatEmptyEmoVX": 110,
-  "floatEmptyEmoVY": 180,
-  "floatEmptyEmoX": 125,
-  "floatEmptyEmoY": 165,
+  "floatEmptyEmoVX": 21,
+  "floatEmptyEmoVY": 150,
+  "floatEmptyEmoX": 135,
+  "floatEmptyEmoY": 211,
   "floatBackX": 0,
   "floatBackY": 68,
   "floatFwdX": 30,
@@ -957,7 +976,7 @@ module.exports={
   "floatPostItX": 77,
   "floatPostItY": 30,
   "floatPostItVX": 5,
-  "floatPostItVY": 80,
+  "floatPostItVY": 50,
   "floatPostItVRX": 130,
   "floatPostItVRY": 178,
   "floatEditOutlineVRW": 140,
@@ -966,14 +985,14 @@ module.exports={
   "floatEditOutlineVRY": 0,
   "floatEditIconVRX": 10,
   "floatEditIconVRY": 195,
-  "floatEditEmoVRX": 10,
-  "floatEditEmoVRY": 340,
+  "floatEditEmoVRX": 110,
+  "floatEditEmoVRY": 342,
   "floatEditDescVRX": 10,
-  "floatEditDescVRY": 220,
+  "floatEditDescVRY": 225,
   "floatEmptyIconVRX": 10,
   "floatEmptyIconVRY": 105,
-  "floatEmptyEmoVRX": 10,
-  "floatEmptyEmoVRY": 280,
+  "floatEmptyEmoVRX": 120,
+  "floatEmptyEmoVRY": 252,
   "floatBackVRX": 135,
   "floatBackVRY": 100,
   "floatFwdVRX": 165,
@@ -987,9 +1006,9 @@ module.exports={
   "floatMoveMenuX": 175,
   "floatMoveMenuY": 70,
   "floatMoveMenuVX": 25,
-  "floatMoveMenuVY": 215,
+  "floatMoveMenuVY": 5,
   "floatMoveMenuVRX": 133,
-  "floatMoveMenuVRY": 312
+  "floatMoveMenuVRY": 95
 }
 
 },{}],7:[function(require,module,exports){
@@ -1061,6 +1080,11 @@ function initialiseEventHandlers () {
   attachEvent('#card_colour_select', 'change', function (e) {
     e.preventDefault();
     UI.changeCardColour();
+  });
+
+  attachEvent('#emoticon_colour_select', 'change', function (e) {
+    e.preventDefault();
+    UI.changeEmoticonColour();
   });
 
   attachEvent('#printform', 'submit', function (e) {
@@ -1623,13 +1647,13 @@ module.exports = "\r\n<p class=\"footer-copy\">\r\n  <a href=\"https://iet-ou.gi
 module.exports = "\r\n<svg x=\"270\" y=\"0\" id='head_background'>\r\n  <image xlink:href='{assets}/background/head-background.png' role='presentation' x='0' y='0' height=\"315\" width=\"952\" id='headBackgroundImage'/>\r\n</svg>\r\n\r\n<svg x=\"120\" y=\"20\" id='start_point'>\r\n  <rect aria-labelledby=\"start-card\" width=\"130\" height=\"240\" y=\"20\" x=\"0\" stroke=\"black\" fill=\"crimson\" stroke-width=\"1\" id='start_place' fill-opacity=\"1.0\" role='presentation'/>\r\n  <image xlink:href='{assets}/start-here-trans.png' x=\"7\" y=\"60\" height=\"156\" width=\"115\" id='startIcon' role='presentation'/>\r\n</svg>\r\n<svg x='0' y='0' id='scol_start_point' visibility='collapse'>\r\n  <rect aria-labelledby=\"start-card\" width=\"240\" height=\"170\" y=\"0\" x=\"0\" stroke=\"black\" fill=\"crimson\" stroke-width=\"1\" id='start_place' fill-opacity=\"1.0\" role='presentation'/>\r\n  <image xlink:href='{assets}/start-here-trans.png' x=\"65\" y=\"5\" height=\"156\" width=\"115\" id='startIcon' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"390\" y=\"565\" id='journey_logo'>\r\n  <image xlink:href='{assets}/background/journey-logo.png' x='0' y='0' height=\"140\" width=\"442\" id='journeyLogoImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"320\" y=\"930\" id='pencil_background'>\r\n  <image xlink:href='{assets}/background/pencil.png' x='0' y='0' height=\"97\" width=\"161\" id='pencilImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"1010\" y=\"920\" id='plant_background'>\r\n  <image xlink:href='{assets}/background/plant.png' x='0' y='0' height=\"134\" width=\"137\" id='plantImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"100\" y=\"1260\" id='calc_background'>\r\n  <image xlink:href='{assets}/background/calculator.png' x='0' y='0' height=\"145\" width=\"141\" id='calcImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"50\" y=\"580\" id='biscuits_background'>\r\n  <image xlink:href='{assets}/background/biscuits.png' x='0' y='0' height=\"144\" width=\"139\" id='biscuitsImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"770\" y=\"1280\" id='glasses_background'>\r\n  <image xlink:href='{assets}/background/glasses.png' x='0' y='0' height=\"90\" width=\"141\" id='glassesImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"950\" y=\"1600\" id='folder_background'>\r\n  <image xlink:href='{assets}/background/folder.png' x='0' y='0' height=\"202\" width=\"209\" id='folderImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"300\" y=\"1610\" id='coffee_background'>\r\n  <image xlink:href='{assets}/background/coffee.png' x='0' y='0' height=\"110\" width=\"115\" id='coffeeImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"610\" y=\"1630\" id='pens_background'>\r\n  <image xlink:href='{assets}/background/pens.png' x='0' y='0' height=\"122\" width=\"197\" id='pensImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"130\" y=\"1970\" id='graph_background'>\r\n  <image xlink:href='{assets}/background/graph.png' x='0' y='0' height=\"191\" width=\"247\" id='graphImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"750\" y=\"1970\" id='jammie_background'>\r\n  <image xlink:href='{assets}/background/jammie.png' x='0' y='0' height=\"124\" width=\"134\" id='jammieImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"990\" y=\"3780\" id='pencil_background_2'>\r\n  <image xlink:href='{assets}/background/pencil.png' x='0' y='0' height=\"97\" width=\"161\" id='pencilImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"700\" y=\"2315\" id='biscuits_background_2'>\r\n  <image xlink:href='{assets}/background/biscuits.png' x='0' y='0' height=\"144\" width=\"139\" id='biscuitsImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"440\" y=\"2315\" id='plant_background_2'>\r\n  <image xlink:href='{assets}/background/plant.png' x='0' y='0' height=\"134\" width=\"137\" id='plantImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"900\" y=\"4450\" id='tablet_background'>\r\n  <image xlink:href='{assets}/background/tablet.png' x='0' y='0' height=\"206\" width=\"292\" id='tabletImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"700\" y=\"2670\" id='calc_background_2'>\r\n  <image xlink:href='{assets}/background/calculator.png' x='0' y='0' height=\"145\" width=\"141\" id='calcImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"30\" y=\"2660\" id='tablet_background_2'>\r\n  <image xlink:href='{assets}/background/tablet.png' x='0' y='0' height=\"206\" width=\"292\" id='tabletImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"1030\" y=\"3080\" id='glasses_background_2'>\r\n  <image xlink:href='{assets}/background/glasses.png' x='0' y='0' height=\"90\" width=\"141\" id='glassesImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"270\" y=\"3030\" id='coffee_background_2'>\r\n  <image xlink:href='{assets}/background/coffee.png' x='0' y='0' height=\"110\" width=\"115\" id='coffeeImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"640\" y=\"3390\" id='pens_background_2'>\r\n  <image xlink:href='{assets}/background/pens.png' x='0' y='0' height=\"122\" width=\"197\" id='pensImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"100\" y=\"3380\" id='folder_background_2'>\r\n  <image xlink:href='{assets}/background/folder.png' x='0' y='0' height=\"202\" width=\"209\" id='folderImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"20\" y=\"4080\" id='graph_background_2'>\r\n  <image xlink:href='{assets}/background/graph.png' x='0' y='0' height=\"191\" width=\"247\" id='graphImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"985\" y=\"4920\" id='jammie_background_2'>\r\n  <image xlink:href='{assets}/background/jammie.png' x='0' y='0' height=\"124\" width=\"134\" id='jammieImage' role='presentation'/>\r\n</svg>\r\n\r\n<svg x=\"800\" y=\"4100\" id='coffee_background_3'>\r\n  <image xlink:href='{assets}/background/coffee.png' x='0' y='0' height=\"110\" width=\"115\" id='coffeeImage' role='presentation'/>\r\n</svg>\r\n\r\n<rect width=\"1240\" height=\"1600\" fill-opacity=\"0.0\" stroke-opacity=\"0.0\" id=\"journey-background\" role=\"presentation\"/>\r\n";
 
 },{}],13:[function(require,module,exports){
-module.exports = "\r\n<svg x=\"{x}\" y=\"{y}\" id=\"group{j}\" role=\"listitem\" class=\"card orient-{orient}\" tabindex=\"0\">\r\n  <rect width=\"{w}\" height=\"{h}\" id=\"place{j}\"/>\r\n  <image href=\"\" id=\"icon{j}\"/>\r\n  <switch>\r\n    <foreignObject id=\"description{j}\" class=\"in_card\" width=\"110\" height=\"200\">\r\n      <p xmlns=\"http://www.w3.org/1999/xhtml\">not filled</p>\r\n    </foreignObject>\r\n    <text id=\"description{j}\" class=\"in_card\">not filled</text>\r\n  </switch>\r\n\r\n  <image href=\"\" id=\"emoticon{j}\"/>\r\n\r\n  <image id=\"postit{j}\" href=\"{assets}/PostIt.png\" width=\"100\" height=\"100\" visibility=\"collapse\" role=\"presentation\"></image>\r\n  <switch>\r\n    <foreignObject id=\"postittext{j}\" class=\"in_postit\" width=\"85\" height=\"85\" visibility=\"collapse\">\r\n      <p xmlns=\"http://www.w3.org/1999/xhtml\">not filled</p>\r\n    </foreignObject>\r\n    <text id=\"postittext{j}\" class=\"in_card\">not filled</text>\r\n  </switch>\r\n</svg>\r\n";
+module.exports = "\r\n<svg x=\"{x}\" y=\"{y}\" id=\"group{j}\" role=\"listitem\" class=\"card orient-{orient}\" tabindex=\"0\">\r\n  <rect width=\"{w}\" height=\"{h}\" id=\"place{j}\"/>\r\n  <image href=\"\" id=\"icon{j}\"/>\r\n  <switch>\r\n    <foreignObject id=\"description{j}\" class=\"in_card\" width=\"115\" height=\"380\">\r\n      <p xmlns=\"http://www.w3.org/1999/xhtml\">not filled</p>\r\n    </foreignObject>\r\n    <text id=\"description{j}\" class=\"in_card\">not filled</text>\r\n  </switch>\r\n  <circle r=\"43\" id=\"emoticonback{j}\" visibility=\"collapse\" role=\"presentation\" fill=\"Ivory\" stroke=\"gray\"/>\r\n  <image href=\"\" id=\"emoticon{j}\"/>\r\n\r\n  <image id=\"postit{j}\" href=\"{assets}/PostIt.png\" width=\"100\" height=\"100\" visibility=\"collapse\" role=\"presentation\"></image>\r\n  <switch>\r\n    <foreignObject id=\"postittext{j}\" class=\"in_postit\" width=\"85\" height=\"85\" visibility=\"collapse\">\r\n      <p xmlns=\"http://www.w3.org/1999/xhtml\">not filled</p>\r\n    </foreignObject>\r\n    <text id=\"postittext{j}\" class=\"in_card\">not filled</text>\r\n  </switch>\r\n</svg>\r\n";
 
 },{}],14:[function(require,module,exports){
-module.exports = "\r\n<div class=\"editorbar\" id=\"editorbar\">\r\n  <div class=\"formeditor\" id=\"formeditor\">\r\n\r\n    <h1 id=\"title\">Journey editor: Map your study journey on to the cards</h1>\r\n\r\n    <form id=\"updateform\">\r\n      <select id=\"icon_select\" aria-labelledby=\"What happened?\">\r\n        <option value=\"considerstudy\">Considering study</option>\r\n        <option value=\"information\">Finding information</option>\r\n        <option value=\"register\">Registering</option>\r\n        <option value=\"finances\">Finances</option>\r\n        <option value=\"peersupport\">Peer support</option>\r\n        <option value=\"none\">What happened?</option>\r\n        <option value=\"achievement\">Achievement</option>\r\n        <option value=\"admin\">Admin and forms</option>\r\n        <option value=\"assessment\">Assessment</option>\r\n        <option value=\"studybreak\">Break from study</option>\r\n        <option value=\"barrier\">Barrier</option>\r\n        <option value=\"communication\">Communication</option>\r\n        <option value=\"confidence\">Confidence boost</option>\r\n        <option value=\"duedates\">Due dates</option>\r\n        <option value=\"employment\">Jobs and Employment</option>\r\n        <option value=\"studygoal\">Goal</option>\r\n        <option value=\"helpneeded\">Help needed</option>\r\n        <option value=\"highpressure\">High pressure</option>\r\n        <option value=\"lostdirection\">Lost direction</option>\r\n        <option value=\"lowenergy\">Low energy</option>\r\n        <option value=\"lowscores\">Low scores</option>\r\n        <option value=\"moving\">Moving home</option>\r\n        <option value=\"studymilestone\">Milestone</option>\r\n        <option value=\"nosupport\">No support</option>\r\n        <option value=\"problem\">Problem</option>\r\n        <option value=\"repetition\">Repetition</option>\r\n        <option value=\"studyexperience\">Study experience</option>\r\n        <option value=\"studysuccess\">Study success</option>\r\n        <option value=\"studysupport\">Study support</option>\r\n        <option value=\"timelost\">Time Lost</option>\r\n      </select>\r\n\r\n      <label for=\"event_desc\">Describe it:</label>\r\n      <textarea rows=3 maxlength=45 cols=12 id=\"event_desc\" value=\"\"></textarea>\r\n\r\n      <select id=\"emoticon_select\" aria-labelledby=\"How did you feel?\">\r\n        <option value=\"none\">How did you feel?</option>\r\n        <option value=\"angry\">Angry</option>\r\n        <option value=\"anxious\">Anxious</option>\r\n        <option value=\"bored\">Bored</option>\r\n        <option value=\"confident\">Confident</option>\r\n        <option value=\"confused\">Confused</option>\r\n        <option value=\"curious\">Curious</option>\r\n        <option value=\"embarrassed\">Embarrassed</option>\r\n        <option value=\"excited\">Excited</option>\r\n        <option value=\"happy\">Happy</option>\r\n        <option value=\"nervous\">Nervous</option>\r\n        <option value=\"proud\">Proud</option>\r\n        <option value=\"scared\">Scared</option>\r\n        <option value=\"stressed\">Bored</option>\r\n        <option value=\"thinking\">Thinking</option>\r\n        <option value=\"tired\">Tired</option>\r\n        <option value=\"unhappy\">Unhappy</option>\r\n        <option value=\"unwell\">Unwell</option>\r\n        <option value=\"upset\">Upset</option>\r\n      </select>\r\n\r\n      <label for=\"post_it_text\">Optional note:</label>\r\n      <textarea rows=3 maxlength=44 cols=12 id=\"post_it_text\" value=\"\"></textarea>\r\n      <input type='submit' aria-label=\"Update element\" value=\"Update\" id=\"updateButton\">\r\n    </form>\r\n\r\n    <form id=\"deleteform\">\r\n      <input type='submit' aria-label=\"Delete element\" value=\"Clear\" id=\"deleteButton\">\r\n    </form>\r\n\r\n    <form id=\"backform\">\r\n      <input type='submit' aria-label=\"Move element backwards\" value=\"Move Back\" id=\"backButton\">\r\n    </form>\r\n    <form id=\"forwardform\">\r\n      <input type='submit' aria-label=\"Move element forwards\" value=\"Move Fwd\" id=\"fwdButton\">\r\n    </form>\r\n    <form id=\"optionsform\">\r\n      <input type='submit' aria-label=\"Show or hide other menu options\" value=\"Options\" id=\"optionsButton\">\r\n    </form>\r\n    <a href=\"{helpUrl}\" target=\"_blank\">Help</a>\r\n  </div>\r\n\r\n  <div id=\"float_bar\" class=\"float_bar\">\r\n    <form id=\"float_simplesaveform\">\r\n      <input type='submit' aria-label=\"Save journey to file\" value=\"Save\" id=\"float_simplesavebutton\">\r\n    </form>\r\n    <form id=\"float_optionsform\">\r\n      <input type='submit' aria-label=\"Show or hide menu options\" value=\"Options\" id=\"float_optionsButton\">\r\n    </form>\r\n\r\n    <a class=\"help_link\" id=\"help_link\" href=\"{helpUrl}\" target=\"_blank\">Help</a>\r\n  </div>\r\n\r\n  <div class=\"optionsbar\" id=\"options\" aria-label=\"Menu\">\r\n    <h2>Options</h2>\r\n    <h2>File:</h2>\r\n    <h3>Save As:</h3>\r\n    <form id=\"saveform\" aria-label=\"Save journey to file name\">\r\n      <label for=\"filenamearea\">Choose a filename:</label>\r\n      <input type='text' value=\"journey-file\" id=\"filenamearea\">\r\n      <input type='submit' value=\"Save\" id=\"saveButton\" >\r\n    </form>\r\n\r\n    <br>\r\n    <form id=\"loadform\" aria-label=\"Load journey from file\" hidden>\r\n      <h3 hidden><label for=\"fileinput\">Load:</label></h3>\r\n      <input type='file' accept='application/json, text/html' id='fileinput' required aria-required=\"true\" hidden>\r\n      <input type='submit' id=\"loadButton\" value=\"Load File\" hidden>\r\n    </form>\r\n    <h3>Load:</h3>\r\n    You can load your saved journey by opening the file in a browser. Opening the saved file (for example by double clicking on it) should load it in your default browser.\r\n    \r\n    <br>\r\n    <h3>Print:</h3>\r\n    <form id=\"printform\">\r\n      <input type='submit' aria-label=\"Print using browser\" value=\"Print using browser\" id=\"printButton\">\r\n    </form>\r\n    <hr>\r\n    <h2>View:</h2>\r\n\r\n    <form id=\"backgroundform\" aria-label=\"Choose background colour\">\r\n      <label for=\"background_select\">Background Colour:</label>\r\n      <select id=\"background_select\">\r\n        <option value=\"none\">None</option>\r\n        <option value=\"Ivory\">Ivory</option>\r\n        <option value=\"Linen\">Linen</option>\r\n        <option value=\"Beige\">Beige</option>\r\n        <option value=\"Wheat\">Wheat</option>\r\n        <option value=\"BurlyWood\">Wood</option>\r\n        <option value=\"DarkSeaGreen\">Green</option>\r\n        <option value=\"PaleTurquoise\">Turquoise</option>\r\n        <option value=\"SkyBlue\">Blue</option>\r\n        <option value=\"LightPink\">Pink</option>\r\n        <option value=\"Lavender\">Lavender</option>\r\n        <option value=\"LightGray\">Grey</option>\r\n        <option value=\"Coral\">Orange</option>\r\n      </select>\r\n    </form>\r\n\r\n    <br>\r\n\r\n    <form id=\"backgroundelementsform\" aria-label=\"Show or hide background images\">\r\n      <label for=\"background_elements_select\">Background Images:</label>\r\n      <select id=\"background_elements_select\">\r\n        <option value=\"all\">All images</option>\r\n        <option value=\"some\">Some images</option>\r\n        <option value=\"none\">No images</option>\r\n      </select>\r\n    </form>\r\n\r\n    <br>\r\n\r\n    <form id=\"cardcolourform\" aria-label=\"Choose card colour\">\r\n      <label for=\"card_colour_select\">Card Colour:</label>\r\n      <select id=\"card_colour_select\">\r\n        <option value=\"none\">None</option>\r\n        <option value=\"Ivory\">Ivory</option>\r\n        <option value=\"Linen\">Linen</option>\r\n        <option value=\"Beige\">Beige</option>\r\n        <option value=\"Wheat\">Wheat</option>\r\n        <option value=\"BurlyWood\">Wood</option>\r\n        <option value=\"DarkSeaGreen\">Green</option>\r\n        <option value=\"PaleTurquoise\">Turquoise</option>\r\n        <option value=\"SkyBlue\">Blue</option>\r\n        <option value=\"LightPink\">Pink</option>\r\n        <option value=\"Lavender\">Lavender</option>\r\n        <option value=\"LightGray\">Grey</option>\r\n        <option value=\"Coral\">Orange</option>\r\n      </select>\r\n    </form>\r\n\r\n    <br>\r\n    <hr>\r\n    <h2>Share:</h2>\r\n    <p>\r\n      <a id=\"oj-share-link\" class=\"oj-share-link\" href=\"?empty\" rel=\"nofollow\" title=\"Base64 encoded!\">Go to shareable URL</a>\r\n    </p>\r\n  </div>\r\n</div>\r\n";
+module.exports = "\r\n<div class=\"editorbar\" id=\"editorbar\">\r\n  <div class=\"formeditor\" id=\"formeditor\">\r\n\r\n    <h1 id=\"title\">Journey editor: Map your study journey on to the cards</h1>\r\n\r\n    <form id=\"updateform\">\r\n      <select id=\"icon_select\" aria-labelledby=\"What happened?\">\r\n        <option value=\"considerstudy\">Considering study</option>\r\n        <option value=\"information\">Finding information</option>\r\n        <option value=\"register\">Registering</option>\r\n        <option value=\"finances\">Finances</option>\r\n        <option value=\"peersupport\">Peer support</option>\r\n        <option value=\"none\">What happened?</option>\r\n        <option value=\"achievement\">Achievement</option>\r\n        <option value=\"admin\">Admin and forms</option>\r\n        <option value=\"assessment\">Assessment</option>\r\n        <option value=\"studybreak\">Break from study</option>\r\n        <option value=\"barrier\">Barrier</option>\r\n        <option value=\"communication\">Communication</option>\r\n        <option value=\"confidence\">Confidence boost</option>\r\n        <option value=\"duedates\">Due dates</option>\r\n        <option value=\"employment\">Jobs and Employment</option>\r\n        <option value=\"studygoal\">Goal</option>\r\n        <option value=\"helpneeded\">Help needed</option>\r\n        <option value=\"highpressure\">High pressure</option>\r\n        <option value=\"lostdirection\">Lost direction</option>\r\n        <option value=\"lowenergy\">Low energy</option>\r\n        <option value=\"lowscores\">Low scores</option>\r\n        <option value=\"moving\">Moving home</option>\r\n        <option value=\"studymilestone\">Milestone</option>\r\n        <option value=\"nosupport\">No support</option>\r\n        <option value=\"problem\">Problem</option>\r\n        <option value=\"repetition\">Repetition</option>\r\n        <option value=\"studyexperience\">Study experience</option>\r\n        <option value=\"studysuccess\">Study success</option>\r\n        <option value=\"studysupport\">Study support</option>\r\n        <option value=\"timelost\">Time Lost</option>\r\n      </select>\r\n\r\n      <label for=\"event_desc\">Describe it:</label>\r\n      <textarea rows=3 maxlength=45 cols=12 id=\"event_desc\" value=\"\"></textarea>\r\n\r\n      <select id=\"emoticon_select\" aria-labelledby=\"How did you feel?\">\r\n        <option value=\"none\">How did you feel?</option>\r\n        <option value=\"angry\">Angry</option>\r\n        <option value=\"anxious\">Anxious</option>\r\n        <option value=\"bored\">Bored</option>\r\n        <option value=\"confident\">Confident</option>\r\n        <option value=\"confused\">Confused</option>\r\n        <option value=\"curious\">Curious</option>\r\n        <option value=\"embarrassed\">Embarrassed</option>\r\n        <option value=\"excited\">Excited</option>\r\n        <option value=\"happy\">Happy</option>\r\n        <option value=\"nervous\">Nervous</option>\r\n        <option value=\"proud\">Proud</option>\r\n        <option value=\"scared\">Scared</option>\r\n        <option value=\"stressed\">Bored</option>\r\n        <option value=\"thinking\">Thinking</option>\r\n        <option value=\"tired\">Tired</option>\r\n        <option value=\"unhappy\">Unhappy</option>\r\n        <option value=\"unwell\">Unwell</option>\r\n        <option value=\"upset\">Upset</option>\r\n      </select>\r\n\r\n      <label for=\"post_it_text\">Optional note:</label>\r\n      <textarea rows=3 maxlength=44 cols=12 id=\"post_it_text\" value=\"\"></textarea>\r\n      <input type='submit' aria-label=\"Update element\" value=\"Update\" id=\"updateButton\">\r\n    </form>\r\n\r\n    <form id=\"deleteform\">\r\n      <input type='submit' aria-label=\"Delete element\" value=\"Clear\" id=\"deleteButton\">\r\n    </form>\r\n\r\n    <form id=\"backform\">\r\n      <input type='submit' aria-label=\"Move element backwards\" value=\"Move Back\" id=\"backButton\">\r\n    </form>\r\n    <form id=\"forwardform\">\r\n      <input type='submit' aria-label=\"Move element forwards\" value=\"Move Fwd\" id=\"fwdButton\">\r\n    </form>\r\n    <form id=\"optionsform\">\r\n      <input type='submit' aria-label=\"Show or hide other menu options\" value=\"Options\" id=\"optionsButton\">\r\n    </form>\r\n    <a href=\"{helpUrl}\" target=\"_blank\">Help</a>\r\n  </div>\r\n\r\n  <div id=\"float_bar\" class=\"float_bar\">\r\n    <form id=\"float_simplesaveform\">\r\n      <input type='submit' aria-label=\"Save journey to file\" value=\"Save\" id=\"float_simplesavebutton\">\r\n    </form>\r\n    <form id=\"float_optionsform\">\r\n      <input type='submit' aria-label=\"Show or hide menu options\" value=\"Options\" id=\"float_optionsButton\">\r\n    </form>\r\n\r\n    <a class=\"help_link\" id=\"help_link\" href=\"{helpUrl}\" target=\"_blank\">Help</a>\r\n  </div>\r\n\r\n  <div class=\"optionsbar\" id=\"options\" aria-label=\"Menu\">\r\n    <h2>Options</h2>\r\n    <h2>File:</h2>\r\n    <h3>Save As:</h3>\r\n    <form id=\"saveform\" aria-label=\"Save journey to file name\">\r\n      <label for=\"filenamearea\">Choose a filename:</label>\r\n      <input type='text' value=\"journey-file\" id=\"filenamearea\">\r\n      <input type='submit' value=\"Save\" id=\"saveButton\" >\r\n    </form>\r\n\r\n    <br>\r\n    <form id=\"loadform\" aria-label=\"Load journey from file\" hidden>\r\n      <h3 hidden><label for=\"fileinput\">Load:</label></h3>\r\n      <input type='file' accept='application/json, text/html' id='fileinput' required aria-required=\"true\" hidden>\r\n      <input type='submit' id=\"loadButton\" value=\"Load File\" hidden>\r\n    </form>\r\n    <h3>Load:</h3>\r\n    You can load your saved journey by opening the file in a browser. Opening the saved file (for example by double clicking on it) should load it in your default browser.\r\n    \r\n    <br>\r\n    <h3>Print:</h3>\r\n    <form id=\"printform\">\r\n      <input type='submit' aria-label=\"Print using browser\" value=\"Print using browser\" id=\"printButton\">\r\n    </form>\r\n    <hr>\r\n    <h2>View:</h2>\r\n\r\n    <form id=\"backgroundelementsform\" aria-label=\"Show or hide background images\">\r\n      <label for=\"background_elements_select\">Show Background Images:</label>\r\n      <select id=\"background_elements_select\">\r\n        <option value=\"all\" selected=\"selected\">All images</option>\r\n        <option value=\"some\">Some images</option>\r\n        <option value=\"none\">No images</option>\r\n      </select>\r\n    </form>\r\n\r\n    <br>\r\n\r\n    <form id=\"backgroundform\" aria-label=\"Choose background colour\">\r\n      <label for=\"background_select\">Background Colour:</label>\r\n      <select id=\"background_select\">\r\n        <option value=\"none\">None</option>\r\n        <option value=\"Wheat\" selected=\"selected\">Wheat</option>\r\n        <option value=\"Ivory\">Ivory</option>\r\n        <option value=\"Linen\">Linen</option>\r\n        <option value=\"Beige\">Beige</option>\r\n        <option value=\"BurlyWood\">Wood</option>\r\n        <option value=\"DarkSeaGreen\">Green</option>\r\n        <option value=\"PaleTurquoise\">Turquoise</option>\r\n        <option value=\"SkyBlue\">Blue</option>\r\n        <option value=\"LightPink\">Pink</option>\r\n        <option value=\"Lavender\">Lavender</option>\r\n        <option value=\"LightGray\">Grey</option>\r\n        <option value=\"Coral\">Orange</option>\r\n      </select>\r\n    </form>\r\n\r\n    <br>\r\n\r\n    <form id=\"cardcolourform\" aria-label=\"Choose card colour\">\r\n      <label for=\"card_colour_select\">Card Colour:</label>\r\n      <select id=\"card_colour_select\">\r\n        <option value=\"none\">None</option>\r\n        <option value=\"White\">White</option>\r\n        <option value=\"Ivory\" selected=\"selected\">Ivory</option>\r\n        <option value=\"Linen\">Linen</option>\r\n        <option value=\"Beige\">Beige</option>\r\n        <option value=\"Wheat\">Wheat</option>\r\n        <option value=\"BurlyWood\">Wood</option>\r\n        <option value=\"DarkSeaGreen\">Green</option>\r\n        <option value=\"PaleTurquoise\">Turquoise</option>\r\n        <option value=\"SkyBlue\">Blue</option>\r\n        <option value=\"LightPink\">Pink</option>\r\n        <option value=\"Lavender\">Lavender</option>\r\n        <option value=\"LightGray\">Grey</option>\r\n        <option value=\"Coral\">Orange</option>\r\n      </select>\r\n    </form>\r\n\r\n    <br>\r\n\r\n    <form id=\"emoticoncolourform\" aria-label=\"Choose emoticon background colour\">\r\n      <label for=\"emoticon_colour_select\">Emoticon Colour:</label>\r\n      <select id=\"emoticon_colour_select\" selected=\"White\">\r\n        <option value=\"none\">None</option>\r\n        <option value=\"White\" selected=\"selected\">White</option>\r\n        <option value=\"Ivory\">Ivory</option>\r\n        <option value=\"Linen\">Linen</option>\r\n        <option value=\"Beige\">Beige</option>\r\n        <option value=\"Wheat\">Wheat</option>\r\n        <option value=\"BurlyWood\">Wood</option>\r\n        <option value=\"DarkSeaGreen\">Green</option>\r\n        <option value=\"PaleTurquoise\">Turquoise</option>\r\n        <option value=\"SkyBlue\">Blue</option>\r\n        <option value=\"LightPink\">Pink</option>\r\n        <option value=\"Lavender\">Lavender</option>\r\n        <option value=\"LightGray\">Grey</option>\r\n        <option value=\"Coral\">Orange</option>\r\n        <option value=\"Black\">Black</option>\r\n      </select>\r\n    </form>\r\n\r\n    <br>\r\n    <hr>\r\n    <h2>Share:</h2>\r\n    <p>\r\n      <a id=\"oj-share-link\" class=\"oj-share-link\" href=\"?empty\" rel=\"nofollow\" title=\"Base64 encoded!\">Go to shareable URL</a>\r\n    </p>\r\n  </div>\r\n</div>\r\n";
 
 },{}],15:[function(require,module,exports){
-module.exports = "\r\n<svg id=\"floating_editor\" x=\"0\" y=\"0\" width=\"370\" height=\"370\" visibility=\"collapse\">\r\n  <rect id=\"floating_editor_outline\" width=\"240\" height=\"130\" stroke=\"black\" stroke-width=\"0\" fill-opacity=\"0.0\" fill=\"Ivory\"/>\r\n\r\n  <svg id=\"empty_icon\" x=\"10\" y=\"110\">\r\n    <rect id=\"empty_icon_rect\" width=\"110\" height=\"110\"  stroke=\"LightGray\" fill=\"LightGray\"/>\r\n    <foreignObject id=\"empty_icon_text\" width=\"100\" height=\"75\" x=\"5\" y=\"10\">\r\n      <p>1. What happened?</p>\r\n    </foreignObject>\r\n  </svg>\r\n\r\n  <foreignObject id=\"floating_icon\" y=85 x=5 width=\"110\" height=\"30\">\r\n    <form>\r\n    <select class=\"floating_icon_select\" id=\"floating_icon_select\" width=\"110\" aria-label=\"Select an event\" tabindex=\"0\">\r\n      <option value=\"none\">Select</option>\r\n\r\n      <optgroup label=\"Figuring things out\">\r\n        <option value=\"considerstudy\">Considering study</option>\r\n        <option value=\"information\">Finding information</option>\r\n        <option value=\"register\">Registering</option>\r\n        <option value=\"admin\">Admin and forms</option>\r\n        <option value=\"communication\">Communication</option>\r\n        <option value=\"studygoal\">Study goal</option>\r\n      </optgroup>\r\n      <optgroup label=\"Study\">\r\n        <option value=\"assessment\">Assessment</option>\r\n        <option value=\"duedates\">Due dates</option>\r\n        <option value=\"lowscores\">Low scores</option>\r\n        <option value=\"studymilestone\">Milestone</option>\r\n        <option value=\"studyexperience\">Study experience</option>\r\n        <option value=\"studysupport\">Study support</option>\r\n      </optgroup>\r\n      <optgroup label=\"Positives\">\r\n        <option value=\"achievement\">Achievement</option>\r\n        <option value=\"confidence\">Confidence boost</option>\r\n        <option value=\"peersupport\">Peer support</option>\r\n        <option value=\"studysuccess\">Study success</option>\r\n      </optgroup>\r\n      <optgroup label=\"Challenges\">\r\n        <option value=\"barrier\">Barrier</option>\r\n        <option value=\"helpneeded\">Help needed</option>\r\n        <option value=\"highpressure\">High pressure</option>\r\n        <option value=\"lostdirection\">Lost direction</option>\r\n        <option value=\"nosupport\">No support</option>\r\n        <option value=\"problem\">Problem</option>\r\n        <option value=\"timelost\">Time lost</option>\r\n      </optgroup>\r\n      <optgroup label=\"Life\">\r\n        <option value=\"studybreak\">Break from study</option>\r\n        <option value=\"finances\">Finances</option>\r\n        <option value=\"employment\">Jobs and employment</option>\r\n        <option value=\"lowenergy\">Low energy</option>\r\n        <option value=\"moving\">Moving home</option>\r\n        <option value=\"repetition\">Repetition</option>\r\n      </optgroup>\r\n\r\n    </select>\r\n    </form>\r\n  </foreignObject>\r\n\r\n  <foreignObject x=125 y=10 id=\"floating_desc\" width=\"110\" height=\"80\">\r\n    <textarea id=\"floating_event_desc\" rows=3 cols=12 tabindex=\"0\" maxlength=40 placeholder=\"2. Describe the event\"></textarea>\r\n  </foreignObject>\r\n\r\n  <svg id=\"empty_emoticon\" x=\"125\" y=\"150\">\r\n    <rect id=\"empty_emoticon_rect\" width=\"110\" height=\"75\" stroke=\"LightGray\" fill=\"LightGray\"/>\r\n    <foreignObject id=\"empty_emoticon_text\" width=\"100\" height=\"75\" x=\"5\" y=\"0\">\r\n      <p>3. How did you feel?</p>\r\n    </foreignObject>\r\n  </svg>\r\n\r\n  <foreignObject id=\"floating_emoticon\" y=140 x=12 width=\"110\" height=\"30\">\r\n    <form>\r\n      <select class=\"floating_emoticon_select\" id=\"floating_emoticon_select\" width=\"110\" aria-label=\"How did you feel?\" tabindex=\"0\">\r\n        <option value=\"none\">Select</option>\r\n        <option value=\"angry\">Angry</option>\r\n        <option value=\"anxious\">Anxious</option>\r\n        <option value=\"bored\">Bored</option>\r\n        <option value=\"confident\">Confident</option>\r\n        <option value=\"confused\">Confused</option>\r\n        <option value=\"curious\">Curious</option>\r\n        <option value=\"embarrassed\">Embarrassed</option>\r\n        <option value=\"excited\">Excited</option>\r\n        <option value=\"happy\">Happy</option>\r\n        <option value=\"nervous\">Nervous</option>\r\n        <option value=\"proud\">Proud</option>\r\n        <option value=\"scared\">Scared</option>\r\n        <option value=\"stressed\">Stressed</option>\r\n        <option value=\"thinking\">Thinking</option>\r\n        <option value=\"tired\">Tired</option>\r\n        <option value=\"unhappy\">Unhappy</option>\r\n        <option value=\"unwell\">Unwell</option>\r\n        <option value=\"upset\">Upset</option>\r\n      </select>\r\n    </form>\r\n  </foreignObject>\r\n\r\n  <foreignObject x='245' y='10' id=\"floating_post\" width='95' height='100'>\r\n    <textarea class=\"floating_post\" id=\"floating_post_it_text\" rows=3 cols=9 maxlength=36 placeholder=\"4. Add an optional note\"></textarea>\r\n  </foreignObject>\r\n\r\n  <foreignObject x='0' y='220' id=\"floating_move\" width='70' height='30'>\r\n    <form>\r\n      <select id=\"floating_move_menu\" class=\"floating_move_menu\" width=\"80\" tabindex=\"0\" aria-label=\"Move card menu\">\r\n        <option value=\"Move\">Move</option>\r\n        <option value=\"SwapBack\">Swap card backwards</option>\r\n        <option value=\"SwapFwd\">Swap card forwards</option>\r\n        <option value=\"AddNew\">Add new card next</option>\r\n      </select>\r\n    </form>\r\n  </foreignObject>\r\n</svg>\r\n";
+module.exports = "\r\n<svg id=\"floating_editor\" x=\"0\" y=\"0\" width=\"370\" height=\"370\" visibility=\"collapse\">\r\n  <rect id=\"floating_editor_outline\" width=\"240\" height=\"130\" stroke=\"black\" stroke-width=\"0\" fill-opacity=\"0.0\" fill=\"Ivory\"/>\r\n\r\n  <svg id=\"empty_icon\" x=\"10\" y=\"110\">\r\n    <rect id=\"empty_icon_rect\" width=\"110\" height=\"110\"  stroke=\"LightBlue\" fill=\"LightGray\"/>\r\n    <foreignObject id=\"empty_icon_text\" width=\"100\" height=\"75\" x=\"5\" y=\"10\">\r\n      <p>1. What happened?</p>\r\n    </foreignObject>\r\n  </svg>\r\n\r\n  <foreignObject id=\"floating_icon\" y=85 x=5 width=\"110\" height=\"30\">\r\n    <form>\r\n    <select class=\"floating_icon_select\" id=\"floating_icon_select\" width=\"110\" aria-label=\"Select an event\" tabindex=\"0\">\r\n      <option value=\"none\">Select</option>\r\n\r\n      <optgroup label=\"Figuring things out\">\r\n        <option value=\"considerstudy\">Considering study</option>\r\n        <option value=\"information\">Finding information</option>\r\n        <option value=\"register\">Registering</option>\r\n        <option value=\"admin\">Admin and forms</option>\r\n        <option value=\"communication\">Communication</option>\r\n        <option value=\"studygoal\">Study goal</option>\r\n      </optgroup>\r\n      <optgroup label=\"Study\">\r\n        <option value=\"assessment\">Assessment</option>\r\n        <option value=\"duedates\">Due dates</option>\r\n        <option value=\"lowscores\">Low scores</option>\r\n        <option value=\"studymilestone\">Milestone</option>\r\n        <option value=\"studyexperience\">Study experience</option>\r\n        <option value=\"studysupport\">Study support</option>\r\n      </optgroup>\r\n      <optgroup label=\"Positives\">\r\n        <option value=\"achievement\">Achievement</option>\r\n        <option value=\"confidence\">Confidence boost</option>\r\n        <option value=\"peersupport\">Peer support</option>\r\n        <option value=\"studysuccess\">Study success</option>\r\n      </optgroup>\r\n      <optgroup label=\"Challenges\">\r\n        <option value=\"barrier\">Barrier</option>\r\n        <option value=\"helpneeded\">Help needed</option>\r\n        <option value=\"highpressure\">High pressure</option>\r\n        <option value=\"lostdirection\">Lost direction</option>\r\n        <option value=\"nosupport\">No support</option>\r\n        <option value=\"problem\">Problem</option>\r\n        <option value=\"timelost\">Time lost</option>\r\n      </optgroup>\r\n      <optgroup label=\"Life\">\r\n        <option value=\"studybreak\">Break from study</option>\r\n        <option value=\"finances\">Finances</option>\r\n        <option value=\"employment\">Jobs and employment</option>\r\n        <option value=\"lowenergy\">Low energy</option>\r\n        <option value=\"moving\">Moving home</option>\r\n        <option value=\"repetition\">Repetition</option>\r\n      </optgroup>\r\n\r\n    </select>\r\n    </form>\r\n  </foreignObject>\r\n\r\n  <foreignObject x=125 y=10 id=\"floating_desc\" width=\"110\" height=\"150\">\r\n    <textarea id=\"floating_event_desc\" rows=6 cols=12 tabindex=\"0\" maxlength=80 placeholder=\"2. Describe the event\"></textarea>\r\n  </foreignObject>\r\n\r\n  <svg id=\"empty_emoticon\" x=\"110\" y=\"250\">\r\n    <circle id=\"empty_emoticon_rect\" r=\"42\" cx=\"45\" cy=\"45\" stroke=\"LightBlue\" fill=\"LightGray\"/>\r\n    <foreignObject id=\"empty_emoticon_text\" width=\"80\" height=\"75\" x=\"2\" y=\"30\">\r\n      <p>3. How did you feel?</p>\r\n    </foreignObject>\r\n  </svg>\r\n\r\n  <foreignObject id=\"floating_emoticon\" y=140 x=12 width=\"110\" height=\"30\">\r\n    <form>\r\n      <select class=\"floating_emoticon_select\" id=\"floating_emoticon_select\" width=\"110\" aria-label=\"How did you feel?\" tabindex=\"0\">\r\n        <option value=\"none\">Select</option>\r\n        <option value=\"angry\">Angry</option>\r\n        <option value=\"anxious\">Anxious</option>\r\n        <option value=\"bored\">Bored</option>\r\n        <option value=\"confident\">Confident</option>\r\n        <option value=\"confused\">Confused</option>\r\n        <option value=\"curious\">Curious</option>\r\n        <option value=\"embarrassed\">Embarrassed</option>\r\n        <option value=\"excited\">Excited</option>\r\n        <option value=\"happy\">Happy</option>\r\n        <option value=\"nervous\">Nervous</option>\r\n        <option value=\"proud\">Proud</option>\r\n        <option value=\"scared\">Scared</option>\r\n        <option value=\"stressed\">Stressed</option>\r\n        <option value=\"thinking\">Thinking</option>\r\n        <option value=\"tired\">Tired</option>\r\n        <option value=\"unhappy\">Unhappy</option>\r\n        <option value=\"unwell\">Unwell</option>\r\n        <option value=\"upset\">Upset</option>\r\n      </select>\r\n    </form>\r\n  </foreignObject>\r\n\r\n  <foreignObject x='245' y='10' id=\"floating_post\" width='95' height='100'>\r\n    <textarea class=\"floating_post\" id=\"floating_post_it_text\" rows=3 cols=9 maxlength=36 placeholder=\"4. Add an optional note\"></textarea>\r\n  </foreignObject>\r\n\r\n  <foreignObject x='0' y='220' id=\"floating_move\" width='70' height='30'>\r\n    <form>\r\n      <select id=\"floating_move_menu\" class=\"floating_move_menu\" width=\"80\" tabindex=\"0\" aria-label=\"Move card menu\">\r\n        <option value=\"Move\">Move</option>\r\n        <option value=\"SwapBack\">Swap card backwards</option>\r\n        <option value=\"SwapFwd\">Swap card forwards</option>\r\n        <option value=\"AddNew\">Add new card next</option>\r\n      </select>\r\n    </form>\r\n  </foreignObject>\r\n</svg>\r\n";
 
 },{}],16:[function(require,module,exports){
 /*!
@@ -1720,6 +1744,7 @@ module.exports = {
   changeBackground: changeBackground,
   changeBackgroundElements: changeBackgroundElements,
   changeCardColour: changeCardColour,
+  changeEmoticonColour: changeEmoticonColour,
   chooseEditor: chooseEditor,
   getEditor: getEditor,
   toggleFloatOptions: toggleFloatOptions,
@@ -1799,7 +1824,6 @@ function toggleOptions (tog) {
 function changeBackground (bg) {
   const ELEM = UTIL.config('wholePage') ? document.body : UTIL.container();
   const background = bg || UTIL.qs('#background_select').value;
-
   ELEM.style.background = background; // Was: document.body.style.background = background;
   UTIL.qs('#background_select').value = background;
 }
@@ -1832,6 +1856,11 @@ function changeBackgroundElements (c) {
 function changeCardColour () {
   var colour = document.getElementById('card_colour_select').value;
   CORE.setCardColour(colour);
+}
+
+function changeEmoticonColour () {
+  var colour = document.getElementById('emoticon_colour_select').value;
+  CORE.setEmoticonColour(colour);
 }
 
 function chooseEditor (newEdit) {

@@ -3,12 +3,12 @@
   <rect width="{w}" height="{h}" id="place{j}"/>
   <image href="" id="icon{j}"/>
   <switch>
-    <foreignObject id="description{j}" class="in_card" width="110" height="200">
+    <foreignObject id="description{j}" class="in_card" width="115" height="380">
       <p xmlns="http://www.w3.org/1999/xhtml">not filled</p>
     </foreignObject>
     <text id="description{j}" class="in_card">not filled</text>
   </switch>
-
+  <circle r="43" id="emoticonback{j}" visibility="collapse" role="presentation" fill="Ivory" stroke="gray"/>
   <image href="" id="emoticon{j}"/>
 
   <image id="postit{j}" href="{assets}/PostIt.png" width="100" height="100" visibility="collapse" role="presentation"></image>

@@ -122,14 +122,25 @@
     <hr>
     <h2>View:</h2>
 
+    <form id="backgroundelementsform" aria-label="Show or hide background images">
+      <label for="background_elements_select">Show Background Images:</label>
+      <select id="background_elements_select">
+        <option value="all" selected="selected">All images</option>
+        <option value="some">Some images</option>
+        <option value="none">No images</option>
+      </select>
+    </form>
+
+    <br>
+
     <form id="backgroundform" aria-label="Choose background colour">
       <label for="background_select">Background Colour:</label>
       <select id="background_select">
         <option value="none">None</option>
+        <option value="Wheat" selected="selected">Wheat</option>
         <option value="Ivory">Ivory</option>
         <option value="Linen">Linen</option>
         <option value="Beige">Beige</option>
-        <option value="Wheat">Wheat</option>
         <option value="BurlyWood">Wood</option>
         <option value="DarkSeaGreen">Green</option>
         <option value="PaleTurquoise">Turquoise</option>
@@ -138,17 +149,6 @@
         <option value="Lavender">Lavender</option>
         <option value="LightGray">Grey</option>
         <option value="Coral">Orange</option>
-      </select>
-    </form>
-
-    <br>
-
-    <form id="backgroundelementsform" aria-label="Show or hide background images">
-      <label for="background_elements_select">Background Images:</label>
-      <select id="background_elements_select">
-        <option value="all">All images</option>
-        <option value="some">Some images</option>
-        <option value="none">No images</option>
       </select>
     </form>
 
@@ -158,6 +158,29 @@
       <label for="card_colour_select">Card Colour:</label>
       <select id="card_colour_select">
         <option value="none">None</option>
+        <option value="White">White</option>
+        <option value="Ivory" selected="selected">Ivory</option>
+        <option value="Linen">Linen</option>
+        <option value="Beige">Beige</option>
+        <option value="Wheat">Wheat</option>
+        <option value="BurlyWood">Wood</option>
+        <option value="DarkSeaGreen">Green</option>
+        <option value="PaleTurquoise">Turquoise</option>
+        <option value="SkyBlue">Blue</option>
+        <option value="LightPink">Pink</option>
+        <option value="Lavender">Lavender</option>
+        <option value="LightGray">Grey</option>
+        <option value="Coral">Orange</option>
+      </select>
+    </form>
+
+    <br>
+
+    <form id="emoticoncolourform" aria-label="Choose emoticon background colour">
+      <label for="emoticon_colour_select">Emoticon Colour:</label>
+      <select id="emoticon_colour_select" selected="White">
+        <option value="none">None</option>
+        <option value="White" selected="selected">White</option>
         <option value="Ivory">Ivory</option>
         <option value="Linen">Linen</option>
         <option value="Beige">Beige</option>
@@ -170,6 +193,7 @@
         <option value="Lavender">Lavender</option>
         <option value="LightGray">Grey</option>
         <option value="Coral">Orange</option>
+        <option value="Black">Black</option>
       </select>
     </form>
 

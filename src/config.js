@@ -22,7 +22,7 @@ module.exports.DEFAULTS = {
   layout: UTIL.param(/[?&]layout=(scol|default)/, 'default'),
   // @prop {string} background  Set the background colour-name (Default: 'wheat')
   // @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/color_value}
-  background: UTIL.param(/[?&]bg=([a-z]+)/, 'wheat'),
+  background: UTIL.param(/[?&]bg=([a-z]+)/, 'Wheat'),
   // @prop {integer} zoom Set the zoom-level for embeds (50 ... 95)% (Default: 100).
   zoom: UTIL.param(/[?&]zoom=([5-9][05])/, 100),
   // @prop {boolean} wholePage  Does the our-journey tool occupy the whole page? (Default: true)
