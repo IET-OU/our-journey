@@ -1,7 +1,7 @@
 {
   "name": "our-journey",
   "description": "Our Journey interactive student journey creator. | © 2018 The Open University (IET-OU).",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "license": "GPL-3.0+",
   "main": "index.js",
   "browser": "dist/our-journey.js",

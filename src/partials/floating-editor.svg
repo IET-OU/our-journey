@@ -3,7 +3,7 @@
   <rect id="floating_editor_outline" width="240" height="130" stroke="black" stroke-width="0" fill-opacity="0.0" fill="Ivory"/>
 
   <svg id="empty_icon" x="10" y="110">
-    <rect id="empty_icon_rect" width="110" height="110"  stroke="LightBlue" fill="LightGray"/>
+    <rect id="empty_icon_rect" width="110" height="110" fill="LightGray"/>
     <foreignObject id="empty_icon_text" width="100" height="75" x="5" y="10">
       <p>1. What happened?</p>
     </foreignObject>
@@ -63,7 +63,7 @@
   </foreignObject>
 
   <svg id="empty_emoticon" x="110" y="250">
-    <circle id="empty_emoticon_rect" r="42" cx="45" cy="45" stroke="LightBlue" fill="LightGray"/>
+    <circle id="empty_emoticon_rect" r="42" cx="45" cy="45" fill="LightGray"/>
     <foreignObject id="empty_emoticon_text" width="80" height="75" x="2" y="30">
       <p>3. How did you feel?</p>
     </foreignObject>

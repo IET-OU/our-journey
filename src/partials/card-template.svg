@@ -8,7 +8,7 @@
     </foreignObject>
     <text id="description{j}" class="in_card">not filled</text>
   </switch>
-  <circle r="43" id="emoticonback{j}" visibility="collapse" role="presentation" fill="Ivory" stroke="gray"/>
+  <circle r="43" id="emoticonback{j}" visibility="collapse" role="presentation" fill="Ivory" stroke-width="2" stroke="gray"/>
   <image href="" id="emoticon{j}"/>
 
   <image id="postit{j}" href="{assets}/PostIt.png" width="100" height="100" visibility="collapse" role="presentation"></image>
