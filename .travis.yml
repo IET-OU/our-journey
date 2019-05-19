@@ -2,17 +2,14 @@
 
 language: node_js
 
-node_js:
-  - 9
+node_js: 11 # Was: 9
 
-cache:
-  directories:
-    - node_modules
+cache: npm
 
 git:
   depth: 8
 
-# install: npm install
+# install: npm ci
 
 before_script: npm run build
 
@@ -23,5 +20,7 @@ after_script:
   - ls -al dist/
   - ls -alh jsdoc/
   - git status
+  - npm audit
+  - npm outdated
 
 # End.

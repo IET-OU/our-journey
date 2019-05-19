@@ -130,9 +130,9 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 [gpl-orig]: https://gnu.org/licenses/gpl-3.0.txt
 
 [iet]: https://iet.open.ac.uk/
-[ou]: http://www.open.ac.uk/
+[ou]: https://www.open.ac.uk/
 [web]: https://iet-ou.github.io/our-journey/
-[gh]: https://github.com/IET-OU/learningdesign
+[gh]: https://github.com/IET-OU/our-journey
 [tim]: https://iet.open.ac.uk/profiles/tim.coughlan
 [kate]: http://www.open.ac.uk/people/kml322 "Kate Lister"
 [node]: https://nodejs.org/en/
