@@ -7,6 +7,15 @@
 
 ## [Latest][]
 
+ * Fix security vulnerabilities - update dev-dependencies;
+ * Add `Exemplar journey Kate.html` (_renamed_);
+
+## v[1.6.2][]
+
+ * _14 February 2019_;
+
+...
+
  * Embed demo video with _VTT_ captions on video page, #56;
 
 ## v[1.5.0][]
@@ -110,7 +119,8 @@ See [spreadsheet][gdoc].
 [1.4.2]: https://github.com/IET-OU/our-journey/releases/tag/1.4.2 "22 October (4a48769)"
 [1.4.7]:  https://github.com/IET-OU/our-journey/commit/97f197a37884408fb "25 October (97f197a)"
 [1.4.10]: https://github.com/IET-OU/our-journey/releases/tag/1.4.10 "25 October (6b32aee)"
-[1.5.0]: https://github.com/IET-OU/our-journey/commit/c280beeeb31f4486a#!-1.5.0 "30 November (c280bee)"
+[1.5.0]: https://github.com/IET-OU/our-journey/releases/tag/1.5.0 "30 November (3123fdb)"
+[1.6.2]: https://github.com/IET-OU/our-journey/commit/61fe7237df779733a "14 Feb 2019, 15:13 (61fe723)"
 
 [latest]: https://github.com/IET-OU/our-journey/commits "Currently unreleased commits"
 [changelog]: https://github.com/IET-OU/our-journey/blob/master/docs/CHANGELOG.md
