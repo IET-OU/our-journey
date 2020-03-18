@@ -17,7 +17,7 @@ before_script: npm run build
 
 after_script:
   - npx eslint src/
-  - ls -al dist/
+  - ls -alh dist/
   - ls -alh jsdoc/
   - git status
   - npm audit
