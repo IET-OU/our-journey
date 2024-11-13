@@ -125,7 +125,7 @@ See [spreadsheet][gdoc].
 [latest]: https://github.com/IET-OU/our-journey/commits "Currently unreleased commits"
 [changelog]: https://github.com/IET-OU/our-journey/blob/master/docs/CHANGELOG.md
 [readme]: https://github.com/IET-OU/our-journey#readme
-[gh]: https://iet-ou.github.io/our-journey/
+[gh]: https://ourjourney.ac.uk/alpha/
 [unpkg]: https://unpkg.com/our-journey/ "unpkg is a fast, global content delivery (CDN) network for everything on npm."
 [npmjs.com]: https://npmjs.com/package/our-journey "our-journey on Npmjs.com"
 [browserify]: http://browserify.org/
