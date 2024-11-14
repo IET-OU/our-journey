@@ -17,7 +17,7 @@ The design is informed by research conducted to understand the challenges faced
 by disabled students at the Open University (see [Coughlan & Lister, 2018][ORO]
 and [Coughlan, Ullmann & Lister, 2017][ORO2]).
 
- * [ourjourney.ac.uk/alpha][web]
+ * [ourjourney.ac.uk/v1][web]
 
 [![Screenshot 1 - the editor.][img-rel]][web]
 
@@ -131,7 +131,7 @@ Copyright © 2018 [The Open University][ou]. All rights reserved. ([Institute of
 
 [iet]: https://iet.open.ac.uk/
 [ou]: https://www.open.ac.uk/
-[web]: https://ourjourney.ac.uk/alpha/
+[web]: https://ourjourney.ac.uk/v1/
 [gh]: https://github.com/IET-OU/our-journey
 [tim]: https://iet.open.ac.uk/profiles/tim.coughlan
 [kate]: http://www.open.ac.uk/people/kml322 "Kate Lister"

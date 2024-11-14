@@ -7,11 +7,11 @@ module.exports.DEFAULTS = {
   // CSS-style selector for the containing HTML element.
   containerSelector: '#our-journey-tool',
   // URL to load icons and emoticons from (Default: Unpkg CDN https://unpkg.com/our-journey@^1/assets).
-  assetUrl: 'https://ourjourney.ac.uk/alpha/tool-assets',
+  assetUrl: 'https://ourjourney.ac.uk/v1/tool-assets',
   // URL of the help page, to use in HTML links.
-  helpUrl: 'https://ourjourney.ac.uk/alpha/help.html',
+  helpUrl: 'https://ourjourney.ac.uk/v1/help.html',
   // @prop {string} privacyUrl Link to a privacy policy, and terms.
-  privacyUrl: 'https://ourjourney.ac.uk/alpha/privacy-ou-generic.html',
+  privacyUrl: 'https://ourjourney.ac.uk/v1/privacy-ou-generic.html',
   // Load a demonstration journey (Default: false)
   demo: UTIL.param(/[?&]demo=(1)/, false),
   // Use the floating or fixed editor (Default: floating)

@@ -21,7 +21,7 @@
       "url": "https://iet.open.ac.uk"
     }
   ],
-  "homepage": "https://ourjourney.ac.uk/alpha/?utm_source=npm",
+  "homepage": "https://ourjourney.ac.uk/v1/?utm_source=npm",
   "repository": "https://github.com/IET-OU/our-journey",
   "bugs": "https://github.com/IET-OU/our-journey/issues",
   "keywords": [
