@@ -1,10 +1,10 @@
 /*!
-  our-journey | 1.6.4
-  © 2024 The Open University (IET) | Tim Coughlan {lead}, Glen Darby, Nick Freear | GPL-3.0+.
-  Build: 2024-11-14T10:52Z
-  https://github.com/IET-OU/our-journey
+ * our-journey | 1.6.4
+ * © 2024 The Open University (IET) | Tim Coughlan {lead}, Glen Darby, Nick Freear | GPL-3.0+.
+ * Build: 2024-11-14T14:03Z
+ * https://github.com/IET-OU/our-journey
+ */
 
-*/
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 /* Default application | ©The Open University.
 */
