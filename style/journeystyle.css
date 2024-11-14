@@ -122,6 +122,10 @@ svg#journey-canvas .in_postit {
   clear: both;
 }
 
+.fork-me-btn {
+  margin-left: 1.5rem;
+}
+
 .our-journey-js .fork-me-btn a {
   background-color: #eff3f6;
   background-image: -webkit-linear-gradient(top, #fafbfc, #e4ebf0);
@@ -214,7 +218,8 @@ svg#journey-canvas .card.orient-vert > rect {
   color: #333;
   float: left;
   font-size: .85rem;
-  margin-top: 65px;
+  margin-top: 89px;
+  margin-left: 1.5rem;
 }
 
 .footer-copy .p:before,
@@ -243,13 +248,12 @@ img[ src $= 'assets/iet-logo.svg' ] {
   border: 1px solid transparent;
   border-radius: 3px;
   height: 68px;
-  margin-right: 16px;
-  padding: 5px;
+  padding: 1.5rem;
 }
 
 .ojs-error,
 .no-js {
-  colour: #a00;
+  color: #a00;
 }
 
 .our-journey-whole-page h1 {
