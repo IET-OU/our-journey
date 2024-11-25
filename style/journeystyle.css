@@ -48,7 +48,11 @@ select {
 
 a:link,
 a[ href *= '?demo=' ] {
-  color: #2b6ab7;
+  color: blue;
+}
+
+a:visited {
+  color: purple;
 }
 
 form {
